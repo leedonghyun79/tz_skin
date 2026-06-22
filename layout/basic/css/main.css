@@ -89,7 +89,7 @@ main#contents {display: block;}
     .mainTitle {margin-top: 70px;}
     .mainTitle h2 { font-size: 22px;}
     .more { margin:65px 16px 0; }
-    .mainVisual { min-height:390px; margin:0 16px; }
+    .mainVisual { min-height:390px; margin:0; }
     .mainVisual .here .text { font-size:15px; }
     .mainVisual .here .button { min-width:127px; height:36px; margin:25px 0 0; padding:11px 0 10px; font-size:12px; }
     .mainVisual a::before { content: ""; width: 1px; margin-left: -1px; float: left; height: 0; padding-top:118.905%; }
@@ -133,7 +133,7 @@ main#contents {display: block;}
     .gInner {margin: 0 24px;}
     .mainTitle {margin: 115px 0 0;}
     .mainTitle h2 { font-size:30px; }
-    .mainVisual { margin:0 24px; }
+    .mainVisual { margin:0; }
     .mainVisual .here .text { font-size:30px; }
     .mainVisual .here .button { margin:42px 0 0; }
     .collection { margin:0 24px; }
@@ -158,6 +158,7 @@ main#contents {display: block;}
     .mainTitle h2 { margin-bottom: 52px;  }
     .btnMore { padding:18px 40px; font-size:15px;}
 
+    .mainVisual { margin:0 -50px; }
     .mainVisual .swiper-container{height: 620px; }
     .mainVisual .swiper-button-next:after, 
     .mainVisual .swiper-button-prev:after {color: #fff;}
@@ -165,7 +166,7 @@ main#contents {display: block;}
     .mainVisual .swiper-button-prev, .mainVisual .swiper-container-rtl .swiper-button-next{left: 50px; }
     .mainVisual .here .text { font-size:45px; }
     .mainVisual .here .button { height:54px; margin:42px 0 0; }
-    .mainVisual img{ position: relative; top:0; left: 50%; height: 100%; width:auto; min-width: 100%; transform: translate(-50%, 0); object-fit: cover; }
+    .mainVisual img{ position: relative; top:0; left: 50%; height: 100%; width:100%; transform: translate(-50%, 0); object-fit: cover; }
     .collection{ display: flex; margin: 20px 0 0;}
     .collection-item:nth-child(3n+3){margin-right: 0;}
     .saleItem { margin:95px -50px 0; padding:100px 60px;}

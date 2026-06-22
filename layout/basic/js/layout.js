@@ -198,14 +198,20 @@ function getQuickPosition(){
 function getMainQuickPosition(){
 	var quickMenu = document.querySelector('#quick');
 	var collection = document.querySelector('.collection');
-	var snsItem = document.querySelector('.snsItem');
+	var footer = document.querySelector('#footer');
 
 	var mainTopSpace = 115;
 	var mainFooterSpace = 34;
 
-	var top = collection.offsetTop + collection.clientHeight + mainTopSpace;
-    var footTop = getOffset(snsItem).top + mainFooterSpace;
-	var maxY = footTop - quickMenu.offsetHeight;
+	// collection이 없으면 기본값 284 사용
+	var top = 284;
+	if (collection) {
+	    top = collection.offsetTop + collection.clientHeight + mainTopSpace;
+	}
+	
+	// snsItem 대신 footer를 기준으로 사용
+    var footTop = footer ? getOffset(footer).top : document.body.scrollHeight;
+	var maxY = footTop - quickMenu.offsetHeight - mainFooterSpace;
 
 	return [top, maxY]
 }
