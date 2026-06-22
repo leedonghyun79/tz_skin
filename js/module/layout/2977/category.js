@@ -4,7 +4,6 @@
  */
 
 $(document).ready(function(){
-
     var closeTimer = null;
     var methods = {
         aCategory    : [],
