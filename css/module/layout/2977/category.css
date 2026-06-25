@@ -1,4 +1,4 @@
-.xans-layout-category {
+﻿.xans-layout-category {
   color: #000;
   z-index: 999;
 }
@@ -45,9 +45,9 @@
   text-decoration: none;
 }
 
-/* 메가 메뉴 전체 박스 (가로 100%) */
-.xans-layout-category .sub-category.mega-menu-wrapper,
-.sub-category.mega-menu-wrapper {
+/* 서브메뉴 전체 박스 (가로 100%) */
+.xans-layout-category .sub-category.submenu-wrapper,
+.sub-category.submenu-wrapper {
   background: #ffffff;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
@@ -55,7 +55,7 @@
 }
 
 /* 내부 콘텐츠 중앙 정렬 (쇼핑몰 넓이에 맞게 수정 가능) */
-.mega-menu-inner {
+.submenu-inner {
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
@@ -64,19 +64,19 @@
 }
 
 /* 1. 왼쪽: 서브 메뉴 영역 */
-.mega-menu-left {
+.submenu-left {
   flex: 0 0 250px;
   border-right: 1px solid #eee;
   padding-right: 30px;
 }
 
-.mega-menu-left ul {
+.submenu-left ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.mega-menu-left>ul>li {
+.submenu-left>ul>li {
   margin-bottom: 12px;
   border-bottom: none;
   width: auto;
@@ -84,7 +84,7 @@
   text-indent: 0;
 }
 
-.mega-menu-left>ul>li a {
+.submenu-left>ul>li a {
   font-size: 15px;
   font-weight: 500;
   color: #555;
@@ -94,21 +94,21 @@
   width: auto;
 }
 
-.mega-menu-left>ul>li a:hover {
+.submenu-left>ul>li a:hover {
   color: #000;
   font-weight: 700;
   background: transparent;
 }
 
 /* 2. 오른쪽: 상품 배너 영역 */
-.mega-menu-right {
+.submenu-right {
   flex: 1;
   padding-left: 40px;
   display: flex;
   gap: 20px;
 }
 
-.mega-banner {
+.submenu-banner {
   flex: 1;
   background: #f8f9fa;
   border-radius: 8px;
@@ -132,7 +132,7 @@
 }
 
 /* 추천상품 모듈 스타일 */
-[id^="mega-recommend-"] {
+[id^="submenu-recommend-"] {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -141,7 +141,7 @@
   padding: 20px;
 }
 
-[id^="mega-recommend-"] img {
+[id^="submenu-recommend-"] img {
   width: 100%;
   height: 140px;
   object-fit: cover;
@@ -149,12 +149,12 @@
   margin-bottom: 12px;
 }
 
-[id^="mega-recommend-"] strong,
-[id^="mega-recommend-"] span {
+[id^="submenu-recommend-"] strong,
+[id^="submenu-recommend-"] span {
   display: block;
 }
 
-[id^="mega-recommend-"] strong {
+[id^="submenu-recommend-"] strong {
   font-weight: 600;
   color: #333;
   font-size: 13px;
@@ -165,7 +165,7 @@
   width: 100%;
 }
 
-[id^="mega-recommend-"] .price {
+[id^="submenu-recommend-"] .price {
   font-weight: 700;
   color: #000;
   font-size: 14px;

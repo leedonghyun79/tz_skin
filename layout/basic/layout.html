@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,64 +31,52 @@
     <!--@js(/layout/basic/js/layout.js)-->
     <!--@js(/js/common.js)-->
 </head>
+
 <body>
-<div id="skipNavigation">
-    <p><a href="#category">전체상품목록 바로가기</a></p>
-    <p><a href="#contents">본문 바로가기</a></p>
-</div>
-
-<div id="wrap">
-    <!--@import(/layout/basic/topbanner.html)-->
-    <header id="header">
-        <div class="inner">
-            <div class="topArea">
-                <!--@import(/layout/basic/state_login.html)-->
-            </div>
-            <div class="mainNav">
-                <h1 module="Layout_LogoTop" class="topArea__logo">
-                    <!--@css(/css/module/layout/logotop.css)-->
-                    <a href="/index.html"><img src="{$logo}" alt="{$mall_name}" style="max-height: 55px; width: auto;" /></a>
-                </h1>
-                <!--@import(/layout/basic/navigation.html)-->
-            </div>
-        </div>
-    </header><hr class="layout" />
-
-    <!-- 메가메뉴 모듈 컨테이너 -->
-    <div class="sub-category mega-menu-wrapper" id="mega-menu-module" style="width: 100%; display: none; z-index: 10000;">
-        <div class="mega-menu-inner">
-            <!-- 왼쪽: 서브 카테고리 -->
-            <div class="mega-menu-left" id="mega-menu-left-content">
-                <ul></ul>
-            </div>
-
-            <!-- 오른쪽: 배너 + 추천상품 -->
-            <div class="mega-menu-right">
-                <div class="mega-banner" id="mega-banner-content">
-                    <div class="banner-placeholder">배너 영역</div>
-                </div>
-
-                <!-- 추천상품 모듈 -->
-                <div class="mega-banner" id="mega-recommend-product">
-                    <div class="banner-placeholder">추천상품</div>
-                </div>
-            </div>
-        </div>
+    <div id="skipNavigation">
+        <p><a href="#category">전체상품목록 바로가기</a></p>
+        <p><a href="#contents">본문 바로가기</a></p>
     </div>
 
-    <!--@import(/layout/basic/sidebar.html)-->
-    <div id="container">
-        <div id="contents">
-            <span module="Layout_MobileAction" class="RTMB">
-                <a href="#none" onclick="{$go_back}"><!--@import(/svg/icon-go-back.html)-->뒤로가기</a>
-            </span>
-            <!--@contents-->
-        </div><hr class="layout" />
+    <div id="wrap">
+        <!--@import(/layout/basic/topbanner.html)-->
+        <header id="header">
+            <div class="inner">
+                <div class="topArea">
+                    <!--@import(/layout/basic/state_login.html)-->
+                </div>
+                <div class="mainNav">
+                    <h1 module="Layout_LogoTop" class="topArea__logo">
+                        <!--@css(/css/module/layout/logotop.css)-->
+                        <a href="/index.html"><img src="{$logo}" alt="{$mall_name}"
+                                style="max-height: 55px; width: auto;" /></a>
+                    </h1>
+                    <!--@import(/layout/basic/navigation.html)-->
+                </div>
+            </div>
+        </header>
+        <hr class="layout" />
 
-    </div><hr class="layout" />
+        <!-- 서브메뉴 모듈 컨테이너 -->
+        <!--@import(/layout/basic/sub_category.html)-->
 
-    <!--@import(/layout/basic/quick.html)-->
 
-    <!--@import(/layout/basic/footer.html)-->
+        <!--@import(/layout/basic/sidebar.html)-->
+        <div id="container">
+            <div id="contents">
+                <span module="Layout_MobileAction" class="RTMB">
+                    <a href="#none" onclick="{$go_back}"><!--@import(/svg/icon-go-back.html)-->뒤로가기</a>
+                </span>
+                <!--@contents-->
+            </div>
+            <hr class="layout" />
+
+        </div>
+        <hr class="layout" />
+
+        <!--@import(/layout/basic/quick.html)-->
+
+        <!--@import(/layout/basic/footer.html)-->
 </body>
+
 </html>

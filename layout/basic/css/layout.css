@@ -4,6 +4,17 @@
 #header {
     background: #fff;
     box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+/* 고정 헤더 높이만큼 컨테이너 마진 확보 */
+#container {
+    margin-top: 130px; /* 헤더의 실제 높이에 맞게 숫자를 조절해주세요 (보통 120~150px) */
 }
 
 #header .topArea {
