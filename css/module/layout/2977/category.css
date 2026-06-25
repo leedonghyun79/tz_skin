@@ -126,3 +126,43 @@
   display: block;
   margin-bottom: 8px;
 }
+
+/* 추천상품 모듈 스타일 */
+[id^="mega-recommend-"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+[id^="mega-recommend-"] img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+[id^="mega-recommend-"] strong,
+[id^="mega-recommend-"] span {
+  display: block;
+}
+
+[id^="mega-recommend-"] strong {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+[id^="mega-recommend-"] .price {
+  font-weight: 700;
+  color: #000;
+  font-size: 14px;
+}

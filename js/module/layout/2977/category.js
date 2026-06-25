@@ -50,72 +50,66 @@ $(document).ready(function(){
 
 
         show: function(overNode, iCateNo) {
-            var wasOpen = $('.sub-category').length > 0; // 이전에 메뉴가 열려있었는지 확인
-            methods.close(); // 기존 열려있는 서브메뉴 우선 제거
+            var wasOpen = $('#mega-menu-module').is(':visible');
 
             if (methods.aSubCategory[iCateNo].length == 0) {
                 return;
             }
 
-            var aHtml = [];
-            aHtml.push('<div class="mega-menu-inner">');
-            
-            // 1. 왼쪽: 서브메뉴 텍스트 리스트
-            aHtml.push('<div class="mega-menu-left">');
-            aHtml.push('<ul>');
+            // 1. 왼쪽 카테고리 목록 업데이트
+            var leftHtml = '<ul>';
             $(methods.aSubCategory[iCateNo]).each(function() {
-                aHtml.push('<li><a href="/'+this.design_page_url+this.param+'">'+this.name+'</a></li>');
+                leftHtml += '<li><a href="/' + this.design_page_url + this.param + '">' + this.name + '</a></li>';
             });
-            aHtml.push('</ul>');
-            aHtml.push('</div>');
+            leftHtml += '</ul>';
+            $('#mega-menu-left-content').html(leftHtml);
 
-            // 2. 오른쪽: 프로모션/상품 배너 영역
-            aHtml.push('<div class="mega-menu-right">');
-            aHtml.push('  <div class="mega-banner">');
-            aHtml.push('    <div class="banner-placeholder">추후 여기에 <b>[' + $(overNode).text().trim() + ']</b> 관련 이미지 삽입</div>');
-            aHtml.push('  </div>');
-            aHtml.push('  <div class="mega-banner">');
-            aHtml.push('    <div class="banner-placeholder"><b>[추천 상품]</b><br>영역</div>');
-            aHtml.push('  </div>');
-            aHtml.push('</div>');
+            // 2. 배너 영역 업데이트
+            var categoryName = $(overNode).text().trim();
+            $('#mega-banner-content').html(
+                '<div class="banner-placeholder">추후 여기에 <b>[' + categoryName + ']</b> 관련 이미지 삽입</div>'
+            );
 
-            aHtml.push('</div>'); // end mega-menu-inner
+            // 3. 메가메뉴 준비
 
+            // 4. 추천상품 로드
+            methods.loadRecommendProduct(iCateNo);
 
-            var offset = $(overNode).offset();
-            // 화면 전체 가로폭(width: 100%)을 차지하도록 수정, 왼쪽 끝(left: 0)에 붙임
-            // 여백 15px을 주기 위해 top 위치값에 + 15 추가
-            var $sub = $('<div class="sub-category mega-menu-wrapper" style="display:none;"></div>')
-                .html(aHtml.join(''))
-                .css({ position: 'absolute', left: 0, width: '100%', top: offset.top + $(overNode).outerHeight() + 15, 'z-index': 10000 });
-
-            $sub.appendTo('body');
-            
-            if (wasOpen) {
-                $sub.show(); // 다른 메뉴에서 넘어왔을 때는 애니메이션 없이 바로 보여줌
+            // 5. 메가메뉴 표시
+            if (!wasOpen) {
+                $('#mega-menu-module').slideDown(200);
             } else {
-                $sub.slideDown(200); // 처음 열릴 때만 스르륵 내려옴
+                $('#mega-menu-module').show();
             }
-            
-            $sub.find('li').on('mouseover', function(e) {
-                    $(this).addClass('over');
-                }).on('mouseout', function(e) {
-                    $(this).removeClass('over');
-                });
+        },
 
-            // keep submenu open while hovering submenu
-            $sub.on('mouseenter', function(){
-                if (closeTimer) {
-                    clearTimeout(closeTimer);
-                    closeTimer = null;
+        loadRecommendProduct: function(iCateNo) {
+            $.ajax({
+                url: '/exec/front/Product/Recommend',
+                data: {
+                    cate_no: iCateNo,
+                    count: 1
+                },
+                dataType: 'json',
+                success: function(aData) {
+                    if (aData && aData.length > 0) {
+                        var product = aData[0];
+                        var html = '<a href="' + product.link_product_detail + '" style="display: block; text-decoration: none; color: inherit;">';
+                        html += '<img src="' + product.image_medium + '" alt="' + product.product_name + '" style="width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 12px;">';
+                        html += '<strong style="display: block; font-weight: 600; color: #333; font-size: 13px; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + product.product_name + '</strong>';
+                        html += '<span style="display: block; font-weight: 700; color: #000; font-size: 14px;">' + product.product_price + '</span>';
+                        html += '</a>';
+                        $('#mega-recommend-product').html(html);
+                    }
+                },
+                error: function() {
+                    $('#mega-recommend-product').html('<div class="banner-placeholder">추천상품</div>');
                 }
-            }).on('mouseleave', function(){
-                closeTimer = setTimeout(function(){ methods.close(); }, 150);
             });
         },
 
         close: function() {
-            $('.sub-category').remove();
+            $('#mega-menu-module').slideUp(200);
         }
     };
 
@@ -134,7 +128,16 @@ $(document).ready(function(){
             methods.show($this, iCateNo);
         }).mouseleave(function(e) {
            var $this = $(this).removeClass('on');
-           // delay closing to allow mouse move into submenu appended to body
            closeTimer = setTimeout(function(){ methods.close(); }, 150);
+        });
+
+        // 메가메뉴 마우스 이벤트
+        $('#mega-menu-module').on('mouseenter', function(){
+            if (closeTimer) {
+                clearTimeout(closeTimer);
+                closeTimer = null;
+            }
+        }).on('mouseleave', function(){
+            closeTimer = setTimeout(function(){ methods.close(); }, 150);
         });
 });

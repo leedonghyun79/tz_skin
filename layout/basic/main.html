@@ -48,6 +48,36 @@
         </div>
     </header><hr class="layout" />
 
+    <!-- 메가메뉴 모듈 컨테이너 -->
+    <div class="sub-category mega-menu-wrapper" id="mega-menu-module" style="width: 100%; display: none; z-index: 10000;">
+        <div class="mega-menu-inner">
+            <!-- 왼쪽: 서브 카테고리 -->
+            <div class="mega-menu-left" id="mega-menu-left-content">
+                <ul></ul>
+            </div>
+
+            <!-- 오른쪽: 배너 + 추천상품 -->
+            <div class="mega-menu-right">
+                <div class="mega-banner" id="mega-banner-content">
+                    <div class="banner-placeholder">배너 영역</div>
+                </div>
+
+                <!-- 추천상품 모듈 -->
+                <div class="mega-banner" module="product_recommend" id="mega-recommend-product">
+                    <!--
+                        $count = 1
+                    -->
+                    <a href="{$link_product_detail}" style="display: block; text-decoration: none; color: inherit;">
+                        <!-- <img src="{$image_medium}" alt="{$product_name}" style="width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 12px;"> -->
+                        <img src="/product/detail.html{$1}" alt="{$product_name}" style="width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 12px;">
+                        <strong style="display: block; font-weight: 600; color: #333; font-size: 13px; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{$product_name}</strong>
+                        <span style="display: block; font-weight: 700; color: #000; font-size: 14px;">{$product_price}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--@import(/layout/basic/sidebar.html)-->
     <div id="container">
         <main id="contents" role="main">
