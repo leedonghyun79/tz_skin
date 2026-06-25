@@ -469,6 +469,7 @@
     #header .mainNav {
         display: flex;
         align-items: center;
+        justify-content: space-between;
     }
 
     #header .mainNav .topArea__logo {
@@ -484,6 +485,7 @@
         display: flex;
         align-items: center;
         min-height: 64px;
+        justify-content: space-between;
     }
 
     #header .mainNav .navigation .btnNav {
@@ -493,12 +495,17 @@
     #header .mainNav .navigation__category {
         flex: 1;
         margin: 0 !important;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     #header .mainNav .navigation__util {
         flex-shrink: 0;
         position: static;
+        display: flex;
+        align-items: center;
+        gap: 20px;
     }
 
     #contents {
