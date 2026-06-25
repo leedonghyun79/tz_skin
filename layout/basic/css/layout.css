@@ -14,7 +14,8 @@
 
 /* 고정 헤더 높이만큼 컨테이너 마진 확보 */
 #container {
-    margin-top: 130px; /* 헤더의 실제 높이에 맞게 숫자를 조절해주세요 (보통 120~150px) */
+    margin-top: 85px;
+    /* 헤더의 실제 높이에 맞게 숫자를 조절해주세요 (보통 120~150px) */
 }
 
 #header .topArea {
@@ -560,8 +561,8 @@
 
     #quick {
         z-index: 10;
-        position: absolute;
-        top: 284px;
+        position: fixed;
+        top: 106px;
         right: 50%;
         margin-right: -910px;
         width: 93px;
@@ -571,7 +572,8 @@
 
     #quick.fixed {
         position: fixed;
-        top: 100px;
+        top: 150px;
+        /* 고정된 헤더(약 130px)보다 아래에 위치하도록 수정 */
     }
 
     #quick .pageTop a {
