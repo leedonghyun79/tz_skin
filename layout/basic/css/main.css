@@ -83,6 +83,26 @@ main#contents {display: block;}
 .snsItem-item{flex: 1; }
 .snsItem-item img{width: 100%;}
 
+/* videoBanner - 공통 */
+.videoBanner__inner { display: flex; align-items: center; }
+.videoBanner__sub { display: block; font-size: 14px; color: #e86426; margin-bottom: 12px; }
+.videoBanner__title { font-size: 28px; font-weight: bold; color: #111; margin: 0 0 16px; }
+.videoBanner__desc { font-size: 14px; color: #666; line-height: 1.7; margin: 0 0 28px; }
+.videoBanner__btn { display: inline-block; padding: 12px 30px; border: 1px solid #333; font-size: 13px; color: #333; text-decoration: none; letter-spacing: 0.1em; transition: background 0.2s, color 0.2s; }
+.videoBanner__btn:hover { background: #333; color: #fff; }
+
+/* collectionBanner - 공통 */
+.collectionBanner { display: flex; gap: 16px; max-width: 1410px; margin: 95px auto; }
+.collectionBanner__item { flex: 1; position: relative; overflow: hidden; }
+.collectionBanner__item a { display: block; position: relative; }
+.collectionBanner__item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.collectionBanner__item:hover img { transform: scale(1.04); }
+.collectionBanner__text { position: absolute; bottom: 30px; left: 24px; }
+.collectionBanner__title { font-size: 16px; font-weight: 600; color: #222; margin: 0 0 8px; }
+.collectionBanner__link { font-size: 13px; color: #444; letter-spacing: 0.05em; }
+
+
+
 /* categorySlide */
 .categorySlide { margin: 60px auto; max-width: 1410px; position: relative; padding: 0 40px; text-align: center; }
 .categorySlide .mainTitle { margin-bottom: 40px; }
@@ -129,7 +149,7 @@ main#contents {display: block;}
     .collection { margin:0 16px; }
     .collection-item{ margin:10px 0 0; }
     .productSlide {margin: 0 16px; padding:122px 0 0;}
-	.productItem { margin:40px 16px 0; }
+	.productItem, .xans-product-listmain-1, .xans-product-listmain-2, .xans-product-listmain-3 { margin:40px 16px 0; }
     .middleBanner { position:relative; margin: 0 16px;}
     .middleBanner .text { position:absolute; top:25px; width:100%; font-size:22px; color:#000; text-align:center; text-decoration:none; }
     .snsItem { margin: 0 16px; }
@@ -137,6 +157,11 @@ main#contents {display: block;}
     .snsItem-item{flex-basis: 33.33%; }
     .snsItem-item a{display: block; margin: 5px; }
     main#contents .ec-base-product ul.grid3 > li { width: 50%; }
+    /* videoBanner - 모바일 */
+    .videoBanner { margin: 60px 16px; }
+    .videoBanner__inner { flex-direction: column; gap: 40px; }
+    .videoBanner__text { width: 100%; text-align: center; }
+
 }
 
 /********************* Mobile / Tablet *********************/
@@ -170,7 +195,7 @@ main#contents {display: block;}
     .mainVisual .here .button { margin:42px 0 0; }
     .collection { margin:0 24px; }
     .collection-item{ margin:24px 0 0; }
-    .productItem { margin:60px 24px 0; }
+    .productItem, .xans-product-listmain-1, .xans-product-listmain-2, .xans-product-listmain-3 { margin:60px 24px 0; }
     .productSlide { padding:182px 0 0; }
     .middleBanner { position:relative; margin: 0 24px;}
     .middleBanner .text { position:absolute; top:80px; width:100%; font-size:50px; color:#000; text-align:center; text-decoration:none; }
@@ -203,7 +228,7 @@ main#contents {display: block;}
     .collection-item:nth-child(3n+3){margin-right: 0;}
     .saleItem { margin:95px -50px 0; padding:100px 60px;}
     .saleItem .tab{margin-top: -35px;}
-    .productItem { max-width:1410px; margin:95px auto 0; }
+    .productItem, .xans-product-listmain-1, .xans-product-listmain-2, .xans-product-listmain-3 { max-width:1410px; margin:95px auto 0; }
     .productSlide{ position:relative; max-width:1410px; margin:95px auto; padding: 50px 0;}
     .productSlide .mainTitle { position:absolute; top:0; left:0; width:100%; }
     .item-wrapper{ display: flex; margin: 54px 0;}
@@ -224,4 +249,11 @@ main#contents {display: block;}
     .snsItem .mainTitle { max-width:1410px; margin:0 auto; }
     .snsItem-wrapper{margin: 60px -10px 0;}
     .snsItem-wrapper .snsItem-item a{display: block; margin: 0 10px; }
-}
+
+    /* videoBanner - PC */
+    .videoBanner { max-width: 1410px; margin: 95px auto; }
+    .videoBanner__inner { display: flex; align-items: center; gap: 80px; }
+    .videoBanner__text { flex: 0 0 auto; width: 280px; }
+    .videoBanner__media { flex: 1; }
+    .videoBanner__media iframe { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; display: block; }
+}
