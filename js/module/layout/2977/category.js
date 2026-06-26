@@ -75,21 +75,65 @@ $(document).ready(function(){
 
         show: function(overNode, iCateNo) {
             var wasOpen = $('#submenu-module').is(':visible');
+            // 띄어쓰기/줄바꿈 등에 의한 불일치를 막기 위해 공백을 모두 제거한 이름으로 매핑
+            var categoryName = $(overNode).find('a').first().text().replace(/\s+/g, '');
 
-            if (methods.aSubCategory[iCateNo].length == 0) {
+            // 1. 커스텀 서브메뉴(수동 정의) 구조
+            // 고객님이 요청하신 뎁스 구조를 매핑합니다. (나중에 /product/?? 링크만 수정해주세요)
+            var customMenus = {
+                'LED안내전광판': [
+                    { name: '실내용', link: '/product/multivision' },
+                    { name: '실외용', link: '/product/??' },
+                    { name: '배너형 포스터', link: '/product/??' },
+                    { name: '특수형(비정형)', link: '/product/??' }
+                ],
+                '디지털사이니지': [
+                    { name: '멀티비전', link: '/product/multivision' },
+                    { name: '삼성 사이니지', link: '/product/??' },
+                    { name: '엘지 사이니지', link: '/product/??' },
+                    { name: '안드로이드 사이니지', link: '/product/??' }
+                ],
+                '키오스크': [
+                    { name: '삼성 사이니지', link: '/product/??' },
+                    { name: '엘지 사이니지', link: '/product/??' },
+                    { name: '안드로이드 사이니지', link: '/product/??' }
+                ],
+                '거치대마운트': [
+                    { name: '스탠드형 거치대', link: '/product/??' },
+                    { name: '멀티비전/메뉴보드용 거치대', link: '/product/??' }
+                ],
+                '솔루션': [
+                    { name: 'T-10 USB 광고용 최적화 솔루션 프로그램', link: '/solution' },
+                    { name: 'T-CMS MULTIPLEX 솔루션 프로그램', link: '/solution' },
+                    { name: 'T-서베이 소비자 만족도조사 키오스크', link: '/solution' }
+                ]
+            };
+
+            var subItems = customMenus[categoryName];
+            
+            // 커스텀 메뉴가 없다면 Cafe24 기본 AJAX 데이터 사용
+            if (!subItems && iCateNo && methods.aSubCategory[iCateNo]) {
+                subItems = [];
+                $(methods.aSubCategory[iCateNo]).each(function() {
+                    subItems.push({ name: this.name, link: '/' + this.design_page_url + this.param });
+                });
+            }
+
+            // 서브메뉴가 아예 없으면 닫고 리턴
+            if (!subItems || subItems.length === 0) {
+                $('#submenu-module').hide();
                 return;
             }
 
             // 1. 왼쪽 카테고리 목록 업데이트
             var leftHtml = '<ul>';
-            $(methods.aSubCategory[iCateNo]).each(function() {
-                leftHtml += '<li><a href="/' + this.design_page_url + this.param + '">' + this.name + '</a></li>';
+            $(subItems).each(function() {
+                leftHtml += '<li><a href="' + this.link + '">' + this.name + '</a></li>';
             });
             leftHtml += '</ul>';
             $('#submenu-left-content').html(leftHtml);
 
             // 2. 배너 영역 업데이트
-            var categoryName = $(overNode).text().trim();
             $('#submenu-banner-content').html(
                 '<div class="banner-placeholder">추후 여기에 <b>[' + categoryName + ']</b> 관련 이미지 삽입</div>'
             );
@@ -107,6 +151,10 @@ $(document).ready(function(){
             $('#submenu-recommend-product').html(recommendHtml);
 
             // 5. 서브메뉴 표시
+            // 동적으로 헤더의 현재 높이를 가져와 top을 설정 (스크롤 시 변경되는 헤더 높이에도 완벽 대응)
+            var headerHeight = $('#header').outerHeight();
+            $('#submenu-module').css('top', headerHeight + 'px');
+
             if (!wasOpen) {
                 $('#submenu-module').slideDown(200);
             } else {
@@ -124,12 +172,8 @@ $(document).ready(function(){
 
         $('.xans-layout-category li').mouseenter(function(e) {
             if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-            var $this = $(this).addClass('on'),
-              iCateNo = Number(methods.getParam($this.find('a').attr('href'), 'cate_no'));
-
-            if (!iCateNo) {
-                return;
-            }
+            var $this = $(this).addClass('on');
+            var iCateNo = Number(methods.getParam($this.find('a').attr('href'), 'cate_no'));
 
             methods.show($this, iCateNo);
         }).mouseleave(function(e) {

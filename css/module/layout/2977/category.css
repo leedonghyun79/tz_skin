@@ -1,4 +1,4 @@
-﻿.xans-layout-category {
+.xans-layout-category {
   color: #000;
   z-index: 999;
 }
@@ -48,6 +48,10 @@
 /* 서브메뉴 전체 박스 (가로 100%) */
 .xans-layout-category .sub-category.submenu-wrapper,
 .sub-category.submenu-wrapper {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 999;
   background: #ffffff;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
