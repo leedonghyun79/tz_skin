@@ -58,7 +58,7 @@ main#contents {display: block;}
 .saleItem .tab .menu li .button { display: inline-block; margin: 0 15px;}
 .saleItem .tab .menu li .button.active {position: relative; font-weight: bold; color: #000;}
 .saleItem .tab .menu li .button.active::after { content: ''; position: absolute; right: 0; left: 0; bottom: 0; height: 1px; background: #000;}
-.saleItem .tabContent { display:none; max-width:1240px; margin:0 auto; }
+.saleItem .tabContent { display:none; max-width:1410px; margin:0 auto; }
 .saleItem .tabContent.active { display:block; }
 .middleBanner img { width:100%; max-width:100%; }
 .middleBanner .banner img {width:100%;}
@@ -82,6 +82,38 @@ main#contents {display: block;}
 .snsItem-wrapper{display: flex; }
 .snsItem-item{flex: 1; }
 .snsItem-item img{width: 100%;}
+
+/* categorySlide */
+.categorySlide { margin: 60px auto; max-width: 1410px; position: relative; padding: 0 40px; text-align: center; }
+.categorySlide .mainTitle { margin-bottom: 40px; }
+.categorySlide .swiper-container { padding: 40px 0 20px; overflow: hidden; }
+.categorySlide .swiper-slide { width: 260px; transition: transform 0.3s ease, opacity 0.3s ease; transform: scale(0.85); opacity: 0.5; }
+.categorySlide .swiper-slide-active { transform: scale(1.1) translateY(-10px); opacity: 1; z-index: 2; }
+.categorySlide .cat-item { display: block; text-decoration: none; color: #333; }
+.categorySlide .img-box { 
+    border-radius: 16px; overflow: hidden; margin: 0 auto 20px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+    background:#f5f5f5;
+    position: relative;
+    width: 260px;
+    height: 260px;
+}
+.categorySlide .swiper-slide-active .img-box { box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+.categorySlide .img-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.categorySlide .cat-text-wrap { opacity: 0; transform: translateY(-10px); transition: all 0.3s ease; padding-top: 10px; }
+.categorySlide .swiper-slide-active .cat-text-wrap { opacity: 1; transform: translateY(0); }
+.categorySlide .cat-name { display: block; font-size: 16px; font-weight: bold; color: #111; margin-bottom: 5px; }
+.categorySlide .cat-sub { display: block; font-size: 13px; color: #666; }
+
+/* Custom Controls layout */
+.categorySlide .category-controls { display: flex; align-items: center; justify-content: center; width: 90%; max-width: 900px; margin: 20px auto 0; position: relative; gap: 20px; }
+.categorySlide .swiper-button-prev, .categorySlide .swiper-button-next { position: static; margin: 0; width: 12px; height: 12px; border-color: #999; border-width: 1px 1px 0 0; }
+.categorySlide .swiper-button-prev { transform: rotate(-135deg); }
+.categorySlide .swiper-button-next { transform: rotate(45deg); }
+.categorySlide .swiper-button-next.swiper-button-disabled, .categorySlide .swiper-button-prev.swiper-button-disabled { opacity: 0.3; }
+.categorySlide .swiper-scrollbar { position: static; flex: 1; margin: 0; height: 1px; background: #ddd; border-radius: 0; }
+.categorySlide .swiper-scrollbar-drag { background: #333; height: 2px; top: -0.5px; border-radius: 0; }
 
 /********************* Mobile *********************/
 @media all and (max-width:767px) {
@@ -171,8 +203,8 @@ main#contents {display: block;}
     .collection-item:nth-child(3n+3){margin-right: 0;}
     .saleItem { margin:95px -50px 0; padding:100px 60px;}
     .saleItem .tab{margin-top: -35px;}
-    .productItem { max-width:1240px; margin:95px auto 0; }
-    .productSlide{ position:relative; max-width:1240px; margin:95px auto; padding: 50px 0;}
+    .productItem { max-width:1410px; margin:95px auto 0; }
+    .productSlide{ position:relative; max-width:1410px; margin:95px auto; padding: 50px 0;}
     .productSlide .mainTitle { position:absolute; top:0; left:0; width:100%; }
     .item-wrapper{ display: flex; margin: 54px 0;}
     .item-wrapper > div{flex: 1;}
@@ -189,7 +221,7 @@ main#contents {display: block;}
     .middleBanner { position:relative; margin:115px 0; }
     .middleBanner .text { position:absolute; left:115px; top:0; bottom:0; margin:auto 0; height:60px; font-size:50px; color:#000; text-decoration:none; }
     .snsItem {margin:95px 0; }
-    .snsItem .mainTitle { max-width:1240px; margin:0 auto; }
+    .snsItem .mainTitle { max-width:1410px; margin:0 auto; }
     .snsItem-wrapper{margin: 60px -10px 0;}
     .snsItem-wrapper .snsItem-item a{display: block; margin: 0 10px; }
 }

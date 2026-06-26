@@ -1,5 +1,6 @@
 window.addEventListener('load', function(){
     swiperVisual();
+    swiperCategory();
     swiperLazyInit();
 	saleItemTab();
     videoLoad();
@@ -130,5 +131,33 @@ function videoLoad() {
             video.load();
         }
         video.play();
+    });
+}
+
+function swiperCategory() {
+    var swiperCat = document.querySelector('.category-swiper');
+    if(!swiperCat) return;
+    new Swiper(swiperCat, {
+        slidesPerView: 'auto',
+        spaceBetween: 20,
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: 5,
+        scrollbar: {
+            el: '.categorySlide .swiper-scrollbar',
+            draggable: true,
+        },
+        navigation: {
+            nextEl: '.categorySlide .swiper-button-next',
+            prevEl: '.categorySlide .swiper-button-prev',
+        },
+        breakpoints: {
+            768: {
+                spaceBetween: 30,
+            },
+            1024: {
+                spaceBetween: 40,
+            }
+        }
     });
 }
