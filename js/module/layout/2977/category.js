@@ -24,11 +24,16 @@ $(document).ready(function(){
         ],
         '특수형(비정형)': [
             { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '특수형 1', desc: '설명 텍스트' }
+        ],
+        // 매핑되지 않은 나머지 모든 메뉴를 위한 기본(Default) 슬라이드
+        '기본값': [
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '추천 상품', desc: '기본 추천 상품입니다.' }
         ]
     };
 
     function renderSubmenuSlider(subName) {
-        var slidesData = subCategorySlides[subName];
+        // subName에 해당하는 데이터가 없으면 '기본값' 데이터를 불러옵니다.
+        var slidesData = subCategorySlides[subName] || subCategorySlides['기본값'];
         if (!slidesData || slidesData.length === 0) {
             $('#submenu-banner-content').empty();
             if (currentSwiper) {
