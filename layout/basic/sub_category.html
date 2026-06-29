@@ -1,0 +1,54 @@
+<div class="sub-category submenu-wrapper" id="submenu-module" style="width: 100%; display: none; z-index: 10000;">
+  <div class="submenu-inner">
+    <!-- 왼쪽: 서브 카테고리 -->
+    <div class="submenu-left" id="submenu-left-content">
+      <ul></ul>
+    </div>
+
+    <!-- 오른쪽: 배너 + 추천상품 -->
+    <div class="submenu-right">
+      <div class="submenu-banner" id="submenu-banner-content">
+        <div class="banner-placeholder">배너 영역</div>
+      </div>
+
+      <!-- 추천상품 직접입력 영역 -->
+      <div module="product_listmain_1">
+        <!--@css(/css/module/product/479/listmain_1.css)-->
+        <!--
+        $count = 1
+        $basket_result = /product/add_basket.html
+        $basket_option = /product/basket_option.html
+    -->
+        <h2><span>{$category_title_text}</span></h2>
+        <ul class="prdList column1">
+          <li class="item" id="anchorBoxId_{$product_no}">
+            <div class="box">
+              <a href="/product/detail.html{$param}" name="anchorBoxName_{$product_no}"><img src="{$image_medium}"
+                  id="{$image_medium_id}" alt="" class="thumb" /></a>
+              <div class="status">
+                <div class="icon">{$soldout_icon} {$recommend_icon} {$new_icon} {$product_icons}
+                  {$benefit_icons}</div>
+                <div class="button">
+                  <div class="option">{$option_preview_icon}</div> {$basket_icon} {$zoom_icon}
+                </div>
+              </div>
+              <p class="name">
+                <strong><a href="/product/detail.html{$param}" class="{$product_name_display|display}"><span
+                      class="title {$product_name_title_display|display}">{$product_name_title}
+                      :</span> {$product_name}</a></strong>
+              </p>
+              <ul module="product_ListItem">
+                <li class="{$item_display|display}"><strong class="title {$item_title_display|display}">{$item_title}
+                    :</strong>
+                  {$item_content}</li>
+                <li class="{$item_display|display}"><strong class="title {$item_title_display|display}">{$item_title}
+                    :</strong>
+                  {$item_content}</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

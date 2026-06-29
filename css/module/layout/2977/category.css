@@ -1,0 +1,206 @@
+.xans-layout-category {
+  color: #000;
+  z-index: 999;
+}
+
+.xans-layout-category h2 {
+  text-indent: 150%;
+  font-size: 0;
+  width: 0;
+  height: 0;
+  line-height: 0;
+}
+
+.xans-layout-category .position {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.xans-layout-category .position>ul {
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.xans-layout-category .position>ul>li {
+  position: relative;
+  z-index: 99;
+  background: none;
+}
+
+.xans-layout-category .position>ul>li>a {
+  display: block;
+  padding: 15px 30px;
+  /* 메뉴 사이 여백을 여유있게 지정 */
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+}
+
+/* 서브메뉴 전체 박스 (가로 100%) */
+.xans-layout-category .sub-category.submenu-wrapper,
+.sub-category.submenu-wrapper {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: #ffffff;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* 내부 콘텐츠 중앙 정렬 (쇼핑몰 넓이에 맞게 수정 가능) */
+.submenu-inner {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* 1. 왼쪽: 서브 메뉴 영역 */
+.submenu-left {
+  flex: 0 0 250px;
+  border-right: 1px solid #eee;
+  padding-right: 30px;
+}
+
+.submenu-left ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.submenu-left>ul>li {
+  margin-bottom: 12px;
+  border-bottom: none;
+  width: auto;
+  padding: 0;
+  text-indent: 0;
+}
+
+.submenu-left>ul>li a {
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s;
+  width: auto;
+}
+
+.submenu-left>ul>li a:hover {
+  color: #000;
+  font-weight: 700;
+  background: transparent;
+}
+
+/* 2. 오른쪽: 상품 배너 영역 */
+.submenu-right {
+  flex: 1;
+  padding-left: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.submenu-banner {
+  flex: 1;
+  background: #f8f9fa;
+  border-radius: 8px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-placeholder {
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+}
+
+.banner-placeholder b {
+  color: #333;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+@media all and (max-width: 1024px) {
+  .submenu-inner {
+    display: block;
+    padding: 20px;
+  }
+
+  .submenu-left {
+    border-right: none;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .submenu-right {
+    display: block;
+  }
+
+  .submenu-banner,
+  .submenu-recommend-product {
+    min-height: auto;
+  }
+}
+
+
+.banner-placeholder b {
+  color: #333;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* 추천상품 모듈 스타일 */
+[id^="submenu-recommend-"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+[id^="submenu-recommend-"] img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+[id^="submenu-recommend-"] strong,
+[id^="submenu-recommend-"] span {
+  display: block;
+}
+
+[id^="submenu-recommend-"] strong {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+[id^="submenu-recommend-"] .price {
+  font-weight: 700;
+  color: #000;
+  font-size: 14px;
+}
