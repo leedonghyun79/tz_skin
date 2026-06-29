@@ -43,12 +43,16 @@ $(document).ready(function(){
         
         $(slidesData).each(function(i, item) {
             swiperHtml += '<div class="swiper-slide">' +
-                            '<a href="' + item.link + '" style="display: block; text-decoration: none; color: inherit;">' +
-                                '<div style="border: 1px solid #eaeaea; padding: 30px; text-align: center; margin-bottom: 15px; background: #fff; border-radius: 8px;">' +
-                                    '<img src="' + item.img + '" alt="" style="width: 100%; height: auto; max-height: 320px; object-fit: contain;">' +
+                            '<a href="' + item.link + '" style="display: flex; align-items: center; text-decoration: none; color: inherit; background: #fff; border-radius: 8px; padding: 20px; min-height: 380px;">' +
+                                // 좌측: 큼직한 이미지 영역
+                                '<div style="flex: 1; text-align: center; padding-right: 30px;">' +
+                                    '<img src="' + item.img + '" alt="" style="width: 100%; height: auto; max-height: 380px; object-fit: contain;">' +
                                 '</div>' +
-                                '<strong style="display: block; font-size: 18px; margin-bottom: 8px; color: #333;">' + item.title + '</strong>' +
-                                '<p style="font-size: 14px; color: #777; line-height: 1.5; margin: 0;">' + item.desc + '</p>' +
+                                // 우측: 텍스트 영역
+                                '<div style="flex: 1; text-align: left; padding-top: 10px;">' +
+                                    '<strong style="display: block; font-size: 22px; font-weight: 700; margin-bottom: 15px; color: #222;">' + item.title + '</strong>' +
+                                    '<p style="font-size: 15px; color: #555; line-height: 1.6; margin: 0;">' + item.desc + '</p>' +
+                                '</div>' +
                             '</a>' +
                           '</div>';
         });
