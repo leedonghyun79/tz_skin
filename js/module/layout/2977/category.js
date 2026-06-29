@@ -5,28 +5,80 @@
 
 $(document).ready(function(){
     var closeTimer = null;
-    // ========= [추가] 카테고리별 추천상품 세팅 =========
-    // 카테고리 이름(텍스트)과 동일하게 작성하시면 됩니다.
-    var categoryProducts = {
-        '키오스크': {
-            link: '/product/detail.html?product_no=1',
-            img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png',
-            name: '[키오스크] 추천상품명',
-            price: '2,178,000원'
-        },
-        '멀티비전': {
-            link: '/product/detail.html?product_no=2',
-            img: '//img.echosting.cafe24.com/thumb/img_product_big.gif',
-            name: '[멀티비전] 추천상품명 적어주세요',
-            price: '1,000,000원'
-        },
-        '기본': { // 매핑되지 않은 카테고리에 마우스를 올렸을 때 나오는 기본값
-            link: '/product/detail.html?product_no=1',
-            img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png',
-            name: '[TZ-SW4300]광고용 43인치 회전형 DID/키오스크/웰컴보드/모니터',
-            price: '2,178,000원'
-        }
+    var currentSwiper = null;
+
+    // ========= [추가] 서브메뉴(세부항목)별 슬라이드 상품 세팅 =========
+    // 왼쪽 세부 항목 이름(예: 실내용)과 동일하게 매핑됩니다.
+    var subCategorySlides = {
+        '실내용': [
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 (480X480)', desc: '밝기: 600nit ~ 800nit<br>사이즈: 480X480<br>픽셀 피치: 1.875, 2.5' },
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 2번째', desc: '설명 텍스트' },
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 3번째', desc: '설명 텍스트' },
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 4번째', desc: '설명 텍스트' }
+        ],
+        '실외용': [
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실외용 첫번째', desc: '설명 텍스트' }
+        ],
+        '배너형 포스터': [
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '배너형 포스터', desc: '설명 텍스트' }
+        ],
+        '특수형(비정형)': [
+            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '특수형 1', desc: '설명 텍스트' }
+        ]
     };
+
+    function renderSubmenuSlider(subName) {
+        var slidesData = subCategorySlides[subName];
+        if (!slidesData || slidesData.length === 0) {
+            $('#submenu-banner-content').empty();
+            if (currentSwiper) {
+                currentSwiper.destroy(true, true);
+                currentSwiper = null;
+            }
+            return;
+        }
+
+        var swiperHtml = '<div class="swiper-container submenu-right-swiper" style="width: 100%; overflow: hidden;">' +
+                            '<div class="swiper-wrapper">';
+        
+        $(slidesData).each(function(i, item) {
+            swiperHtml += '<div class="swiper-slide">' +
+                            '<a href="' + item.link + '" style="display: block; text-decoration: none; color: inherit;">' +
+                                '<div style="border: 1px solid #eaeaea; padding: 30px; text-align: center; margin-bottom: 15px; background: #fff; border-radius: 8px;">' +
+                                    '<img src="' + item.img + '" alt="" style="width: 100%; height: auto; max-height: 320px; object-fit: contain;">' +
+                                '</div>' +
+                                '<strong style="display: block; font-size: 18px; margin-bottom: 8px; color: #333;">' + item.title + '</strong>' +
+                                '<p style="font-size: 14px; color: #777; line-height: 1.5; margin: 0;">' + item.desc + '</p>' +
+                            '</a>' +
+                          '</div>';
+        });
+
+        swiperHtml +=       '</div>' +
+                            '<div class="swiper-pagination" style="position: relative; margin-top: 15px;"></div>' +
+                         '</div>';
+
+        $('#submenu-banner-content').html(swiperHtml);
+
+        if (currentSwiper) {
+            currentSwiper.destroy(true, true);
+        }
+
+        if (typeof Swiper !== 'undefined') {
+            currentSwiper = new Swiper('.submenu-right-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: slidesData.length > 1,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }
+            });
+        }
+    }
     // ====================================================
 
     var methods = {
@@ -128,27 +180,27 @@ $(document).ready(function(){
             // 1. 왼쪽 카테고리 목록 업데이트
             var leftHtml = '<ul>';
             $(subItems).each(function() {
-                leftHtml += '<li><a href="' + this.link + '">' + this.name + '</a></li>';
+                leftHtml += '<li data-subname="' + this.name + '"><a href="' + this.link + '">' + this.name + '</a></li>';
             });
             leftHtml += '</ul>';
             $('#submenu-left-content').html(leftHtml);
 
-            // 2. 배너 영역 업데이트
-            $('#submenu-banner-content').html(
-                '<div class="banner-placeholder">추후 여기에 <b>[' + categoryName + ']</b> 관련 이미지 삽입</div>'
-            );
+            // 좌측 서브메뉴 항목에 마우스를 올렸을 때 슬라이더 변경
+            $('#submenu-left-content li').on('mouseenter', function() {
+                var subName = $(this).data('subname');
+                $('#submenu-left-content li').removeClass('active');
+                $(this).addClass('active');
+                renderSubmenuSlider(subName);
+            });
 
-            // 3. 서브메뉴 준비
-
-            // 4. 동적 추천상품 삽입 (카테고리명에 따라 변경)
-            var prod = categoryProducts[categoryName] || categoryProducts['기본'];
-            var recommendHtml = 
-                '<a href="' + prod.link + '" style="display: block; text-decoration: none; color: inherit; width: 100%; text-align: center;">' +
-                    '<img src="' + prod.img + '" alt="추천상품" style="width: 100%; height: auto; max-height: 180px; object-fit: contain; border-radius: 4px; margin-bottom: 12px;">' +
-                    '<strong style="display: block; font-weight: 600; color: #333; font-size: 13px; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + prod.name + '</strong>' +
-                    '<span class="price" style="display: block; font-weight: 700; color: #000; font-size: 14px;">' + prod.price + '</span>' +
-                '</a>';
-            $('#submenu-recommend-product').html(recommendHtml);
+            // 2. 처음 열렸을 때 첫 번째 항목의 슬라이더 자동 표시
+            if (subItems.length > 0) {
+                var firstSubName = subItems[0].name;
+                $('#submenu-left-content li').first().addClass('active');
+                renderSubmenuSlider(firstSubName);
+            } else {
+                $('#submenu-banner-content').empty();
+            }
 
             // 5. 서브메뉴 표시
             // 동적으로 헤더의 현재 높이를 가져와 top을 설정 (스크롤 시 변경되는 헤더 높이에도 완벽 대응)
