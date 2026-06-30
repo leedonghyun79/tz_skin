@@ -11,23 +11,20 @@ $(document).ready(function(){
     // 왼쪽 세부 항목 이름(예: 실내용)과 동일하게 매핑됩니다.
     var subCategorySlides = {
         '실내용': [
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 (480X480)', desc: '밝기: 600nit ~ 800nit<br>사이즈: 480X480<br>픽셀 피치: 1.875, 2.5' },
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 2번째', desc: '설명 텍스트' },
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 3번째', desc: '설명 텍스트' },
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실내용 4번째', desc: '설명 텍스트' }
+            { link: '/product/list.html?cate_no=29', img: 'https://cdn.imweb.me/thumbnail/20260417/12cc50ffba0a3.png', title: '실내용 (480X480)', desc: '밝기: 600nit ~ 800nit<br>사이즈: 480X480<br>픽셀 피치: 1.875, 2.5' }
         ],
         '실외용': [
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '실외용 첫번째', desc: '설명 텍스트' }
+            { link: '#', img: 'https://img.echosting.cafe24.com/skin/skin_ko_KR/main/img_collection2.jpg', title: '실외용 첫번째', desc: '설명 텍스트' }
         ],
         '배너형 포스터': [
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '배너형 포스터', desc: '설명 텍스트' }
+            { link: '#', img: 'https://img.echosting.cafe24.com/skin/skin_ko_KR/main/img_collection2.jpg', title: '배너형 포스터', desc: '설명 텍스트' }
         ],
         '특수형(비정형)': [
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '특수형 1', desc: '설명 텍스트' }
+            { link: '#', img: 'https://img.echosting.cafe24.com/skin/skin_ko_KR/main/img_collection2.jpg', title: '특수형 1', desc: '설명 텍스트' }
         ],
         // 매핑되지 않은 나머지 모든 메뉴를 위한 기본(Default) 슬라이드
         '기본값': [
-            { link: '#', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone/web/product/medium/20260616/3fa763af308b211c03b8fa6c7836fdf0.png', title: '추천 상품', desc: '기본 추천 상품입니다.' }
+            { link: '#', img: 'https://img.echosting.cafe24.com/skin/skin_ko_KR/main/img_collection2.jpg', title: '추천 상품', desc: '기본 추천 상품입니다.' }
         ]
     };
 
@@ -43,49 +40,68 @@ $(document).ready(function(){
             return;
         }
 
-        var swiperHtml = '<div class="swiper-container submenu-right-swiper" style="width: 100%; overflow: hidden;">' +
-                            '<div class="swiper-wrapper">';
-        
-        $(slidesData).each(function(i, item) {
-            swiperHtml += '<div class="swiper-slide">' +
-                            '<a href="' + item.link + '" style="display: flex; align-items: center; text-decoration: none; color: inherit; background: #fff; border-radius: 8px; padding: 20px; min-height: 380px;">' +
-                                // 좌측: 큼직한 이미지 영역
-                                '<div style="flex: 1; text-align: center; padding-right: 30px;">' +
-                                    '<img src="' + item.img + '" alt="" style="width: 100%; height: auto; max-height: 380px; object-fit: contain;">' +
-                                '</div>' +
-                                // 우측: 텍스트 영역
-                                '<div style="flex: 1; text-align: left; padding-top: 10px;">' +
-                                    '<strong style="display: block; font-size: 22px; font-weight: 700; margin-bottom: 15px; color: #222;">' + item.title + '</strong>' +
-                                    '<p style="font-size: 15px; color: #555; line-height: 1.6; margin: 0;">' + item.desc + '</p>' +
-                                '</div>' +
-                            '</a>' +
-                          '</div>';
-        });
-
-        swiperHtml +=       '</div>' +
-                            '<div class="swiper-pagination" style="position: relative; margin-top: 15px;"></div>' +
-                         '</div>';
-
-        $('#submenu-banner-content').html(swiperHtml);
-
         if (currentSwiper) {
             currentSwiper.destroy(true, true);
+            currentSwiper = null;
         }
 
-        if (typeof Swiper !== 'undefined') {
-            currentSwiper = new Swiper('.submenu-right-swiper', {
-                slidesPerView: 1,
-                spaceBetween: 20,
-                loop: slidesData.length > 1,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                }
+        if (slidesData.length === 1) {
+            // 슬라이드가 1개일 때는 Swiper 없이 일반 레이아웃으로 렌더링 (치우침/넓이 이슈 방지)
+            var item = slidesData[0];
+            var html = '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%; width: 100%;">' +
+                            '<div style="flex: 0 0 400px; height: 100%;">' +
+                                '<img src="' + item.img + '" alt="" style="width: 100%; height: 100%; object-fit: cover;">' +
+                            '</div>' +
+                            '<div style="flex: 1; text-align: left; padding: 20px 30px;">' +
+                                '<strong style="display: block; font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #222; word-break: keep-all;">' + item.title + '</strong>' +
+                                '<p style="font-size: 13px; color: #555; line-height: 1.5; margin: 0; word-break: keep-all;">' + item.desc + '</p>' +
+                            '</div>' +
+                       '</a>';
+            $('#submenu-banner-content').html(html);
+        } else {
+            // 슬라이드가 여러 개일 때만 Swiper 렌더링
+            var swiperHtml = '<div class="swiper-container submenu-right-swiper" style="width: 100%; height: 100%; overflow: hidden;">' +
+                                '<div class="swiper-wrapper">';
+            
+            $(slidesData).each(function(i, item) {
+                swiperHtml += '<div class="swiper-slide">' +
+                                '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%;">' +
+                                    '<div style="flex: 0 0 400px; height: 100%;">' +
+                                        '<img src="' + item.img + '" alt="" style="width: 100%; height: 100%; object-fit: cover;">' +
+                                    '</div>' +
+                                    '<div style="flex: 1; text-align: left; padding: 20px 30px;">' +
+                                        '<strong style="display: block; font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #222; word-break: keep-all;">' + item.title + '</strong>' +
+                                        '<p style="font-size: 13px; color: #555; line-height: 1.5; margin: 0; word-break: keep-all;">' + item.desc + '</p>' +
+                                    '</div>' +
+                                '</a>' +
+                              '</div>';
             });
+
+            swiperHtml +=       '</div>' +
+                                '<div class="swiper-pagination"></div>' +
+                             '</div>';
+
+            $('#submenu-banner-content').html(swiperHtml);
+
+            if (typeof Swiper !== 'undefined') {
+                currentSwiper = new Swiper('.submenu-right-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loop: true,
+                    speed: 800,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        type: 'progressbar',
+                    },
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true
+                    },
+                    observer: true,
+                    observeParents: true
+                });
+            }
         }
     }
     // ====================================================
@@ -157,7 +173,7 @@ $(document).ready(function(){
                 '키오스크': [
                     { name: '삼성 사이니지', link: '/product/list.html?cate_no=46' },
                     { name: '엘지 사이니지', link: '/product/list.html?cate_no=47' },
-                    { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=48' }
+                    { name: '티비존 사이니지', link: '/product/list.html?cate_no=48' }
                 ],
                 '거치대마운트': [
                     { name: '스탠드형 거치대', link: '/product/list.html?cate_no=49' },
