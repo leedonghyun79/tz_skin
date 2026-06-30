@@ -248,12 +248,17 @@ $(document).ready(function(){
 
 
         $('.xans-layout-category li').mouseenter(function(e) {
+            // 모바일 화면(1024px 이하)에서는 커스텀 드롭다운 작동 방지
+            if (window.innerWidth <= 1024) return;
+            
             if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
             var $this = $(this).addClass('on');
             var iCateNo = Number(methods.getParam($this.find('a').attr('href'), 'cate_no'));
 
             methods.show($this, iCateNo);
         }).mouseleave(function(e) {
+            if (window.innerWidth <= 1024) return;
+            
            var $this = $(this).removeClass('on');
            closeTimer = setTimeout(function(){ methods.close(); }, 150);
         });

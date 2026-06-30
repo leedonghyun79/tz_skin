@@ -136,6 +136,10 @@
 }
 
 @media all and (max-width: 1024px) {
+  #submenu-module {
+    display: none !important;
+  }
+  
   .submenu-inner {
     display: block;
     padding: 20px;

@@ -1,7 +1,6 @@
 .xans-product-menupackage {
     margin: 0 0 27px;
     position: relative;
-    left: 280px;
 }
 
 .xans-product-menupackage .title {
@@ -159,5 +158,6 @@
 
 /* 앵커 이동 시 고정 헤더에 내용이 가려지는 현상 방지 */
 #Product_ListMenu {
-    scroll-margin-top: 150px; /* 헤더 높이만큼 여백 확보 */
+    scroll-margin-top: 150px;
+    /* 헤더 높이만큼 여백 확보 */
 }
