@@ -1,34 +1,81 @@
-.topArea__statelogon { position:absolute; right:0; top:28px; }
-.topArea__statelogon a { display:inline-block; margin-left:25px; font-family: Arial; font-size:12px; color:#1e1e1e; text-transform:uppercase; text-decoration:none; }
-.topArea__statelogon .count { display:inline-block; min-width:24px; margin: 0 0 0 6px; padding:3px 4px 3px; font-size:13px; text-align:center; border:1px solid #000; border-radius:20px; box-sizing:border-box; }
+.topArea__statelogon {
+    position: relative;
+}
+
+.topArea__statelogon>div {
+    display: flex;
+    align-items: center;
+}
+
+.topArea__statelogon a {
+    display: inline-block;
+    margin-left: 25px;
+    font-family: Arial;
+    font-size: 12px;
+    color: #1e1e1e;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.topArea__statelogon .count {
+    display: inline-block;
+    min-width: 24px;
+    margin: 0 0 0 6px;
+    padding: 3px 4px 3px;
+    font-size: 13px;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
 
 /* 유틸리티 메뉴 드롭다운 스타일 */
-.topArea__statelogon .top-utility-dropdown { display:inline-block; position:relative; padding-bottom:15px; } /* 마우스가 아래로 이동할 때 끊기지 않도록 여백 추가 */
-.topArea__statelogon .top-utility-dropdown .dropdown-toggle { margin-left:25px; } /* 기존 a태그 마진 유지 */
-.topArea__statelogon .top-utility-dropdown .dropdown-menu { 
-    display:none; 
-    position:absolute; 
-    top:100%; 
-    right:0; 
-    background:#fff; 
-    border:1px solid #e5e5e5; 
-    padding:10px 0; 
-    min-width:130px; 
-    z-index:1000; 
-    box-shadow:0 4px 10px rgba(0,0,0,0.05); 
+.topArea__statelogon .top-utility-dropdown {
+    display: inline-block;
+    position: relative;
 }
-.topArea__statelogon .top-utility-dropdown:hover .dropdown-menu { display:block; }
-.topArea__statelogon .top-utility-dropdown .dropdown-menu li { list-style:none; text-align:center; }
-.topArea__statelogon .top-utility-dropdown .dropdown-menu li a { 
-    display:block; 
-    margin:0; /* 부모 a태그 마진 초기화 */
-    padding:8px 20px; 
-    color:#333; 
-    font-size:13px; 
+
+/* 마우스가 아래로 이동할 때 끊기지 않도록 여백 추가 */
+.topArea__statelogon .top-utility-dropdown .dropdown-toggle {
+    margin-left: 25px;
+}
+
+/* 기존 a태그 마진 유지 */
+.topArea__statelogon .top-utility-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    padding: 10px 0;
+    min-width: 130px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.topArea__statelogon .top-utility-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.topArea__statelogon .top-utility-dropdown .dropdown-menu li {
+    list-style: none;
+    text-align: center;
+}
+
+.topArea__statelogon .top-utility-dropdown .dropdown-menu li a {
+    display: block;
+    margin: 0;
+    /* 부모 a태그 마진 초기화 */
+    padding: 8px 20px;
+    color: #333;
+    font-size: 13px;
     transition: background 0.2s;
 }
-.topArea__statelogon .top-utility-dropdown .dropdown-menu li a:hover { 
-    background:#f8f9fa; 
-    font-weight:600; 
-    color:#000; 
+
+.topArea__statelogon .top-utility-dropdown .dropdown-menu li a:hover {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #000;
 }
