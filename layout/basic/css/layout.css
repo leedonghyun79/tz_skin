@@ -14,7 +14,7 @@
 
 /* 고정 헤더 높이만큼 컨테이너 마진 확보 (에디터 오류 방지를 위해 margin 대신 padding 사용) */
 #container {
-    padding-top: 85px;
+    padding-top: 100px;
     /* 헤더의 실제 높이에 맞게 숫자를 조절해주세요 (보통 120~150px) */
 }
 

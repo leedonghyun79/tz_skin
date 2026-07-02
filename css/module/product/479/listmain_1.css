@@ -1,6 +1,7 @@
 /* 공통 */
 .xans-product-1 {
   margin: 22px 0 0;
+  font-family: "Pretendard", Arial, "Apple SD Gothic Neo", "Noto Sans Regular", "맑은 고딕", "malgun gothic", "돋움", "dotum", sans-serif;
 }
 
 .xans-product-1 h2 {
@@ -8,6 +9,7 @@
   font-weight: normal;
   font-size: 20px;
   text-align: center;
+  font-family: "Poppins", sans-serif;
 }
 
 .xans-product-1 img {
@@ -28,8 +30,8 @@
   margin: 20px 0;
   color: #757575;
   vertical-align: top;
-  *display: inline;
-  *zoom: 1;
+  display: inline;
+  zoom: 1;
 }
 
 .xans-product-1 ul.prdList li.item .box {

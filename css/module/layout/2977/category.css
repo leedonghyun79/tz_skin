@@ -72,11 +72,12 @@
   flex: 0 0 250px;
   border-right: 1px solid #eee;
   padding-right: 30px;
+  padding-top: 40px;
 }
 
 .submenu-left ul {
   margin: 0;
-  padding: 30px 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -94,6 +95,7 @@
   color: #555;
   text-decoration: none;
   display: block;
+  text-align: left;
   transition: color 0.2s;
   width: auto;
 }
@@ -139,7 +141,7 @@
   #submenu-module {
     display: none !important;
   }
-  
+
   .submenu-inner {
     display: block;
     padding: 20px;
