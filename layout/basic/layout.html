@@ -43,16 +43,16 @@
     <div id="wrap">
         <!--@import(/layout/basic/topbanner.html)-->
         <header id="header">
-            <div class="inner">
-                <div class="topArea">
-                    <!--@import(/layout/basic/state_login.html)-->
-                </div>
-                <div class="mainNav">
-                    <h1 module="Layout_LogoTop" class="topArea__logo">
-                        <!--@css(/css/module/layout/logotop.css)-->
-                        <a href="/index.html"><img src="{$logo}" alt="{$mall_name}" width="150" height="30" /></a>
-                    </h1>
+            <div class="inner" style="display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; height: 90px; box-sizing: border-box;">
+                <h1 module="Layout_LogoTop" class="topArea__logo" style="margin: 0; padding: 0; display: flex; align-items: center;">
+                    <!--@css(/css/module/layout/logotop.css)-->
+                    <a href="/index.html"><img src="{$logo}" alt="{$mall_name}" width="150" height="30" /></a>
+                </h1>
+                <div class="mainNav" style="flex: 1; display: flex; justify-content: center; align-items: center;">
                     <!--@import(/layout/basic/navigation.html)-->
+                </div>
+                <div class="topArea" style="display: flex; align-items: center;">
+                    <!--@import(/layout/basic/state_login.html)-->
                 </div>
             </div>
         </header>

@@ -11,7 +11,8 @@ $(document).ready(function(){
     // 왼쪽 세부 항목 이름(예: 실내용)과 동일하게 매핑됩니다.
     var subCategorySlides = {
         '실내용': [
-            { link: '/product/list.html?cate_no=29', img: 'https://cdn.imweb.me/thumbnail/20260417/12cc50ffba0a3.png', title: '실내용 (480X480)', desc: '밝기: 600nit ~ 800nit<br>사이즈: 480X480<br>픽셀 피치: 1.875, 2.5' }
+            { link: '/product/list.html?cate_no=29', img: 'https://cdn.imweb.me/thumbnail/20260417/12cc50ffba0a3.png', title: '실내용 (480X480)', desc: '밝기: 600nit ~ 800nit<br>사이즈: 480X480<br>픽셀 피치: 1.875, 2.5' },
+            { link: '/product/list.html?cate_no=30', img: 'https://cdn.imweb.me/thumbnail/20260417/12cc50ffba0a3.png', title: '실내용 (480X480) 텍스트', desc: '밝기: 600nit ~ 800nit<br>사이즈: 480X480<br>픽셀 피치: 1.875, 2.5' }
         ],
         '실외용': [
             { link: '#', img: 'https://img.echosting.cafe24.com/skin/skin_ko_KR/main/img_collection2.jpg', title: '실외용 첫번째', desc: '설명 텍스트' }
@@ -29,24 +30,28 @@ $(document).ready(function(){
     };
 
     function renderSubmenuSlider(subName) {
+        console.log("renderSubmenuSlider called with:", subName);
         // subName에 해당하는 데이터가 없으면 '기본값' 데이터를 불러옵니다.
         var slidesData = subCategorySlides[subName] || subCategorySlides['기본값'];
         if (!slidesData || slidesData.length === 0) {
-            $('#submenu-banner-content').empty();
-            if (currentSwiper) {
-                currentSwiper.destroy(true, true);
-                currentSwiper = null;
-            }
+            $('#submenu-module .submenu-banner').empty();
+            try {
+                if (currentSwiper && typeof currentSwiper.destroy === 'function') {
+                    currentSwiper.destroy(true, true);
+                }
+            } catch(e) { console.error("Swiper destroy error:", e); }
+            currentSwiper = null;
             return;
         }
 
-        if (currentSwiper) {
-            currentSwiper.destroy(true, true);
-            currentSwiper = null;
-        }
+        try {
+            if (currentSwiper && typeof currentSwiper.destroy === 'function') {
+                currentSwiper.destroy(true, true);
+            }
+        } catch(e) { console.error("Swiper destroy error:", e); }
+        currentSwiper = null;
 
         if (slidesData.length === 1) {
-            // 슬라이드가 1개일 때는 Swiper 없이 일반 레이아웃으로 렌더링 (치우침/넓이 이슈 방지)
             var item = slidesData[0];
             var html = '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%; width: 100%;">' +
                             '<div style="flex: 0 0 400px; height: 100%;">' +
@@ -57,14 +62,15 @@ $(document).ready(function(){
                                 '<p style="font-size: 13px; color: #555; line-height: 1.5; margin: 0; word-break: keep-all;">' + item.desc + '</p>' +
                             '</div>' +
                        '</a>';
-            $('#submenu-banner-content').html(html);
+            $('#submenu-module .submenu-banner').html(html);
+            console.log("Injected 1-slide layout");
         } else {
             // 슬라이드가 여러 개일 때만 Swiper 렌더링
             var swiperHtml = '<div class="swiper-container submenu-right-swiper" style="width: 100%; height: 100%; overflow: hidden;">' +
-                                '<div class="swiper-wrapper">';
+                                '<div class="swiper-wrapper" style="height: 100%; display: flex;">';
             
             $(slidesData).each(function(i, item) {
-                swiperHtml += '<div class="swiper-slide">' +
+                swiperHtml += '<div class="swiper-slide" style="height: 100%; width: 100%; box-sizing: border-box; flex-shrink: 0;">' +
                                 '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%;">' +
                                     '<div style="flex: 0 0 400px; height: 100%;">' +
                                         '<img src="' + item.img + '" alt="" style="width: 100%; height: 100%; object-fit: cover;">' +
@@ -79,28 +85,51 @@ $(document).ready(function(){
 
             swiperHtml +=       '</div>' +
                                 '<div class="swiper-pagination"></div>' +
+                                '<div class="swiper-button-prev" style="color: #333; left: 10px;"></div>' +
+                                '<div class="swiper-button-next" style="color: #333; right: 10px;"></div>' +
                              '</div>';
 
-            $('#submenu-banner-content').html(swiperHtml);
+            $('#submenu-module .submenu-banner').html(swiperHtml);
+            console.log("Injected Swiper HTML into #submenu-banner-content. HTML length:", swiperHtml.length);
 
             if (typeof Swiper !== 'undefined') {
-                currentSwiper = new Swiper('.submenu-right-swiper', {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    loop: true,
-                    speed: 800,
-                    pagination: {
-                        el: '.swiper-pagination',
-                        type: 'progressbar',
-                    },
-                    autoplay: {
-                        delay: 3000,
-                        disableOnInteraction: false,
-                        pauseOnMouseEnter: true
-                    },
-                    observer: true,
-                    observeParents: true
-                });
+                console.log("Initializing Swiper...");
+                try {
+                    currentSwiper = new Swiper('.submenu-right-swiper', {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                        loop: true,
+                        speed: 800,
+                        pagination: {
+                            el: '.swiper-pagination',
+                            type: 'progressbar',
+                        },
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        autoplay: {
+                            delay: 3000,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true
+                        },
+                        observer: true,
+                        observeParents: true,
+                        on: {
+                            init: function() {
+                                var _this = this;
+                                setTimeout(function() {
+                                    _this.update();
+                                }, 250);
+                            }
+                        }
+                    });
+                    console.log("Swiper initialized successfully.");
+                } catch(e) {
+                    console.error("Swiper initialization failed:", e);
+                }
+            } else {
+                console.error("Swiper is undefined!");
             }
         }
     }
@@ -196,11 +225,39 @@ $(document).ready(function(){
                 });
             }
 
+            // 메가메뉴 대상인지 확인
+            var megaMenus = ['LED안내전광판', '디지털사이니지', '키오스크'];
+            var isMegaMenu = $.inArray(categoryName, megaMenus) !== -1;
+
             // 서브메뉴가 아예 없으면 닫고 리턴
             if (!subItems || subItems.length === 0) {
                 $('#submenu-module').hide();
+                $('.simple-submenu').remove();
                 return;
             }
+
+            if (!isMegaMenu) {
+                $('#submenu-module').hide();
+                $('.simple-submenu').remove();
+                
+                var simpleHtml = '<ul class="simple-submenu" style="position:absolute; top:100%; left:0; background:#fff; border:1px solid #eee; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:10px 0; min-width:220px; z-index:10001; text-align:left; border-radius:4px; margin-top:0;">';
+                $(subItems).each(function() {
+                    simpleHtml += '<li><a href="' + this.link + '" style="display:block; padding:8px 20px; font-size:14px; color:#777; text-decoration:none; word-break:keep-all; transition:all 0.2s; font-weight:normal;">' + this.name + '</a></li>';
+                });
+                simpleHtml += '</ul>';
+                
+                $(overNode).css('position', 'relative').append(simpleHtml);
+                
+                $(overNode).find('.simple-submenu a').hover(function() {
+                    $(this).css('color', '#333');
+                }, function() {
+                    $(this).css('color', '#777');
+                });
+                
+                return;
+            }
+
+            $('.simple-submenu').remove();
 
             // 1. 왼쪽 카테고리 목록 업데이트
             var leftHtml = '<ul>';
@@ -224,7 +281,7 @@ $(document).ready(function(){
                 $('#submenu-left-content li').first().addClass('active');
                 renderSubmenuSlider(firstSubName);
             } else {
-                $('#submenu-banner-content').empty();
+                $('#submenu-module .submenu-banner').empty();
             }
 
             // 5. 서브메뉴 표시
@@ -241,6 +298,7 @@ $(document).ready(function(){
 
         close: function() {
             $('#submenu-module').slideUp(200);
+            $('.simple-submenu').remove();
         }
     };
 
