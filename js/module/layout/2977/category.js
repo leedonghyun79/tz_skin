@@ -165,24 +165,24 @@ $(document).ready(function(){
                     { name: '특수형(비정형)', link: '/product/list.html?cate_no=43' }
                 ],
                 '디지털사이니지': [
-                    { name: '멀티비전', link: '/product/multivision' },
-                    { name: '삼성 사이니지', link: '/product/list.html?cate_no=32' },
+                    { name: '멀티비전', link: '/product/list.html?cate_no=32' },
+                    { name: '삼성 사이니지', link: '/product/list.html?cate_no=33' },
                     { name: '엘지 사이니지', link: '/product/list.html?cate_no=44' },
-                    { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=45' }
-                ],
+                    { name: '전자액자', link: '/product/list.html?cate_no=45' }
+                ], 
                 '키오스크': [
                     { name: '삼성 사이니지', link: '/product/list.html?cate_no=46' },
                     { name: '엘지 사이니지', link: '/product/list.html?cate_no=47' },
-                    { name: '티비존 사이니지', link: '/product/list.html?cate_no=48' }
+                    { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=48' }
                 ],
                 '거치대마운트': [
                     { name: '스탠드형 거치대', link: '/product/list.html?cate_no=49' },
                     { name: '멀티비전/메뉴보드용 거치대', link: '/product/list.html?cate_no=50' }
                 ],
                 '솔루션': [
-                    { name: 'T-10 USB 광고용 최적화 솔루션 프로그램', link: '/solution' },
-                    { name: 'T-CMS MULTIPLEX 솔루션 프로그램', link: '/solution' },
-                    { name: 'T-서베이 소비자 만족도조사 키오스크', link: '/solution' }
+                    { name: 'T-10 USB 광고용 최적화 솔루션 프로그램', link: '/product/list.html?cate_no=54' },
+                    { name: 'T-CMS MULTIPLEX 솔루션 프로그램', link: '/product/list.html?cate_no=55' },
+                    { name: 'T-서베이 소비자 만족도조사 키오스크', link: '/product/list.html?cate_no=56' }
                 ]
             };
 

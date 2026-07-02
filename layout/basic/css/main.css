@@ -58,7 +58,7 @@ main#contents {display: block;}
 .saleItem .tab .menu li .button { display: inline-block; margin: 0 15px;}
 .saleItem .tab .menu li .button.active {position: relative; font-weight: bold; color: #000;}
 .saleItem .tab .menu li .button.active::after { content: ''; position: absolute; right: 0; left: 0; bottom: 0; height: 1px; background: #000;}
-.saleItem .tabContent { display:none; max-width:1410px; margin:0 auto; }
+.saleItem .tabContent { display:none; max-width:1400px; margin:0 auto; }
 .saleItem .tabContent.active { display:block; }
 .middleBanner img { width:100%; max-width:100%; }
 .middleBanner .banner img {width:100%;}
@@ -102,7 +102,7 @@ main#contents {display: block;}
 }
 
 /* collectionBanner - 공통 */
-.collectionBanner { display: flex; gap: 16px; max-width: 1410px; margin: 95px auto; }
+.collectionBanner { display: flex; gap: 16px; max-width: 1400px; margin: 95px auto; }
 .collectionBanner__item { flex: 1; position: relative; overflow: hidden; }
 .collectionBanner__item a { display: block; position: relative; }
 .collectionBanner__item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
@@ -114,7 +114,7 @@ main#contents {display: block;}
 
 
 /* categorySlide */
-.categorySlide { margin: 150px auto; max-width: 1410px; position: relative; padding: 0 40px; text-align: center; }
+.categorySlide { margin: 150px auto; max-width: 1400px; position: relative; padding: 0 40px; text-align: center; }
 .categorySlide .mainTitle { margin-bottom: 40px; }
 .categorySlide .swiper-container { padding: 40px 0 20px; overflow: hidden; }
 .categorySlide .swiper-slide { width: 260px; transition: transform 0.3s ease, opacity 0.3s ease; transform: scale(0.85); opacity: 0.5; }
@@ -239,8 +239,8 @@ main#contents {display: block;}
     .collection-item:nth-child(3n+3){margin-right: 0;}
     .saleItem { margin:95px -50px 0; padding:100px 60px;}
     .saleItem .tab{margin-top: -35px;}
-    .productItem, .xans-product-listmain-1, .xans-product-listmain-2, .xans-product-listmain-3 { max-width:1410px; margin:150px auto 0; }
-    .productSlide{ position:relative; max-width:1410px; margin:95px auto; padding: 50px 0;}
+    .productItem, .xans-product-listmain-1, .xans-product-listmain-2, .xans-product-listmain-3 { max-width:1400px; margin:150px auto 0; }
+    .productSlide{ position:relative; max-width:1400px; margin:95px auto; padding: 50px 0;}
     .productSlide .mainTitle { position:absolute; top:0; left:0; width:100%; }
     .item-wrapper{ display: flex; margin: 54px 0;}
     .item-wrapper > div{flex: 1;}
@@ -257,12 +257,12 @@ main#contents {display: block;}
     .middleBanner { position:relative; margin:115px 0; }
     .middleBanner .text { position:absolute; left:115px; top:0; bottom:0; margin:auto 0; height:60px; font-size:50px; color:#000; text-decoration:none; }
     .snsItem {margin:95px 0; }
-    .snsItem .mainTitle { max-width:1410px; margin:0 auto; }
+    .snsItem .mainTitle { max-width:1400px; margin:0 auto; }
     .snsItem-wrapper{margin: 60px -10px 0;}
     .snsItem-wrapper .snsItem-item a{display: block; margin: 0 10px; }
 
     /* videoBanner - PC */
-    .videoBanner { max-width: 1410px; margin: 150px auto; }
+    .videoBanner { max-width: 1400px; margin: 150px auto; }
     .videoBanner__inner { display: flex; align-items: center; gap: 80px; }
     .videoBanner__text { flex: 0 0 auto; width: 280px; }
     .videoBanner__media { flex: 1; }

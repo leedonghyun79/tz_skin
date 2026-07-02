@@ -510,6 +510,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #header .mainNav .navigation__category li {
+        margin: 0 1.2vw;
+        white-space: nowrap;
     }
 
     #header .mainNav .navigation__util {
@@ -521,7 +527,7 @@
     }
 
     #contents {
-        max-width: 1410px;
+        max-width: 1400px;
         min-height: 700px;
         padding: 0 50px 200px;
         padding-bottom: 200px;
@@ -535,7 +541,7 @@
     }
 
     section.gInner {
-        max-width: 1410px;
+        max-width: 1400px;
         margin: 0 auto;
     }
 

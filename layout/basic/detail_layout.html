@@ -41,13 +41,15 @@
     <header id="header">
         <div class="inner">
             <div class="topArea">
-                <div module="Layout_LogoTop" class="topArea__logo">
-                    <!--@css(/css/module/layout/logotop.css)-->
-                    <a href="/index.html"><img src="{$logo}" alt="{$mall_name}" width="150" height="30" /></a>
-                </div>
                 <!--@import(/layout/basic/state_login.html)-->
             </div>
-            <!--@import(/layout/basic/navigation.html)-->
+            <div class="mainNav">
+                <h1 module="Layout_LogoTop" class="topArea__logo">
+                    <!--@css(/css/module/layout/logotop.css)-->
+                    <a href="/index.html"><img src="{$logo}" alt="{$mall_name}" width="150" height="30" /></a>
+                </h1>
+                <!--@import(/layout/basic/navigation.html)-->
+            </div>
         </div>
     </header><hr class="layout" />
     
