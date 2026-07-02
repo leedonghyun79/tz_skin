@@ -85,8 +85,12 @@ $(document).ready(function(){
 
             swiperHtml +=       '</div>' +
                                 '<div class="swiper-pagination"></div>' +
-                                '<div class="swiper-button-prev" style="color: #333; left: 10px;"></div>' +
-                                '<div class="swiper-button-next" style="color: #333; right: 10px;"></div>' +
+                                '<div class="swiper-button-prev" style="left: -6px; display: flex !important; align-items: center; justify-content: center; width: 50px !important; height: 50px !important; background: none !important; border: none !important; transform: translateY(-50%) !important; margin-top: 0 !important; text-indent: 0 !important;">' +
+                                    '<svg viewBox="0 0 24 24" width="50" height="50" stroke="#7e7e7e" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>' +
+                                '</div>' +
+                                '<div class="swiper-button-next" style="right: 6px; display: flex !important; align-items: center; justify-content: center; width: 50px !important; height: 50px !important; background: none !important; border: none !important; transform: translateY(-50%) !important; margin-top: 0 !important; text-indent: 0 !important;">' +
+                                    '<svg viewBox="0 0 24 24" width="50" height="50" stroke="#7e7e7e" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
+                                '</div>' +
                              '</div>';
 
             $('#submenu-module .submenu-banner').html(swiperHtml);
