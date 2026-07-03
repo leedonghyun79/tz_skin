@@ -243,14 +243,14 @@ $(document).ready(function(){
                 $('#submenu-module').hide();
                 $('.simple-submenu').remove();
                 
-                var simpleHtml = '<ul class="simple-submenu" style="position:absolute; top:100%; left:30px; background:#fff; border:1px solid #eee; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:10px 0; min-width:220px; z-index:10001; text-align:left; border-radius:4px; margin-top:0;">';
+                var simpleHtml = '<ul class="simple-submenu" style="position:absolute; top:100%; left:30px; background:#fff; border:1px solid #eee; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:10px 0; min-width:220px; z-index:10001; text-align:left; border-radius:4px; margin-top:15px;">';
                 $(subItems).each(function() {
                     simpleHtml += '<li><a href="' + this.link + '" style="display:block; padding:8px 0; font-size:17px; color:#777; text-decoration:none; word-break:keep-all; transition:all 0.2s; font-weight:normal;">' + this.name + '</a></li>';
                 });
                 simpleHtml += '</ul>';
                 
                 $(overNode).css('position', 'relative').append(simpleHtml);
-                $(overNode).find('.simple-submenu li').css('margin-bottom', '12px');
+                $(overNode).find('.simple-submenu li').not(':last').css('margin-bottom', '12px');
                 
                 $(overNode).find('.simple-submenu a').hover(function() {
                     $(this).css('color', '#333');
