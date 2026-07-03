@@ -17,34 +17,194 @@
 
 <div class="titleArea" module="product_headcategory">
     <h2>{$title_text_or_image}</h2>
-    <span class="likeButton {$disp_likecate_class}"><button type="button">{$disp_likecate_icon}<strong>{$disp_likecate_count}</strong></button></span>
+    <span class="likeButton {$disp_likecate_class}"><button
+            type="button">{$disp_likecate_icon}<strong>{$disp_likecate_count}</strong></button></span>
 </div>
+
+<div class="my-custom-tabs-container">
+    <ul class="custom-category-box" id="dynamic-subcategory-box">
+        <!-- JS로 서브카테고리 박스 렌더링 -->
+    </ul>
+</div>
+
+<style>
+    .my-custom-tabs-container {
+        margin: 30px 0 50px;
+    }
+
+    .custom-category-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        padding: 0;
+        list-style: none;
+    }
+
+    .custom-category-box>li {
+        display: block;
+    }
+
+    .custom-category-box>li>a {
+        display: inline-block;
+        padding: 10px 20px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        font-size: 15px;
+        color: #666;
+        text-decoration: none;
+        background: #fff;
+        transition: all 0.2s;
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .custom-category-box>li>a:hover,
+    .custom-category-box>li.selected>a {
+        border-color: #222;
+        color: #222;
+        font-weight: 600;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var currentCateNo = urlParams.get('cate_no');
+
+        if (!currentCateNo) {
+            var matches = window.location.pathname.match(/\/(\d+)\/?$/);
+            if (matches) currentCateNo = matches[1];
+        }
+        if (!currentCateNo) return;
+
+        var currentTitle = document.querySelector('.titleArea h2');
+        var categoryName = currentTitle ? currentTitle.innerText.trim() : '전체';
+
+        var breadcrumbs = document.querySelectorAll('.path ol li a');
+        var catePath = [];
+        breadcrumbs.forEach(function (el) {
+            var href = el.getAttribute('href');
+            var cNo = null;
+            if (href) {
+                if (href.indexOf('cate_no=') !== -1) {
+                    cNo = new URLSearchParams(href.split('?')[1]).get('cate_no');
+                } else if (href.indexOf('/category/') !== -1) {
+                    var m = href.match(/\/(\d+)\/?$/);
+                    if (m) cNo = m[1];
+                }
+            }
+            if (cNo) {
+                catePath.push({ no: cNo, name: el.innerText.trim() });
+            }
+        });
+
+        var myDepthIndex = -1;
+        for (var i = 0; i < catePath.length; i++) {
+            if (catePath[i].no == currentCateNo) {
+                myDepthIndex = i;
+                break;
+            }
+        }
+
+        var targetParentNo = currentCateNo;
+        var targetParentName = categoryName;
+
+        if (myDepthIndex > 0) {
+            // Check children first
+        } else if (catePath.length > 1) {
+            targetParentNo = catePath[catePath.length - 1].no;
+            targetParentName = catePath[catePath.length - 1].name;
+        }
+
+        fetch('/exec/front/Product/SubCategory')
+            .then(function (res) { return res.json(); })
+            .then(function (aData) {
+                if (!aData || aData.length === 0) return;
+
+                var myChildren = aData.filter(function (item) {
+                    return item.parent_cate_no == currentCateNo;
+                });
+
+                var renderList = [];
+                var allLink = '/product/list.html?cate_no=' + currentCateNo;
+                var allTitle = categoryName + ' all';
+
+                if (myChildren.length > 0) {
+                    renderList = myChildren;
+                } else {
+                    if (myDepthIndex > 0) {
+                        var myParent = catePath[myDepthIndex - 1];
+                        targetParentNo = myParent.no;
+                        targetParentName = myParent.name;
+
+                        renderList = aData.filter(function (item) {
+                            return item.parent_cate_no == targetParentNo;
+                        });
+
+                        allLink = '/product/list.html?cate_no=' + targetParentNo;
+                        allTitle = targetParentName + ' all';
+                    }
+                }
+
+                if (renderList.length > 0) {
+                    var html = '';
+                    var isAllSelected = (currentCateNo == targetParentNo) ? 'class="selected"' : '';
+                    html += '<li ' + isAllSelected + '><a href="' + allLink + '">' + allTitle + '</a></li>';
+
+                    renderList.forEach(function (item) {
+                        var isSelected = (currentCateNo == item.cate_no) ? 'class="selected"' : '';
+                        html += '<li ' + isSelected + '><a href="/product/list.html' + (item.param || '?cate_no=' + item.cate_no) + '">' + item.name + '</a></li>';
+                    });
+
+                    var box = document.getElementById('dynamic-subcategory-box');
+                    if (box) {
+                        box.innerHTML = html;
+                    }
+                }
+            })
+            .catch(function (err) {
+                console.error('SubCategory Fetch Error:', err);
+            });
+    });
+</script>
 
 <div class="ec-base-tab typeMenu">
     <ul class="menuCategory menu">
         <li module="product_displaycategory" style="display:{$display};" class="{$selected}">
             <a href="{$link_product_list_sub}" class="button">{$category_name}
-                <span class="count {$product_count_display|display}">({$product_count})</span></a><a href="#none" class="iconWrap"></a>
+                <span class="count {$product_count_display|display}">({$product_count})</span></a><a href="#none"
+                class="iconWrap"></a>
             <ul module="product_children">
                 <li class="{$selected}">
                     <a href="{$link_product_list_sub}">{$category_name}
-                        <span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none" class="iconWrap"></a>
+                        <span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none"
+                        class="iconWrap"></a>
                     <div class="button">
                         {$children_icon}
                         <ul module="product_children" class="subCategory">
-                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none" class="iconWrap"></a></li>
-                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none" class="iconWrap"></a></li>
+                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span
+                                        class="{$product_count_display|display}">({$product_count})</span></a><a
+                                    href="#none" class="iconWrap"></a></li>
+                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span
+                                        class="{$product_count_display|display}">({$product_count})</span></a><a
+                                    href="#none" class="iconWrap"></a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="{$selected}">
                     <a href="{$link_product_list_sub}">{$category_name}
-                        <span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none" class="iconWrap"></a>
+                        <span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none"
+                        class="iconWrap"></a>
                     <div class="button">
                         {$children_icon}
                         <ul module="product_children" class="subCategory">
-                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none" class="iconWrap"></a></li>
-                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span class="{$product_count_display|display}">({$product_count})</span></a><a href="#none" class="iconWrap"></a></li>
+                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span
+                                        class="{$product_count_display|display}">({$product_count})</span></a><a
+                                    href="#none" class="iconWrap"></a></li>
+                            <li class="{$selected}"><a href="{$link_product_list_sub}">{$category_name}<span
+                                        class="{$product_count_display|display}">({$product_count})</span></a><a
+                                    href="#none" class="iconWrap"></a></li>
                         </ul>
                     </div>
                 </li>
@@ -64,11 +224,14 @@
     <div class="title">
         <h3>추천상품</h3>
     </div>
-    <ul class="prdList grid4">
+    <ul class="prdList grid5">
         <li id="anchorBoxId_{$product_no}">
             <div class="prdList__item">
                 <div class="thumbnail">
-                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}" alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span class="prdIcon {$icon_class_name}" style="background-image:url('{$icon_url}');"></span></span></a>
+                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}"
+                            alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span
+                                class="prdIcon {$icon_class_name}"
+                                style="background-image:url('{$icon_url}');"></span></span></a>
                     <div class="icon__box">
                         <span class="wish">{$list_wish_icon}</span>
                         <span class="cart">{$basket_icon}</span>
@@ -76,10 +239,13 @@
                     <span class="benefit">{$benefit_icons}</span>
                 </div>
                 <div class="description">
-                    <strong class="name {$product_name_display|display}"><a href="{$link_product_detail}">{$product_name}</a></strong>
+                    <strong class="name {$product_name_display|display}"><a
+                            href="{$link_product_detail}">{$product_name}</a></strong>
                     <ul class="spec">
                         <li class="summary">{$summary_desc}</li>
-                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price} <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span id="span_product_price_text">{$product_tax_type_text}</span></li>
+                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price}
+                            <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span
+                                id="span_product_price_text">{$product_tax_type_text}</span></li>
                         <li class="price sale {$product_sale_display|display}">{$product_sale_price}</li>
                         <li class="price sale {$optimum_discount_price_display|display}">{$optimum_discount_price}</li>
                         <li class="mileage {$mileage_icon_display}">{$mileage_value}</li>
@@ -90,14 +256,18 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
+                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons}
+                        {$today_arrival_icon} {$pickup_icon}</div>
                 </div>
             </div>
         </li>
         <li id="anchorBoxId_{$product_no}">
             <div class="prdList__item">
                 <div class="thumbnail">
-                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}" alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span class="prdIcon {$icon_class_name}" style="background-image:url('{$icon_url}');"></span></span></a>
+                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}"
+                            alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span
+                                class="prdIcon {$icon_class_name}"
+                                style="background-image:url('{$icon_url}');"></span></span></a>
                     <div class="icon__box">
                         <span class="wish">{$list_wish_icon}</span>
                         <span class="cart">{$basket_icon}</span>
@@ -105,10 +275,13 @@
                     <span class="benefit">{$benefit_icons}</span>
                 </div>
                 <div class="description">
-                    <strong class="name {$product_name_display|display}"><a href="{$link_product_detail}">{$product_name}</a></strong>
+                    <strong class="name {$product_name_display|display}"><a
+                            href="{$link_product_detail}">{$product_name}</a></strong>
                     <ul class="spec">
                         <li class="summary">{$summary_desc}</li>
-                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price} <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span id="span_product_price_text">{$product_tax_type_text}</span></li>
+                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price}
+                            <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span
+                                id="span_product_price_text">{$product_tax_type_text}</span></li>
                         <li class="price sale {$product_sale_display|display}">{$product_sale_price}</li>
                         <li class="price sale {$optimum_discount_price_display|display}">{$optimum_discount_price}</li>
                         <li class="mileage {$mileage_icon_display}">{$mileage_value}</li>
@@ -119,7 +292,8 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
+                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons}
+                        {$today_arrival_icon} {$pickup_icon}</div>
                 </div>
             </div>
         </li>
@@ -136,11 +310,14 @@
     <div class="title">
         <h3>신상품</h3>
     </div>
-    <ul class="prdList grid4">
+    <ul class="prdList grid5">
         <li id="anchorBoxId_{$product_no}">
             <div class="prdList__item">
                 <div class="thumbnail">
-                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}" alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span class="prdIcon {$icon_class_name}" style="background-image:url('{$icon_url}');"></span></span></a>
+                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}"
+                            alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span
+                                class="prdIcon {$icon_class_name}"
+                                style="background-image:url('{$icon_url}');"></span></span></a>
                     <div class="icon__box">
                         <span class="wish">{$list_wish_icon}</span>
                         <span class="cart">{$basket_icon}</span>
@@ -148,10 +325,13 @@
                     <span class="benefit">{$benefit_icons}</span>
                 </div>
                 <div class="description">
-                    <strong class="name {$product_name_display|display}"><a href="{$link_product_detail}">{$product_name}</a></strong>
+                    <strong class="name {$product_name_display|display}"><a
+                            href="{$link_product_detail}">{$product_name}</a></strong>
                     <ul class="spec">
                         <li class="summary">{$summary_desc}</li>
-                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price} <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span id="span_product_price_text">{$product_tax_type_text}</span></li>
+                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price}
+                            <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span
+                                id="span_product_price_text">{$product_tax_type_text}</span></li>
                         <li class="price sale {$product_sale_display|display}">{$product_sale_price}</li>
                         <li class="price sale {$optimum_discount_price_display|display}">{$optimum_discount_price}</li>
                         <li class="mileage {$mileage_icon_display}">{$mileage_value}</li>
@@ -162,14 +342,18 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
+                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons}
+                        {$today_arrival_icon} {$pickup_icon}</div>
                 </div>
             </div>
         </li>
         <li id="anchorBoxId_{$product_no}">
             <div class="prdList__item">
                 <div class="thumbnail">
-                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}" alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span class="prdIcon {$icon_class_name}" style="background-image:url('{$icon_url}');"></span></span></a>
+                    <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}"
+                            alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span
+                                class="prdIcon {$icon_class_name}"
+                                style="background-image:url('{$icon_url}');"></span></span></a>
                     <div class="icon__box">
                         <span class="wish">{$list_wish_icon}</span>
                         <span class="cart">{$basket_icon}</span>
@@ -177,10 +361,13 @@
                     <span class="benefit">{$benefit_icons}</span>
                 </div>
                 <div class="description">
-                    <strong class="name {$product_name_display|display}"><a href="{$link_product_detail}">{$product_name}</a></strong>
+                    <strong class="name {$product_name_display|display}"><a
+                            href="{$link_product_detail}">{$product_name}</a></strong>
                     <ul class="spec">
                         <li class="summary">{$summary_desc}</li>
-                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price} <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span id="span_product_price_text">{$product_tax_type_text}</span></li>
+                        <li class="price {$product_price_display|display} {$product_sale_strike}">{$disp_product_price}
+                            <span class="{$product_price_ref_display|display}">{$txt_product_price_ref}</span><span
+                                id="span_product_price_text">{$product_tax_type_text}</span></li>
                         <li class="price sale {$product_sale_display|display}">{$product_sale_price}</li>
                         <li class="price sale {$optimum_discount_price_display|display}">{$optimum_discount_price}</li>
                         <li class="mileage {$mileage_icon_display}">{$mileage_value}</li>
@@ -191,7 +378,8 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
+                    <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons}
+                        {$today_arrival_icon} {$pickup_icon}</div>
                 </div>
             </div>
         </li>
@@ -213,7 +401,8 @@
                     <option value="{$param}">{$sort_name}</option>
                 </select>
             </div>
-            <span class="compare {$product_compare_display|display}"><a href="#none" class="btnCompare" onclick="{$product_compare_action}">상품비교</a></span>
+            <span class="compare {$product_compare_display|display}"><a href="#none" class="btnCompare"
+                    onclick="{$product_compare_action}">상품비교</a></span>
         </div>
 
         <fieldset class="condition {$select_search_display|display}">
@@ -245,11 +434,14 @@
                 $basket_result = /product/add_basket.html
                 $basket_option = /product/basket_option.html
             -->
-            <ul class="prdList grid4">
+            <ul class="prdList grid5">
                 <li id="anchorBoxId_{$product_no}">
                     <div class="prdList__item">
                         <div class="thumbnail">
-                            <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}" alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span class="prdIcon {$icon_class_name}" style="background-image:url('{$icon_url}');"></span></span></a>
+                            <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}"
+                                    alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span
+                                        class="prdIcon {$icon_class_name}"
+                                        style="background-image:url('{$icon_url}');"></span></span></a>
                             <div class="icon__box">
                                 <span class="wish">{$list_wish_icon}</span>
                                 <span class="cart">{$basket_icon}</span>
@@ -257,23 +449,32 @@
                             <span class="benefit">{$benefit_icons}</span>
                         </div>
                         <div class="description">
-                            <strong class="name"><a href="{$link_product_detail}" class="{$product_name_display|display}"><span class="title {$product_name_title_display|display}">{$product_name_title} :</span> {$product_name}</a></strong>
+                            <strong class="name"><a href="{$link_product_detail}"
+                                    class="{$product_name_display|display}"><span
+                                        class="title {$product_name_title_display|display}">{$product_name_title}
+                                        :</span> {$product_name}</a></strong>
                             <ul module="product_ListItem" class="spec">
                                 <li class="{$item_display|display}">
-                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong> {$item_content}
+                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong>
+                                    {$item_content}
                                 </li>
                                 <li class="{$item_display|display}">
-                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong> {$item_content}
+                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong>
+                                    {$item_content}
                                 </li>
                             </ul>
-                            <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
+                            <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon}
+                                {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
                         </div>
                     </div>
                 </li>
                 <li id="anchorBoxId_{$product_no}">
                     <div class="prdList__item">
                         <div class="thumbnail">
-                            <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}" alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span class="prdIcon {$icon_class_name}" style="background-image:url('{$icon_url}');"></span></span></a>
+                            <a href="{$link_product_detail}"><img src="{$image_medium}" id="{$image_medium_id}"
+                                    alt="{$seo_alt_tag}"><span module="product_Imagestyle"><span
+                                        class="prdIcon {$icon_class_name}"
+                                        style="background-image:url('{$icon_url}');"></span></span></a>
                             <div class="icon__box">
                                 <span class="wish">{$list_wish_icon}</span>
                                 <span class="cart">{$basket_icon}</span>
@@ -281,22 +482,28 @@
                             <span class="benefit">{$benefit_icons}</span>
                         </div>
                         <div class="description">
-                            <strong class="name"><a href="{$link_product_detail}" class="{$product_name_display|display}"><span class="title {$product_name_title_display|display}">{$product_name_title} :</span> {$product_name}</a></strong>
+                            <strong class="name"><a href="{$link_product_detail}"
+                                    class="{$product_name_display|display}"><span
+                                        class="title {$product_name_title_display|display}">{$product_name_title}
+                                        :</span> {$product_name}</a></strong>
                             <ul module="product_ListItem" class="spec">
                                 <li class="{$item_display|display}">
-                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong> {$item_content}
+                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong>
+                                    {$item_content}
                                 </li>
                                 <li class="{$item_display|display}">
-                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong> {$item_content}
+                                    <strong class="title {$item_title_display|display}">{$item_title} :</strong>
+                                    {$item_content}
                                 </li>
                             </ul>
-                            <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon} {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
+                            <div class="icon">{$soldout_icon} {$stock_icon} {$recommend_icon} {$new_icon}
+                                {$product_icons} {$today_arrival_icon} {$pickup_icon}</div>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
-        
+
         <div module="product_listmore" class="more">
             <a href="#none" onclick="{$more_action}" class="btnMore">
                 더보기<span id="more_current_page">{$current_page}</span>/<span id="more_total_page">{$total_page}</span>
