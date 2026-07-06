@@ -1,10 +1,15 @@
 <div class="bottom-nav RTMB">
     <ul class="bottom-nav__tabBar">
-        <li><button type="button" class="btnNav eNavFold"><i aria-hidden="true" class="icon icoNav"></i>네비게이션</button></li>
+        <li><button type="button" class="btnNav eNavFold"><i aria-hidden="true" class="icon icoNav"></i>네비게이션</button>
+        </li>
         <li><button type="button" class="btnSearch eSearch"><!--@import(/svg/icon-search.html)-->검색</button></li>
         <li><a href="/"><!--@import(/svg/icon-home.html)-->홈</a></li>
-        <li module="Layout_stateLogon"><a href="/order/basket.html"><!--@import(/svg/icon-cart.html)-->Cart <span class="count {$basket_count_display|display} {$basket_count_display_class}"><span class="{$basket_count_class}">{$basket_count}</span></span></a></li>
-        <li module="Layout_stateLogoff"><a href="/order/basket.html"><!--@import(/svg/icon-cart.html)-->Cart <span class="count {$basket_count_display|display} {$basket_count_display_class}"><span class="{$basket_count_class}">{$basket_count}</span></span></a></li>
+        <li module="Layout_stateLogon"><a href="/order/basket.html"><!--@import(/svg/icon-cart.html)-->Cart <span
+                    class="count {$basket_count_display|display} {$basket_count_display_class}"><span
+                        class="{$basket_count_class}">{$basket_count}</span></span></a></li>
+        <li module="Layout_stateLogoff"><a href="/order/basket.html"><!--@import(/svg/icon-cart.html)-->Cart <span
+                    class="count {$basket_count_display|display} {$basket_count_display_class}"><span
+                        class="{$basket_count_class}">{$basket_count}</span></span></a></li>
         <li><a href="/myshop/index.html"><!--@import(/svg/icon-user.html)-->마이쇼핑</a></li>
     </ul>
     <div class="bottom-nav__top">
@@ -28,25 +33,63 @@
 <footer id="footer">
     <h2 class="blind">회사정보</h2>
     <div class="inner">
-        <div module="Layout_footer">
-<!--@css(/css/module/layout/2973/footer.css)-->
-    <p class="address">
-        <span>법인명(상호) : {$company_name} </span> <span>대표자(성명) : {$president_name}</span> <span>사업자 등록번호 안내 : [{$company_regno}]</span> <span>통신판매업 신고 {$network_regno}</span> <span>{$biz_no_link}</span> <br />
-        <span>전화 : {$phone}</span> <span>팩스 : {$fax}</span> <span>주소 : {$mall_zipcode} {$mall_addr1} {$mall_addr2}</span><br />
-        <span>개인정보관리책임자 : <a href="mailto:{$cpo_email}">{$cpo_name}({$cpo_email})</a></span><br />
-        <span>Contact <strong><a href="mailto:{$email}">{$email}</a></strong> for more information.</span>
-    </p>
-    <ul class="utilMenu">
-        <li class="home"><a href="/index.html">Home</a></li>
-        <li><a href="/shopinfo/company.html">About Us</a></li>
-        <li><a href="/member/agreement.html">Terms and Conditions</a></li>
-        <li><a href="/member/privacy.html"><strong>Privacy Policy</strong></a></li>
-        <li><a href="/shopinfo/guide.html">Help</a></li>
-    </ul>
-    <p class="copyright">Copyright &copy; 2011 <strong>{$mall_name}</strong>. All rights reserved.</p>
-    <!-- <p class="pageTop"><a href="#header" title="화면 최상단으로 이동하기"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/btn_top2.gif" alt="맨위로" /></a></p> -->
-    <p class="hosting"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/logo_cafe24.png" alt="hosting by cafe24 심플렉스인터넷(주)" /></p>
-</div>
+        <div module="Layout_footer" class="footer-wrap">
+            <!--@css(/css/module/layout/2973/footer.css)-->
+            <div class="footer-grid">
+                <!-- Col 1: Logo, Menu, Company Info -->
+                <div class="footer-col footer-col-info">
+                    <h2 class="footer-logo">{$mall_name}</h2>
+                    <ul class="utilMenu">
+                        <li><a href="/shopinfo/company.html">회사소개</a></li>
+                        <li><a href="/member/agreement.html">이용약관</a></li>
+                        <li><a href="/member/privacy.html"><strong>개인정보 취급방침</strong></a></li>
+                        <li><a href="/shopinfo/guide.html">이용안내</a></li>
+                    </ul>
+                    <p class="address">
+                        <span>법인명(상호) : {$company_name}</span>
+                        <span>주소 : {$mall_zipcode} {$mall_addr1} {$mall_addr2}</span><br />
+                        <span>대표자(성명) : {$president_name}</span>
+                        <span>전화 : {$phone}</span>
+                        <span>개인정보관리책임자 : <a href="mailto:{$cpo_email}">{$cpo_name}({$cpo_email})</a></span><br />
+                        <span>사업자등록번호 : {$company_regno}</span>
+                        <span>통신판매업신고 : {$network_regno} [{$biz_no_link}]</span>
+                    </p>
+                    <p class="copyright">Copyright &copy; 2026 <strong>{$mall_name}</strong>. All rights reserved.</p>
+                </div>
+
+                <!-- Col 2: Customer Service -->
+                <div class="footer-col footer-col-cs">
+                    <h3 class="footer-title">구매상담</h3>
+                    <p class="footer-phone">{$phone}</p>
+                    <ul class="cs-info">
+                        <li><span>이메일</span> <a href="mailto:{$email}">{$email}</a></li>
+                        <li><span>팩스</span> {$fax}</li>
+                    </ul>
+
+                    <h3 class="footer-title" style="margin-top:25px;">교환 & 반품주소</h3>
+                    <p class="cs-info">
+                        {$mall_zipcode} {$mall_addr1} {$mall_addr2}<br />
+                        {$company_name}
+                    </p>
+                </div>
+
+                <!-- Col 3: Operating Hours & Hosting -->
+                <div class="footer-col footer-col-extra">
+                    <h3 class="footer-title">운영시간</h3>
+                    <p class="operating-time">
+                        평일 : 10:00 ~ 18:00<br>
+                        점심시간 : 12:00 ~ 13:30<br>
+                        주말 및 공휴일은 휴무입니다.
+                    </p>
+                    <!-- <p class="hosting"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/logo_cafe24.png"
+                            alt="hosting by cafe24 심플렉스인터넷(주)" /></p> -->
+                </div>
+            </div>
+
+            <div class="footer-safe">
+                고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 PG사의 구매안전 서비스를 이용하실 수 있습니다. [서비스 가입사실 확인]
+            </div>
+        </div>
 
     </div>
 </footer>
@@ -62,11 +105,13 @@
     <h3 class="title">Search</h3>
     <fieldset>
         <legend>검색</legend>
-        {$form.keyword}<button type="button" class="btnSearch" onclick="{$action_search_submit}"><!--@import(/svg/icon-search.html)--> 검색</button><ul class="autoDrop" id="{$search_auto_id}"></ul>
+        {$form.keyword}<button type="button" class="btnSearch"
+            onclick="{$action_search_submit}"><!--@import(/svg/icon-search.html)--> 검색</button>
+        <ul class="autoDrop" id="{$search_auto_id}"></ul>
     </fieldset>
     <button type="button" class="btnClose"><i aria-hidden="true" class="icon icoClose"></i>닫기</button>
 </div>
-            
+
 <div id="progressPaybar" style="display:none;">
     <div id="progressPaybarBackground" class="layerProgress"></div>
     <div id="progressPaybarView">
@@ -76,7 +121,8 @@
                 본 결제 창은 결제완료 후 자동으로 닫히며,결제 진행 중에 본 결제 창을 닫으시면<br />
                 주문이 되지 않으니 결제 완료 될 때 까지 닫지 마시기 바랍니다.
             </p>
-            <div class="progressbar"><img src="//img.echosting.cafe24.com/skin/skin/common/img_loading.gif" alt="loading" loading="lazy"></div>
+            <div class="progressbar"><img src="//img.echosting.cafe24.com/skin/skin/common/img_loading.gif"
+                    alt="loading" loading="lazy"></div>
         </div>
     </div>
 </div>
@@ -92,12 +138,12 @@
         <div class="content">
             <p class="desc">PLEASE SELECT THE DESTINATION COUNTRY AND LANGUAGE :</p>
             <select module="Layout_multishopShippingCountrylist">
-                <option value="{$country_code}"{$country_default_selected}>SHIPPING TO : {$country_name}</option>
-                <option value="{$country_code}"{$country_default_selected}>SHIPPING TO : {$country_name}</option>
+                <option value="{$country_code}" {$country_default_selected}>SHIPPING TO : {$country_name}</option>
+                <option value="{$country_code}" {$country_default_selected}>SHIPPING TO : {$country_name}</option>
             </select>
             <select module="Layout_multishopShippingLanguagelist">
-                <option value="{$shop_domain}"{$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
-                <option value="{$shop_domain}"{$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
+                <option value="{$shop_domain}" {$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
+                <option value="{$shop_domain}" {$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
             </select>
         </div>
         <div class="ec-base-button">
