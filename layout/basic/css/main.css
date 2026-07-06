@@ -1314,6 +1314,7 @@ main#contents {
     border-color: #222;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     transform: translateY(-3px);
+    text-decoration: none !important;
 }
 
 .serviceBanner__item .icon {
@@ -1354,43 +1355,161 @@ main#contents {
 .serviceBanner__item .arrow svg {
     width: 100%;
     height: 100%;
-}/* ¼­ºñ½º ¹è³Ê ÅÂºí¸´ ¹ÝÀÀÇü (1024px ÀÌÇÏ) */
+}
+
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Âºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (1024px ï¿½ï¿½ï¿½ï¿½) */
 @media all and (max-width: 1024px) {
     .serviceBanner {
         gap: 15px;
         margin: 50px 20px;
     }
+
     .serviceBanner__item {
         padding: 25px 30px;
     }
+
     .serviceBanner__item .text strong {
         font-size: 18px;
     }
 }
 
-/* ¼­ºñ½º ¹è³Ê ¸ð¹ÙÀÏ ¹ÝÀÀÇü (768px ÀÌÇÏ) */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (768px ï¿½ï¿½ï¿½ï¿½) */
 @media all and (max-width: 768px) {
     .serviceBanner {
         flex-direction: column;
         margin: 40px 15px;
     }
+
     .serviceBanner__item {
         padding: 20px;
     }
+
     .serviceBanner__item .icon {
         width: 32px;
         height: 32px;
         margin-right: 15px;
     }
+
     .serviceBanner__item .text strong {
         font-size: 16px;
         margin-bottom: 4px;
     }
+
     .serviceBanner__item .text p {
         font-size: 13px;
     }
+
     .serviceBanner__item .arrow {
         width: 20px;
         height: 20px;
     }
+}
+
+.serviceBanner__item:hover {
+    text-decoration: none !important;
+}
+
+.serviceBanner__item:hover .text strong,
+.serviceBanner__item:hover .text p {
+    text-decoration: none !important;
+}.categorySlide .swiper-scrollbar {
+    height: 4px !important;
+    background: #e5e5e5 !important;
+    border-radius: 4px !important;
+}
+.categorySlide .swiper-scrollbar-drag {
+    background: #222 !important;
+    height: 4px !important;
+    top: 0 !important;
+    border-radius: 4px !important;
+}
+.categorySlide .swiper-pagination-progressbar {
+    background: #e5e5e5;
+    height: 4px;
+    border-radius: 4px;
+    position: relative;
+    width: 100%;
+}
+.categorySlide .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background: #222;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: left top;
+}
+.categorySlide .swiper-scrollbar, 
+.categorySlide .swiper-pagination-progressbar {
+    display: none !important;
+}
+.categorySlide .swiper-button-prev,
+.categorySlide .swiper-button-next {
+    position: absolute !important;
+    top: 50% !important;
+    margin-top: -20px !important;
+    z-index: 10 !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+.categorySlide .swiper-button-prev {
+    left: 20px !important;
+}
+.categorySlide .swiper-button-next {
+    right: 20px !important;
+}
+.categorySlide .swiper-button-prev,
+.categorySlide .swiper-button-next {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #ffffff !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    z-index: 20 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    cursor: pointer !important;
+}
+
+.categorySlide .swiper-button-prev.swiper-button-disabled,
+.categorySlide .swiper-button-next.swiper-button-disabled {
+    opacity: 0.3 !important;
+    cursor: default !important;
+}
+
+.categorySlide .swiper-button-prev::after,
+.categorySlide .swiper-button-next::after {
+    content: '' !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-color: #222 !important;
+    border-style: solid !important;
+    border-width: 2px 2px 0 0 !important;
+    display: block !important;
+}
+
+.categorySlide .swiper-button-prev::after {
+    transform: rotate(-135deg) !important;
+    margin-left: 5px !important;
+}
+
+.categorySlide .swiper-button-next::after {
+    transform: rotate(45deg) !important;
+    margin-right: 5px !important;
+}
+
+.categorySlide .swiper-button-prev {
+    left: 5px !important;
+}
+
+.categorySlide .swiper-button-next {
+    right: 0px !important;
 }

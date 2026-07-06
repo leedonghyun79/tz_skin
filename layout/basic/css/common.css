@@ -130,10 +130,6 @@ a {
   color: var(--font-color-base);
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
 a:active {
   text-decoration: none;
 }

@@ -142,10 +142,9 @@ function swiperCategory() {
         spaceBetween: 20,
         centeredSlides: true,
         loop: true,
-        loopedSlides: 5,
-        scrollbar: {
-            el: '.categorySlide .swiper-scrollbar',
-            draggable: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
         },
         navigation: {
             nextEl: '.categorySlide .swiper-button-next',
