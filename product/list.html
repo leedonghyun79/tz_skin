@@ -56,7 +56,7 @@
         background: #fff;
         transition: all 0.2s;
         min-width: 120px;
-        text-align: center;
+        text-align: left;
     }
 
     .custom-category-box>li>a:hover,
@@ -128,7 +128,7 @@
 
                 var renderList = [];
                 var allLink = '/product/list.html?cate_no=' + currentCateNo;
-                var allTitle = categoryName + ' all';
+                var allTitle = '전체';
 
                 if (myChildren.length > 0) {
                     renderList = myChildren;
@@ -143,7 +143,7 @@
                         });
 
                         allLink = '/product/list.html?cate_no=' + targetParentNo;
-                        allTitle = targetParentName + ' all';
+                        allTitle = '전체';
                     }
                 }
 

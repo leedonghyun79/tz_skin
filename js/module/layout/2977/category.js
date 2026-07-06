@@ -211,11 +211,7 @@ $(document).ready(function(){
                 '거치대마운트': [
                     { name: '스탠드형 거치대', link: '/product/list.html?cate_no=49' }
                 ],
-                '솔루션': [
-                    { name: 'T-10 USB 광고용 최적화 솔루션 프로그램', link: '/product/list.html?cate_no=54' },
-                    { name: 'T-CMS MULTIPLEX 솔루션 프로그램', link: '/product/list.html?cate_no=55' },
-                    { name: 'T-서베이 소비자 만족도조사 키오스크', link: '/product/list.html?cate_no=56' }
-                ]
+                '솔루션': []
             };
 
             var subItems = customMenus[categoryName];

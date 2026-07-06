@@ -14,7 +14,7 @@
   }
 
   .xans-layout-logotop img {
-    width: 150px;
+    width: 205px;
     height: 30px;
     object-fit: contain;
   }
@@ -23,10 +23,10 @@
 /********************* PC *********************/
 @media all and (min-width:1025px) {
   .xans-layout-logotop {
-    width: 800px;
-    margin: 0 auto;
-    padding: 53px 0 31px;
-    text-align: center;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    text-align: left;
   }
 
   .xans-layout-logotop a {
@@ -38,8 +38,9 @@
   }
 
   .xans-layout-logotop img {
-    width: 252px;
-    height: 100%;
+    width: 205px;
+    height: auto;
     object-fit: contain;
+    display: block;
   }
 }

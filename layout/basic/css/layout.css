@@ -12,10 +12,10 @@
     width: 100%;
 }
 
-/* 고정 헤더 높이만큼 컨테이너 마진 확보 (에디터 오류 방지를 위해 margin 대신 padding 사용) */
+/* 고정 헤더 높이만큼 컨테이너 마진 확보 (2행 헤더: topArea ~50px + mainNav ~54px) */
 #container {
-    padding-top: 100px;
-    /* 헤더의 실제 높이에 맞게 숫자를 조절해주세요 (보통 120~150px) */
+    padding-top: 120px;
+    /* 헤더의 실제 높이에 맞게 숫자를 조절해주세요 */
 }
 
 #header .topArea {
@@ -174,7 +174,7 @@
     }
 
     #header .topArea {
-        display: none;
+        display: none !important;
     }
 
     #header {
@@ -437,15 +437,30 @@
     #header {
         max-width: 1920px;
         padding: 0 49px;
+        margin: 0 auto;
         transition: .5s;
     }
 
-    /* 상단 유틸리티 바 (Join/Login/Order/Cart) */
+    #header .inner {
+        width: 1440px;
+        margin: 0 auto;
+    }
+
+    /* Row 1: 로고(좌) + 유틸리티 링크(우) */
     #header .topArea {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
-        padding: 8px 0;
+        padding: 10px 30px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    #header .topArea .topArea__logo {
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: left !important;
+        flex-shrink: 0;
     }
 
     #header .topArea .topArea__statelogon {
@@ -458,7 +473,7 @@
         position: fixed;
         top: 0;
         width: 100%;
-        height: 85px;
+        height: 60px;
         z-index: 1000;
         transition: .5s;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -477,26 +492,23 @@
         height: 100%;
     }
 
-    /* mainNav: 로고(좌) | 카테고리(중앙) | 유틸아이콘(우) */
+    /* Row 2: 카테고리(좌/중앙) + 아이콘(우) */
     #header .mainNav {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 
+    /* mainNav에서 로고 숨김 (topArea로 이동됨) */
     #header .mainNav .topArea__logo {
-        width: auto !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        text-align: left !important;
-        flex-shrink: 0;
+        display: none !important;
     }
 
     #header .mainNav .navigation {
         flex: 1;
         display: flex;
         align-items: center;
-        min-height: 64px;
+        min-height: 54px;
         justify-content: space-between;
     }
 
@@ -508,13 +520,13 @@
         flex: 1;
         margin: 0 !important;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         flex-wrap: wrap;
     }
 
     #header .mainNav .navigation__category li {
-        margin: 0 1.2vw;
+        margin: 0 1.2vw 0 0;
         white-space: nowrap;
     }
 
