@@ -1,6 +1,6 @@
 window.addEventListener('load', function(){
 	bottomNav();
-    stickyNavScroll();
+    fixedHeader();
     handleNav();
     quickGoTop();
     searchLayer();
@@ -19,7 +19,7 @@ function handleScroll(){
         scrollPosition = window.scrollY || window.pageYOffset;
         if (ticking) return;
         window.requestAnimationFrame(function() {
-            stickyNavScroll();
+            fixedHeader();
             setQuickScrollEvent(scrollPosition, quickMenu)
             ticking = false;
         });
@@ -40,35 +40,13 @@ function toggleClass(element, handler, className){
     });
 }
 
-function stickyNavScroll() {
-    var header = document.getElementById('header');
-    var mainNav = document.querySelector('#header .mainNav');
-    var topArea = document.querySelector('#header .topArea');
-    if (!mainNav || !topArea) return;
-
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    var topAreaHeight = topArea.offsetHeight;
-
-    if (scrollY > topAreaHeight) {
-        if (!mainNav.classList.contains('is-fixed')) {
-            mainNav.classList.add('is-fixed');
-            mainNav.classList.add('scrolled');
-            // mainNav 높이만큼 spacer로 자리 확보 (컨텐츠 점프 방지)
-            var spacer = document.getElementById('mainNavSpacer');
-            if (!spacer) {
-                spacer = document.createElement('div');
-                spacer.id = 'mainNavSpacer';
-                mainNav.parentNode.insertBefore(spacer, mainNav.nextSibling);
-            }
-            spacer.style.height = mainNav.offsetHeight + 'px';
-        }
+function fixedHeader() {
+    var header = document.getElementById("header");
+	var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if(scrollY > header.offsetTop) {
+        header.classList.add("fixed");
     } else {
-        if (mainNav.classList.contains('is-fixed')) {
-            mainNav.classList.remove('is-fixed');
-            mainNav.classList.remove('scrolled');
-            var spacer = document.getElementById('mainNavSpacer');
-            if (spacer) spacer.style.height = '0px';
-        }
+        header.classList.remove("fixed");
     }
 }
 

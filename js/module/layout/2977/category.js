@@ -285,7 +285,7 @@ $(document).ready(function(){
             }
 
             // 5. 서브메뉴 표시
-            // 동적으로 헤더의 현재 높이를 가져와 top을 설정 (스크롤 시 변경되는 헤더 높이에도 완벽 대응)
+            // 동적으로 헤더의 현재 높이를 가져와 top을 설정
             var headerHeight = $('#header').outerHeight();
             $('#submenu-module').css('top', headerHeight + 'px');
 

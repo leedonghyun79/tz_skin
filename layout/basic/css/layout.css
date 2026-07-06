@@ -4,8 +4,17 @@
 #header {
     background: #fff;
     box-sizing: border-box;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     width: 100%;
+}
+
+/* 고정 헤더 높이만큼 컨테이너 마진 확보 (2행 헤더: topArea ~50px + mainNav ~54px) */
+#container {
+    padding-top: 166px;
 }
 
 
@@ -430,11 +439,22 @@
         max-width: 1920px;
         padding: 0 49px;
         margin: 0 auto;
-        position: relative;
+        transition: .5s;
+    }
+
+    /* 스크롤 고정 시 전체 헤더 고정 */
+    #header.fixed {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        transition: .5s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        background: #fff;
     }
 
     #header .inner {
-        width: 1440px;
+        width: 1300px;
         margin: 15px auto;
     }
 
@@ -465,27 +485,6 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        position: relative;
-        z-index: 1000;
-        background: #fff;
-        box-shadow: none;
-        transition: box-shadow 0.3s;
-    }
-
-    /* 스크롤 시 mainNav 상단 고정 */
-    #header .mainNav.is-fixed {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        padding: 0 49px;
-        box-sizing: border-box;
-    }
-
-    /* 스크롤 시 mainNav 그림자 효과 */
-    #header .mainNav.scrolled {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     /* mainNav에서 로고 숨김 (topArea로 이동됨) */
@@ -528,7 +527,7 @@
     }
 
     #contents {
-        max-width: 1400px;
+        max-width: 1300px;
         min-height: 700px;
         padding: 0 50px 200px;
         padding-bottom: 200px;
@@ -542,7 +541,7 @@
     }
 
     section.gInner {
-        max-width: 1400px;
+        max-width: 1300px;
         margin: 0 auto;
     }
 

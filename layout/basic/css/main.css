@@ -1140,13 +1140,13 @@ main#contents {
     .xans-product-listmain-1,
     .xans-product-listmain-2,
     .xans-product-listmain-3 {
-        max-width: 1400px;
+        max-width: 1300px;
         margin: 150px auto 0;
     }
 
     .productSlide {
         position: relative;
-        max-width: 1400px;
+        max-width: 1300px;
         margin: 95px auto;
         padding: 50px 0;
     }
@@ -1260,7 +1260,7 @@ main#contents {
 
     /* videoBanner - PC */
     .videoBanner {
-        max-width: 1400px;
+        max-width: 1300px;
         margin: 150px auto;
     }
 
@@ -1284,5 +1284,113 @@ main#contents {
         aspect-ratio: 16 / 9;
         border-radius: 8px;
         display: block;
+    }
+}
+
+/* serviceBanner */
+.serviceBanner {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1300px;
+    margin: 80px auto;
+}
+
+.serviceBanner__item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 40px 50px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.serviceBanner__item:hover {
+    border-color: #222;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transform: translateY(-3px);
+}
+
+.serviceBanner__item .icon {
+    width: 42px;
+    height: 42px;
+    margin-right: 25px;
+}
+
+.serviceBanner__item .icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.serviceBanner__item .text {
+    flex: 1;
+}
+
+.serviceBanner__item .text strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #111;
+}
+
+.serviceBanner__item .text p {
+    font-size: 15px;
+    color: #888;
+    margin: 0;
+}
+
+.serviceBanner__item .arrow {
+    width: 24px;
+    height: 24px;
+    color: #666;
+}
+
+.serviceBanner__item .arrow svg {
+    width: 100%;
+    height: 100%;
+}/* 서비스 배너 태블릿 반응형 (1024px 이하) */
+@media all and (max-width: 1024px) {
+    .serviceBanner {
+        gap: 15px;
+        margin: 50px 20px;
+    }
+    .serviceBanner__item {
+        padding: 25px 30px;
+    }
+    .serviceBanner__item .text strong {
+        font-size: 18px;
+    }
+}
+
+/* 서비스 배너 모바일 반응형 (768px 이하) */
+@media all and (max-width: 768px) {
+    .serviceBanner {
+        flex-direction: column;
+        margin: 40px 15px;
+    }
+    .serviceBanner__item {
+        padding: 20px;
+    }
+    .serviceBanner__item .icon {
+        width: 32px;
+        height: 32px;
+        margin-right: 15px;
+    }
+    .serviceBanner__item .text strong {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+    .serviceBanner__item .text p {
+        font-size: 13px;
+    }
+    .serviceBanner__item .arrow {
+        width: 20px;
+        height: 20px;
     }
 }
