@@ -45,17 +45,20 @@
   text-decoration: none;
 }
 
+.xans-layout-category .position>ul>li:first-child>a {
+  padding-left: 0;
+}
+
 /* 서브메뉴 전체 박스 (가로 100%) */
 .xans-layout-category .sub-category.submenu-wrapper,
 .sub-category.submenu-wrapper {
+  padding: 25px 0;
   position: fixed;
   display: none;
   left: 0;
   width: 100%;
   z-index: 10000;
   background: #fff;
-  border-bottom: 1px solid #eee;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* 내부 콘텐츠 중앙 정렬 (쇼핑몰 넓이에 맞게 수정 가능) */

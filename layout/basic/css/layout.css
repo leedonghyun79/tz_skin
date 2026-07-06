@@ -4,19 +4,11 @@
 #header {
     background: #fff;
     box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    position: relative;
     width: 100%;
 }
 
-/* 고정 헤더 높이만큼 컨테이너 마진 확보 (2행 헤더: topArea ~50px + mainNav ~54px) */
-#container {
-    padding-top: 120px;
-    /* 헤더의 실제 높이에 맞게 숫자를 조절해주세요 */
-}
+
 
 #header .topArea {
     position: relative;
@@ -438,12 +430,12 @@
         max-width: 1920px;
         padding: 0 49px;
         margin: 0 auto;
-        transition: .5s;
+        position: relative;
     }
 
     #header .inner {
         width: 1440px;
-        margin: 0 auto;
+        margin: 15px auto;
     }
 
     /* Row 1: 로고(좌) + 유틸리티 링크(우) */
@@ -451,8 +443,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 30px;
+        padding: 10px 0px 30px 0;
         border-bottom: 1px solid #f0f0f0;
+        background: #fff;
     }
 
     #header .topArea .topArea__logo {
@@ -467,36 +460,32 @@
         position: static;
     }
 
-    /* 스크롤 고정 시 topArea 숨김 */
-    #header.fixed {
-        overflow: hidden;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 60px;
-        z-index: 1000;
-        transition: .5s;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
-
-    #header.fixed .topArea {
-        display: none;
-    }
-
-    #header.fixed .mainNav {
-        position: absolute;
-        top: 0;
-        left: 49px;
-        right: 49px;
-        background: #fff;
-        height: 100%;
-    }
-
     /* Row 2: 카테고리(좌/중앙) + 아이콘(우) */
     #header .mainNav {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: relative;
+        z-index: 1000;
+        background: #fff;
+        box-shadow: none;
+        transition: box-shadow 0.3s;
+    }
+
+    /* 스크롤 시 mainNav 상단 고정 */
+    #header .mainNav.is-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 0 49px;
+        box-sizing: border-box;
+    }
+
+    /* 스크롤 시 mainNav 그림자 효과 */
+    #header .mainNav.scrolled {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     /* mainNav에서 로고 숨김 (topArea로 이동됨) */
