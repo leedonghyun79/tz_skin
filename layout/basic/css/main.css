@@ -639,10 +639,10 @@ main#contents {
 /* categorySlide */
 .categorySlide {
     margin: 150px auto;
-    max-width: none; /* allow slider to use full available width */
+    max-width: 1300px;
     width: 100%;
     position: relative;
-    padding: 0 20px; /* reduce side padding */
+    padding: 0 20px;
     text-align: center;
 }
 
@@ -658,21 +658,26 @@ main#contents {
 .categorySlide .swiper-wrapper {
     gap: 12px;
 }
+
 .categorySlide .swiper-wrapper {
-    gap: 0; /* Swiper controls spacing via JS (spaceBetween). keep CSS gap 0 to avoid double spacing */
+    gap: 0;
+    /* Swiper controls spacing via JS (spaceBetween). keep CSS gap 0 to avoid double spacing */
 }
 
 .categorySlide .swiper-slide {
-    width: 350px; /* uniform slide width */
+    width: 350px;
+    /* uniform slide width */
     transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: none; /* remove scale to keep uniform spacing */
+    transform: none;
+    /* remove scale to keep uniform spacing */
     opacity: 0.5;
     box-sizing: border-box;
 }
 
 .categorySlide .swiper-slide-active,
 .categorySlide .swiper-slide-duplicate-active {
-    transform: translateY(-10px); /* vertical emphasis only */
+    transform: translateY(-10px);
+    /* vertical emphasis only */
     opacity: 1;
     z-index: 2;
 }
@@ -707,6 +712,12 @@ main#contents {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.categorySlide .swiper-slide-active .cat-item:hover .img-box img,
+.categorySlide .swiper-slide-duplicate-active .cat-item:hover .img-box img {
+    transform: scale(1.08);
 }
 
 .categorySlide .cat-text-wrap {
@@ -724,7 +735,7 @@ main#contents {
 
 .categorySlide .cat-name {
     display: block;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     color: #111;
     margin-bottom: 5px;
@@ -732,7 +743,7 @@ main#contents {
 
 .categorySlide .cat-sub {
     display: block;
-    font-size: 13px;
+    font-size: 15px;
     color: #666;
 }
 
@@ -1424,17 +1435,21 @@ main#contents {
 .serviceBanner__item:hover .text strong,
 .serviceBanner__item:hover .text p {
     text-decoration: none !important;
-}.categorySlide .swiper-scrollbar {
+}
+
+.categorySlide .swiper-scrollbar {
     height: 4px !important;
     background: #e5e5e5 !important;
     border-radius: 4px !important;
 }
+
 .categorySlide .swiper-scrollbar-drag {
     background: #222 !important;
     height: 4px !important;
     top: 0 !important;
     border-radius: 4px !important;
 }
+
 .categorySlide .swiper-pagination-progressbar {
     background: #e5e5e5;
     height: 4px;
@@ -1442,6 +1457,7 @@ main#contents {
     position: relative;
     width: 100%;
 }
+
 .categorySlide .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
     background: #222;
     border-radius: 4px;
@@ -1452,7 +1468,8 @@ main#contents {
     height: 100%;
     transform-origin: left top;
 }
-.categorySlide .swiper-scrollbar, 
+
+.categorySlide .swiper-scrollbar,
 .categorySlide .swiper-pagination-progressbar {
     display: none !important;
 }
@@ -1460,9 +1477,11 @@ main#contents {
 .categorySlide .swiper-button-prev {
     left: 20px !important;
 }
+
 .categorySlide .swiper-button-next {
     right: 20px !important;
 }
+
 .categorySlide .swiper-button-prev,
 .categorySlide .swiper-button-next {
     position: absolute !important;
@@ -1473,7 +1492,7 @@ main#contents {
     background-color: #ffffff !important;
     border: 1px solid #e5e5e5 !important;
     border-radius: 50% !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
     z-index: 20 !important;
     display: flex !important;
     align-items: center !important;
@@ -1522,9 +1541,9 @@ main#contents {
 .xans-product-listmain-1,
 .xans-layout-project {
     position: relative;
-    padding-top: 100px; 
-    padding-bottom: 100px; 
-    margin-top: 0; 
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: 0;
     margin-bottom: 0;
     z-index: 1;
 }
@@ -1547,8 +1566,9 @@ main#contents {
 .xans-product-listmore-3,
 .xans-product-listmore-1 {
     position: relative;
-    padding-bottom: 100px; 
-    margin-top: -100px; /* main list???�단 ?�딩�?겹치지 ?�게 조절 */
+    padding-bottom: 100px;
+    margin-top: -100px;
+    /* main list???�단 ?�딩�?겹치지 ?�게 조절 */
     z-index: 1;
 }
 
@@ -1564,5 +1584,3 @@ main#contents {
     background-color: #f3f5f7;
     z-index: -1;
 }
-
-
