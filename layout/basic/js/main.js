@@ -137,8 +137,55 @@ function videoLoad() {
 function swiperCategory() {
     var swiperCat = document.querySelector('.category-swiper');
     if(!swiperCat) return;
-    new Swiper(swiperCat, {
-        slidesPerView: 'auto',
+
+    // Compute desired slidesPerView based on container width so the active slide is visually centered.
+    var wrapper = swiperCat.querySelector('.swiper-wrapper');
+    var computedSlidesPerView = 'auto';
+    if (wrapper) {
+        var slides = wrapper.querySelectorAll('.swiper-slide');
+        if (slides && slides.length > 0) {
+            var gap = 20; // fixed gap requirement
+            var containerWidth = swiperCat.clientWidth || swiperCat.offsetWidth || window.innerWidth;
+
+            // Prefer target item width of 350px; if it doesn't fit, fall back to smaller width
+            var targetItemWidth = 350;
+            var maxSlotsForTarget = Math.floor((containerWidth + gap) / (targetItemWidth + gap));
+            var chosenSlots, chosenItemWidth;
+            if (maxSlotsForTarget >= 1) {
+                // use the largest odd slot count that fits with the target width
+                chosenSlots = maxSlotsForTarget;
+                if (chosenSlots % 2 === 0) chosenSlots = Math.max(1, chosenSlots - 1);
+                chosenItemWidth = targetItemWidth;
+            } else {
+                // target doesn't fit even one; compute single responsive width
+                chosenSlots = 1;
+                chosenItemWidth = Math.floor(containerWidth);
+                if (chosenItemWidth < 120) chosenItemWidth = 120; // arbitrary min
+            }
+
+            // Apply computed widths to each slide so spacing becomes exact (slides are responsive containers)
+            slides.forEach(function(slide) {
+                slide.style.width = chosenItemWidth + 'px';
+            });
+
+            // debug output to help verify layout in browser console
+            try { console.info('categorySwiper layout:', {containerWidth: containerWidth, chosenSlots: chosenSlots, chosenItemWidth: chosenItemWidth, gap: gap}); } catch(e){}
+
+            computedSlidesPerView = chosenSlots;
+
+            // Ensure there are enough slides for looping without large empty gaps
+            var minSlides = Math.max(chosenSlots + 3, 5);
+            if (slides.length < minSlides) {
+                for (var i = 0; i < (minSlides - slides.length); i++) {
+                    var clone = slides[i % slides.length].cloneNode(true);
+                    wrapper.appendChild(clone);
+                }
+            }
+        }
+    }
+
+    var categorySwiper = new Swiper(swiperCat, {
+        slidesPerView: computedSlidesPerView,
         spaceBetween: 20,
         centeredSlides: true,
         loop: true,
@@ -146,17 +193,24 @@ function swiperCategory() {
             delay: 3000,
             disableOnInteraction: false,
         },
+        observer: true,
+        observeParents: true,
+        on: {
+            init: function() { this.update(); }
+        },
         navigation: {
             nextEl: '.categorySlide .swiper-button-next',
             prevEl: '.categorySlide .swiper-button-prev',
         },
         breakpoints: {
             768: {
-                spaceBetween: 30,
+                spaceBetween: 20,
             },
             1024: {
-                spaceBetween: 40,
+                spaceBetween: 20,
             }
         }
     });
+    // ensure classes applied
+    if (categorySwiper && typeof categorySwiper.update === 'function') categorySwiper.update();
 }

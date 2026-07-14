@@ -52,13 +52,14 @@
 /* 서브메뉴 전체 박스 (가로 100%) */
 .xans-layout-category .sub-category.submenu-wrapper,
 .sub-category.submenu-wrapper {
-  padding: 25px 0;
+  padding: 0px 0 25px;
   position: fixed;
   display: none;
   left: 0;
   width: 100%;
   z-index: 10000;
   background: #fff;
+  box-shadow: 0 10px 20px -12px rgba(0,0,0,0.12);
 }
 
 /* 내부 콘텐츠 중앙 정렬 (쇼핑몰 넓이에 맞게 수정 가능) */
@@ -80,7 +81,7 @@
 
 .submenu-left ul {
   margin: 0;
-  padding: 30px 50px;
+  padding: 30px;
   list-style: none;
 }
 

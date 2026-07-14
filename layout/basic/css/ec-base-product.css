@@ -37,10 +37,10 @@
 /* grid */
 .ec-base-product ul.grid2 > li { width:50%; }
 .ec-base-product ul.grid3 > li { width:33.33%; }
-.ec-base-product ul.grid4 > li { width:25%; }
+.ec-base-product ul.grid5 > li { width:25%; }
 .ec-base-product ul.grid5 > li { width:20%; }
 .ec-base-product ul.grid3 .color { max-width:230px; }
-.ec-base-product ul.grid4 .color { max-width:190px; }
+.ec-base-product ul.grid5 .color { max-width:190px; }
 .ec-base-product ul.grid5 .color { max-width:130px; }
   /* right display */
   .ec-base-product ul.grid2 li:after { content:""; display:block; clear:both; }
@@ -107,7 +107,7 @@
 /********************* Mobile / Tablet *********************/
 @media all and (max-width:1024px) {
   .ec-base-product .title h3 { margin:40px 0 20px; font-size:16px; }
-  .ec-base-product ul.grid4 > li{width: 50%; }
+  .ec-base-product ul.grid5 > li{width: 50%; }
   
   .ec-base-product .discountPeriod { position:static; }
   .ec-base-product .btnTooltip { position:static; }
@@ -117,7 +117,7 @@
 /********************* Tablet *********************/
 @media all and (min-width:768px) and (max-width:1024px) {
   .ec-base-product ul.grid5 > li{width: 33.33%;}
-  .ec-base-product ul.grid4 > li{width: 33.33%; }
+  .ec-base-product ul.grid5 > li{width: 33.33%; }
 
   .ec-base-product .prdList{margin: 0 -8px 0;}
   .ec-base-product .prdList .prdList__item{margin: 0 8px; }

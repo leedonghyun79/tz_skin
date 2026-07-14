@@ -8,10 +8,12 @@
 }
 
 .topArea__statelogon a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
     margin-left: 25px;
     font-family: Arial;
-    font-size: 12px;
+    font-size: 13px;
     color: #1e1e1e;
     text-transform: uppercase;
     text-decoration: none;
@@ -19,14 +21,23 @@
 }
 
 .topArea__statelogon .count {
-    display: inline-block;
-    min-width: 24px;
-    margin: 0 0 0 6px;
-    padding: 3px 4px 3px;
-    font-size: 13px;
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    color: #fff;
     text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    background: #000;
     border: 1px solid #000;
-    border-radius: 20px;
     box-sizing: border-box;
 }
 

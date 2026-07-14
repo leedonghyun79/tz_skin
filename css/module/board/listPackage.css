@@ -64,7 +64,7 @@
 	.xans-board-listheader-8.ec-base-tab  li a { padding: 16px 2px 3px; white-space:nowrap; border-bottom:0; }
 	.xans-board-listheader-8.ec-base-tab  li + li{ margin:0 0 0 50px; }
     
-    .xans-board-listpackage .ec-base-tab.typeMenu { margin:0 0 50px; }
+    .xans-board-listpackage .ec-base-tab.typeMenu { margin:0 0 50px; display:none; } /* 게시판 탭메뉴 비활성화 */
     .xans-board-listpackage .ec-base-tab.typeMenu .button { margin:0 22px; padding:0 0 3px 0; }
     
     .xans-board-listpackage .boardSort { margin:0 0 20px; }

@@ -639,9 +639,10 @@ main#contents {
 /* categorySlide */
 .categorySlide {
     margin: 150px auto;
-    max-width: 1400px;
+    max-width: none; /* allow slider to use full available width */
+    width: 100%;
     position: relative;
-    padding: 0 40px;
+    padding: 0 20px; /* reduce side padding */
     text-align: center;
 }
 
@@ -650,19 +651,28 @@ main#contents {
 }
 
 .categorySlide .swiper-container {
-    padding: 40px 0 20px;
+    padding: 20px 0 20px;
     overflow: hidden;
 }
 
-.categorySlide .swiper-slide {
-    width: 260px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: scale(0.85);
-    opacity: 0.5;
+.categorySlide .swiper-wrapper {
+    gap: 12px;
+}
+.categorySlide .swiper-wrapper {
+    gap: 0; /* Swiper controls spacing via JS (spaceBetween). keep CSS gap 0 to avoid double spacing */
 }
 
-.categorySlide .swiper-slide-active {
-    transform: scale(1.1) translateY(-10px);
+.categorySlide .swiper-slide {
+    width: 350px; /* uniform slide width */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: none; /* remove scale to keep uniform spacing */
+    opacity: 0.5;
+    box-sizing: border-box;
+}
+
+.categorySlide .swiper-slide-active,
+.categorySlide .swiper-slide-duplicate-active {
+    transform: translateY(-10px); /* vertical emphasis only */
     opacity: 1;
     z-index: 2;
 }
@@ -679,13 +689,14 @@ main#contents {
     margin: 0 auto 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    background: #f5f5f5;
+    background: #fff;
     position: relative;
-    width: 260px;
-    height: 260px;
+    width: 350px;
+    height: 350px;
 }
 
-.categorySlide .swiper-slide-active .img-box {
+.categorySlide .swiper-slide-active .img-box,
+.categorySlide .swiper-slide-duplicate-active .img-box {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -705,7 +716,8 @@ main#contents {
     padding-top: 10px;
 }
 
-.categorySlide .swiper-slide-active .cat-text-wrap {
+.categorySlide .swiper-slide-active .cat-text-wrap,
+.categorySlide .swiper-slide-duplicate-active .cat-text-wrap {
     opacity: 1;
     transform: translateY(0);
 }
@@ -739,7 +751,6 @@ main#contents {
 .categorySlide .swiper-button-prev,
 .categorySlide .swiper-button-next {
     position: static;
-    margin: 0;
     width: 12px;
     height: 12px;
     border-color: #999;
@@ -1358,7 +1369,7 @@ main#contents {
     height: 100%;
 }
 
-/* ���� ���?�º��� ������ (1024px ����) */
+/********************* Mobile / Tablet *********************/
 @media all and (max-width: 1024px) {
     .serviceBanner {
         gap: 15px;
@@ -1374,7 +1385,7 @@ main#contents {
     }
 }
 
-/* ���� ���?�����?������ (768px ����) */
+/********************* Mobile *********************/
 @media all and (max-width: 768px) {
     .serviceBanner {
         flex-direction: column;
@@ -1445,15 +1456,7 @@ main#contents {
 .categorySlide .swiper-pagination-progressbar {
     display: none !important;
 }
-.categorySlide .swiper-button-prev,
-.categorySlide .swiper-button-next {
-    position: absolute !important;
-    top: 50% !important;
-    margin-top: -20px !important;
-    z-index: 10 !important;
-    width: 15px !important;
-    height: 15px !important;
-}
+
 .categorySlide .swiper-button-prev {
     left: 20px !important;
 }
@@ -1465,7 +1468,6 @@ main#contents {
     position: absolute !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    margin: 0 !important;
     width: 50px !important;
     height: 50px !important;
     background-color: #ffffff !important;
@@ -1546,7 +1548,7 @@ main#contents {
 .xans-product-listmore-1 {
     position: relative;
     padding-bottom: 100px; 
-    margin-top: -100px; /* main list???�단 ?�딩�?겹치지 ?�게 조절 */
+    margin-top: -100px; /* main list???�단 ?�딩�?겹치지 ?�게 조절 */
     z-index: 1;
 }
 
