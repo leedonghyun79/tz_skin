@@ -88,13 +88,18 @@ main#contents {
 .swiper-control {
     position: absolute;
     bottom: 70px;
+    left: 0;
     z-index: 100;
     width: 100%;
     height: 10px;
     text-align: center;
-    overflow: hidden;
-    margin: 0 auto;
+    overflow: visible;
+    margin: 0;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
 }
 
 .swiper-button-next,
@@ -150,7 +155,7 @@ main#contents {
 .swiper-pagination {
     position: relative;
     display: inline-block;
-    height: 10px;
+    height: 15px;
     margin: 0 10px;
     text-align: center;
     -webkit-transition: .3s opacity;
@@ -214,22 +219,26 @@ main#contents {
 }
 
 .swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
+    width: 15px;
+    height: 15px;
     display: inline-block;
-    border-radius: 100%;
+    border-radius: 10px;
     background: #000;
     opacity: .2;
     vertical-align: top;
+    transition: width 0.3s ease, border-radius 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
 }
 
 .swiper-pagination-bullet-active {
     opacity: 1;
     background: #fff;
+    width: 30px;
+    border-radius: 10px;
 }
 
 .swiper-container-horizontal .swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 7px;
+    margin: 0 4px;
     background: #fff;
 }
 
@@ -655,6 +664,10 @@ main#contents {
     overflow: hidden;
 }
 
+.category-swiper-wrap {
+    position: relative;
+}
+
 .categorySlide .swiper-wrapper {
     gap: 12px;
 }
@@ -666,19 +679,14 @@ main#contents {
 
 .categorySlide .swiper-slide {
     width: 350px;
-    /* uniform slide width */
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease;
     transform: none;
-    /* remove scale to keep uniform spacing */
-    opacity: 0.5;
     box-sizing: border-box;
 }
 
 .categorySlide .swiper-slide-active,
 .categorySlide .swiper-slide-duplicate-active {
     transform: translateY(-10px);
-    /* vertical emphasis only */
-    opacity: 1;
     z-index: 2;
 }
 
@@ -692,18 +700,22 @@ main#contents {
     border-radius: 16px;
     overflow: hidden;
     margin: 0 auto 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, opacity 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     background: #fff;
     position: relative;
     width: 350px;
     height: 350px;
+    opacity: 0.5;
+    /* 비활성: 이미지만 흐리게 */
 }
 
 .categorySlide .swiper-slide-active .img-box,
 .categorySlide .swiper-slide-duplicate-active .img-box {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    opacity: 1;
 }
+
+
 
 .categorySlide .img-box img {
     position: absolute;
@@ -721,30 +733,40 @@ main#contents {
 }
 
 .categorySlide .cat-text-wrap {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    padding-top: 10px;
-}
-
-.categorySlide .swiper-slide-active .cat-text-wrap,
-.categorySlide .swiper-slide-duplicate-active .cat-text-wrap {
     opacity: 1;
     transform: translateY(0);
+    padding-top: 10px;
+    transition: color 0.3s ease;
 }
 
 .categorySlide .cat-name {
     display: block;
     font-size: 20px;
     font-weight: bold;
-    color: #111;
+    color: #bbb;
+    /* 비활성: 연한 색 */
     margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.categorySlide .swiper-slide-active .cat-name,
+.categorySlide .swiper-slide-duplicate-active .cat-name {
+    color: #111;
+    /* 활성: 진한 색 */
 }
 
 .categorySlide .cat-sub {
     display: block;
     font-size: 15px;
+    color: #ccc;
+    /* 비활성: 연한 색 */
+    transition: color 0.3s ease;
+}
+
+.categorySlide .swiper-slide-active .cat-sub,
+.categorySlide .swiper-slide-duplicate-active .cat-sub {
     color: #666;
+    /* 활성: 원래 색 */
 }
 
 /* Custom Controls layout */
@@ -1475,17 +1497,18 @@ main#contents {
 }
 
 .categorySlide .swiper-button-prev {
-    left: 20px !important;
+    left: 30px !important;
 }
 
 .categorySlide .swiper-button-next {
-    right: 20px !important;
+    right: 30px !important;
 }
 
 .categorySlide .swiper-button-prev,
 .categorySlide .swiper-button-next {
     position: absolute !important;
-    top: 50% !important;
+    top: 215px !important;
+    /* swiper padding(20px) + img-box 절반(175px) + translateY 보정 */
     transform: translateY(-50%) !important;
     width: 50px !important;
     height: 50px !important;
@@ -1529,11 +1552,11 @@ main#contents {
 }
 
 .categorySlide .swiper-button-prev {
-    left: 5px !important;
+    left: -25px !important;
 }
 
 .categorySlide .swiper-button-next {
-    right: 0px !important;
+    right: -30px !important;
 }
 
 /* === Main Sections Alternating Backgrounds (Full Width Trick) === */
@@ -1583,4 +1606,17 @@ main#contents {
     height: 100%;
     background-color: #f3f5f7;
     z-index: -1;
+}
+
+/* 상품 리스트 썸네일 호버 줌 효과 */
+.productItem.ec-base-product .prdList .thumbnail {
+    overflow: hidden;
+}
+
+.productItem.ec-base-product .prdList .thumbnail a img {
+    transition: transform 0.4s ease;
+}
+
+.productItem.ec-base-product .prdList li:hover .thumbnail a img {
+    transform: scale(1.07);
 }
