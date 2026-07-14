@@ -1,4 +1,8 @@
-body, html { overflow-x: hidden; }
+﻿body,
+html {
+    overflow-x: clip;
+}
+
 @charset "utf-8";
 
 /* Layout */
@@ -11,7 +15,7 @@ body, html { overflow-x: hidden; }
     right: 0;
     z-index: 1000;
     width: 100%;
-    box-shadow: 0 10px 20px -12px rgba(0,0,0,0.08);
+    border-bottom: 1px solid #e5e5e5;
 }
 
 #container {
@@ -448,30 +452,40 @@ body, html { overflow-x: hidden; }
         transition: .5s;
     }
 
-    /* ?�크�?고정 ???�체 ?�더 고정 */
+    /* 스크롤 시 전체 헤더 고정 */
     #header.fixed {
         position: fixed;
         top: 0;
         width: 100%;
         z-index: 1000;
         transition: .5s;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid #e5e5e5;
         background: #fff;
     }
 
     #header .inner {
         width: 1300px;
-        margin: 15px auto;
+        margin: 15px auto 5px;
     }
 
-    /* Row 1: 로고(�? + ?�틸리티 링크(?? */
+    /* Row 1: 로고 */
     #header .topArea {
+        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 0px 30px 0;
-        border-bottom: 1px solid #f0f0f0;
         background: #fff;
+    }
+
+    #header .topArea::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -100vw;
+        right: -100vw;
+        border-bottom: 1px solid #e5e5e5;
+        pointer-events: none;
     }
 
     #header .topArea .topArea__logo {
@@ -486,14 +500,15 @@ body, html { overflow-x: hidden; }
         position: static;
     }
 
-    /* Row 2: 카테고리(�?중앙) + ?�이�??? */
+    /* Row 2: 카테고리(중앙) + 아이콘(우측) */
     #header .mainNav {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-top: 5px;
     }
 
-    /* mainNav?�서 로고 ?��? (topArea�??�동?? */
+    /* mainNav에서 로고 숨김 (topArea로 이동) */
     #header .mainNav .topArea__logo {
         display: none !important;
     }
@@ -586,7 +601,7 @@ body, html { overflow-x: hidden; }
     #quick.fixed {
         position: fixed;
         top: 150px;
-        /* 고정???�더(??130px)보다 ?�래???�치?�도�??�정 */
+        /* 고정된 헤더(약 130px)보다 아래에 위치하도록 설정 */
     }
 
     #quick .pageTop a {
