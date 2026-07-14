@@ -1132,11 +1132,13 @@ main#contents {
     .mainVisual .swiper-button-next,
     .mainVisual .swiper-container-rtl .swiper-button-prev {
         right: 50px;
+        z-index: 999;
     }
 
     .mainVisual .swiper-button-prev,
     .mainVisual .swiper-container-rtl .swiper-button-next {
         left: 50px;
+        z-index: 999;
     }
 
     .mainVisual .here .text {
