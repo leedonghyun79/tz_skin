@@ -745,7 +745,7 @@ main#contents {
     font-weight: bold;
     color: #bbb;
     /* 비활성: 연한 색 */
-    margin-bottom: 5px;
+    margin: 5px;
     transition: color 0.3s ease;
 }
 
