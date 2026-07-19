@@ -683,13 +683,14 @@ main#contents {
 .categorySlide .swiper-container {
     padding: 20px 0 20px;
     overflow: visible;
+    /* 좌우만 잘라서 반쪽 슬라이드 노출 제한, 위아래는 active 슬라이드 올라오는 여백 확보 */
+    clip-path: inset(-60px 0px -60px 0px);
+    -webkit-clip-path: inset(-60px 0px -60px 0px);
 }
 
 .category-swiper-wrap {
     position: relative;
-    /* overflow-x 짤림을 방지하면서 좌우만 자르기 위해 clip-path 사용 (위아래는 100px 여유) */
-    clip-path: inset(-100px 0 -100px 0);
-    -webkit-clip-path: inset(-100px 0 -100px 0);
+    overflow: visible;
 }
 
 /* Prevent accidental scroll when slides overflow vertically */
@@ -742,6 +743,7 @@ main#contents {
 .categorySlide .swiper-slide-active .img-box,
 .categorySlide .swiper-slide-duplicate-active .img-box {
     opacity: 1;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12); /* 가운데(active) 아이템에 미미하게 더 강조된 그림자 효과 */
 }
 
 
