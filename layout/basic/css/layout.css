@@ -1,4 +1,4 @@
-﻿body,
+body,
 html {
     overflow-x: clip;
 }
@@ -19,13 +19,14 @@ html {
 }
 
 #container {
-    padding-top: 166px;
+    padding-top: 155px;
 }
 
 
 
 #header .topArea {
     position: relative;
+    height: 35px;
 }
 
 #header .navigation .btnNav {

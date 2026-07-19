@@ -694,6 +694,31 @@
         <div class="cont">
             <h3 class="visual-title" data-text="상품상세정보">상품상세정보</h3>
             {$product_detail}
+
+        </div>
+        <!-- 관심 상품 -->
+        <div class="cont">
+            <h3 class="visual-title" data-text="관심상품">관심상품</h3>
+            <div module="product_relation" class="xans-product-relation relation">
+                <div module="product_relationlist">
+                    <ul class="prdList">
+                        <li class="item">
+                            <div class="box">
+                                <a href="/product/detail.html{$param}"><img src="{$img_small}" alt="" class="thumb" /></a>
+                                <p><a href="/product/detail.html{$param}">{$name}</a></p>
+                                <strong>{$price_unit_head}{$product_price}{$price_unit_tail}</strong>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="box">
+                                <a href="/product/detail.html{$param}"><img src="{$img_small}" alt="" class="thumb" /></a>
+                                <p><a href="/product/detail.html{$param}">{$name}</a></p>
+                                <strong>{$price_unit_head}{$product_price}{$price_unit_tail}</strong>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div><!-- //상품상세정보 -->
 
@@ -910,39 +935,3 @@
 
 
 
-<div module="product_relation" id="prdRelated">
-    <!--@css(/css/module/product/476/relation.css)-->
-    <ul class="link">
-        <li><a href="#prdDetail">상품상세정보</a></li>
-        <li><a href="#prdInfo">상품구매안내</a></li>
-        <li><a href="#prdReview">상품사용후기</a></li>
-        <li><a href="#prdQnA">상품Q&amp;A</a></li>
-        <li class="selected"><a href="#prdRelated">관련상품</a></li>
-    </ul>
-
-    <div class="relation">
-        <h3 class="visual-title" data-text="관련상품">관련상품</h3>
-        <div module="product_relationlist">
-            <ul class="prdList">
-                <li class="item">
-                    <div class="box">
-                        <a href="/product/detail.html{$param}"><img src="{$img_small}" alt="" class="thumb" /></a>
-                        <p><a href="/product/detail.html{$param}">{$name}</a></p>
-                        <strong>{$price_unit_head}{$product_price}{$price_unit_tail}</strong>
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="box">
-                        <a href="/product/detail.html{$param}"><img src="{$img_small}" alt="" class="thumb" /></a>
-                        <p><a href="/product/detail.html{$param}">{$name}</a></p>
-                        <strong>{$price_unit_head}{$product_price}{$price_unit_tail}</strong>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-
-<!--@define(cmc_log)-->

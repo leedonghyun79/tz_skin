@@ -10,20 +10,21 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 1300px;
+    margin: 15px auto 5px;
     background: #fff;
     padding-top: 30px;
 }
 
 @media all and (min-width: 1025px) {
     #tabProduct {
-        top: 170px;
+        top: 125px;
     }
 }
 
 .xans-product-additional ul.link {
     display: flex;
     margin: 0 0 30px;
-    border-bottom: 1px solid #eee;
     padding: 0;
     list-style: none;
 }

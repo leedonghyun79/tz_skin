@@ -661,12 +661,16 @@ main#contents {
 
 .categorySlide .swiper-container {
     padding: 20px 0 20px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .category-swiper-wrap {
     position: relative;
+    overflow: visible; /* allow active slide to rise above neighboring bounds */
 }
+
+/* Prevent accidental scroll when slides overflow vertically */
+.categorySlide { overflow-x: hidden; }
 
 .categorySlide .swiper-wrapper {
     gap: 12px;
@@ -686,8 +690,8 @@ main#contents {
 
 .categorySlide .swiper-slide-active,
 .categorySlide .swiper-slide-duplicate-active {
-    transform: translateY(-10px);
-    z-index: 2;
+    transform: translateY(-38px);
+    z-index: 3;
 }
 
 .categorySlide .cat-item {
@@ -706,8 +710,8 @@ main#contents {
     position: relative;
     width: 350px;
     height: 350px;
-    opacity: 0.5;
-    /* 비활성: 이미지만 흐리게 */
+    opacity: 1;
+    /* 비활성: 이미지 선명하게 표시 */
 }
 
 .categorySlide .swiper-slide-active .img-box,
@@ -818,6 +822,58 @@ main#contents {
     top: -0.5px;
     border-radius: 0;
 }
+
+/* --- Category text visibility & center-slide animation --- */
+/* Hide text for non-active slides and animate it up when slide becomes active (centered) */
+.categorySlide .cat-text-wrap {
+    opacity: 0;
+    /* start above the image so it will drop down */
+    transform: translateY(-44px);
+    /* slower, smoother easing */
+    transition: opacity 0.72s cubic-bezier(.16,.84,.24,1), transform 0.72s cubic-bezier(.16,.84,.24,1);
+    pointer-events: none;
+}
+
+.categorySlide .swiper-slide-active .cat-text-wrap,
+.categorySlide .swiper-slide-duplicate-active .cat-text-wrap {
+    opacity: 1;
+    /* final position (normal flow below image) */
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Show neighboring slides' text partially for better affordance */
+.categorySlide .swiper-slide-prev .cat-text-wrap,
+.categorySlide .swiper-slide-next .cat-text-wrap,
+.categorySlide .swiper-slide-duplicate-prev .cat-text-wrap,
+.categorySlide .swiper-slide-duplicate-next .cat-text-wrap {
+    /* Keep neighbor slides' text hidden (image visible) */
+    opacity: 0;
+    transform: translateY(-44px);
+    pointer-events: none;
+}
+
+/* Ensure individual text elements respect the parent animation */
+.categorySlide .cat-name,
+.categorySlide .cat-sub {
+    transition: color 0.32s ease, opacity 0.32s ease;
+}
+
+/* Prevent hover from showing text on non-active slides */
+.categorySlide .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-duplicate-active) .cat-item:hover .cat-text-wrap {
+    /* On hover over non-center slides, reveal text by dropping it into place */
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Ensure active (center) slide text stays fixed during any hover */
+.categorySlide .swiper-slide-active .cat-text-wrap,
+.categorySlide .swiper-slide-duplicate-active .cat-text-wrap {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
 
 /********************* Mobile *********************/
 @media all and (max-width:767px) {
