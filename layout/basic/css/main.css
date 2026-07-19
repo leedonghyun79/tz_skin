@@ -289,14 +289,35 @@ main#contents {
     position: relative;
     flex: 1;
     width: 100%;
+    height: 100%;
 }
 
 .mainVisual picture {
+    display: block;
     overflow: hidden;
     position: relative;
     width: 100%;
     height: 100%;
     font-size: 0;
+}
+
+.mainVisual picture img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (min-width: 1025px) {
+    .mainVisual img {
+        right: 0;
+        position: relative;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
 }
 
 .mainVisual .here {
@@ -666,11 +687,15 @@ main#contents {
 
 .category-swiper-wrap {
     position: relative;
-    overflow: visible; /* allow active slide to rise above neighboring bounds */
+    /* overflow-x 짤림을 방지하면서 좌우만 자르기 위해 clip-path 사용 (위아래는 100px 여유) */
+    clip-path: inset(-100px 0 -100px 0);
+    -webkit-clip-path: inset(-100px 0 -100px 0);
 }
 
 /* Prevent accidental scroll when slides overflow vertically */
-.categorySlide { overflow-x: hidden; }
+.categorySlide {
+    /* overflow-x: hidden; 제거: 버튼이 바깥으로 나갈 때 잘리지 않도록 함 */
+}
 
 .categorySlide .swiper-wrapper {
     gap: 12px;
@@ -774,31 +799,50 @@ main#contents {
 }
 
 /* Custom Controls layout */
-.categorySlide .category-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    max-width: 900px;
-    margin: 20px auto 0;
-    position: relative;
-    gap: 20px;
-}
-
 .categorySlide .swiper-button-prev,
 .categorySlide .swiper-button-next {
-    position: static;
-    width: 12px;
-    height: 12px;
-    border-color: #999;
-    border-width: 1px 1px 0 0;
+    position: absolute;
+    top: 195px;
+    /* 이미지 영역(350px)의 세로 중앙에 맞춤 (padding 20px + 175px) */
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    margin-top: 0;
+    border: none;
 }
 
 .categorySlide .swiper-button-prev {
-    transform: rotate(-135deg);
+    left: -25px;
+    /* 컨테이너 바깥으로 절반이 나가도록(가운데 정렬) */
 }
 
 .categorySlide .swiper-button-next {
+    right: -25px;
+    /* 컨테이너 바깥으로 절반이 나가도록(가운데 정렬) */
+}
+
+.categorySlide .swiper-button-prev::after,
+.categorySlide .swiper-button-next::after {
+    content: '' !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-color: #5e5e5e !important;
+    border-style: solid !important;
+    border-width: 1px 1px 0 0 !important;
+    display: block !important;
+}
+
+.categorySlide .swiper-button-prev::after {
+    left: 20px;
+    transform: rotate(-135deg);
+}
+
+.categorySlide .swiper-button-next::after {
+    right: 20px;
     transform: rotate(45deg);
 }
 
@@ -830,7 +874,7 @@ main#contents {
     /* start above the image so it will drop down */
     transform: translateY(-44px);
     /* slower, smoother easing */
-    transition: opacity 0.72s cubic-bezier(.16,.84,.24,1), transform 0.72s cubic-bezier(.16,.84,.24,1);
+    transition: opacity 0.72s cubic-bezier(.16, .84, .24, 1), transform 0.72s cubic-bezier(.16, .84, .24, 1);
     pointer-events: none;
 }
 
@@ -1209,10 +1253,8 @@ main#contents {
     .mainVisual img {
         position: relative;
         top: 0;
-        left: 50%;
         height: 100%;
         width: 100%;
-        transform: translate(-50%, 0);
         object-fit: cover;
     }
 
@@ -1593,9 +1635,9 @@ main#contents {
     content: '' !important;
     width: 12px !important;
     height: 12px !important;
-    border-color: #222 !important;
+    border-color: #5e5e5e !important;
     border-style: solid !important;
-    border-width: 2px 2px 0 0 !important;
+    border-width: 1px 1px 0 0 !important;
     display: block !important;
 }
 
