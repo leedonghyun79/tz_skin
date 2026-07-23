@@ -303,7 +303,11 @@ $(document).ready(function(){
                     { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=48' }
                 ],
                 '거치대마운트': [
-                    { name: '스탠드형 거치대', link: '/product/list.html?cate_no=49' }
+                    { name: '이동형 거치대', link: '/product/list.html?cate_no=49' },
+                    { name: '천정형 거치대', link: '/product/list.html?cate_no=60' },
+                    { name: '멀티비전/메뉴보드용 거치대', link: '/product/list.html?cate_no=59' },
+                    { name: '전동형 거치대', link: '/product/list.html?cate_no=61' },
+                    { name: '주문제작형 거치대', link: '/product/list.html?cate_no=62' },
                 ],
                 '솔루션': []
             };

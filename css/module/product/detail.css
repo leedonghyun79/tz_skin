@@ -207,6 +207,10 @@
   display: block;
 }
 
+.xans-product-option tr {
+  display: flex !important; font-size: 14px; line-height: 1.5em; 
+}
+
 .xans-product-detail .xans-product-option tr:first-child th,
 .xans-product-detail .xans-product-option .xans-product-fileoption th {
   padding-top: 14px;

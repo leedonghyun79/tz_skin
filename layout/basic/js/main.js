@@ -8,6 +8,8 @@ window.addEventListener('load', function(){
 
 function swiperVisual() {
     var swipeKeyVisual = new Swiper('.mainVisual .swiper-container', {
+        spaceBetween: 30,
+        centeredSlides: true,
         loop: true,
         autoplay: {
             delay: 2500,

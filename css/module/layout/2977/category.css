@@ -54,6 +54,7 @@
 .sub-category.submenu-wrapper {
   padding: 0px 0 25px;
   position: fixed;
+  top: 15px;
   display: none;
   left: 0;
   width: 100%;

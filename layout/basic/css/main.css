@@ -730,10 +730,8 @@ main#contents {
     border-radius: 16px;
     overflow: hidden;
     margin: 0 auto 20px;
-    transition: box-shadow 0.3s ease, opacity 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    /* 기본: 미미한 그림자 */
-    background: #fff;
+    transition: opacity 0.3s ease;
+    background: #F6F6F6;
     position: relative;
     width: 350px;
     height: 350px;
