@@ -11,30 +11,23 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <!-- // PG크로스브라우징필수내용 -->
 
-    <title>기본 레이아웃</title>
+    <title>티비존 공식 쇼핑몰</title>
+    <link rel="preconnect" href="https://img.echosting.cafe24.com">
+
     <!--@css(/layout/basic/css/common.css)--><!-- 해당 CSS는 쇼핑몰 전체 페이지에 영향을 줍니다. 삭제와 수정에 주의해주세요. -->
     <!--@css(/layout/basic/css/layout.css)-->
     <!--@css(/layout/basic/css/ec-base-ui.css)-->
     <!--@css(/layout/basic/css/ec-base-button.css)-->
-    <!--@css(/layout/basic/css/ec-base-tab.css)-->
-    <!--@css(/layout/basic/css/ec-base-table.css)-->
     <!--@css(/layout/basic/css/ec-base-tooltip.css)-->
-    <!--@css(/layout/basic/css/ec-base-help.css)-->
-    <!--@css(/layout/basic/css/ec-base-fold.css)-->
-    <!--@css(/layout/basic/css/ec-base-box.css)-->
-    <!--@css(/layout/basic/css/ec-base-desc.css)-->
     <!--@css(/layout/basic/css/ec-base-product.css)-->
-    <!--@css(/layout/basic/css/ec-base-prdInfo.css)-->
-    <!--@css(/layout/basic/css/ec-base-paginate.css)-->
+    <!--@css(/layout/basic/css/main.css)-->
 
-    <!-- 스마트디자인에서는 JQuery 3.6.0 버전이 내장되어있습니다. 추가로 호출하면 충돌이 생길 수 있습니다. -->
     <!--@js(/js/swiper-bundle.js)-->
-    <!--@js(/layout/basic/js/basic.js)-->
+    <!--@js(/layout/basic/js/main.js)-->
     <!--@js(/layout/basic/js/layout.js)-->
-    <!--@js(/js/common.js)-->
 </head>
 
-<body>
+<body id="main">
     <div id="skipNavigation">
         <p><a href="#category">전체상품목록 바로가기</a></p>
         <p><a href="#contents">본문 바로가기</a></p>
@@ -58,24 +51,22 @@
         </header>
         <hr class="layout" />
 
+        <!-- 서브메뉴 모듈 컨테이너 -->
+        <!--@import(/layout/basic/sub_category.html)-->
+
         <!--@import(/layout/basic/sidebar.html)-->
         <div id="container">
-            <div id="contents">
-                <span module="Layout_MobileAction" class="RTMB">
-                    <a href="#none" onclick="{$go_back}"><!--@import(/svg/icon-go-back.html)-->뒤로가기</a>
-                </span>
+            <main id="contents" role="main">
                 <!--@contents-->
-            </div>
+            </main>
             <hr class="layout" />
-
         </div>
         <hr class="layout" />
 
         <!--@import(/layout/basic/quick.html)-->
+        <!--@import(/layout/basic/float_banner.html)-->
 
         <!--@import(/layout/basic/footer.html)-->
-        <!-- 서브메뉴 모듈 컨테이너(layout.html 파일 최하단에 배치) -->
-        <!--@import(/layout/basic/sub_category.html)-->
 </body>
 
 </html>

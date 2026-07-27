@@ -1430,6 +1430,101 @@
   -webkit-transform: rotate(45deg);
 }
 
+/* ===== 관심상품 제목 노출 (전역 .visual-title 숨김 해제) ===== */
+#prdDetail .cont>.visual-title[data-text="관심상품"] {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 0 20px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  text-align: left;
+}
+
+#prdDetail .cont>.visual-title[data-text="관심상품"]::before {
+  content: none;
+}
+
+/* ===== 관심상품(#prdDetail) / 관련상품(#prdRelated) 공통 그리드 ===== */
+#prdDetail .relation .prdList,
+#prdRelated .relation .prdList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#prdDetail .relation .prdList .box,
+#prdRelated .relation .prdList .box {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#prdDetail .relation .prdList .thumb,
+#prdRelated .relation .prdList .thumb {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+  overflow: hidden;
+  background: #f7f7f7;
+  margin: 0 0 16px;
+  border: 0;
+}
+
+#prdDetail .relation .prdList .box>p,
+#prdRelated .relation .prdList .box>p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #222;
+}
+
+#prdDetail .relation .prdList .box>p a,
+#prdRelated .relation .prdList .box>p a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#prdDetail .relation .prdList .box>strong,
+#prdRelated .relation .prdList .box>strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #222;
+}
+
+@media all and (min-width: 761px) {
+
+  #prdDetail .relation .prdList,
+  #prdRelated .relation .prdList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media all and (min-width: 1025px) {
+
+  #prdDetail .relation .prdList,
+  #prdRelated .relation .prdList {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 32px 24px;
+  }
+
+  #prdDetail .relation .prdList .box,
+  #prdRelated .relation .prdList .box {
+    width: 254px;
+    margin: 0 auto;
+  }
+}
+
 /********************* Mobile *********************/
 @media all and (max-width: 767px) {
   .xans-product-detail .productSet>.title .txtInfo {
@@ -1444,100 +1539,6 @@
     margin: 0 0 28px;
   }
 
-
-  /* ===== 상품상세 하단 관련상품 / 관심상품 그리드 레이아웃 개선 ===== */
-  .xans-product-relation .relation {
-    padding: 30px 16px 50px;
-  }
-
-  .xans-product-relation .prdList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    white-space: normal;
-  }
-
-  .xans-product-relation .prdList>li,
-  .xans-product-relation .prdList__item,
-  .xans-product-relation ul.prdList li.item {
-    box-sizing: border-box;
-    width: calc(25% - 24px);
-    background: #fff;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    vertical-align: top;
-  }
-
-  .xans-product-relation .prdList>li .box,
-  .xans-product-relation .prdList__item .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .xans-product-relation .prdList .thumb,
-  .xans-product-relation .prdList .thumbnail {
-    width: 100%;
-    height: 180px;
-    display: block;
-    overflow: hidden;
-    border-radius: 8px;
-    background: #f8f8f8;
-  }
-
-  .xans-product-relation .prdList .thumb img,
-  .xans-product-relation .prdList .thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .xans-product-relation .prdList .name {
-    margin: 6px 0 0;
-    font-size: 15px;
-    color: #111;
-    font-weight: 600;
-  }
-
-  .xans-product-relation .prdList .desc,
-  .xans-product-relation .prdList .price {
-    font-size: 13px;
-    color: #666;
-  }
-
-  /* Responsive */
-  @media (max-width: 1100px) {
-    .xans-product-relation .prdList>li {
-      width: calc(33.333% - 24px);
-    }
-  }
-
-  @media (max-width: 760px) {
-    .xans-product-relation .prdList>li {
-      width: calc(50% - 16px);
-    }
-
-    .xans-product-relation .prdList .thumb {
-      height: 140px;
-    }
-  }
-
-  @media (max-width: 420px) {
-    .xans-product-relation .prdList>li {
-      width: 100%;
-    }
-
-    .xans-product-relation .prdList {
-      gap: 12px;
-    }
-  }
 
   .xans-product-detail .imgArea .prdImg img {
     width: 100%;

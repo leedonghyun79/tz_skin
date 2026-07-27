@@ -287,9 +287,10 @@ $(document).ready(function(){
             var customMenus = {
                 'LED안내전광판': [
                     { name: '실내용', link: '/product/list.html?cate_no=29' },
-                    { name: '실외용', link: '/product/list.html?cate_no=30' },
+                    // 카드 심사 - 상품 없는 카테고리 비활성화
+                    // { name: '실외용', link: '/product/list.html?cate_no=30' },
                     { name: '배너형 포스터', link: '/product/list.html?cate_no=31' },
-                    { name: '특수형(비정형)', link: '/product/list.html?cate_no=43' }
+                    // { name: '특수형(비정형)', link: '/product/list.html?cate_no=43' }
                 ],
                 '디지털사이니지': [
                     { name: '멀티비전', link: '/product/list.html?cate_no=32' },
@@ -307,7 +308,8 @@ $(document).ready(function(){
                     { name: '천정형 거치대', link: '/product/list.html?cate_no=60' },
                     { name: '멀티비전/메뉴보드용 거치대', link: '/product/list.html?cate_no=59' },
                     { name: '전동형 거치대', link: '/product/list.html?cate_no=61' },
-                    { name: '주문제작형 거치대', link: '/product/list.html?cate_no=62' },
+                    // 카드 심사 - 상품 없는 카테고리 비활성화
+                    // { name: '주문제작형 거치대', link: '/product/list.html?cate_no=62' },
                 ],
                 '솔루션': []
             };

@@ -571,6 +571,8 @@ html {
         padding: 40px 0 44px;
     }
 
+    /* 
+    // 임시 비활성화: 결제사 붙이면 활성화하기
     #footer:before {
         content: "";
         display: block;
@@ -579,7 +581,7 @@ html {
         left: 0;
         right: 0;
         border-top: 1px solid #e0e0e0;
-    }
+    } */
 
     #footer .inner {
         max-width: 1340px;

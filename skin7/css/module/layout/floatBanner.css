@@ -1,0 +1,90 @@
+.qm-wrap {
+  position: fixed;
+  right: 12px;
+  bottom: 145px;
+  width: 90px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border: 1.5px solid #ddd;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.qm-top-btn {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 1.5px solid #ddd;
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+}
+.qm-top-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #333;
+}
+.qm-top-txt {
+  font-size: 10px;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 0.05em;
+}
+.qm-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1.5px solid #ddd;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.qm-top-btn:hover {
+  background: #f5f5f5;
+}
+.qm-top-btn:hover .qm-top-arrow {
+  border-bottom-color: #000;
+}
+.qm-top-btn:hover .qm-top-txt {
+  color: #000;
+}
+.qm-item:hover {
+  background: #f5f5f5;
+}
+.qm-item:last-child { border-bottom: none; }
+.qm-item img {
+  width: 105%;
+  height: 85px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 540px) {
+  .qm-wrap {
+    position: fixed;
+    right: 3px;
+    bottom: 100px;
+    width: 70px;
+    border: 1px solid #ddd;
+  }
+
+  .qm-item img {
+    width: 100%;
+    height: 63px;
+  }
+
+  .qm-top-btn {
+    border-radius: 0;
+    border-bottom: 1px solid #ddd;
+  }
+}
