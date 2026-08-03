@@ -1,0 +1,813 @@
+<!--@layout(/layout/basic/layout.html)-->
+<div class="path">
+    <span>현재 위치</span>
+    <ol>
+        <li><a href="/">홈</a></li>
+        <li title="현재 위치"><strong>나라장터</strong></li>
+    </ol>
+</div>
+
+<div class="titleArea">
+    <h2>나라장터</h2>
+</div>
+
+<div class="contentArea">
+<style>
+      .tz-proc {
+        color: #1a1a1a;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 15px;
+      }
+      .tz-proc * {
+        box-sizing: border-box;
+      }
+      .tz-proc .tz-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      }
+      
+      .tz-proc .tz-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin: 0;
+      }
+      .tz-proc .tz-cnt {
+        background: #0080ff;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 2px 9px;
+        border-radius: 10px;
+      }
+      .tz-proc .tz-view-toggle {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+      }
+      .tz-proc .tz-vbtn {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        cursor: pointer;
+        color: #666;
+        font-size: 15px;
+        line-height: 1;
+      }
+      .tz-proc .tz-vbtn.on {
+        background: #0080ff;
+        color: #fff;
+        border-color: #0080ff;
+      }
+      .tz-proc .tz-filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+        align-items: center;
+      }
+      .tz-proc .tz-filters select,
+      .tz-proc .tz-filters input {
+        font-size: 15px;
+        padding: 6px 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        color: #1a1a1a;
+        height: 38px;
+        outline: none;
+        font-family: inherit;
+      }
+      .tz-proc .tz-filters select:focus,
+      .tz-proc .tz-filters input:focus {
+        border-color: #0080ff;
+      }
+      .tz-proc .tz-search {
+        width: 300px;
+      }
+      .tz-proc .tz-reset {
+        font-size: 15px;
+        padding: 5px 14px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        color: #666;
+        cursor: pointer;
+        height: 38px;
+        font-family: inherit;
+      }
+      .tz-proc .tz-reset:hover {
+        background: #f0f0f0;
+      }
+      .tz-proc .tz-tabs {
+        display: flex;
+        margin-bottom: 5rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .tz-proc .tz-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .tz-proc .tz-tab {
+        font-size: 15px;
+        padding: 8px 14px;
+        cursor: pointer;
+        color: #101010;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .tz-proc .tz-tab.on {
+        color: #101010;
+        border-bottom-color: #101010;
+        font-weight: 600;
+      }
+      .tz-proc .tz-tab:hover:not(.on) {
+        color: #333;
+      }
+
+      /* 카드 그리드 */
+      .tz-proc .tz-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+
+      .tz-proc .tz-card {
+        background: #fff;
+        overflow: hidden;
+        transition: border-color 0.15s, box-shadow 0.15s;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* 카드 이미지 영역 */
+      .tz-proc .tz-card-img {
+        width: 100%;
+        border: 1px solid #e8e8e8;
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .tz-proc .tz-card-img:hover {
+        border-color: #0080ff;
+        box-shadow: 0 2px 12px rgba(0, 128, 255, 0.1);
+      }
+
+      .tz-proc .tz-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        padding: 12px;
+        transition: transform 0.2s;
+      }
+      .tz-proc .tz-card:hover .tz-card-img img {
+        transform: scale(1.04);
+      }
+
+      /* 카드 바디 */
+      .tz-proc .tz-card-body {
+        padding: 10px 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+      }
+      .tz-proc .tz-badge {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 7px;
+      }
+      .tz-proc .tz-model {
+        padding: 5px 10px 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: #1a1a1a;
+        line-height: 1.3;
+      }
+      .tz-proc .tz-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        overflow: hidden;
+      }
+      .tz-proc .tz-meta-row {
+        display: flex;
+        align-items: center;
+        padding: 2px 10px;
+        gap: 12px;
+      }
+
+      .tz-proc .tz-meta-label {
+        font-size: 17px;
+        color: #555;
+        font-weight: 400;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .tz-proc .tz-meta-val {
+        font-size: 17px;
+        color: #101010;
+        font-weight: 400;
+        word-break: break-all;
+      }
+
+      /* 배지 색상 */
+      .tz-proc .bg-stand {
+        background: #e6f1fb;
+        color: #185fa5;
+      }
+      .tz-proc .bg-rotate {
+        background: #eaf3de;
+        color: #3b6d11;
+      }
+      .tz-proc .bg-single {
+        background: #faeeda;
+        color: #854f0b;
+      }
+      .tz-proc .bg-led {
+        background: #fbeaf0;
+        color: #993556;
+      }
+      .tz-proc .bg-set {
+        background: #f1efe8;
+        color: #5f5e5a;
+      }
+      .tz-proc .bg-edu {
+        background: #faece7;
+        color: #993c1d;
+      }
+      /* 벤처나라 배지 */
+      .tz-proc .bg-venture {
+        background: #eef0ff;
+        color: #3d4fd6;
+      }
+
+      /* 페이지네이션 */
+      .tz-proc .tz-pager {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        margin-top: 2.5rem;
+        flex-wrap: wrap;
+      }
+      .tz-proc .tz-pg {
+        min-width: 38px;
+        height: 38px;
+        padding: 0 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        cursor: pointer;
+        color: #555;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: inherit;
+      }
+      .tz-proc .tz-pg:hover:not(:disabled) {
+        background: #f0f0f0;
+      }
+      .tz-proc .tz-pg.on {
+        background: #0080ff;
+        color: #fff;
+        border-color: #0080ff;
+        font-weight: 600;
+      }
+      .tz-proc .tz-pg:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+      .tz-proc .tz-pginfo {
+        font-size: 15px;
+        color: #888;
+        margin-left: 8px;
+      }
+
+      /* 목록 뷰 */
+      .tz-proc .tz-list-wrap {
+        border: 1px solid #e8e8e8;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .tz-proc .tz-list-wrap table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+      }
+      .tz-proc .tz-list-wrap thead th {
+        background: #f8f9fa;
+        color: #888;
+        font-weight: 600;
+        font-size: 15px;
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e8e8e8;
+        white-space: nowrap;
+      }
+      .tz-proc .tz-list-wrap tbody tr {
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .tz-proc .tz-list-wrap tbody tr:last-child {
+        border-bottom: none;
+      }
+      .tz-proc .tz-list-wrap tbody tr:hover {
+        background: #fafcff;
+      }
+      .tz-proc .tz-list-wrap tbody td {
+        padding: 9px 12px;
+        vertical-align: middle;
+        font-size: 15px;
+      }
+      .tz-proc .tz-nodata {
+        text-align: center;
+        padding: 3rem;
+        color: #aaa;
+        font-size: 15px;
+        grid-column: 1/-1;
+      }
+
+      @media (max-width: 960px) {
+        .tz-proc .tz-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 540px) {
+        .tz-header {
+          padding: 0 4px;
+        }
+        .tz-proc .tz-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tz-proc .tz-model {
+          font-size: 14px !important;
+        }
+
+        .tz-proc .tz-meta-label {
+          font-size: 12px !important;
+        }
+      }
+    </style>
+
+    <div class="tz-proc">
+      <div class="tz-header">
+        <p class="tz-title">나라장터 · 학교장터 공공조달</p>
+        <span class="tz-cnt" id="tz-cnt">0</span>
+        <div class="tz-view-toggle">
+          <button class="tz-vbtn on" id="tz-btnCard" onclick="tzSetView('card')">카드</button>
+          <button class="tz-vbtn" id="tz-btnList" onclick="tzSetView('list')">목록</button>
+        </div>
+      </div>
+      <div class="tz-filters">
+        <input
+          class="tz-search"
+          type="text"
+          id="tz-search"
+          placeholder="모델명 · 분류번호 · 식별번호 · S2B번호 검색..."
+        />
+        <select id="tz-os">
+          <option value="">전체 프로세스</option>
+          <option>USB</option>
+          <option>안드로이드</option>
+          <option>PC/Windows</option>
+          <option>MN / AN / PN</option>
+          <option>e-MMC 16GB</option>
+          <option>e-MMC 32GB</option>
+        </select>
+        <button class="tz-reset" onclick="tzReset()">초기화</button>
+      </div>
+      <div class="tz-tabs" id="tz-tabs"></div>
+      <div class="tz-grid" id="tz-grid"></div>
+      <div class="tz-list-wrap" id="tz-list" style="display: none">
+        <table>
+          <thead id="tz-thead">
+            <tr>
+              <th>구분</th>
+              <th>모델명</th>
+              <th>G2B 분류번호</th>
+              <th>G2B 식별번호</th>
+              <th>S2B 물품번호</th>
+              <th>프로세스</th>
+              <th style="text-align: right">조달금액</th>
+            </tr>
+          </thead>
+          <tbody id="tz-tbody"></tbody>
+        </table>
+      </div>
+      <div class="tz-pager" id="tz-pager"></div>
+    </div>
+
+    <script>
+      (function () {
+        const SERIES_IMG = {
+          // 전자액자
+          PW:         "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/90ab850d8ee05.png",
+          PW_VENTURE: "https://cdn.imweb.me/thumbnail/20260414/0da2809719be5.png",
+          // LED / 셋탑 / 교육
+          LED: "https://cdn.imweb.me/thumbnail/20260417/f37ac1ac3187f.png",
+          SET: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/3c0565923a342.png",
+          EDU: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/f3f3e22e3b46c.png",
+
+          // 스탠드형 (일반)
+          ST4300: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/cffa6e108ee69.png",
+          ST4900: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/d7a4ea441eebe.png",
+          ST5500: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/e40de18d5236b.png",
+          ST6500: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/964538a46c4e9.png",
+          // 스탠드형 (터치스크린 · 프리미엄가능 / AT·PT)
+          ST4300f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/cffa6e108ee69.png",
+          ST4900f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/d7a4ea441eebe.png",
+          ST5500f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/e40de18d5236b.png",
+          ST6500f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/964538a46c4e9.png",
+
+          // 회전형 (일반)
+          SW4300: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/d2a528294ba2b.png",
+          SW4900: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/53f08fb1f526b.png",
+          SW5500: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/7c5aa4db1b3aa.png",
+          SW6500: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/3aa30fe8f0818.png",
+          // 회전형 (터치스크린 · 프리미엄가능 / AT·PT)
+          SW4300f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/d2a528294ba2b.png",
+          SW4900f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/53f08fb1f526b.png",
+          SW5500f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/7c5aa4db1b3aa.png",
+          SW6500f: "https://cdn.imweb.me/upload/S20260413cc62e8028f7a9/3aa30fe8f0818.png",
+        };
+
+        const CAT_META = {
+          "일반 스탠드":                      { label: "일반 스탠드",             cls: "bg-stand"  },
+          "회전형 ":                           { label: "회전형",                  cls: "bg-rotate" },
+          "전자액자":                          { label: "전자액자",                cls: "bg-single" },
+          "LED 안내전광판":                    { label: "LED 안내전광판",          cls: "bg-led"    },
+          "일반 스탠드 (프리미엄가능)":        { label: "일반 스탠드 · 프리미엄",  cls: "bg-stand"  },
+          "회전형 (프리미엄가능)":             { label: "회전형 · 프리미엄",       cls: "bg-rotate" },
+          "셋탑박스":                          { label: "셋탑박스",                cls: "bg-set"    },
+          "사용자교육":                        { label: "사용자교육",              cls: "bg-edu"    },
+        };
+
+        const DATA = [
+          // ─── 나라장터 / 학교장터 ───────────────────────────────────────
+          { cat: "일반 스탠드 ", model: "TZ-ST6500-MN", g2b_cls: "45111893", g2b: "24518239", s2b: "202411119925346", os: "USB",        price: 3740000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST5500-MN", g2b_cls: "45111893", g2b: "24518240", s2b: "202411119925240", os: "USB",        price: 2805000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST4900-MN", g2b_cls: "45111893", g2b: "24518241", s2b: "202411119925292", os: "USB",        price: 2420000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST4300-MN", g2b_cls: "45111893", g2b: "24518242", s2b: "202411119925250", os: "USB",        price: 2310000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST6500-AN", g2b_cls: "45111893", g2b: "24518243", s2b: "202411119925225", os: "안드로이드", price: 4125000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST5500-AN", g2b_cls: "45111893", g2b: "24518244", s2b: "202411119925193", os: "안드로이드", price: 3190000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST4900-AN", g2b_cls: "45111893", g2b: "24518245", s2b: "202411119925079", os: "안드로이드", price: 2750000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST4300-AN", g2b_cls: "45111893", g2b: "24518246", s2b: "202411119924864", os: "안드로이드", price: 2640000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST6500-PN", g2b_cls: "45111893", g2b: "24518251", s2b: "202411119924792", os: "PC/Windows", price: 4565000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST5500-PN", g2b_cls: "45111893", g2b: "24518252", s2b: "202411119924742", os: "PC/Windows", price: 3707000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST4900-PN", g2b_cls: "45111893", g2b: "24518253", s2b: "202411119924682", os: "PC/Windows", price: 3245000, source: "g2b" },
+          { cat: "일반 스탠드 ", model: "TZ-ST4300-PN", g2b_cls: "45111893", g2b: "24518254", s2b: "202411119924550", os: "PC/Windows", price: 3190000, source: "g2b" },
+
+          { cat: "회전형 ", model: "TZ-SW6500-MN", g2b_cls: "45111893", g2b: "24518259", s2b: "202411119924123", os: "USB",        price: 4125000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW5500-MN", g2b_cls: "45111893", g2b: "24518260", s2b: "202411079899366", os: "USB",        price: 3410000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW4900-MN", g2b_cls: "45111893", g2b: "24518261", s2b: "202411079898503", os: "USB",        price: 2860000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW4300-MN", g2b_cls: "45111893", g2b: "24518262", s2b: "202411079898424", os: "USB",        price: 2640000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW6500-AN", g2b_cls: "45111893", g2b: "24518263", s2b: "202411079897193", os: "안드로이드", price: 4598000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW5500-AN", g2b_cls: "45111893", g2b: "24518264", s2b: "202411079896733", os: "안드로이드", price: 3795000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW4900-AN", g2b_cls: "45111893", g2b: "24518265", s2b: "202411069891392", os: "안드로이드", price: 3278000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW4300-AN", g2b_cls: "45111893", g2b: "24518266", s2b: "202411069891169", os: "안드로이드", price: 3025000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW6500-PN", g2b_cls: "45111893", g2b: "24518271", s2b: "202411069890366", os: "PC/Windows", price: 5038000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW5500-PN", g2b_cls: "45111893", g2b: "24518272", s2b: "202411059878879", os: "PC/Windows", price: 4290000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW4900-PN", g2b_cls: "45111893", g2b: "24518273", s2b: "202411059878719", os: "PC/Windows", price: 3795000, source: "g2b" },
+          { cat: "회전형 ", model: "TZ-SW4300-PN", g2b_cls: "45111893", g2b: "24518274", s2b: "202411059878434", os: "PC/Windows", price: 3498000, source: "g2b" },
+
+          { cat: "전자액자", model: "TZ-PW6500-MN", g2b_cls: "45111893", g2b: "24518203", s2b: "202411049866891", os: "USB",        price: 2530000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW5500-MN", g2b_cls: "45111893", g2b: "24518204", s2b: "202411019853062", os: "USB",        price: 2200000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW4900-MN", g2b_cls: "45111893", g2b: "24518205", s2b: "202411019852982", os: "USB",        price: 1760000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW4300-MN", g2b_cls: "45111893", g2b: "24518206", s2b: "202411019852770", os: "USB",        price: 1595000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW6500-AN", g2b_cls: "45111893", g2b: "24518207", s2b: "202411019852693", os: "안드로이드", price: 2915000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW5500-AN", g2b_cls: "45111893", g2b: "24518208", s2b: "202411019852336", os: "안드로이드", price: 2475000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW4900-AN", g2b_cls: "45111893", g2b: "24518209", s2b: "202411019852116", os: "안드로이드", price: 2145000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW4300-AN", g2b_cls: "45111893", g2b: "24518210", s2b: "202411019852011", os: "안드로이드", price: 1980000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW6500-PN", g2b_cls: "45111893", g2b: "24518215", s2b: "202411019851900", os: "PC/Windows", price: 3410000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW5500-PN", g2b_cls: "45111893", g2b: "24518216", s2b: "202411019851780", os: "PC/Windows", price: 3080000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW4900-PN", g2b_cls: "45111893", g2b: "24518217", s2b: "202411019851447", os: "PC/Windows", price: 2640000, source: "g2b" },
+          { cat: "전자액자", model: "TZ-PW4300-PN", g2b_cls: "45111893", g2b: "24518218", s2b: "202411019850679", os: "PC/Windows", price: 2420000, source: "g2b" },
+
+          // ─── 벤처나라 전자액자 (터치스크린) ──────────────────────────────
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW4300-AT", vn_item: "24518214", vn_detail: "4321190301", os: "안드로이드", price: 2200000, source: "venture" },
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW4900-AT", vn_item: "24518213", vn_detail: "4321190301", os: "안드로이드", price: 2750000, source: "venture" },
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW4300-PT", vn_item: "24518222", vn_detail: "4321190301", os: "PC/Windows", price: 2750000, source: "venture" },
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW5500-AT", vn_item: "24518212", vn_detail: "4321190301", os: "안드로이드", price: 2950000, source: "venture" },
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW4900-PT", vn_item: "24518221", vn_detail: "4321190301", os: "PC/Windows", price: 3350000, source: "venture" },
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW6500-AT", vn_item: "24518211", vn_detail: "4321190301", os: "안드로이드", price: 3500000, source: "venture" },
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW5500-PT", vn_item: "24518220", vn_detail: "4321190301", os: "PC/Windows", price: 3500000, source: "venture" },
+          { cat: "전자액자", subcat: "전자액자 (터치스크린)", model: "TZ-PW6500-PT", vn_item: "24518219", vn_detail: "4321190301", os: "PC/Windows", price: 3950000, source: "venture" },
+
+          // ─── LED 안내전광판 ───────────────────────────────────────────
+          { cat: "LED 안내전광판", model: "TZL640-P1.25",   g2b_cls: "55121903", g2b: "25717234", s2b: "202505162167697", os: "MN / AN / PN", price: 2905000, source: "g2b" },
+          { cat: "LED 안내전광판", model: "TZL640-P1.53",   g2b_cls: "55121903", g2b: "25717235", s2b: "203505162168160", os: "MN / AN / PN", price: 2130000, source: "g2b" },
+          { cat: "LED 안내전광판", model: "TZL640-P1.86",   g2b_cls: "55121903", g2b: "25717236", s2b: "202505162168243", os: "MN / AN / PN", price: 1570000, source: "g2b" },
+          { cat: "LED 안내전광판", model: "TZL640-P2",      g2b_cls: "55121903", g2b: "25717237", s2b: "202505162168284", os: "MN / AN / PN", price: 1256000, source: "g2b" },
+          { cat: "LED 안내전광판", model: "TZL640-P2.5",    g2b_cls: "55121903", g2b: "25717238", s2b: "202505162168333", os: "MN / AN / PN", price:  976000, source: "g2b" },
+          { cat: "LED 안내전광판", model: "TZL640-P3.076",  g2b_cls: "55121903", g2b: "25717239", s2b: "202050562168448", os: "MN / AN / PN", price:  886000, source: "g2b" },
+
+          // ─── 일반 스탠드 (프리미엄가능) ──────────────────────────────
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST6500-AT", g2b_cls: "45111893", g2b: "24518247", s2b: "202603127295063", os: "안드로이드", price: 4455000, source: "g2b" },
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST5500-AT", g2b_cls: "45111893", g2b: "24518248", s2b: "202603127295213", os: "안드로이드", price: 3520000, source: "g2b" },
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST4900-AT", g2b_cls: "45111893", g2b: "24518249", s2b: "202603127295473", os: "안드로이드", price: 3080000, source: "g2b" },
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST4300-AT", g2b_cls: "45111893", g2b: "24518250", s2b: "202603127295523", os: "안드로이드", price: 2970000, source: "g2b" },
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST6500-PT", g2b_cls: "45111893", g2b: "24518255", s2b: "202603127295568", os: "PC/Windows", price: 4895000, source: "g2b" },
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST5500-PT", g2b_cls: "45111893", g2b: "24518256", s2b: "202603127295609", os: "PC/Windows", price: 4037000, source: "g2b" },
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST4900-PT", g2b_cls: "45111893", g2b: "24518257", s2b: "202603127295652", os: "PC/Windows", price: 3575000, source: "g2b" },
+          { cat: "일반 스탠드 (프리미엄가능)", model: "TZ-ST4300-PT", g2b_cls: "45111893", g2b: "24518258", s2b: "202603127295693", os: "PC/Windows", price: 3520000, source: "g2b" },
+
+          // ─── 회전형 (프리미엄가능) ────────────────────────────────────
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW6500-AT", g2b_cls: "45111893", g2b: "24518267", s2b: "202603127295854", os: "안드로이드", price: 4928000, source: "g2b" },
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW5500-AT", g2b_cls: "45111893", g2b: "24518268", s2b: "202603127296019", os: "안드로이드", price: 4125000, source: "g2b" },
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW4900-AT", g2b_cls: "45111893", g2b: "24518269", s2b: "202603127296069", os: "안드로이드", price: 3608000, source: "g2b" },
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW4300-AT", g2b_cls: "45111893", g2b: "24518270", s2b: "202603127296136", os: "안드로이드", price: 3355000, source: "g2b" },
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW6500-PT", g2b_cls: "45111893", g2b: "24518275", s2b: "202603127296222", os: "PC/Windows", price: 5368000, source: "g2b" },
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW5500-PT", g2b_cls: "45111893", g2b: "24518276", s2b: "202603127296289", os: "PC/Windows", price: 4620000, source: "g2b" },
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW4900-PT", g2b_cls: "45111893", g2b: "24518277", s2b: "202603127296354", os: "PC/Windows", price: 4125000, source: "g2b" },
+          { cat: "회전형 (프리미엄가능)", model: "TZ-SW4300-PT", g2b_cls: "45111893", g2b: "24518278", s2b: "202603127296466", os: "PC/Windows", price: 3828000, source: "g2b" },
+
+          // ─── 셋탑박스 ────────────────────────────────────────────────
+          { cat: "셋탑박스", model: "TZ-OR1G-M110S", g2b_cls: "45111893", g2b: "26070007", s2b: "202603177348878", os: "e-MMC 16GB",         price: 550000, source: "g2b" },
+          { cat: "셋탑박스", model: "TZ-QR5G-M110S", g2b_cls: "45111893", g2b: "26070008", s2b: "202603177345979", os: "e-MMC 32GB",         price: 770000, source: "g2b" },
+
+          // ─── 사용자교육 ──────────────────────────────────────────────
+          { cat: "사용자교육", model: "정보화교육서비스", g2b_cls: "86101698", g2b: "23853729", s2b: "202603127295795", os: "수요처 요구인원", price: 165000, source: "g2b" },
+        ];
+
+        const PER = 12;
+        let page = 1,
+          view = "card",
+          tab = "",
+          filtered = [];
+
+        const CATS = (function () {
+          const s = [], seen = {};
+          DATA.forEach(function (d) {
+            if (!seen[d.cat]) { seen[d.cat] = 1; s.push(d.cat); }
+          });
+          return s;
+        })();
+
+        // ─── 탭 생성 ────────────────────────────────────────────────────
+        const tabsEl = document.getElementById("tz-tabs");
+        [{ val: "", label: "전체" }]
+          .concat(CATS.map(function (c) {
+            return { val: c, label: (CAT_META[c] && CAT_META[c].label) || c };
+          }))
+          .forEach(function (t) {
+            const el = document.createElement("div");
+            el.className = "tz-tab" + (t.val === tab ? " on" : "");
+            el.textContent = t.label;
+            el.onclick = function () {
+              tab = t.val;
+              page = 1;
+              document.querySelectorAll("#tz-tabs .tz-tab").forEach(function (x) {
+                x.classList.remove("on");
+              });
+              el.classList.add("on");
+              render();
+            };
+            tabsEl.appendChild(el);
+          });
+
+        // ─── 헬퍼 ───────────────────────────────────────────────────────
+        function cls(c) { return (CAT_META[c] && CAT_META[c].cls) || "bg-stand"; }
+        function lbl(c) { return (CAT_META[c] && CAT_META[c].label) || c; }
+
+        /**
+         * 모델명에서 이미지 키를 결정한다.
+         *
+         * 모델명 패턴: TZ-(ST|SW)(4300|4900|5500|6500)-(MN|AN|PN|AT|PT)
+         *   - suffix AT 또는 PT → 터치스크린(f) 이미지
+         *   - suffix MN / AN / PN → 일반 이미지
+         *
+         * 전자액자(PW), LED, 셋탑, 교육은 cat으로 처리.
+         */
+        function getImg(cat, source, model) {
+          if (source === "venture") return SERIES_IMG["PW_VENTURE"];
+          if (cat === "전자액자")       return SERIES_IMG["PW"];
+          if (cat === "LED 안내전광판") return SERIES_IMG["LED"];
+          if (cat === "셋탑박스")       return SERIES_IMG["SET"];
+          if (cat === "사용자교육")     return SERIES_IMG["EDU"];
+
+          // 스탠드 / 회전형 → 모델명 파싱
+          // 터치스크린 suffix: AT, PT
+          const mTouch = model.match(/TZ-(ST|SW)(\d{4})-(AT|PT)/);
+          if (mTouch) {
+            const key = mTouch[1] + mTouch[2] + "f"; // e.g. ST4300f, SW4300f
+            const fallback = mTouch[1] === "SW" ? "https://cdn.imweb.me/thumbnail/20260327/ed5d6ae7df2f7.png" : "";
+            return SERIES_IMG[key] || fallback;
+          }
+          // 일반 suffix: MN, AN, PN
+          const mNorm = model.match(/TZ-(ST|SW)(\d{4})/);
+          if (mNorm) {
+            const key = mNorm[1] + mNorm[2]; // e.g. ST4300, SW4300
+            const fallback = mNorm[1] === "SW" ? "https://cdn.imweb.me/thumbnail/20260327/ed5d6ae7df2f7.png" : "";
+            return SERIES_IMG[key] || fallback;
+          }
+
+          return "";
+        }
+
+        // ─── 뷰 전환 ────────────────────────────────────────────────────
+        function tzSetView(v) {
+          view = v;
+          page = 1;
+          document.getElementById("tz-btnCard").classList.toggle("on", v === "card");
+          document.getElementById("tz-btnList").classList.toggle("on", v === "list");
+          document.getElementById("tz-grid").style.display  = v === "card" ? "grid"  : "none";
+          document.getElementById("tz-list").style.display  = v === "list" ? "block" : "none";
+          render();
+        }
+        window.tzSetView = tzSetView;
+
+        // ─── 필터링 ──────────────────────────────────────────────────────
+        function applyFilter() {
+          const q  = document.getElementById("tz-search").value.toLowerCase().replace(/\s/g, "");
+          const os = document.getElementById("tz-os").value;
+          filtered = DATA.filter(function (d) {
+            if (tab && d.cat !== tab) return false;
+            if (os  && d.os  !== os)  return false;
+            if (q) {
+              const haystack = (
+                d.model +
+                (d.g2b_cls || "") +
+                (d.g2b     || "") +
+                (d.s2b     || "") +
+                (d.vn_item || "") +
+                (d.vn_detail || "")
+              ).toLowerCase().replace(/\s/g, "");
+              if (haystack.indexOf(q) < 0) return false;
+            }
+            return true;
+          });
+        }
+
+        // ─── 목록 thead ──────────────────────────────────────────────────
+        function updateThead() {
+          const hasG2b     = filtered.some(function (d) { return d.source === "g2b"; });
+          const hasVenture = filtered.some(function (d) { return d.source === "venture"; });
+          let th;
+          if (hasG2b && !hasVenture) {
+            th = "<tr><th>구분</th><th>모델명</th><th>G2B 분류번호</th><th>G2B 식별번호</th><th>S2B 물품번호</th><th>프로세스</th><th style='text-align:right'>조달금액</th></tr>";
+          } else if (!hasG2b && hasVenture) {
+            th = "<tr><th>구분</th><th>모델명</th><th>벤처나라 물품식별번호</th><th>벤처나라 세부품명번호</th><th>프로세스</th><th style='text-align:right'>조달금액</th></tr>";
+          } else {
+            th = "<tr><th>구분</th><th>모델명</th><th>분류번호</th><th>식별번호</th><th>S2B / 물품번호</th><th>프로세스</th><th style='text-align:right'>조달금액</th></tr>";
+          }
+          document.getElementById("tz-thead").innerHTML = th;
+        }
+
+        // ─── 카드 렌더 ───────────────────────────────────────────────────
+        function renderCards(slice) {
+          const el = document.getElementById("tz-grid");
+          if (!filtered.length) {
+            el.innerHTML = '<div class="tz-nodata">검색 결과가 없습니다</div>';
+            return;
+          }
+          el.innerHTML = slice.map(function (d) {
+            const imgUrl  = getImg(d.cat, d.source, d.model);
+            const imgHtml = imgUrl
+              ? '<div class="tz-card-img"><img src="' + imgUrl + '" alt="' + d.model + '" loading="lazy"></div>'
+              : '<div class="tz-card-img" style="display:flex;align-items:center;justify-content:center;color:#ccc;font-size:12px">이미지 없음</div>';
+
+            let metaRows;
+            if (d.source === "venture") {
+              metaRows =
+                '<div class="tz-meta-row"><span class="tz-meta-label">벤처나라 물품식별번호</span><span class="tz-meta-val">'                        + d.vn_item   + "</span></div>" +
+                '<div class="tz-meta-row"><span class="tz-meta-label">벤처나라 세부품명번호</span><span class="tz-meta-val" style="color:#3d4fd6">' + d.vn_detail + "</span></div>" +
+                '<div class="tz-meta-row"><span class="tz-meta-label">프로세스</span><span class="tz-meta-val" style="font-family:inherit">'          + d.os         + "</span></div>" +
+                '<div class="tz-meta-row"><span class="tz-meta-label">조달금액</span><span class="tz-meta-val" style="font-family:inherit;color:#1a1a1a;font-weight:500">₩ ' + d.price.toLocaleString() + "</span></div>";
+            } else {
+              metaRows =
+                '<div class="tz-meta-row"><span class="tz-meta-label">G2B 분류번호</span><span class="tz-meta-val">'                             + d.g2b_cls + "</span></div>" +
+                '<div class="tz-meta-row"><span class="tz-meta-label">G2B 식별번호</span><span class="tz-meta-val" style="color:#0080FF">'       + d.g2b     + "</span></div>" +
+                '<div class="tz-meta-row"><span class="tz-meta-label">S2B 물품번호</span><span class="tz-meta-val">'                             + d.s2b     + "</span></div>" +
+                '<div class="tz-meta-row"><span class="tz-meta-label">프로세스</span><span class="tz-meta-val" style="font-family:inherit">'      + d.os       + "</span></div>" +
+                '<div class="tz-meta-row"><span class="tz-meta-label">조달금액</span><span class="tz-meta-val" style="font-family:inherit;color:#1a1a1a;font-weight:500">₩ ' + d.price.toLocaleString() + "</span></div>";
+            }
+
+            const badgeCls = d.source === "venture" ? "bg-venture" : cls(d.cat);
+            const badgeTxt = d.subcat || lbl(d.cat);
+
+            return (
+              '<div class="tz-card">' +
+                imgHtml +
+                '<div class="tz-card-body">' +
+                  '<span class="tz-badge ' + badgeCls + '">' + badgeTxt + "</span>" +
+                  '<div class="tz-model">' + d.model + "</div>" +
+                  '<div class="tz-meta">'  + metaRows + "</div>" +
+                "</div>" +
+              "</div>"
+            );
+          }).join("");
+        }
+
+        // ─── 목록 렌더 ───────────────────────────────────────────────────
+        function renderList(slice) {
+          const hasG2b     = filtered.some(function (d) { return d.source === "g2b"; });
+          const hasVenture = filtered.some(function (d) { return d.source === "venture"; });
+
+          document.getElementById("tz-tbody").innerHTML = slice.map(function (d) {
+            const badgeCls = d.source === "venture" ? "bg-venture" : cls(d.cat);
+            const badgeTxt = d.subcat || lbl(d.cat);
+            const badgeCell = '<td><span class="tz-badge ' + badgeCls + '">' + badgeTxt + "</span></td>";
+            const modelCell = '<td style="font-weight:600">' + d.model + "</td>";
+            const priceCell = '<td style="text-align:right;font-weight:600">₩ ' + d.price.toLocaleString() + "</td>";
+            const osCell    = '<td style="color:#666">' + d.os + "</td>";
+
+            if (d.source === "venture") {
+              const col1 = '<td style="font-family:monospace">'              + d.vn_item   + "</td>";
+              const col2 = '<td style="font-family:monospace;color:#3d4fd6">' + d.vn_detail + "</td>";
+              if (hasG2b) {
+                // 혼합: S2B 컬럼 포함 7컬럼
+                return "<tr>" + badgeCell + modelCell + col1 + col2 + '<td style="font-family:monospace;color:#aaa">-</td>' + osCell + priceCell + "</tr>";
+              } else {
+                // 벤처나라만: 6컬럼
+                return "<tr>" + badgeCell + modelCell + col1 + col2 + osCell + priceCell + "</tr>";
+              }
+            } else {
+              const col1 = '<td style="font-family:monospace">'              + d.g2b_cls + "</td>";
+              const col2 = '<td style="font-family:monospace;color:#0080FF">' + d.g2b     + "</td>";
+              const col3 = '<td style="font-family:monospace">'              + d.s2b     + "</td>";
+              if (hasVenture) {
+                // 혼합 7컬럼
+                return "<tr>" + badgeCell + modelCell + col1 + col2 + col3 + osCell + priceCell + "</tr>";
+              } else {
+                return "<tr>" + badgeCell + modelCell + col1 + col2 + col3 + osCell + priceCell + "</tr>";
+              }
+            }
+          }).join("");
+        }
+
+        // ─── 페이저 ──────────────────────────────────────────────────────
+        function renderPager() {
+          const total = Math.ceil(filtered.length / PER);
+          const pg = document.getElementById("tz-pager");
+          if (total <= 1) { pg.innerHTML = ""; return; }
+          let h = '<button class="tz-pg" onclick="tzGo(' + (page - 1) + ')" ' + (page === 1 ? "disabled" : "") + ">‹</button>";
+          const s = Math.max(1, page - 2), e = Math.min(total, page + 2);
+          if (s > 1) h += '<button class="tz-pg" onclick="tzGo(1)">1</button>' + (s > 2 ? '<span style="padding:0 4px;color:#aaa">…</span>' : "");
+          for (let i = s; i <= e; i++)
+            h += '<button class="tz-pg' + (i === page ? " on" : "") + '" onclick="tzGo(' + i + ')">' + i + "</button>";
+          if (e < total)
+            h += (e < total - 1 ? '<span style="padding:0 4px;color:#aaa">…</span>' : "") + '<button class="tz-pg" onclick="tzGo(' + total + ')">' + total + "</button>";
+          h += '<button class="tz-pg" onclick="tzGo(' + (page + 1) + ')" ' + (page === total ? "disabled" : "") + ">›</button>";
+          h += '<span class="tz-pginfo">' + page + " / " + total + " 페이지</span>";
+          pg.innerHTML = h;
+        }
+
+        function tzGo(p) {
+          const total = Math.ceil(filtered.length / PER);
+          if (p < 1 || p > total) return;
+          page = p;
+          const slice = filtered.slice((p - 1) * PER, p * PER);
+          if (view === "card") renderCards(slice);
+          else renderList(slice);
+          renderPager();
+          const top = document.querySelector(".tz-proc");
+          if (top) top.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        window.tzGo = tzGo;
+
+        // ─── 메인 렌더 ───────────────────────────────────────────────────
+        function render() {
+          applyFilter();
+          document.getElementById("tz-cnt").textContent = filtered.length + "개";
+          page = 1;
+          const slice = filtered.slice(0, PER);
+          updateThead();
+          if (view === "card") renderCards(slice);
+          else renderList(slice);
+          renderPager();
+        }
+
+        document.getElementById("tz-search").addEventListener("input",  function () { page = 1; render(); });
+        document.getElementById("tz-os").addEventListener("change", function () { page = 1; render(); });
+
+        function tzReset() {
+          document.getElementById("tz-search").value = "";
+          document.getElementById("tz-os").value = "";
+          tab = "";
+          page = 1;
+          document.querySelectorAll("#tz-tabs .tz-tab").forEach(function (x, i) {
+            x.classList.toggle("on", i === 0);
+          });
+          render();
+        }
+        window.tzReset = tzReset;
+
+        render();
+      })();
+    </script>
+</div>

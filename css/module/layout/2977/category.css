@@ -28,6 +28,10 @@
   align-items: center;
 }
 
+.xans-layout-category .position>ul.link-nara {
+  margin: 0 0 0 30px;
+}
+
 .xans-layout-category .position>ul>li {
   position: relative;
   z-index: 99;
@@ -75,7 +79,7 @@
 
 /* 1. 왼쪽: 서브 메뉴 영역 */
 .submenu-left {
-  flex: 0 0 250px;
+  flex: 0 0 330px;
   border-right: 1px solid #eee;
   padding-right: 30px;
 }
@@ -103,9 +107,11 @@
   text-align: left;
   transition: color 0.2s;
   width: auto;
+  white-space: nowrap;
 }
 
-.submenu-left>ul>li a:hover {
+.submenu-left>ul>li a:hover,
+.submenu-left>ul>li.active a {
   color: #000;
   font-weight: 700;
   background: transparent;

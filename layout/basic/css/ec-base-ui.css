@@ -612,8 +612,10 @@ span.noBorder input {
 
 .path li:last-child a,
 .path li strong,
-.path li strong a {
+.path li strong a,
+.path li.active-path a {
     color: #000;
+    font-weight: bold;
 }
 
 /* ec-base-field */
