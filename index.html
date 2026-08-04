@@ -1,4 +1,12 @@
 <!--@layout(/layout/basic/main.html)-->
+<style>
+    .ec-base-product .spec {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+</style>
 
 <section class="mainVisual" module="custom_moduleedit_1">
     <div class="swiper-container">
@@ -174,7 +182,7 @@
 <!-- ======================== -->
 <!-- 베스트 상품               -->
 <!-- ======================== -->
-<div module="product_listmain_3" class="productItem ec-base-product">
+<div module="product_listmain_30" class="productItem ec-base-product">
     <!--
         $count = 8
         $basket_result = /product/add_basket.html
@@ -249,7 +257,7 @@
         </li>
     </ul>
 </div>
-<div module="product_listmore_3" class="more">
+<div module="product_listmore_30" class="more">
     <a href="#none" onclick="{$more_action}" class="btnMore">
         더보기<span id="more_current_page_{$display_group}">{$current_page}</span>/<span
             id="more_total_page_{$display_group}">{$total_page}</span>
@@ -284,7 +292,7 @@
 <!-- ======================== -->
 <!-- 추천 상품                 -->
 <!-- ======================== -->
-<div module="product_listmain_1" class="productItem ec-base-product">
+<div module="product_listmain_28" class="productItem ec-base-product">
     <!--@css(/css/module/product/479/listmain_1.css)-->
     <!--
         $count = 8
@@ -360,7 +368,7 @@
         </li>
     </ul>
 </div>
-<div module="product_listmore_1" class="more">
+<div module="product_listmore_28" class="more">
     <a href="#none" onclick="{$more_action}" class="btnMore">
         더보기<span id="more_current_page_{$display_group}">{$current_page}</span>/<span
             id="more_total_page_{$display_group}">{$total_page}</span>
@@ -371,7 +379,7 @@
 <!-- ======================== -->
 <!-- 신상품                    -->
 <!-- ======================== -->
-<div module="product_listmain_2" class="productItem ec-base-product">
+<div module="product_listmain_29" class="productItem ec-base-product">
     <!--
         $count = 8
         $basket_result = /product/add_basket.html
@@ -446,7 +454,7 @@
         </li>
     </ul>
 </div>
-<div module="product_listmore_2" class="more">
+<div module="product_listmore_29" class="more">
     <a href="#none" onclick="{$more_action}" class="btnMore">
         더보기<span id="more_current_page_{$display_group}">{$current_page}</span>/<span
             id="more_total_page_{$display_group}">{$total_page}</span>

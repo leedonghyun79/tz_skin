@@ -1,4 +1,4 @@
-﻿<!--@layout(/layout/basic/layout.html)-->
+<!--@layout(/layout/basic/layout.html)-->
 <div module="Product_menupackage">
     <!--@css(/css/module/product/menupackage.css)-->
     <!--@js(/js/module/product/menucategory.js)-->
@@ -28,6 +28,13 @@
 </div>
 
 <style>
+    .ec-base-product .spec {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
     .custom-category-box {
         display: flex;
         flex-wrap: wrap;
@@ -499,6 +506,13 @@
                 </li>
             </ul>
         </div>
+        
+        <div module="product_empty" class="tz-empty-msg" style="text-align:center; padding:120px 0; color:#888; font-size:16px; border-top:1px solid #eee;">
+            <p>상품 준비중입니다.</p>
+        </div>
+        <style>
+            .product_area .ec-base-product:has(li) ~ .tz-empty-msg { display: none !important; }
+        </style>
 
         <div module="product_listmore" class="more">
             <a href="#none" onclick="{$more_action}" class="btnMore">

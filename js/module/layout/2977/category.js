@@ -83,6 +83,19 @@ $(document).ready(function(){
         ],
         'Solutions|T-서베이 만족도조사 키오스크': [
             { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/product/big/20260709/a9ab91ba8024fdcb83399387a57f31b4.png', title: 'T-서베이 소비자만족도 키오스크', desc: '32인치 식당 및 급식소용 소비자 만족도 조사 터치형 키오스크' }
+        ],
+        // Mounts
+        'Mounts|이동형 거치대': [
+            { link: '/product/list.html?cate_no=49', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/category/%EC%9D%B4%EB%8F%99%ED%98%95.jpg', title: '이동형 거치대', desc: '' }
+        ],
+        'Mounts|멀티비전/메뉴보드용 거치대': [
+            { link: '/product/list.html?cate_no=59', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/category/%EB%A9%94%EB%89%B4%EB%B3%B4%EB%93%9C_%EB%A9%80%ED%8B%B0%EB%B9%84%EC%A0%84.jpg', title: '멀티비전/메뉴보드용 거치대', desc: '' }
+        ],
+        'Mounts|전동형 거치대': [
+            { link: '/product/list.html?cate_no=61', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/category/%EC%A0%84%EB%8F%99%ED%98%95.jpg', title: '전동형 거치대', desc: '' }
+        ],
+        'Mounts|천정형 거치대': [
+            { link: '/product/list.html?cate_no=60', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/category/%EC%B2%9C%EC%A0%84%ED%98%95.jpg', title: '천정형 거치대', desc: '' }
         ]
     };
 
@@ -105,18 +118,21 @@ $(document).ready(function(){
         var imageStyle = 'width: 100%; height: 100%; object-fit: cover;';
         if (slideKey.indexOf('배너형 포스터') !== -1 || slideKey.indexOf('Kiosk&DID|삼성 스탠드') !== -1 || slideKey.indexOf('Kiosk&DID|엘지 스탠드') !== -1) {
             imageStyle = 'width: 90%; height: 100%; object-fit: cover;';
-        } else if (slideKey.indexOf('Solutions') !== -1) {
+        } else if (slideKey.indexOf('Solutions') !== -1 || slideKey.indexOf('Mounts') !== -1) {
             imageStyle = 'width: 100%; height: 100%; object-fit: contain; padding: 30px; box-sizing: border-box;';
         }
 
         if (slidesData.length === 1) {
             var item = slidesData[0];
+            var imgHtml = item.img ? '<img src="' + item.img + '" alt="" style="' + imageStyle + '">' 
+                                   : '<div style="width: 100%; height: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; color: #999; font-size: 15px; border-radius: 4px;">상품 준비중입니다</div>';
+
             html = '<div class="swiper-container submenu-right-swiper" style="width: 100%; height: 100%; overflow: hidden; position: relative;">' +
                         '<div class="swiper-wrapper" style="height: 100%; display: flex;">' +
                         '<div class="swiper-slide" style="height: 100%; width: 100%; box-sizing: border-box; flex-shrink: 0;">' +
                             '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%; width: 100%;">' +
-                                '<div style="flex: 0 0 300px; height: 100%; margin-right: 20px;">' +
-                                    '<img src="' + item.img + '" alt="" style="' + imageStyle + '">' +
+                                '<div style="margin-left: 110px; flex: 0 0 300px; height: 100%; margin-right: 20px;">' +
+                                    imgHtml +
                                 '</div>' +
                                 '<div style="flex: 1; text-align: left; padding: 20px 30px;">' +
                                     '<strong style="display: block; font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #222; word-break: keep-all;">' + item.title + '</strong>' +
@@ -137,10 +153,13 @@ $(document).ready(function(){
             html = '<div class="swiper-container submenu-right-swiper" style="width: 100%; height: 100%; overflow: hidden;">' +
                         '<div class="swiper-wrapper" style="height: 100%; display: flex;">';
             $(slidesData).each(function(i, item) {
+                var imgHtml = item.img ? '<img src="' + item.img + '" alt="" style="' + imageStyle + '">' 
+                                       : '<div style="width: 100%; height: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; color: #999; font-size: 15px; border-radius: 4px;">상품 준비중입니다</div>';
+
                 html += '<div class="swiper-slide" style="height: 100%; width: 100%; box-sizing: border-box; flex-shrink: 0;">' +
                                 '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%;">' +
                                     '<div style="flex: 0 0 300px; height: 100%; margin-right: 20px;">' +
-                                        '<img src="' + item.img + '" alt="" style="' + imageStyle + '">' +
+                                        imgHtml +
                                     '</div>' +
                                     '<div style="flex: 1; text-align: left; padding: 20px 30px;">' +
                                         '<strong style="display: block; font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #222; word-break: keep-all;">' + item.title + '</strong>' +
@@ -174,15 +193,9 @@ $(document).ready(function(){
         // subName에 해당하는 데이터가 없으면 현재 메가메뉴 + subName, subName, 기본값 순으로 불러옵니다.
         var slidesData = subCategorySlides[slideKey] || subCategorySlides[subName] || subCategorySlides['기본값'];
         if (!slidesData || slidesData.length === 0) {
-            $('#submenu-module .submenu-banner').empty();
-            if (currentSwiper && typeof currentSwiper.destroy === 'function') {
-                try {
-                    currentSwiper.destroy(true, true);
-                } catch(e) { console.error("Swiper destroy error:", e); }
-            }
-            currentSwiper = null;
-            currentSlideKey = null;
-            return;
+            slidesData = [
+                { link: '#', img: '', title: subName, desc: '' }
+            ];
         }
 
         preloadSubmenuImages(slidesData);
@@ -302,9 +315,9 @@ $(document).ready(function(){
                 'LEDSignage': [
                     { name: '실내용', link: '/product/list.html?cate_no=29' },
                     // 카드 심사 - 상품 없는 카테고리 비활성화
-                    // { name: '실외용', link: '/product/list.html?cate_no=30' },
+                    { name: '실외용', link: '/product/list.html?cate_no=30' },
                     { name: '배너형 포스터', link: '/product/list.html?cate_no=31' },
-                    // { name: '특수형(비정형)', link: '/product/list.html?cate_no=43' }
+                    { name: '특수형(비정형)', link: '/product/list.html?cate_no=43' }
                 ],
                 'DigitalSignage': [
                     { name: '멀티비전', link: '/product/list.html?cate_no=32' },
@@ -316,16 +329,14 @@ $(document).ready(function(){
                     { name: '삼성 스탠드', link: '/product/list.html?cate_no=46' },
                     { name: '엘지 스탠드', link: '/product/list.html?cate_no=47' },
                     { name: '티비존 스탠드', link: '/product/list.html?cate_no=48' },
-                    // { name: '옥외형', link: '/product/list.html?cate_no=64' }
+                    { name: '옥외형', link: '/product/list.html?cate_no=64' },
                     { name: '전자액자', link: '/product/list.html?cate_no=45' }
                 ],
                 'Mounts': [
                     { name: '이동형 거치대', link: '/product/list.html?cate_no=49' },
                     { name: '멀티비전/메뉴보드용 거치대', link: '/product/list.html?cate_no=59' },
                     { name: '전동형 거치대', link: '/product/list.html?cate_no=61' },
-                    { name: '천정형 거치대', link: '/product/list.html?cate_no=60' },
-                    // 카드 심사 - 상품 없는 카테고리 비활성화
-                    // { name: '주문제작형 거치대', link: '/product/list.html?cate_no=62' },
+                    { name: '천정형 거치대', link: '/product/list.html?cate_no=60' }
                 ],
                 'Solutions': [
                     { name: 'T-CMS 원격제어 프로그램', link: '/product/list.html?cate_no=52' },
@@ -345,7 +356,7 @@ $(document).ready(function(){
             }
 
             // 메가메뉴 대상인지 확인
-            var megaMenus = ['LEDSignage', 'DigitalSignage', 'Kiosk&DID', 'Solutions'];
+            var megaMenus = ['LEDSignage', 'DigitalSignage', 'Kiosk&DID', 'Mounts', 'Solutions'];
             var isMegaMenu = $.inArray(categoryName, megaMenus) !== -1;
             currentMegaMenu = isMegaMenu ? categoryName : null;
 
