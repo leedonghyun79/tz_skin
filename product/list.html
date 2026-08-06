@@ -68,6 +68,11 @@
         color: #222;
         font-weight: 600;
     }
+
+    /* 개인결제창(cate_no=66) 상품 리스트 아이콘 숨김 */
+    body.cate-66 .icon__box {
+        display: none !important;
+    }
 </style>
 
 <script>
@@ -80,6 +85,11 @@
             if (matches) currentCateNo = matches[1];
         }
         if (!currentCateNo) return;
+
+        // cate_no가 66인 경우 body에 클래스 추가 (icon__box 숨김 처리용 등)
+        if (currentCateNo === '66') {
+            document.body.classList.add('cate-66');
+        }
 
         var currentTitle = document.querySelector('.titleArea h2');
         var categoryName = currentTitle ? currentTitle.innerText.trim() : '전체';

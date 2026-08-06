@@ -2,24 +2,27 @@
 .footer-wrap {
     overflow: hidden;
     word-break: keep-all;
-    box-sizing: border-box; /* width removed to prevent horizontal scroll */
+    box-sizing: border-box;
+    /* width removed to prevent horizontal scroll */
     padding: 20px 0 0;
     font-family: 'Noto Sans KR', sans-serif;
-    color: #555;
+    color: #666;
 }
 
 .footer-grid {
     display: flex;
-    gap: 40px; flex-wrap: wrap;
+    gap: 40px;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .footer-col-info {
-    flex: 1 1 45%; min-width: 300px;
+    flex: 1 1 45%;
+    min-width: 300px;
 }
 
 .footer-logo {
-    font-size: 22px;
+    font-size: 1.375rem;
     font-weight: 900;
     color: #111;
     margin-bottom: 25px;
@@ -34,19 +37,19 @@
 }
 
 .footer-wrap .utilMenu li a {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #333;
     font-weight: 500;
 }
 
 .footer-wrap .utilMenu li a strong {
-    font-weight: 700;
-    color: #111;
+    font-weight: 500;
+    color: #333;
 }
 
 .footer-wrap .address {
-    font-size: 12px;
-    color: #777;
+    font-size: 0.75rem;
+    color: #666;
     line-height: 1.7;
     margin-bottom: 25px;
     word-break: keep-all;
@@ -58,31 +61,33 @@
 }
 
 .footer-wrap .address a {
-    color: #777;
+    color: #666;
 }
 
 .footer-wrap .copyright {
-    font-size: 11px;
+    font-size: 0.6875rem;
     color: #999;
 }
 
 .footer-col-cs {
-    flex: 1 1 20%; min-width: 250px;
+    flex: 1 1 20%;
+    min-width: 250px;
 }
 
 .footer-col-extra {
-    flex: 1 1 20%; min-width: 200px;
+    flex: 1 1 20%;
+    min-width: 200px;
 }
 
 .footer-title {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 700;
     color: #111;
     margin-bottom: 12px;
 }
 
 .footer-phone {
-    font-size: 26px;
+    font-size: 2.25rem;
     font-weight: 700;
     color: #111;
     margin-bottom: 12px;
@@ -91,7 +96,7 @@
 }
 
 .cs-info {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #666;
     line-height: 1.6;
 }
@@ -103,7 +108,7 @@
 .cs-info li span {
     display: inline-block;
     width: 45px;
-    color: #888;
+    color: #666;
 }
 
 .cs-info a {
@@ -111,7 +116,7 @@
 }
 
 .operating-time {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #666;
     line-height: 1.6;
 }
@@ -123,9 +128,68 @@
 .footer-safe {
     margin-top: 50px;
     padding-top: 25px;
-    font-size: 12px;
-    color: #888;
+    font-size: 0.75rem;
+    color: #666;
     line-height: 1.5;
+}
+
+/* Toss Escrow Banner */
+.toss-escrow-banner {
+    margin-top: 30px;
+    border-top: 1px solid #eaecee;
+    padding-top: 15px;
+}
+
+.toss-escrow-banner .logo-area {
+    display: flex;
+    align-items: center;
+}
+
+.toss-escrow-banner .logo-area img {
+    margin-left: -18px;
+    width: 150px;
+}
+
+.toss-escrow-banner .logo-area span {
+    font-weight: 700;
+    color: #4e5968;
+    font-size: 0.9375rem;
+    letter-spacing: -0.5px;
+    margin-left: 2px;
+}
+
+.toss-escrow-banner .content-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.toss-escrow-banner .content-area p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #666;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+}
+
+.toss-escrow-banner .btn-verify {
+    display: inline-block;
+    border: 1px solid #d1d6db;
+    background-color: transparent;
+    color: #4e5968;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: -0.3px;
+    transition: background-color 0.2s ease;
+}
+
+.toss-escrow-banner .btn-verify:hover {
+    background-color: #f2f4f6;
 }
 
 /* Responsive adjustments */
@@ -134,8 +198,10 @@
         flex-direction: column;
         gap: 40px;
     }
-    .footer-col-info, .footer-col-cs, .footer-col-extra {
+
+    .footer-col-info,
+    .footer-col-cs,
+    .footer-col-extra {
         flex: 1;
     }
 }
-

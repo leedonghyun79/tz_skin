@@ -38,7 +38,12 @@
             <div class="footer-grid">
                 <!-- Col 1: Logo, Menu, Company Info -->
                 <div class="footer-col footer-col-info">
-                    <h2 class="footer-logo">{$mall_name}</h2>
+                    <h2 class="footer-logo">
+                        <a href="/"><img
+                                src="//ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/category/logo/footer_tvzone_logo.png"
+                                alt="{$mall_name}"
+                                style="margin-left: -3px;max-width: 280px; height: auto; display: block;" /></a>
+                    </h2>
                     <ul class="utilMenu">
                         <li><a href="/shopinfo/company.html">회사소개</a></li>
                         <li><a href="/member/agreement.html">이용약관</a></li>
@@ -59,7 +64,7 @@
 
                 <!-- Col 2: Customer Service -->
                 <div class="footer-col footer-col-cs">
-                    <h3 class="footer-title">구매상담</h3>
+                    <h3 class="footer-title">상담 문의</h3>
                     <p class="footer-phone">{$phone}</p>
                     <ul class="cs-info">
                         <li><span>이메일</span> <a href="mailto:{$email}">tvzone@tvzonemall.com</a></li>
@@ -68,8 +73,7 @@
 
                     <h3 class="footer-title" style="margin-top:25px;">교환 & 반품주소</h3>
                     <p class="cs-info">
-                        {$mall_zipcode} {$mall_addr1} {$mall_addr2}<br />
-                        {$company_name}
+                        {$mall_zipcode} {$mall_addr1} {$mall_addr2}
                     </p>
                 </div>
 
@@ -81,6 +85,29 @@
                         점심시간 : 12:00 ~ 13:00<br>
                         주말 및 공휴일은 휴무입니다.
                     </p>
+
+                    <!-- 토스페이먼츠 에스크로 배너 -->
+                    <div class="toss-escrow-banner">
+                        <div class="logo-area">
+                            <img src="https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/tosspayments.webp"
+                                alt="toss payments" />
+                            <span>매매보호(에스크로)서비스</span>
+                        </div>
+
+                        <div class="content-area">
+                            <p>
+                                고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에<br />
+                                가입한 토스페이먼츠의 구매안전서비스를 이용하실 수 있습니다.
+                            </p>
+
+                            <script language="javascript"
+                                src="https://pgweb.tosspayments.com/WEB_SERVER/js/escrowValid.js" defer></script>
+                            <a href="javascript:;" onclick="goValidEscrow('CF_tvzone04e92');" class="btn-verify">
+                                가입 사실 확인
+                            </a>
+                        </div>
+                    </div>
+
                     <!-- <p class="hosting"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/logo_cafe24.png"
                             alt="hosting by cafe24 심플렉스인터넷(주)" /></p> -->
                 </div>

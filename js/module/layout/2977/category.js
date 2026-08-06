@@ -4,6 +4,13 @@
  */
 
 $(document).ready(function(){
+    // 상단 네비게이션에서 '개인결제창' 메뉴 강제 숨김 처리
+    $('.navigation__category .position > ul > li').each(function() {
+        if ($(this).text().indexOf('개인결제창') !== -1) {
+            $(this).hide();
+        }
+    });
+
     var closeTimer = null;
     var currentSwiper = null;
     var currentMegaMenu = null;

@@ -1,0 +1,81 @@
+<!--@css(/layout/basic/css/slideMenu.css)-->
+<!--@js(/layout/basic/js/slide_menu.js)-->
+<aside id="aside" module="layout_slidePackage">
+    <p module="Layout_stateLogon" class="member"><a href="{$action_logout}">로그아웃</a><a href="/myshop/index.html">마이페이지</a></p>
+    <p module="Layout_stateLogoff" class="member"><a href="/member/login.html">로그인</a><a href="/member/agreement.html">회원가입</a><a href="/myshop/index.html">마이페이지</a></p>    
+    
+    <ul module="Layout_shoppingInfo" class="membership">
+        <li class="{$use_deposit|display}">{$deposit_name} : <a href="/myshop/deposits/historyList.html">{$deposit}</a></li>
+        <li class="{$use_mileage|display}">{$mileage_name} : <a href="/myshop/mileage/historyList.html">{$mileage}</a></li>
+        <li class="{$use_coupon_cnt|display}">쿠폰 : <a href="/myshop/coupon/coupon.html">{$coupon_cnt}</a></li>
+        <li class="like {$use_like_product_cnt|display}">{$like_prd_tag}</li>
+    </ul>
+
+    <div id="slideCateList" class="categoryCont">
+        <!--h2 class="selected">카테고리<button type="button" class="icoCategory">펼침</button></h2-->
+        <ul module="layout_category" class="categoryList">
+            <li id="cate{$cate_no}">
+                <a href="#none" class="cate" cate="{$param}">{$name|cut 25}</a>
+                <a href="{$link_product_list}" class="view">상품보기</a>
+                <button type="button" class="icoBookmark" id="icoBookmark">즐겨찾기 추가</button>
+            </li>
+            <li id="cate{$cate_no}">
+                <a href="#none" class="cate" cate="{$param}">{$name|cut 25}</a>
+                <a href="{$link_product_list}" class="view">상품보기</a>
+                <button type="button" class="icoBookmark" id="icoBookmark">즐겨찾기 추가</button>
+            </li>
+        </ul>
+        <!--콘텐츠 카테고리-->
+        <ul class="categoryList contPage" module="Layout_BoardInfo">
+            <li><a href="/shopinfo/company.html" class="cateBoard">브랜드 소개</a></li>
+            <li><a href="{$board_list_url}" class="cateBoard">{$board_name}</a></li>
+            <li><a href="{$board_list_url}" class="cateBoard">{$board_name}</a></li>
+        </ul>         
+        <div id="slideProjectList" module="layout_project">
+            <h2 class="selected">기획전<button type="button" class="icoCategory">펼침</button></h2>
+            <ul class="categoryList">
+                <li id="cate{$cate_no}">
+                    <a href="#none" class="cate" cate="{$param}">{$category_text|cut 25}</a>
+                </li>
+                <li id="cate{$cate_no}">
+                    <a href="#none" class="cate" cate="{$param}">{$category_text|cut 25}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="bookmarkCategory" id="bookmarkCategory">
+            <h2 class="selected">즐겨찾기<button type="button" class="icoCategory">펼침</button></h2>
+            <p class="bookmarkEmpty" id="bookmarkEmpty">자주쓰는 카테고리 우측에 <img src="//img.echosting.cafe24.com/skin/mobile_ko_KR/layout/ico_bookmark_star.png" alt="즐겨찾기"> 을 눌러주세요.<br>쉽게 카테고리를 이용할 수 있습니다.</p>
+            <div id="bookmartCateArea" class="bookmarkCategory"></div>
+        </div>
+        <div class="multishop" module="Layout_multishopList" id="slideMultishopList">
+            <h2 class="selected countryTitle">SHIP TO<button type="button" class="icoCategory">펼침</button></h2>
+            <ul module="Layout_multishopListmultioptionCountry" class="xans-element- xans-multishop xans-multishop-listitem">
+                <li>
+                    <a href="#none" class="countryLink"></a>
+                </li>
+            </ul>
+            <h2 class="selected languageTitle">LANGUAGE<button type="button" class="icoCategory">펼침</button></h2>
+            <ul module="Layout_multishopListmultioptionLanguage" class="xans-multishop xans-multishop-listitem">
+                <li>
+                    <a href="#none" class="languageLink">
+                        <img src="//img.cafe24.com/img/common/global/{$language_code}_53x36.png" width="27" height="18" alt=""><span class="name"> {$language_name}</span>
+                    </a>
+                </li>
+            </ul>
+            <h2 class="selected">{$translate_language}<button type="button" class="icoCategory">펼침</button></h2>
+            <ul module="multishop_listitem">
+                <li class="{$selected_class}">
+                    <a href="//{$shop_domain}/">
+                        <img src="//img.cafe24.com/img/common/global/{$language}_53x36.png" width="27" height="18" alt=""><span class="name"> {$shop_name}</span>
+                    </a>
+                </li>
+                <li class="{$selected_class}">
+                    <a href="//{$shop_domain}/">
+                        <img src="//img.cafe24.com/img/common/global/{$language}_53x36.png" width="27" height="18" alt=""><span class="name"> {$shop_name}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <a href="#none" class="btnClose"><img src="//ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/mobile/btn_close.png" width="13" alt="닫기"></a>
+</aside>
