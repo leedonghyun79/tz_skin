@@ -1,0 +1,333 @@
+{
+  "source": "https://www.tvzonemall.com/shop/list.php?ca_id=3010",
+  "category": "스탠드형/회전형 DID 상품리스트 (TZ 자체브랜드)",
+  "products": [
+    {
+      "model": "TZ-ST8500",
+      "name": "[TZ-ST8500] 견적문의 1599-0479/광고용 85인치 DID 모니터/키오스크/웰컴보드/스탠드DID 라운드형",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=84S02_86S02",
+      "list_price": null,
+      "sale_price": null,
+      "price_note": "전화문의(1599-0479)",
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "TZ-ST5500",
+      "name": "[TZ-ST5500] 광고용 55인치 DID 모니터/웰컴보드/키오스크/스탠드DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=55S02",
+      "list_price": 2990000,
+      "sale_price": 2299000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        { "label": "색상", "choices": [{ "name": "블랙", "price": 0 }, { "name": "실버", "price": 0 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "TZ-SW6500",
+      "name": "[TZ-SW6500] 광고용65인치 회전형 DID/키오스크/웰컴보드/DID모니터/스탠드DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=65SW08",
+      "list_price": 4715000,
+      "sale_price": 3993000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "TZ-ST9800",
+      "name": "[TZ-ST9800] 견적문의 1599-0479/광고용 98인치 DID 모니터/키오스크/웰컴보드/스탠드DID 라운드형",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=98S02",
+      "list_price": null,
+      "sale_price": null,
+      "price_note": "전화문의(1599-0479)",
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "TZ-ST7500",
+      "name": "[TZ-ST7500] 광고용 75인치 DID 모니터/웰컴보드/키오스크/스탠드DID 라운드형",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=75S02",
+      "list_price": 6776000,
+      "sale_price": 4851500,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 0 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비 문의", "price": 330000 }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "TZ-ST6500",
+      "name": "[TZ-ST6500] 광고용 65인치 DID 모니터/웰컴보드/키오스크/스탠드DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=65S02",
+      "list_price": 4025000,
+      "sale_price": 3267000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        },
+        { "label": "로고", "choices": [{ "name": "로고부착", "price": 55000 }] }
+      ]
+    },
+    {
+      "model": "TZ-SW5500",
+      "name": "[TZ-SW5500] 광고용55인치 회전형 DID/키오스크/웰컴보드/DID모니터/스탠드DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=55SW08",
+      "list_price": 3795000,
+      "sale_price": 2904000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "TZ-ST4300",
+      "name": "[TZ-ST4300] 광고용 43인치 DID 모니터/웰컴보드/키오스크/스탠드DID 라운드형",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=43S02",
+      "list_price": 2070000,
+      "sale_price": 1815000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "TZ-SW4900",
+      "name": "[TZ-SW4900] 광고용 49인치 회전형 DID/키오스크/웰컴보드/모니터",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1492593779",
+      "list_price": 2860000,
+      "sale_price": 2420000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        },
+        { "label": "터치", "choices": [{ "name": "정전압식 터치", "price": 600000 }] }
+      ]
+    },
+    {
+      "model": "TZ-ST4900",
+      "name": "[TZ-ST4900] 광고용 49인치 DID 모니터/웰컴보드/키오스크/스탠드DID 라운드형",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=49S02",
+      "list_price": 2415000,
+      "sale_price": 1936000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": null },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "TZ-SW4300",
+      "name": "[TZ-SW4300] 광고용 43인치 회전형 DID/키오스크/웰컴보드/모니터",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=43S08",
+      "list_price": 2645000,
+      "sale_price": 2178000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "AT-안드로이드프리미엄타입", "price": 880000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 },
+            { "name": "PT-PC프리미엄타입", "price": 1430000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        { "label": "솔루션프로그램추가", "choices": [{ "name": "안드로이드/PC 타입 T-CMS 3년", "price": 330000 }] },
+        { "label": "스피커 추가", "choices": [{ "name": "추가함", "price": 55000 }] },
+        { "label": "이동형 바퀴", "choices": [{ "name": "부착함", "price": 44000 }] },
+        {
+          "label": "설치비",
+          "choices": [
+            { "name": "지역/도서산간 차등설치(비용문의)", "price": 0 },
+            { "name": "직접설치함", "price": 0 },
+            { "name": "설치/교육비", "price": 330000 }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "43ST02",
+      "name": "[화이트43ST02] 광고용43인치 DID 모니터/키오스크/스탠드DID 라운드형",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=43ST02event",
+      "list_price": 2830000,
+      "sale_price": 880000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "USB 미디어타입", "price": 0 }
+          ]
+        }
+      ],
+      "additional_options": []
+    }
+  ]
+}

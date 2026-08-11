@@ -1,0 +1,63 @@
+{
+  "source_pages": [
+    "https://www.tvzonemall.com/shop/list.php?ca_id=2050"
+  ],
+  "category": "거치대마운트_전동형거치대",
+  "note": "거치대마운트_전동형거치대.csv 에 있는 5개 상품만 매칭하여 수집 (해당 카테고리 전체 상품이 아님)",
+  "products": [
+    {
+      "model": "5EMS-BS",
+      "name": "[5EMS-BS]86\"~120\" 전동형 스탠드 거치대/국내제작! 티비존 신제품!",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=EMS-BS",
+      "list_price": null,
+      "sale_price": 1950000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "5EMS-1W",
+      "name": "[5EMS-1W]86\"~98\" 전동형 스탠드 거치대/국내제작! 티비존 신제품!",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1615949395",
+      "list_price": null,
+      "sale_price": 1350000,
+      "select_options": [
+        { "label": "색상", "choices": [{ "name": "블랙", "price": 0 }, { "name": "실버", "price": 0 }] }
+      ],
+      "additional_options": [
+        { "label": "유리선반", "choices": [{ "name": "추가함", "price": 50000 }] },
+        { "label": "카메라선반", "choices": [{ "name": "추가함", "price": 30000 }] }
+      ]
+    },
+    {
+      "model": "YK 010",
+      "name": "[YK 010]무선 리모콘 전동식 스탠드형 티비TV거치대/전동 이동식거치대",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1493099141",
+      "list_price": null,
+      "sale_price": 500000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "1EHD-100",
+      "name": "[1EHD-100]스위치 자동높이조절 거치대(대형전자칠판), 전동형 이동형 스탠드/스위치로 위아래 조정가능",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=EHD-100",
+      "list_price": null,
+      "sale_price": 1550000,
+      "select_options": [
+        { "label": "베사 확장", "choices": [{ "name": "선택안함", "price": 0 }, { "name": "가로베사 1000mm 이상일 경우 선택", "price": 20000 }] }
+      ],
+      "additional_options": [
+        { "label": "로고이미지", "choices": [{ "name": "선택안함", "price": 0 }, { "name": "로고 이미지추가", "price": 50000 }] }
+      ]
+    },
+    {
+      "model": "5A80",
+      "name": "[5A80]75\"~120\" 전동형 이동식 스탠드 tv/전자칠판 거치대 특대형 국내제작",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5A80",
+      "list_price": null,
+      "sale_price": 1150000,
+      "select_options": [],
+      "additional_options": []
+    }
+  ]
+}

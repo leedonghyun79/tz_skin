@@ -1,51 +1,194 @@
-<footer module="layout_footerPackage">
-    <!--@css(/css/module/layout/footerPackage.css)-->
-    <div class="footerMenu">
-        <ul class="policy">
-            <li><a href="/shopinfo/company.html">회사소개</a></li>
-            <li><a href="/member/privacy.html">개인정보처리방침</a></li>
-            <li><a href="/member/mall_agreement.html">이용약관</a></li>    
-            <li><a href="/shopinfo/guide.html">이용안내</a></li> 
-            <li><a href="#none" onclick="javascript:isPCver();">PC버전</a></li> 
-        </ul>
-    </div>
-    <address module="Layout_footer">
-        <div class="footerInfo">
-            <dl>
-                <dt>법인명(상호)</dt>
-                <dd>{$company_name}</dd>
-            </dl>
-            <dl>
-                <dt>대표자(성명)</dt>
-                <dd><a href="mailto:{$email}">{$president_name}</a></dd>
-            </dl>
-            <dl>
-                <dt>전화</dt>
-                <dd><a href="tel:{$phone}">{$phone}</a></dd>
-            </dl>
-            <dl>
-                <dt>주소</dt>
-                <dd>{$mall_addr1}<br>{$mall_addr2}</dd>
-            </dl>
-            <dl>
-                <dt>사업자등록번호</dt>
-                <dd>{$company_regno}</dd>
-            </dl>
-            <dl>
-                <dt>통신판매업신고</dt>
-                <dd>{$network_regno}</dd>
-            </dl>
-            <dl class="{$cpo_email|display}">
-                <dt>개인정보관리책임</dt>
-                <dd><a href="mailto:{$cpo_email}">{$cpo_name}</a></dd>
-            </dl>
-            <dl>
-                <dt>호스팅제공</dt>
-                <dd>카페24(주)</dd>
-            </dl>
+<footer id="footer" module="layout_footerPackage">
+    <style>
+        #footer {
+            background: #f8f9fa;
+            padding: 40px 20px;
+            color: #555;
+            font-size: 13px;
+        }
+
+        .footer-mobile-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .footer-logo img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 25px;
+        }
+
+        .utilMenu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .utilMenu a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .utilMenu strong {
+            font-weight: 700;
+        }
+
+        .footer-info-text {
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 15px;
+            word-break: keep-all;
+        }
+
+        .footer-info-text span {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .footer-copyright {
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 0;
+        }
+
+        .footer-section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .footer-cs-phone {
+            font-size: 26px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-cs-list {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .footer-cs-list span {
+            display: inline-block;
+            width: 50px;
+            color: #888;
+        }
+
+        .toss-escrow-banner {
+            margin-top: 10px;
+        }
+
+        .toss-escrow-banner .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .toss-escrow-banner .logo-area img {
+            margin-left: -15px;
+            height: 40px;
+        }
+
+        .toss-escrow-banner .logo-area span {
+            font-weight: 700;
+            color: #111;
+            font-size: 13px;
+        }
+
+        .toss-escrow-banner .content-area p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            word-break: keep-all;
+        }
+
+        .toss-escrow-banner .btn-verify {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #333;
+            font-size: 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+
+    <div class="footer-mobile-wrap" module="Layout_footer">
+        <!-- 1. 로고 및 기본 정보 -->
+        <div class="footer-col">
+            <div class="footer-logo">
+                <a href="/"><img
+                        src="//ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/category/logo/footer_tvzone_logo.png"
+                        alt="{$mall_name}" /></a>
+            </div>
+            <ul class="utilMenu">
+                <li><a href="/shopinfo/company.html">회사소개</a></li>
+                <li><a href="/member/agreement.html">이용약관</a></li>
+                <li><a href="/member/privacy.html"><strong>개인정보 취급방침</strong></a></li>
+                <li><a href="/shopinfo/guide.html">이용안내</a></li>
+            </ul>
+            <p class="footer-info-text">
+                법인명(상호) : {$company_name}<br>
+                주소 : {$mall_zipcode} {$mall_addr1} {$mall_addr2}<br>
+                대표자(성명) : {$president_name} &nbsp; 전화 : {$phone}<br>
+                개인정보관리책임자 : <a href="mailto:{$cpo_email}">{$cpo_name}({$cpo_email})</a><br>
+                사업자등록번호 : {$company_regno}<br>
+                통신판매업신고 : {$network_regno} [{$biz_no_link}]
+            </p>
         </div>
-    </address>
-    <p class="copyright">Copyright&copy; 2014 CoverStory. All Rights Reserved.</p>
+
+        <!-- 2. 고객센터 & 운영시간 -->
+        <div class="footer-col">
+            <h3 class="footer-section-title">상담 문의</h3>
+            <p class="footer-cs-phone">{$phone}</p>
+            <div class="footer-cs-list">
+                <p><span>이메일</span> <a href="mailto:{$email}">tvzone@tvzonemall.com</a></p>
+                <p><span>팩스</span> {$fax}</p>
+            </div>
+
+            <h3 class="footer-section-title" style="margin-top: 25px;">운영시간</h3>
+            <p class="footer-cs-list">
+                평일 : 10:00 ~ 18:00<br>
+                점심시간 : 12:00 ~ 13:00<br>
+                주말 및 공휴일은 휴무입니다.
+            </p>
+
+            <h3 class="footer-section-title" style="margin-top: 25px;">교환 & 반품주소</h3>
+            <p class="footer-cs-list">
+                {$mall_zipcode} {$mall_addr1} {$mall_addr2}
+            </p>
+        </div>
+
+        <!-- 3. 에스크로 -->
+        <div class="footer-col">
+            <div class="toss-escrow-banner">
+                <div class="logo-area">
+                    <img src="https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/tosspayments.webp"
+                        alt="toss payments" />
+                    <span>매매보호(에스크로)서비스</span>
+                </div>
+                <div class="content-area">
+                    <p>고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에 가입한 토스페이먼츠의 구매안전서비스를 이용하실 수 있습니다.</p>
+                    <script language="javascript" src="https://pgweb.tosspayments.com/WEB_SERVER/js/escrowValid.js"
+                        defer></script>
+                    <a href="javascript:;" onclick="goValidEscrow('CF_tvzone04e92');" class="btn-verify">가입 사실 확인</a>
+                </div>
+            </div>
+        </div>
+        
+        <p class="footer-copyright">Copyright &copy; 2026 <strong>{$mall_name}</strong>. All rights reserved.</p>
+    </div>
 </footer>
 <div id="progressPaybar" style="display:none;">
     <div id="progressPaybarBackground" class="layerProgress"></div>
@@ -67,14 +210,14 @@
         <p class="desc">PLEASE SELECT THE DESTINATION COUNTRY AND LANGUAGE :</p>
         <div class="select">
             <select module="Layout_multishopShippingCountrylist">
-                <option value="{$country_code}"{$country_default_selected}>SHIPPING TO : {$country_name}</option>
-                <option value="{$country_code}"{$country_default_selected}>SHIPPING TO : {$country_name}</option>
+                <option value="{$country_code}" {$country_default_selected}>SHIPPING TO : {$country_name}</option>
+                <option value="{$country_code}" {$country_default_selected}>SHIPPING TO : {$country_name}</option>
             </select>
         </div>
         <div class="select">
             <select module="Layout_multishopShippingLanguagelist">
-                <option value="{$shop_domain}"{$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
-                <option value="{$shop_domain}"{$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
+                <option value="{$shop_domain}" {$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
+                <option value="{$shop_domain}" {$shop_default_selected}>LANGUAGE : {$shop_language_name}</option>
             </select>
         </div>
     </div>
@@ -82,9 +225,6 @@
         <a href="#none" class="btnSubmit">GO</a>
     </div>
     <a href="#none" class="btnClose">닫기</a>
-</div>
-<div class="btnTop" id="btnTop">
-    <a href="#">맨위로</a>
 </div>
 <div module="mobilequick_display">
     {$quick_link}

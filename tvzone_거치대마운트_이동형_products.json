@@ -1,0 +1,317 @@
+{
+  "source_pages": [
+    "https://www.tvzonemall.com/shop/list.php?ca_id=2030",
+    "https://www.tvzonemall.com/shop/list.php?ca_id=2030&sort=&sortodr=&page=2",
+    "https://www.tvzonemall.com/shop/list.php?ca_id=2030&sort=&sortodr=&page=3"
+  ],
+  "category": "거치대마운트_이동형",
+  "note": "거치대마운트_이동형.csv 에 있는 27개 상품만 매칭하여 수집 (해당 카테고리 전체 상품이 아님)",
+  "products": [
+    {
+      "model": "5MPS-BW",
+      "name": "[5MPS-BW]스탠드형 모니터 거치대 86~120인치 완제품 배송 TV 모니터 호환",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=MPS-BW",
+      "list_price": null,
+      "sale_price": 1650000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "5MPS-44",
+      "name": "[5MPS-44 멀티형] 멀티모니터 이동형 스탠드 거치대",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5PMS-44",
+      "list_price": null,
+      "sale_price": 1300000,
+      "select_options": [
+        { "label": "색상", "choices": [{ "name": "실버", "price": 0 }, { "name": "블랙", "price": 0 }] }
+      ],
+      "additional_options": [
+        { "label": "카메라선반", "choices": [{ "name": "추가안함", "price": 0 }, { "name": "카메라선반", "price": 30000 }] },
+        { "label": "유리선반", "choices": [{ "name": "추가안함", "price": 0 }, { "name": "유리선반", "price": 50000 }] },
+        { "label": "로고추가", "choices": [{ "name": "추가안함", "price": 0 }, { "name": "로고추가", "price": 50000 }] }
+      ]
+    },
+    {
+      "model": "5MPS-22 가로2단",
+      "name": "[5MPS-22가로2단형] 가로2단 멀티형 이동형 스탠드형 모니터 거치대 42~65인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MPS-22",
+      "list_price": null,
+      "sale_price": 830000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "5MPS-1",
+      "name": "[5MPS-1]스탠드형 모니터 거치대 65~90인치 모든 TV 모니터 호환",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MPS-1",
+      "list_price": null,
+      "sale_price": 670000,
+      "select_options": [
+        { "label": "색상", "choices": [{ "name": "실버", "price": 0 }, { "name": "블랙", "price": 0 }] }
+      ],
+      "additional_options": [
+        { "label": "유리선반", "choices": [{ "name": "유리선반 추가함", "price": 50000 }] },
+        { "label": "카메라선반", "choices": [{ "name": "카메라선반 추가함", "price": 30000 }] }
+      ]
+    },
+    {
+      "model": "5EMS-1",
+      "name": "[5EMS-1]대형모니터 전자칠판 전동식 이동형 스탠드 거치대/국내제작! 티비존 신제품!",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5EMS-1",
+      "list_price": null,
+      "sale_price": 1250000,
+      "select_options": [
+        { "label": "기둥컬러", "choices": [{ "name": "실버", "price": 0 }, { "name": "블랙", "price": 0 }] }
+      ],
+      "additional_options": [
+        { "label": "유리선반", "choices": [{ "name": "추가함", "price": 50000 }] },
+        { "label": "카메라선반", "choices": [{ "name": "추가함", "price": 30000 }] },
+        { "label": "로고추가", "choices": [{ "name": "추가함", "price": 50000 }] }
+      ]
+    },
+    {
+      "model": "1ELS-4W",
+      "name": "[1ELS-4W] 대형TV전자칠판 거치대 이동형 스탠드 거치대",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1ELS-4W",
+      "list_price": null,
+      "sale_price": 750000,
+      "select_options": [],
+      "additional_options": [
+        { "label": "로고(시안)작업", "choices": [{ "name": "제작의뢰", "price": 50000 }] },
+        { "label": "로고(LED)작업", "choices": [{ "name": "제작의뢰", "price": 550000 }] },
+        { "label": "선반대옵션", "choices": [{ "name": "유리선반 추가", "price": 50000 }] },
+        { "label": "카메라선반", "choices": [{ "name": "선택안함", "price": 0 }, { "name": "카메라선반추가", "price": 30000 }] }
+      ]
+    },
+    {
+      "model": "5MPS-2",
+      "name": "[5MPS-2]스탠드형 모니터 거치대 42~65인치 모든 TV 모니터 호환",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MPS-2",
+      "list_price": null,
+      "sale_price": 550000,
+      "select_options": [
+        { "label": "색상", "choices": [{ "name": "실버", "price": 0 }, { "name": "블랙", "price": 0 }] }
+      ],
+      "additional_options": [
+        { "label": "유리선반", "choices": [{ "name": "유리선반 추가함", "price": 50000 }] }
+      ]
+    },
+    {
+      "model": "3EZ-AMSC-220",
+      "name": "[3EZ-AMSC-220]멀티모니터 이동형 스탠드 거치대/워크스페이스 카트(모니터4대)",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=3EZ-AMSC-220",
+      "list_price": null,
+      "sale_price": 454000,
+      "select_options": [],
+      "additional_options": [
+        { "label": "카메라트레이", "choices": [{ "name": "카메라트레이 추가(AMTC/AMSC용)", "price": 38000 }] },
+        { "label": "키보드트레이 or 선반", "choices": [{ "name": "키보드트레이 추가(AMTC/AMSC용)", "price": 113000 }, { "name": "선반 추가(AMTC/AMSC용)", "price": 76000 }] },
+        { "label": "CPU홀더", "choices": [{ "name": "CPU홀더 추가(AMTC/AMSC용)", "price": 48000 }] }
+      ]
+    },
+    {
+      "model": "3EZ-AMSC-210",
+      "name": "[3EZ-AMSC-210]멀티 모니터 이동형 스탠드 거치대/워크스페이스 카트",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=3EZ-AMSC-210",
+      "list_price": null,
+      "sale_price": 391000,
+      "select_options": [],
+      "additional_options": [
+        { "label": "카메라트레이", "choices": [{ "name": "카메라트레이 추가(AMTC/AMSC용)", "price": 38000 }] },
+        { "label": "키보드트레이 or 선반", "choices": [{ "name": "키보드트레이 추가(AMTC/AMSC용)", "price": 113000 }, { "name": "선반 추가(AMTC/AMSC용)", "price": 76000 }] },
+        { "label": "CPU홀더", "choices": [{ "name": "CPU홀더 추가(AMTC/AMSC용)", "price": 48000 }] }
+      ]
+    },
+    {
+      "model": "3EZ-AMSC-200",
+      "name": "[3EZ-AMSC-200]듀얼 모니터 이동형 스탠드 거치대/워크스페이스 카트",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=3EZ-AMSC-200",
+      "list_price": null,
+      "sale_price": 378000,
+      "select_options": [],
+      "additional_options": [
+        { "label": "카메라트레이", "choices": [{ "name": "카메라트레이 추가(AMTC/AMSC용)", "price": 38000 }] },
+        { "label": "키보드트레이", "choices": [{ "name": "키보드트레이 추가(AMTC/AMSC용)", "price": 113000 }] },
+        { "label": "CPU홀더", "choices": [{ "name": "CPU홀더 추가(AMTC/AMSC용)", "price": 48000 }] },
+        { "label": "선반", "choices": [{ "name": "선반 추가(AMTC/AMSC용)", "price": 76000 }] }
+      ]
+    },
+    {
+      "model": "3EZ-AMSC-110",
+      "name": "[3EZ-AMSC-110]듀얼 모니터 이동형 스탠드 거치대/워크스페이스 카트",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=3EZ-AMSC-110",
+      "list_price": null,
+      "sale_price": 340000,
+      "select_options": [],
+      "additional_options": [
+        { "label": "카메라트레이", "choices": [{ "name": "카메라트레이 추가(AMTC/AMSC용)", "price": 38000 }] },
+        { "label": "키보드트레이 or 선반", "choices": [{ "name": "키보드트레이 추가(AMTC/AMSC용)", "price": 113000 }, { "name": "선반 추가(AMTC/AMSC용)", "price": 76000 }] },
+        { "label": "CPU홀더", "choices": [{ "name": "CPU홀더 추가(AMTC/AMSC용)", "price": 48000 }] }
+      ]
+    },
+    {
+      "model": "3EZ-AMSC-100",
+      "name": "[3EZ-AMSC-100]모니터 이동형 스탠드/워크스페이스 카트",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=3EZ-AMSC-100",
+      "list_price": null,
+      "sale_price": 328000,
+      "select_options": [],
+      "additional_options": [
+        { "label": "카메라트레이", "choices": [{ "name": "카메라트레이 추가(AMTC/AMSC용)", "price": 38000 }] },
+        { "label": "키보드트레이", "choices": [{ "name": "키보드트레이 추가(AMTC/AMSC용)", "price": 113000 }] },
+        { "label": "CPU홀더", "choices": [{ "name": "CPU홀더 추가(AMTC/AMSC용)", "price": 48000 }] },
+        { "label": "선반", "choices": [{ "name": "선반 추가(AMTC/AMSC용)", "price": 76000 }] }
+      ]
+    },
+    {
+      "model": "5MPS-22 세로2단",
+      "name": "[5MPS-22 세로2단] 세로2단 듀얼형 이동형 스탠드형 모니터 거치대 42~65인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MPS-22_H",
+      "list_price": null,
+      "sale_price": 830000,
+      "select_options": [
+        { "label": "색상", "choices": [{ "name": "블랙", "price": 0 }, { "name": "실버", "price": 0 }] }
+      ],
+      "additional_options": [
+        { "label": "로고", "choices": [{ "name": "로고추가", "price": 50000 }] }
+      ]
+    },
+    {
+      "model": "1AS-9W",
+      "name": "[1AS-9W] 이동형 스탠드형 모니터 거치대 70~100인치 모든 TV 모니터 호환",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1AS-9W",
+      "list_price": null,
+      "sale_price": 450000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "2PAS-1200",
+      "name": "[2PAS-1200] TV장식장,거실장,벽걸이스탠드,거치대,전제품 설치가능",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=PAS-1400",
+      "list_price": null,
+      "sale_price": 550000,
+      "select_options": [],
+      "additional_options": [
+        { "label": "TV상단선분", "choices": [{ "name": "TV상단선분(셋탑및화상카메라)", "price": 50000 }] },
+        { "label": "선반", "choices": [{ "name": "강화유리선반으로교체", "price": 40000 }] }
+      ]
+    },
+    {
+      "model": "3EZ-MTC-110",
+      "name": "[3EZ-MTC-110] 듀얼모니터 이동형 스탠드 모니터 거치대30~65인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=3EZ-MTC-110",
+      "list_price": null,
+      "sale_price": 227000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "3EZ-MTC-6040C",
+      "name": "[3EZ-MTC-6040C]이동형 스탠드 거치대 30~72인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=3EZ-MTC-6040C",
+      "list_price": null,
+      "sale_price": 126000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "1ELS-1W",
+      "name": "전자칠판[1ELS-1W] 55~84인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=ELS-1W",
+      "list_price": null,
+      "sale_price": 730000,
+      "select_options": [
+        { "label": "색상선택", "choices": [{ "name": "블랙", "price": 0 }, { "name": "실버", "price": 0, "note": "품절" }] }
+      ],
+      "additional_options": [
+        { "label": "로고[시안]작업", "choices": [{ "name": "선택안함", "price": 0 }, { "name": "제작의뢰", "price": 50000 }] },
+        { "label": "선반대옵션", "choices": [{ "name": "선택안함", "price": 0 }, { "name": "유리선반", "price": 50000 }] },
+        { "label": "카메라선반", "choices": [{ "name": "선택안함", "price": 0 }, { "name": "카메라선반", "price": 30000 }] }
+      ]
+    },
+    {
+      "model": "5MPS-33 멀티형",
+      "name": "[5MPS-33 멀티형] 멀티모니터 이동형 스탠드 거치대",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MPS-33",
+      "list_price": null,
+      "sale_price": 1000000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "5MPS-22-75 가로2단 75인치전용",
+      "name": "[5MPS-22 75인치 전용] 가로2단 멀티형 이동형 스탠드형 모니터 거치대75인치 전용",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MPS-22-75",
+      "list_price": null,
+      "sale_price": 930000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "5MPS-1500",
+      "name": "[5MPS-1500] 이동형 TV거치대 40~65인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MPS-1500",
+      "list_price": null,
+      "sale_price": 75000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "4TTL-600B",
+      "name": "[4TTL-600B]대형모니터 수용 가능한 모던하고 심플한 이동형 스탠드",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=4TTL-600B",
+      "list_price": null,
+      "sale_price": 445000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "4RMS-550",
+      "name": "[4RMS-550] 모니터 이동형스탠드 거치대 피벗 가로세로 40-55인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1636682324",
+      "list_price": null,
+      "sale_price": 265000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "4FN-05G",
+      "name": "[4FN-05G] 북유럽풍 49~70인치 이젤형 TV스텐드 그레이&월넛 색상",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1619505601",
+      "list_price": null,
+      "sale_price": 118000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "5ME-64",
+      "name": "[5ME-64] 이젤형 티비 거치대 아트 스탠드 받침대 이젤 40-65인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1616984013",
+      "list_price": null,
+      "sale_price": 94000,
+      "select_options": [
+        { "label": "색상", "choices": [{ "name": "블랙", "price": 0 }, { "name": "화이트", "price": 5000 }] }
+      ],
+      "additional_options": []
+    },
+    {
+      "model": "5ME-65W",
+      "name": "[5ME-65W] 이젤형스탠드거치대 아트 티비 받침대 삼성 LG TV 40-65인치",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=1633069628",
+      "list_price": null,
+      "sale_price": 120000,
+      "select_options": [],
+      "additional_options": []
+    },
+    {
+      "model": "5MS-190",
+      "name": "[5MS-190]스탠드형 모니터 거치대 55~90인치 모든 TV 모니터 호환",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=5MS-190",
+      "list_price": null,
+      "sale_price": 199000,
+      "select_options": [],
+      "additional_options": []
+    }
+  ]
+}

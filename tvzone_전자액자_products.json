@@ -1,0 +1,240 @@
+{
+  "source": "https://www.tvzonemall.com/shop/list.php?ca_id=3030",
+  "category": "전자액자 디지털사이니지 (TZ-PW 시리즈)",
+  "products": [
+    {
+      "model": "TZ-PW6500",
+      "name": "TZ-PW6500 65인치 전자액자 디지털사이니지 USB or 안드로이드 광고용모니터DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=PW6500",
+      "list_price": 2830000,
+      "sale_price": 2400000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 330000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 990000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        {
+          "label": "솔루션프로그램추가",
+          "choices": [
+            { "name": "USB미디어타입솔루션", "price": 0 },
+            { "name": "(안드로이드타입/PC)타입 솔루션(T-CMS)문의1599-0479", "price": 500000 }
+          ]
+        },
+        {
+          "label": "브라켓추가_65",
+          "choices": [
+            { "name": "벽걸이형 브라켓", "price": 55000 },
+            { "name": "천정형 브라켓", "price": 165000 }
+          ]
+        },
+        {
+          "label": "설치비-65",
+          "choices": [
+            { "name": "직접설치", "price": 0 },
+            { "name": "벽걸이 설치", "price": 88000 },
+            { "name": "천정형 설치", "price": 165000 }
+          ]
+        },
+        {
+          "label": "천정형 봉길이추가",
+          "choices": [
+            { "name": "겉봉1000mm", "price": 20000 },
+            { "name": "겉봉1500mm", "price": 25000 },
+            { "name": "겉봉2000mm", "price": 30000 },
+            { "name": "연결봉1000mm", "price": 20000 },
+            { "name": "연결봉1500mm", "price": 25000 },
+            { "name": "연결봉2000mm", "price": 30000 }
+          ]
+        },
+        { "label": "스피커", "choices": [{ "name": "추가함", "price": 33000 }] },
+        { "label": "출장교육비", "choices": [{ "name": "출장교육비", "price": 99000 }] },
+        { "label": "터치", "choices": [{ "name": "정전압식 터치", "price": 770000 }] }
+      ]
+    },
+    {
+      "model": "TZ-PW5500",
+      "name": "TZ-PW5500 55인치 전자액자 디지털사이니지 USB or 안드로이드 광고용모니터DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=SM-55TW00",
+      "list_price": 2530000,
+      "sale_price": 1960200,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 330000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 990000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        {
+          "label": "솔루션프로그램추가",
+          "choices": [
+            { "name": "USB미디어타입솔루션", "price": 0 },
+            { "name": "(안드로이드타입/PC)타입 솔루션(T-CMS)문의1599-0479", "price": 500000 }
+          ]
+        },
+        {
+          "label": "브라켓추가_55",
+          "choices": [
+            { "name": "벽걸이형 브라켓", "price": 55000 },
+            { "name": "천정형 브라켓", "price": 165000 }
+          ]
+        },
+        {
+          "label": "설치비-55",
+          "choices": [
+            { "name": "직접설치", "price": 0 },
+            { "name": "벽걸이 설치", "price": 88000 },
+            { "name": "천정형 설치", "price": 165000 }
+          ]
+        },
+        {
+          "label": "천정형 봉길이추가",
+          "choices": [
+            { "name": "겉봉1000mm", "price": 20000 },
+            { "name": "겉봉1500mm", "price": 25000 },
+            { "name": "겉봉2000mm", "price": 30000 },
+            { "name": "연결봉1000mm", "price": 20000 },
+            { "name": "연결봉1500mm", "price": 25000 },
+            { "name": "연결봉2000mm", "price": 30000 }
+          ]
+        },
+        { "label": "스피커", "choices": [{ "name": "추가함", "price": 33000 }] },
+        { "label": "출장교육비", "choices": [{ "name": "출장교육비", "price": 99000 }] },
+        { "label": "터치", "choices": [{ "name": "정전압식 터치", "price": 600000 }] }
+      ]
+    },
+    {
+      "model": "TZ-PW4300",
+      "name": "TZ-PW4300 43인치 전자액자 디지털사이니지 USB or 안드로이드 광고용모니터DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=SM-43TW00",
+      "list_price": 1980000,
+      "sale_price": 1452000,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "MN-USB 미디어타입", "price": 165000 },
+            { "name": "AN-안드로이드타입", "price": 220000 },
+            { "name": "PN-PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        {
+          "label": "솔루션프로그램추가",
+          "choices": [
+            { "name": "USB미디어타입솔루션", "price": 0 },
+            { "name": "(안드로이드타입/PC)타입 솔루션(T-CMS)", "price": 330000 }
+          ]
+        },
+        {
+          "label": "브라켓추가_43",
+          "choices": [
+            { "name": "벽걸이형 브라켓", "price": 55000 },
+            { "name": "천정형 브라켓", "price": 110000 }
+          ]
+        },
+        {
+          "label": "설치비-43",
+          "choices": [
+            { "name": "직접설치", "price": 0 },
+            { "name": "벽걸이 설치", "price": 88000 },
+            { "name": "천정형 설치", "price": 165000 }
+          ]
+        },
+        {
+          "label": "천정형 봉길이추가",
+          "choices": [
+            { "name": "겉봉1000mm", "price": 20000 },
+            { "name": "겉봉1500mm", "price": 25000 },
+            { "name": "겉봉2000mm", "price": 30000 },
+            { "name": "연결봉1000mm", "price": 20000 },
+            { "name": "연결봉1500mm", "price": 25000 },
+            { "name": "연결봉2000mm", "price": 30000 }
+          ]
+        },
+        { "label": "스피커", "choices": [{ "name": "추가함", "price": 33000 }] },
+        { "label": "출장교육비", "choices": [{ "name": "출장교육비", "price": 99000 }] },
+        { "label": "터치", "choices": [{ "name": "정전압식 터치", "price": 500000 }] }
+      ]
+    },
+    {
+      "model": "TZ-PW3200",
+      "name": "TZ-PW3200 32인치 전자액자 디지털사이니지 USB or 안드로이드 광고용모니터DID",
+      "url": "https://www.tvzonemall.com/shop/item.php?it_id=SM-32TW00",
+      "list_price": 1650000,
+      "sale_price": 1149500,
+      "select_options": [
+        {
+          "label": "DID전용 SetTop Box",
+          "choices": [
+            { "name": "USB 미디어타입", "price": 165000 },
+            { "name": "안드로이드타입", "price": 220000 },
+            { "name": "PC타입(i5/RAM4G/SSD128/OS포함)", "price": 770000 }
+          ]
+        }
+      ],
+      "additional_options": [
+        {
+          "label": "솔루션프로그램추가",
+          "choices": [
+            { "name": "USB미디어타입 솔루션", "price": 0 },
+            { "name": "(안드로이드/PC타입)타입솔루션(T-CMS)문의1599-0479", "price": 0 }
+          ]
+        },
+        {
+          "label": "브라켓추가_32",
+          "choices": [
+            { "name": "선택안함", "price": 0 },
+            { "name": "벽걸이형 브라켓", "price": 55000 },
+            { "name": "천정형 브라켓", "price": 110000 }
+          ]
+        },
+        {
+          "label": "설치비-32",
+          "choices": [
+            { "name": "직접설치", "price": 0 },
+            { "name": "벽걸이 설치", "price": 88000 },
+            { "name": "천정형 설치", "price": 165000 }
+          ]
+        },
+        {
+          "label": "천정형 봉길이추가",
+          "choices": [
+            { "name": "추가안함", "price": 0 },
+            { "name": "겉봉1000mm", "price": 20000 },
+            { "name": "겉봉1500mm", "price": 25000 },
+            { "name": "겉봉2000mm", "price": 30000 },
+            { "name": "연결봉1000mm", "price": 20000 },
+            { "name": "연결봉1500mm", "price": 25000 },
+            { "name": "연결봉2000mm", "price": 30000 }
+          ]
+        },
+        {
+          "label": "스피커",
+          "choices": [
+            { "name": "추가안함", "price": 0 },
+            { "name": "추가함", "price": 33000 }
+          ]
+        },
+        {
+          "label": "출장교육비",
+          "choices": [
+            { "name": "선택안함", "price": 0 },
+            { "name": "출장교육비", "price": 99000 }
+          ]
+        },
+        { "label": "터치", "choices": [{ "name": "정전압식 터치 문의1599-0479", "price": 0 }] }
+      ]
+    }
+  ]
+}

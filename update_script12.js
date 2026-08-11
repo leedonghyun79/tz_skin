@@ -1,0 +1,252 @@
+const fs = require('fs');
+const files = [
+    'product/detail.html',
+    'mob/mobile5/product/detail.html'
+];
+const snippet = `
+<!-- Custom Option Cleaner Script -->
+<style>
+    /* Hide the redundant "옵션선택" button since options auto-add */
+    .infoArea .selectButton,
+    .ec-base-product .selectButton,
+    .infoArea a.btnSubmit.sizeS,
+    .ec-base-product a.btnSubmit.sizeS {
+        display: none !important;
+    }
+    .totalPrice .title {
+        color: #333 !important;
+    }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function getBasePrice() {
+        var metaPrice = document.querySelector('meta[property="product:sale_price"]') || document.querySelector('meta[property="product:price"]');
+        if (metaPrice && metaPrice.content) {
+            return parseInt(metaPrice.content.replace(/[^0-9]/g, ''));
+        }
+        if (typeof product_price !== 'undefined') {
+            return parseInt(product_price);
+        }
+        var priceEl = document.querySelector('.infoArea #span_product_price_text, .infoArea .product_price');
+        if (priceEl) {
+            return parseInt(priceEl.innerText.replace(/[^0-9]/g, ''));
+        }
+        return 0;
+    }
+
+    var basePrice = getBasePrice();
+
+    function convertNegativePrices(text) {
+        if (!basePrice || basePrice === 0) return text;
+        return text.replace(/\\(\\s*-\\s*([0-9,]+)\\s*원\\s*\\)/g, function(match, priceStr) {
+            var negativeVal = parseInt(priceStr.replace(/[^0-9]/g, ''));
+            var realVal = basePrice - negativeVal;
+            if (realVal < 0) return match;
+            return '(+' + realVal.toLocaleString() + '원)';
+        });
+    }
+
+    function addOptionHeadings(selects) {
+        selects.forEach(function(select, index) {
+            var tr = select.closest('tr');
+            if (tr && !tr.dataset.headingAdded) {
+                tr.dataset.headingAdded = "true";
+                var titleTr = document.createElement('tr');
+                titleTr.className = 'custom-option-heading';
+                
+                var titleText = "";
+                var isFirst = false;
+                
+                if (index === 0) {
+                    titleText = "필수 옵션";
+                    isFirst = true;
+                } else if (index === 1) {
+                    titleText = "추가 옵션";
+                    isFirst = false;
+                }
+                
+                if (titleText !== "") {
+                    var paddingTop = isFirst ? '15px' : '25px';
+                    var borderTop = isFirst ? 'none' : '1px solid #e5e5e5';
+                    
+                    titleTr.innerHTML = '<td colspan="2" style="width:100%; padding-top:'+paddingTop+'; padding-bottom:10px; border-bottom:none; border-top:'+borderTop+'; text-align:left;"><strong style="font-size:14px; color:#333; font-weight:bold; display:block; width:100%;">' + titleText + '</strong></td>';
+                    tr.parentNode.insertBefore(titleTr, tr);
+                }
+            }
+        });
+    }
+
+    function formatSelectedOptions() {
+        var trs = document.querySelectorAll('tbody.option_products tr, #totalProducts tbody tr, div[id^="totalProducts"] tbody tr');
+        
+        trs.forEach(function(tr) {
+            if (tr.dataset.formatted) return;
+            
+            var nameTd = tr.querySelector('td:first-child');
+            if (!nameTd) return;
+            
+            if (!tr.querySelector('input[type="text"]') && !tr.className.includes('option_product')) return;
+
+            var walker = document.createTreeWalker(nameTd, NodeFilter.SHOW_TEXT, null, false);
+            var textNodes = [];
+            var node;
+            while ((node = walker.nextNode())) {
+                if (node.nodeValue.trim() !== '') {
+                    textNodes.push(node);
+                }
+            }
+            
+            var optionNodeIndex = -1;
+            for (var i = 0; i < textNodes.length; i++) {
+                if (textNodes[i].nodeValue.trim().startsWith('-')) {
+                    optionNodeIndex = i;
+                    break;
+                }
+            }
+            
+            if (optionNodeIndex !== -1) {
+                textNodes[optionNodeIndex].nodeValue = textNodes[optionNodeIndex].nodeValue.trim().replace(/^-\\s*/, '');
+                
+                for (var j = 0; j < optionNodeIndex; j++) {
+                    textNodes[j].nodeValue = '';
+                }
+                
+                var brs = nameTd.querySelectorAll('br');
+                brs.forEach(function(br) { br.style.display = 'none'; });
+                
+                var prodSpans = nameTd.querySelectorAll('span:not(.option), p:not(.product)');
+                prodSpans.forEach(function(span) {
+                    if (!span.innerText.includes(textNodes[optionNodeIndex].nodeValue)) {
+                        span.style.display = 'none';
+                    }
+                });
+            } else {
+                var optionSpan = nameTd.querySelector('.option');
+                if (optionSpan) {
+                    Array.from(nameTd.childNodes).forEach(function(child) {
+                        if (child.nodeType === Node.TEXT_NODE) child.nodeValue = '';
+                        else if (child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('option')) {
+                            child.style.display = 'none';
+                        }
+                    });
+                    if (optionSpan.innerText.trim().startsWith('-')) {
+                        optionSpan.innerText = optionSpan.innerText.replace(/^-\\s*/, '');
+                    }
+                }
+            }
+
+            tr.dataset.formatted = "true";
+        });
+    }
+
+    function formatTotalPrice() {
+        var totalPriceDivs = document.querySelectorAll('.totalPrice');
+        totalPriceDivs.forEach(function(totalPriceDiv) {
+            var titleStrong = totalPriceDiv.querySelector('.title, strong:first-child');
+            if (!titleStrong) return;
+            
+            var totalCntSpan = totalPriceDiv.querySelector('span:not(.title)');
+            if (!totalCntSpan && titleStrong) {
+                totalCntSpan = titleStrong.nextElementSibling;
+            }
+            if (!totalCntSpan) return;
+
+            var qtyStr = "";
+            var qtyNum = -1; // Default -1 means we didn't find the pattern
+            var walker = document.createTreeWalker(totalCntSpan, NodeFilter.SHOW_TEXT, null, false);
+            var node;
+            while ((node = walker.nextNode())) {
+                var match = node.nodeValue.match(/\\(([0-9,\\s]+)개\\)/);
+                if (match) {
+                    qtyStr = match[0];
+                    qtyNum = parseInt(match[1].replace(/[^0-9]/g, ''));
+                    node.nodeValue = node.nodeValue.replace(/\\([0-9,\\s]+개\\)/, '').trim();
+                }
+            }
+            
+            // Hide the total price completely if 0 items are selected
+            if (qtyNum === 0) {
+                totalPriceDiv.style.display = 'none';
+            } else {
+                totalPriceDiv.style.display = '';
+            }
+            
+            if (qtyStr) {
+                titleStrong.innerHTML = '총 상품금액 <span style="font-weight:normal; font-size:14px; color:#777; margin-left:5px;">' + qtyStr + '</span>';
+            } else {
+                if (titleStrong.innerText.includes('TOTAL') || titleStrong.innerText.includes('총 상품금액')) {
+                    titleStrong.innerHTML = '총 상품금액';
+                }
+            }
+        });
+    }
+
+    function cleanOptions() {
+        var selects = document.querySelectorAll('select[id^="product_option_id"], select[name^="option"]');
+        if (selects.length > 0) {
+            addOptionHeadings(selects);
+        }
+        
+        selects.forEach(function(select) {
+            if (select.style.width !== '100%') {
+                select.style.width = '100%';
+                select.style.boxSizing = 'border-box';
+                select.style.maxWidth = '100%';
+            }
+
+            Array.from(select.options).forEach(function(opt) {
+                if (opt.value === '*' || opt.value === '') {
+                    if (opt.text.includes('[필수]')) {
+                        opt.text = '[필수] 옵션 선택';
+                    } else if (opt.text.includes('[선택]')) {
+                        opt.text = '[선택] 옵션 선택';
+                    }
+                } else {
+                    var newText = convertNegativePrices(opt.text);
+                    if (newText !== opt.text) {
+                        opt.text = newText;
+                    }
+                }
+            });
+        });
+
+        var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+        var node;
+        while ((node = walker.nextNode())) {
+            if (node.parentElement && node.parentElement.closest('.infoArea, #totalProducts, tbody, .totalPrice, .option_product, .productSet, .ec-base-desc')) {
+                var newText = convertNegativePrices(node.nodeValue);
+                if (newText !== node.nodeValue) {
+                    node.nodeValue = newText;
+                }
+            }
+        }
+
+        formatSelectedOptions();
+        formatTotalPrice();
+    }
+
+    cleanOptions();
+    
+    var observer = new MutationObserver(function(mutations) {
+        observer.disconnect();
+        cleanOptions();
+        observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+});
+</script>
+`;
+
+files.forEach(f => {
+    if(fs.existsSync(f)) {
+        let text = fs.readFileSync(f, 'utf8');
+        let idx = text.indexOf('<!-- Custom Option Cleaner Script -->');
+        if (idx !== -1) {
+            text = text.substring(0, idx).trim();
+        }
+        text += '\n\n' + snippet.trim();
+        fs.writeFileSync(f, text, 'utf8');
+        console.log('Hide totalPrice if 0 in ' + f);
+    }
+});

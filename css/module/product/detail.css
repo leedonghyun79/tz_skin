@@ -1431,7 +1431,8 @@
 }
 
 /* ===== 관심상품 제목 노출 (전역 .visual-title 숨김 해제) ===== */
-#prdDetail .cont>.visual-title[data-text="관심상품"] {
+#prdDetail .cont>.visual-title[data-text="관심상품"],
+#prdDetail .cont>.visual-title[data-text="관련 상품"] {
   position: static !important;
   width: auto !important;
   height: auto !important;
@@ -1448,7 +1449,8 @@
   border-bottom: 1px solid #dddddd !important;
 }
 
-#prdDetail .cont>.visual-title[data-text="관심상품"]::before {
+#prdDetail .cont>.visual-title[data-text="관심상품"]::before,
+#prdDetail .cont>.visual-title[data-text="관련 상품"]::before {
   content: none;
 }
 
