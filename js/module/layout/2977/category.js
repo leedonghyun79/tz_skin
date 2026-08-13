@@ -330,7 +330,7 @@ $(document).ready(function(){
                     { name: '멀티비전', link: '/product/list.html?cate_no=32' },
                     { name: '삼성 사이니지', link: '/product/list.html?cate_no=33' },
                     { name: '엘지 사이니지', link: '/product/list.html?cate_no=44' },
-                    { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=48' }
+                    { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=65' }
                 ],
                 'Kiosk&DID': [
                     { name: '삼성 스탠드', link: '/product/list.html?cate_no=46' },

@@ -1475,6 +1475,19 @@ document.addEventListener("DOMContentLoaded", function() {
             return s.id.includes('option_id') || s.name.includes('option') || s.id.includes('product_addoption');
         });
 
+        var selectBtns = document.querySelectorAll('.infoArea .selectButton, .ec-base-product .selectButton, .selectButton');
+        if (optionSelects.length === 0) {
+            selectBtns.forEach(function(btn) {
+                btn.style.setProperty('display', 'none', 'important');
+            });
+        } else {
+            selectBtns.forEach(function(btn) {
+                if (btn.style.getPropertyValue('display') === 'none') {
+                    btn.style.removeProperty('display');
+                }
+            });
+        }
+
         optionSelects.forEach(function(select) {
             // Find the parent table and add our bulletproof class
             var table = select.closest('table');
