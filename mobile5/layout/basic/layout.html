@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+    <!--@css(/layout/basic/css/common.css)-->
+    <!--@css(/layout/basic/css/layout.css)-->
+    <!--@css(/layout/basic/css/ec-base-ui.css)-->
+    <!--@css(/layout/basic/css/ec-base-paginate.css)-->
+    <!--@css(/layout/basic/css/ec-base-help.css)-->
+    <!--@css(/layout/basic/css/ec-base-product.css)-->
+    <!--@css(/layout/basic/css/ec-base-button.css)-->
+    <!--@css(/layout/basic/css/ec-base-box.css)-->
+    <!--@css(/layout/basic/css/ec-base-layer.css)-->
+    <!--@css(/layout/basic/css/ec-base-tab.css)-->
+    <!--@css(/layout/basic/css/ec-base-tooltip.css)-->
+    <!--@css(/layout/basic/css/ec-base-table.css)-->
+    <!--@css(/layout/basic/css/ec-base-fold.css)-->
+    <!--@css(/layout/basic/css/ec-base-prdInfo.css)-->
+    <!--@css(/css/module/layout/floatBanner.css)-->
+
+    <!-- 스마트디자인에서는 JQuery 1.4.4 버전이 내장되어있습니다. 추가로 호출하면 충돌이 생길 수 있습니다. -->
+    <!--@js(/layout/basic/js/common.js)-->
+</head>
+<body id="layout">
+     <div id="wrap">
+        <!--@import(/layout/basic/sidebar.html)-->
+        <hr class="layout">
+        <div id="container">
+          <!-- 헤더 -->
+          <!--@import(/layout/basic/header.html)-->  
+            <hr class="layout">
+            <div id="contents">
+                <!--@contents-->
+            </div>
+            <hr class="layout">
+            <!--@import(/layout/basic/footer.html)-->
+        </div>
+        <!--@import(/layout/basic/quick.html)-->
+    </div>
+    
+    <!-- ChannelIO (채널톡) 기본 스크립트 - 한 번만 로드하세요 -->
+    <script>
+    (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+    /* 기본 boot: 로그인 정보가 템플릿 변수로 있으면 여기에 전달하도록 수정하세요. */
+    ChannelIO('boot', { pluginKey: '95f4325f-b42a-4634-850c-6f96dbfa0645' });
+    </script>
+    <script>
+    (function(){
+        function diag(){
+            console.info('ChannelIO diag: window.ChannelIO ->', !!window.ChannelIO);
+            if(!window.ChannelIO){ console.warn('ChannelIO not defined. Check network/CSP/adblocker.'); return; }
+            try{
+                console.info('ChannelIO queue length:', (window.ChannelIO.q && window.ChannelIO.q.length) || 0 );
+                console.info('ChannelIO ready; messenger will not open automatically.');
+            }catch(e){ console.error(e); }
+        }
+        if(document.readyState==='complete'){ diag(); } else { window.addEventListener('load', diag); }
+    })();
+    </script>
+    <script>
+    (function(){
+        function diagAll(){
+            try{
+                console.group('ChannelIO Diagnostic');
+                console.log('typeof window.ChannelIO ->', typeof window.ChannelIO);
+                console.log('window.ChannelIOInitialized ->', !!window.ChannelIOInitialized);
+                var scripts = Array.from(document.querySelectorAll('script[src*="ch-plugin-web.js"]'));
+                console.log('ch-plugin-web.js script tags found:', scripts.length);
+                scripts.forEach(function(s,i){ console.log('script['+i+'] src=', s.src); });
+                console.log('ChannelIO.q length ->', (window.ChannelIO && window.ChannelIO.q && window.ChannelIO.q.length) || 0);
+                var launcher = document.getElementById('custom-channelio-launcher');
+                console.log('custom launcher element ->', !!launcher, launcher && getComputedStyle(launcher).display, launcher && getComputedStyle(launcher).opacity);
+                // Try to fetch the plugin script (may be blocked by CORS; we catch errors)
+                var url = scripts.length ? scripts[0].src : 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+                fetch(url, {method:'HEAD', cache:'no-store'}).then(function(res){ console.log('fetch HEAD response ok? status=', res.status); }).catch(function(err){ console.warn('fetch HEAD failed (CORS or network):', err); });
+                console.groupEnd();
+            }catch(e){ console.error('ChannelIO diag error', e); }
+        }
+
+        // expose manual runner for environments where console paste isn't possible
+        window.runChannelIODiag = diagAll;
+
+        // auto-run when url contains ?cioDiag=1
+        try{
+            if(location.search.indexOf('cioDiag=1')>-1){ if(document.readyState==='complete'){ setTimeout(diagAll,120); } else { window.addEventListener('load', function(){ setTimeout(diagAll,120); }); } }
+        }catch(e){ /* ignore in older browsers */ }
+    })();
+    </script>
+    <script>
+    (function(){
+        // On-page diagnostic panel + fallback loader for environments where console isn't visible
+        function createPanel(){
+            if(document.getElementById('channelio-diag-panel')) return document.getElementById('channelio-diag-panel');
+            var p=document.createElement('div');
+            p.id='channelio-diag-panel';
+            p.style.position='fixed';p.style.left='12px';p.style.bottom='12px';p.style.width='360px';p.style.maxHeight='60vh';p.style.overflow='auto';p.style.zIndex='2147483646';p.style.background='rgba(0,0,0,0.85)';p.style.color='#fff';p.style.fontSize='13px';p.style.padding='10px';p.style.borderRadius='8px';p.style.boxShadow='0 6px 18px rgba(0,0,0,0.4)';
+            p.innerHTML='<strong style="display:block;margin-bottom:8px">ChannelIO Diag</strong><div id="channelio-diag-logs" style="font-family:monospace;line-height:1.2;max-height:46vh;overflow:auto"></div><div style="margin-top:8px;text-align:right"><button id="channelio-diag-close" style="background:#6c2bd9;color:#fff;border:none;padding:6px 8px;border-radius:4px;cursor:pointer">닫기</button></div>';
+            document.body.appendChild(p);
+            p.querySelector('#channelio-diag-close').addEventListener('click',function(){ p.style.display='none'; });
+            return p;
+        }
+        function panelLog(msg){ try{ var panel=createPanel(); var log=document.createElement('div'); log.textContent = (new Date()).toLocaleTimeString() + ' — ' + msg; panel.querySelector('#channelio-diag-logs').appendChild(log); panel.querySelector('#channelio-diag-logs').scrollTop = panel.querySelector('#channelio-diag-logs').scrollHeight; }catch(e){ console.log('panelLog failed', e); } }
+
+        function tryLoadPlugin(url, cb){
+            panelLog('Attempting to load: ' + url);
+            var s=document.createElement('script'); s.src=url; s.async=true;
+            s.onload=function(){ panelLog('Plugin script loaded (onload)'); if(cb)cb(null); };
+            s.onerror=function(e){ panelLog('Plugin script failed to load (onerror)'); if(cb)cb(e); };
+            document.head.appendChild(s);
+        }
+
+        function runFullDiag(){
+            panelLog('Running full diagnostic');
+            panelLog('window.ChannelIO -> ' + (typeof window.ChannelIO));
+            panelLog('ChannelIOInitialized -> ' + !!window.ChannelIOInitialized);
+            var scripts = Array.from(document.querySelectorAll('script[src*="ch-plugin-web.js"]'));
+            panelLog('ch-plugin script tags found: ' + scripts.length);
+            if(scripts.length){ panelLog('first script src: ' + scripts[0].src); }
+            panelLog('ChannelIO.q length -> ' + ((window.ChannelIO && window.ChannelIO.q && window.ChannelIO.q.length) || 0));
+
+            // If ChannelIO not present, try to load plugin script directly
+            if(!(window.ChannelIO && typeof ChannelIO === 'function')){
+                panelLog('ChannelIO not present — attempting manual script injection');
+                tryLoadPlugin('https://cdn.channel.io/plugin/ch-plugin-web.js', function(err){
+                    if(err){ panelLog('Manual script injection failed — check network/CSP/adblock'); }
+                    else {
+                        panelLog('Manual injection completed — attempting boot');
+                        try{ if(window.ChannelIO) { ChannelIO('boot', { pluginKey: '95f4325f-b42a-4634-850c-6f96dbfa0645' }); panelLog('ChannelIO boot called'); } else { panelLog('ChannelIO still undefined after script load'); } }catch(e){ panelLog('boot call error: '+e); }
+                    }
+                });
+            } else { panelLog('ChannelIO is present — try clicking launcher'); }
+        }
+
+        // Auto-run when ?cioDiag=1 or expose run
+        window.runChannelIODiagPanel = function(){ createPanel(); runFullDiag(); };
+        if(location.search.indexOf('cioDiag=1')>-1){ if(document.readyState==='complete'){ setTimeout(window.runChannelIODiagPanel,200); } else { window.addEventListener('load', function(){ setTimeout(window.runChannelIODiagPanel,200); }); } }
+    })();
+    </script>
+
+    <style>
+        /* Hide common ChannelIO default launcher elements to avoid duplicate launchers. */
+        .ch-plugin-launcher, .ch-launcher, .ch-widget-launcher, .channel-plugin-launcher, .channel-launcher { display: none !important; }
+        /* If ChannelIO inserts a launcher with unpredictable classes, hide by attribute fallback */
+        [class*="channel" i][class*="launcher" i] { display: none !important; }
+    </style>
+    <script>
+    (function(){
+        function tryHideFallback(){
+            try{
+                var selectors = ['.ch-plugin-launcher', '.ch-launcher', '.ch-widget-launcher', '.channel-plugin-launcher', '.channel-launcher'];
+                selectors.forEach(function(s){ document.querySelectorAll(s).forEach(function(el){ el.style.setProperty('display','none','important'); }); });
+                // fallback: hide elements whose class name suggests "channel" and "launcher"
+                document.querySelectorAll('[class]').forEach(function(el){ var c=el.className+''; if(/channel/i.test(c) && /launch|launcher/i.test(c)){ el.style.setProperty('display','none','important'); } });
+                console.info('ChannelIO: attempted to hide default launcher elements');
+            }catch(e){ console.warn('ChannelIO hide fallback failed', e); }
+        }
+        if(document.readyState==='complete'){ setTimeout(tryHideFallback, 300); } else { window.addEventListener('load', function(){ setTimeout(tryHideFallback, 300); }); }
+    })();
+    </script>
+    <!-- /ChannelIO -->
+
+    <!-- 주문완료 트래킹 삽입 안내:
+         주문완료 페이지(order_result 등)에 아래 track 코드를 추가하세요 (boot 이후).
+    <script>
+    ChannelIO('track', 'OrderCompleted', {
+      orderId: '{$od_id}',
+      revenue: {$od_receipt_price},
+      items: [ /* 주문상품 루프로 id/name/price/quantity 채움 */ ]
+    });
+    </script>
+    -->
+</body>
+</html>

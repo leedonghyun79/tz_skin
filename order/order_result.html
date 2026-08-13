@@ -963,5 +963,33 @@
         <a href="/" class="btnSubmit">쇼핑계속하기</a>
     </div>
 </div>
+</div>
+
+<!-- ChannelIO OrderCompleted 트래킹 전송 (boot 이후 실행) -->
+<script>
+    (function(){
+        function sendOrderTrack(){
+            if(!window.ChannelIO){console.warn('ChannelIO not ready'); return;}
+            try{
+                var items=[];
+                document.querySelectorAll('.ec-base-prdInfo .prdBox').forEach(function(box){
+                    var nameEl = box.querySelector('.prdName');
+                    var qtyEl = box.querySelector('li.quantity');
+                    var name = nameEl ? nameEl.textContent.trim() : '';
+                    var qty = 1;
+                    if(qtyEl){ var m = qtyEl.textContent.match(/(\d+)/); if(m) qty = parseInt(m[1],10); }
+                    items.push({ name: name, quantity: qty });
+                });
+
+                ChannelIO('track','OrderCompleted',{
+                    orderId: '{$order_id}',
+                    revenue: '{$result_order_price_front}',
+                    items: items
+                });
+            }catch(e){console.error(e);} 
+        }
+        if(document.readyState==='complete'){ sendOrderTrack(); } else { window.addEventListener('load', sendOrderTrack); }
+    })();
+</script>
 </body>
 </html>
