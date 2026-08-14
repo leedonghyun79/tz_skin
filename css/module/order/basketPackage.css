@@ -49,7 +49,7 @@
     .cart-container { display:flex; }
     .cart-product { flex:1; }
     .cart-total { position:relative; width:300px; margin:0 0 0 47px; }
-    .cart-total .sticky { position:sticky; top:60px; }
+    .cart-total .sticky { position:sticky; top:165px; }
 	.xans-order-basketpackage .xans-order-tabinfo { margin:40px 0 54px; }
     .xans-order-basketpackage .summary { margin:40px 0; }
     .xans-order-basketpackage .ec-base-prdInfo .description { margin:0 20% 0 0; }

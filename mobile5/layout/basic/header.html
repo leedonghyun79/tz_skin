@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
     background: #ffffff !important;
 }
 </style>
-<header id="header" style="background-color: #ffffff !important; border-bottom: 1px solid #eee;">
+<header id="header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: #ffffff !important; border-bottom: 1px solid #eee;">
     <div class="header">
         <!-- Top Area -->
         <section id="topArea" style="position:relative; display:flex; justify-content:space-between; align-items:center; padding:12px 10px; border-bottom:1px solid #f9f9f9; background-color: #ffffff !important; box-sizing:border-box; width:100%;">
@@ -121,3 +121,18 @@ h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
         <!--@import(/layout/basic/search.html)-->
     </div>
 </header>
+<div id="header-spacer"></div>
+<script>
+    (function() {
+        function updateSpacer() {
+            var header = document.getElementById('header');
+            var spacer = document.getElementById('header-spacer');
+            if (header && spacer) {
+                spacer.style.height = header.offsetHeight + 'px';
+            }
+        }
+        window.addEventListener('load', updateSpacer);
+        window.addEventListener('resize', updateSpacer);
+        updateSpacer();
+    })();
+</script>

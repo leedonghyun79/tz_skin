@@ -79,6 +79,9 @@ $(document).ready(function(){
             { link: '/product/list.html?cate_no=48', img: 'https://cdn.imweb.me/thumbnail/20260413/f55de1a5ee985.png', title: 'TZ-ST 시리즈', desc: '밝기: 450nit<br>해상도: 1,920X1,080(FULL HD)' },
             { link: '/product/list.html?cate_no=48', img: 'https://cdn.imweb.me/thumbnail/20260413/a6a43c2b97a0a.png', title: 'TZ-SW 시리즈', desc: '밝기: 450nit<br>해상도: 3,840X2,160(4K UHD)' }
         ],
+        'Kiosk&DID|옥외형': [
+            { link: '/product/list.html?cate_no=64', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/category/%EC%98%A5%EC%99%B8%ED%98%95%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC300.jpg', title: '옥외형 키오스크', desc: '전화주문' }
+        ],
         'Kiosk&DID|전자액자': [
             { link: '/product/list.html?cate_no=45', img: 'https://cdn.imweb.me/thumbnail/20260414/0da2809719be5.png', title: 'TZ-PW 시리즈', desc: '밝기: 350nit<br>해상도: 3,840x2,160(4K UHD)' }
         ],
@@ -123,8 +126,11 @@ $(document).ready(function(){
 
         var html = '';
         var imageStyle = 'width: 100%; height: 100%; object-fit: cover;';
+        var isOutdoorKiosk = slideKey.indexOf('Kiosk&DID|옥외형') !== -1;
         if (slideKey.indexOf('배너형 포스터') !== -1 || slideKey.indexOf('Kiosk&DID|삼성 스탠드') !== -1 || slideKey.indexOf('Kiosk&DID|엘지 스탠드') !== -1) {
             imageStyle = 'width: 90%; height: 100%; object-fit: cover;';
+        } else if (isOutdoorKiosk) {
+            imageStyle = 'width: 267px; height: 100%; object-fit: contain; padding: 18px; box-sizing: border-box;';
         } else if (slideKey.indexOf('Solutions') !== -1 || slideKey.indexOf('Mounts') !== -1) {
             imageStyle = 'width: 100%; height: 100%; object-fit: contain; padding: 30px; box-sizing: border-box;';
         }
@@ -133,12 +139,13 @@ $(document).ready(function(){
             var item = slidesData[0];
             var imgHtml = item.img ? '<img src="' + item.img + '" alt="" style="' + imageStyle + '">' 
                                    : '<div style="width: 100%; height: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; color: #999; font-size: 15px; border-radius: 4px;">상품 준비중입니다</div>';
+            var imageWrapStyle = isOutdoorKiosk ? 'margin-left: 80px; flex: 0 0 250px; height: 100%; margin-right: 20px;' : 'margin-left: 110px; flex: 0 0 300px; height: 100%; margin-right: 20px;';
 
             html = '<div class="swiper-container submenu-right-swiper" style="width: 100%; height: 100%; overflow: hidden; position: relative;">' +
                         '<div class="swiper-wrapper" style="height: 100%; display: flex;">' +
                         '<div class="swiper-slide" style="height: 100%; width: 100%; box-sizing: border-box; flex-shrink: 0;">' +
                             '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%; width: 100%;">' +
-                                '<div style="margin-left: 110px; flex: 0 0 300px; height: 100%; margin-right: 20px;">' +
+                                '<div style="' + imageWrapStyle + '">' +
                                     imgHtml +
                                 '</div>' +
                                 '<div style="flex: 1; text-align: left; padding: 20px 30px;">' +
@@ -162,10 +169,11 @@ $(document).ready(function(){
             $(slidesData).each(function(i, item) {
                 var imgHtml = item.img ? '<img src="' + item.img + '" alt="" style="' + imageStyle + '">' 
                                        : '<div style="width: 100%; height: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; color: #999; font-size: 15px; border-radius: 4px;">상품 준비중입니다</div>';
+                var imageWrapStyle = isOutdoorKiosk ? 'flex: 0 0 250px; height: 100%; margin-right: 20px;' : 'flex: 0 0 300px; height: 100%; margin-right: 20px;';
 
                 html += '<div class="swiper-slide" style="height: 100%; width: 100%; box-sizing: border-box; flex-shrink: 0;">' +
                                 '<a href="' + item.link + '" style="display: flex; align-items: center; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; height: 100%;">' +
-                                    '<div style="flex: 0 0 300px; height: 100%; margin-right: 20px;">' +
+                                    '<div style="' + imageWrapStyle + '">' +
                                         imgHtml +
                                     '</div>' +
                                     '<div style="flex: 1; text-align: left; padding: 20px 30px;">' +
@@ -327,10 +335,10 @@ $(document).ready(function(){
                     { name: '특수형(비정형)', link: '/product/list.html?cate_no=43' }
                 ],
                 'DigitalSignage': [
-                    { name: '멀티비전', link: '/product/list.html?cate_no=32' },
                     { name: '삼성 사이니지', link: '/product/list.html?cate_no=33' },
                     { name: '엘지 사이니지', link: '/product/list.html?cate_no=44' },
-                    { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=65' }
+                    { name: '안드로이드 사이니지', link: '/product/list.html?cate_no=65' },
+                    { name: '멀티비전', link: '/product/list.html?cate_no=32' }
                 ],
                 'Kiosk&DID': [
                     { name: '삼성 스탠드', link: '/product/list.html?cate_no=46' },

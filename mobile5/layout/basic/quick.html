@@ -10,3 +10,58 @@
         <img src="//ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/qm/ban_tvzonelogo.png" alt="공식사이트 바로가기" />
     </a>
 </div>
+<a class="custom-ch-btn" href="javascript:void(0)" onclick="if(window.ChannelIO){ChannelIO('showMessenger');}">
+    <img src="https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/qm/help-desk.webp" alt="상담하기" />
+</a>
+
+<style>
+/* --- Custom Channel Talk Button --- */
+.custom-ch-btn {
+    position: fixed !important;
+    right: 12px !important;
+    bottom: 20px !important; /* Default bottom */
+    width: 60px !important;
+    z-index: 400 !important;
+    display: block !important;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    overflow: hidden;
+    background: #fff;
+}
+.custom-ch-btn img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+@media all and (max-width: 480px) {
+    .custom-ch-btn {
+        right: 10px !important;
+        bottom: 10px !important;
+        width: 55px !important;
+        height: 55px !important;
+    }
+}
+
+.qm-wrap.mobile-qm {
+    bottom: 75px !important;
+}
+
+/* Hide original Channel Talk launcher */
+div[class*="ChatButtonContainer__Container-ch-front"],
+.ch-plugin-launcher,
+.ch-launcher,
+.ch-plugin-entry,
+#ch-plugin-entry {
+    display: none !important;
+}
+
+/* --- Detail Page Overrides (Activated when orderFixArea is visible) --- */
+@media all and (max-width: 480px) {
+    body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .custom-ch-btn {
+        bottom: 125px !important;
+    }
+}
+body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .qm-wrap.mobile-qm {
+    bottom: 193px !important;
+}
+</style>

@@ -906,12 +906,10 @@
 </div>
 
 <div class="relation-section-wrapper">
-    <div class="title relation-title-wrap">
-        <h2>관련 상품</h2>
-        <div class="relation-title-nav">
-            <div class="swiper-button-prev relation-prev" aria-label="이전 관련 상품"></div>
-            <div class="swiper-button-next relation-next" aria-label="다음 관련 상품"></div>
-        </div>
+    <div class="title">
+        <h2
+            style="padding: 20px 14px 10px; font-size: 16px; font-weight: bold; border-bottom: 1px solid #e5e5e5; margin-bottom: 15px;">
+            관련 상품</h2>
     </div>
     <p class="empty-msg"
         style="text-align: center; padding: 40px 0; color: #888; font-size: 14px; margin: 0; background: #fff;">등록된 관련
@@ -931,32 +929,6 @@
                     display: none !important;
                 }
 
-                .relation-section-wrapper .relation-title-wrap {
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: space-between !important;
-                    padding: 0 15px !important;
-                    margin: 0 0 15px !important;
-                    border-bottom: 1px solid #e5e5e5 !important;
-                }
-
-                .relation-section-wrapper .relation-title-wrap h2 {
-                    margin: 0 !important;
-                    padding: 0 !important;
-                    font-size: 16px !important;
-                    font-weight: bold !important;
-                    line-height: 1.3 !important;
-                    color: #111 !important;
-                }
-
-                .relation-section-wrapper .relation-title-nav {
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: flex-end !important;
-                    gap: 8px !important;
-                    margin-left: auto !important;
-                }
-
                 .relation .relation-swiper-wrap {
                     padding: 10px 15px 30px !important;
                     position: relative;
@@ -965,49 +937,27 @@
                 .relation .relation-swiper {
                     padding: 0 !important;
                     width: 100%;
-                    overflow: hidden !important;
-                }
-
-                .relation .relation-swiper .swiper-wrapper {
-                    display: flex !important;
-                    width: 100% !important;
-                    align-items: stretch !important;
                 }
 
                 .relation .relation-swiper-wrap .swiper-button-next,
-                .relation .relation-swiper-wrap .swiper-button-prev,
-                .relation-section-wrapper .relation-title-nav .swiper-button-next,
-                .relation-section-wrapper .relation-title-nav .swiper-button-prev {
-                    position: relative !important;
-                    top: auto !important;
-                    left: auto !important;
-                    right: auto !important;
-                    bottom: auto !important;
-                    margin: 0 !important;
-                    background-color: rgba(255,255,255,0.96) !important;
+                .relation .relation-swiper-wrap .swiper-button-prev {
+                    background-color: #fff !important;
                     border: 1px solid #e5e5e5 !important;
                     border-radius: 50% !important;
-                    width: 28px !important;
-                    height: 28px !important;
+                    width: 36px !important;
+                    height: 36px !important;
                     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
                     opacity: 1 !important;
+                    top: 100px !important;
+                    /* 이미지 중심 정도로 맞춤 */
+                    margin-top: 0 !important;
                     display: flex !important;
                     align-items: center !important;
                     justify-content: center !important;
                     color: transparent !important;
                     font-size: 0 !important;
                     transform: none !important;
-                    z-index: 20 !important;
-                    float: none !important;
-                    pointer-events: auto !important;
-                    cursor: pointer !important;
-                    transition: all 0.2s ease !important;
-                }
-
-                .relation-section-wrapper .relation-title-nav .swiper-button-next:hover,
-                .relation-section-wrapper .relation-title-nav .swiper-button-prev:hover {
-                    background-color: #f5f5f5 !important;
-                    border-color: #d0d0d0 !important;
+                    z-index: 10 !important;
                 }
 
                 .relation .relation-swiper-wrap .swiper-button-next::before,
@@ -1020,18 +970,18 @@
                     content: none !important;
                 }
 
-                .relation .relation-swiper-wrap .swiper-button-prev,
-                .relation-section-wrapper .relation-title-nav .swiper-button-prev {
+                .relation .relation-swiper-wrap .swiper-button-prev {
+                    left: 5px !important;
                     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgc3Ryb2tlPScjN2U3ZTdlJyBzdHJva2Utd2lkdGg9JzEuNScgZmlsbD0nbm9uZScgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cG9seWxpbmUgcG9pbnRzPScxNSAxOCA5IDEyIDE1IDYnPjwvcG9seWxpbmU+PC9zdmc+") !important;
-                    background-size: 16px !important;
+                    background-size: 20px !important;
                     background-position: center !important;
                     background-repeat: no-repeat !important;
                 }
 
-                .relation .relation-swiper-wrap .swiper-button-next,
-                .relation-section-wrapper .relation-title-nav .swiper-button-next {
+                .relation .relation-swiper-wrap .swiper-button-next {
+                    right: 5px !important;
                     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgc3Ryb2tlPScjN2U3ZTdlJyBzdHJva2Utd2lkdGg9JzEuNScgZmlsbD0nbm9uZScgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cG9seWxpbmUgcG9pbnRzPSc5IDE4IDE1IDEyIDkgNic+PC9wb2x5bGluZT48L3N2Zz4=") !important;
-                    background-size: 16px !important;
+                    background-size: 20px !important;
                     background-position: center !important;
                     background-repeat: no-repeat !important;
                 }
@@ -1063,14 +1013,10 @@
                 }
 
                 .relation .relation-swiper .swiper-slide {
-                    width: calc(50% - 6px) !important;
-                    flex: 0 0 calc(50% - 6px) !important;
-                    box-sizing: border-box !important;
-                    margin-right: 12px !important;
+                    width: 100% !important;
                 }
 
                 .relation .relation-swiper .box {
-                    width: 100% !important;
                     margin: 0 !important;
                     text-align: left;
                 }
@@ -1081,14 +1027,6 @@
                     color: #1a1a1a;
                     line-height: 1.3;
                     word-break: break-all;
-                    padding: 0 8px 0;
-                }
-
-                .relation .relation-swiper .box .thumb {
-                    display: block;
-                    width: 100%;
-                    height: auto;
-                    border-radius: 8px 8px 0 0;
                 }
 
                 .relation .relation-swiper .box p.price {
@@ -1128,6 +1066,8 @@
                     </ul>
                     <div class="swiper-pagination relation-pagination" style="bottom: 0px;"></div>
                 </div>
+                <div class="swiper-button-next relation-next"></div>
+                <div class="swiper-button-prev relation-prev"></div>
             </div>
         </div>
     </div>
@@ -1172,81 +1112,20 @@
             initRelationObserver();
 
             if (typeof Swiper !== 'undefined') {
-                setTimeout(function() {
-                    window.relationSwiper = new Swiper('.relation-swiper', {
-                        slidesPerView: 2,
-                        slidesPerGroup: 2,
-                        spaceBetween: 12,
-                        watchOverflow: true,
-                        observer: true,
-                        observeParents: true,
-                        centeredSlides: false,
-                        loopFillGroupWithBlank: false,
-                        navigation: {
-                            nextEl: '.relation-section-wrapper .relation-next',
-                            prevEl: '.relation-section-wrapper .relation-prev',
-                        },
-                        pagination: {
-                            el: '.relation-pagination',
-                            clickable: true,
-                        },
-                        on: {
-                            init: function(swiper) {
-                                console.log('Swiper initialized');
-                                attachButtonHandlers(swiper);
-                            }
-                        }
-                    });
-                }, 150);
-            }
-
-            // 버튼 핸들러를 별도로 분리하여 더 강력하게 만들기
-            function attachButtonHandlers(swiper) {
-                var nextBtn = document.querySelector('.relation-section-wrapper .relation-next');
-                var prevBtn = document.querySelector('.relation-section-wrapper .relation-prev');
-                
-                if (nextBtn && nextBtn.onclick === null) {
-                    nextBtn.onclick = function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        swiper.slideNext();
-                        return false;
-                    };
-                }
-                
-                if (prevBtn && prevBtn.onclick === null) {
-                    prevBtn.onclick = function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        swiper.slidePrev();
-                        return false;
-                    };
-                }
-            }
-            
-            // 추가: 버튼이 없을 경우 재시도
-            setTimeout(function() {
-                if (window.relationSwiper) {
-                    var nextBtn = document.querySelector('.relation-section-wrapper .relation-next');
-                    var prevBtn = document.querySelector('.relation-section-wrapper .relation-prev');
-                    
-                    if (nextBtn && !nextBtn.onclick) {
-                        nextBtn.onclick = function(e) {
-                            e.preventDefault();
-                            window.relationSwiper.slideNext();
-                            return false;
-                        };
+                var relationSwiper = new Swiper('.relation-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                    watchOverflow: true,
+                    navigation: {
+                        nextEl: '.relation-next',
+                        prevEl: '.relation-prev',
+                    },
+                    pagination: {
+                        el: '.relation-pagination',
+                        clickable: true,
                     }
-                    
-                    if (prevBtn && !prevBtn.onclick) {
-                        prevBtn.onclick = function(e) {
-                            e.preventDefault();
-                            window.relationSwiper.slidePrev();
-                            return false;
-                        };
-                    }
-                }
-            }, 500);
+                });
+            }
         });
     })();
 </script>
@@ -1438,30 +1317,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function isPhoneInquiryPrice() {
-        var priceEl = document.querySelector('#span_product_price_text');
-        if (priceEl && (priceEl.textContent || '').indexOf('전화문의') !== -1) {
-            return true;
-        }
-
-        var totalRows = document.querySelectorAll('.totalPrice, #totalProducts, tbody.option_products');
-        for (var j = 0; j < totalRows.length; j++) {
-            if ((totalRows[j].textContent || '').indexOf('전화문의') !== -1) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     function formatTotalPrice() {
         var selects = document.querySelectorAll('select');
         var optionSelects = Array.from(selects).filter(function(s) {
             return s.id.includes('option_id') || s.name.includes('option') || s.id.includes('product_addoption');
         });
         var hasOptions = optionSelects.length > 0;
-        var isPhoneInquiry = isPhoneInquiryPrice();
-
+        
         var hasSelectedProduct = false;
         var selectedProducts = document.querySelectorAll('tbody.option_products tr, #totalProducts tbody tr, div[id^="totalProducts"] tbody tr');
         selectedProducts.forEach(function(tr) {
@@ -1497,22 +1359,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-            if (isPhoneInquiry) {
-                totalPriceDiv.style.setProperty('display', 'none', 'important');
-            } else if (hasOptions && !hasSelectedProduct) {
+            if (hasOptions && !hasSelectedProduct) {
                 totalPriceDiv.style.setProperty('display', 'none', 'important');
             } else {
                 totalPriceDiv.style.setProperty('display', 'flex', 'important');
-            }
-        });
-
-        // 판매가 대체문구(전화문의)인 상품은 장바구니/구매하기 버튼을 숨깁니다. (하단 고정바 포함)
-        var buyButtons = document.querySelectorAll('#actionCart, #actionCartClone, a.btnStrong');
-        buyButtons.forEach(function(btn) {
-            if (isPhoneInquiry) {
-                btn.style.setProperty('display', 'none', 'important');
-            } else {
-                btn.style.removeProperty('display');
             }
         });
     }
