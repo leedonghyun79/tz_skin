@@ -65,3 +65,29 @@ body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .qm-wrap.mobile-q
     bottom: 193px !important;
 }
 </style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Escape any local stacking context by moving the buttons to the body root
+    var btn = document.querySelector(".custom-ch-btn");
+    var qm = document.querySelector(".qm-wrap.mobile-qm");
+    if(btn) document.body.appendChild(btn);
+    if(qm) document.body.appendChild(qm);
+
+    // Fallback for older browsers that don't support CSS :has()
+    if (!CSS.supports('selector(:has(a))')) {
+        var checkOrderFix = function() {
+            var orderFix = document.getElementById("orderFixArea");
+            if (orderFix && orderFix.style.display !== "none" && !orderFix.classList.contains("displaynone")) {
+                if (btn) btn.style.setProperty("bottom", "125px", "important");
+                if (qm) qm.style.setProperty("bottom", "193px", "important");
+            } else {
+                if (btn) btn.style.setProperty("bottom", window.innerWidth <= 480 ? "10px" : "20px", "important");
+                if (qm) qm.style.setProperty("bottom", "75px", "important");
+            }
+        };
+        checkOrderFix();
+        // optionally observe changes to orderFixArea if it toggles, or just rely on initial state
+    }
+});
+</script>

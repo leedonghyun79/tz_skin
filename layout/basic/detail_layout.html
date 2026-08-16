@@ -70,5 +70,15 @@
     <!--@import(/layout/basic/sub_category.html)-->
     
     <!--@import(/layout/basic/footer.html)-->
+
+    <!-- ChannelIO (채널톡) 기본 스크립트 - 한 번만 로드하세요 -->
+    <script>
+        (function () { var w = window; if (w.ChannelIO) { return w.console.error("ChannelIO script included twice."); } var ch = function () { ch.c(arguments); }; ch.q = []; ch.c = function (args) { ch.q.push(args); }; w.ChannelIO = ch; function l() { if (w.ChannelIOInitialized) { return; } w.ChannelIOInitialized = true; var s = document.createElement("script"); s.type = "text/javascript"; s.async = true; s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js"; var x = document.getElementsByTagName("script")[0]; if (x.parentNode) { x.parentNode.insertBefore(s, x); } } if (document.readyState === "complete") { l(); } else { w.addEventListener("DOMContentLoaded", l); w.addEventListener("load", l); } })();
+
+        /* 기본 boot: 로그인 정보가 템플릿 변수로 있으면 여기에 전달하도록 수정하세요. */
+        ChannelIO('boot', { pluginKey: '95f4325f-b42a-4634-850c-6f96dbfa0645' });
+    </script>
+    <!-- /ChannelIO -->
+
 </body>
 </html>

@@ -5,6 +5,11 @@ html {
 
 @charset "utf-8";
 
+/* Hide Cafe24 marketing banner */
+.campaign-container, #campaign-container {
+    display: none !important;
+}
+
 /* Layout */
 #header {
     background: #fff;

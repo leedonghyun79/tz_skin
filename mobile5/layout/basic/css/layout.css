@@ -3,6 +3,11 @@
 /*웹폰트적용*/
 @import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
 
+/* Hide Cafe24 marketing banner */
+.campaign-container, #campaign-container {
+    display: none !important;
+}
+
 body,
 code {
     font-family: 나눔고딕, 'Nanum Gothic', sans-serif, Verdana, Dotum, AppleGothic;
