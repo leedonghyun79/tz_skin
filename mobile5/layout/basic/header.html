@@ -124,6 +124,7 @@ h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
 <div id="header-spacer"></div>
 <script>
     (function() {
+        // 헤더 스페이서 높이 업데이트
         function updateSpacer() {
             var header = document.getElementById('header');
             var spacer = document.getElementById('header-spacer');
@@ -134,5 +135,53 @@ h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
         window.addEventListener('load', updateSpacer);
         window.addEventListener('resize', updateSpacer);
         updateSpacer();
+
+        // 검색창 토글 스크립트
+        document.addEventListener('DOMContentLoaded', function() {
+            var searchBtn = document.querySelector('.btnSearch');
+            var searchBox = document.querySelector('.searchBox, .xans-layout-searchheader');
+            
+            if (searchBtn && searchBox) {
+                searchBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (searchBox.style.display === 'block') {
+                        searchBox.style.display = 'none';
+                    } else {
+                        searchBox.style.display = 'block';
+                        setTimeout(function() {
+                            var keywordInput = document.getElementById('keyword');
+                            if (keywordInput) {
+                                keywordInput.focus();
+                            }
+                        }, 50);
+                    }
+                });
+            }
+
+            // 검색창 내부 닫기 버튼 이벤트
+            var closeBtn = document.querySelector('.searchBox .btnClose, .xans-layout-searchheader .btnClose');
+            if (closeBtn && searchBox) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    searchBox.style.display = 'none';
+                });
+            }
+
+            // 네비게이션 순서 변경 (개인결제창 앞으로 나라장터쇼핑몰 이동)
+            var navItems = document.querySelectorAll('.header-nav-scroll li');
+            var naraItem = null;
+            var personalItem = null;
+            for (var i = 0; i < navItems.length; i++) {
+                var text = navItems[i].textContent.trim();
+                if (text === '나라장터쇼핑몰') {
+                    naraItem = navItems[i];
+                } else if (text === '개인결제창') {
+                    personalItem = navItems[i];
+                }
+            }
+            if (naraItem && personalItem && personalItem.parentNode === naraItem.parentNode) {
+                personalItem.parentNode.insertBefore(naraItem, personalItem);
+            }
+        });
     })();
 </script>

@@ -218,3 +218,58 @@ $('.ec-base-tooltip-area').find('input').focusout(function() {
     $('.ec-base-tooltip-area').removeClass('show');
     findTarget.hide();
 });
+
+// [TVZone Custom] 장바구니/주문서 옵션 가격(+,-) 텍스트 숨김 스크립트
+(function(){
+    // 장바구니, 주문서 페이지에서만 작동하도록 제한하여 상품 상세페이지 무한루프 방지
+    if (window.location.href.indexOf('/order/basket.html') === -1 && window.location.href.indexOf('/order/orderform.html') === -1) {
+        return;
+    }
+
+    function removeOptionPrices(node) {
+        if (node.nodeType === 3) { 
+            if (node.nodeValue.indexOf('(') !== -1 && (node.nodeValue.indexOf('+') !== -1 || node.nodeValue.indexOf('-') !== -1)) {
+                node.nodeValue = node.nodeValue.replace(/\s*\([\+\-][0-9,]+[원]?\)/g, '');
+            }
+        } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+            for (var i = 0; i < node.childNodes.length; i++) {
+                removeOptionPrices(node.childNodes[i]);
+            }
+        }
+    }
+
+    function runEraser() {
+        var targetAreas = document.querySelectorAll('.xans-order, #mCafe24Order, .ec-base-prdInfo, .prdInfo, .option, .prdName, .description');
+        if (targetAreas.length > 0) {
+            for (var i = 0; i < targetAreas.length; i++) {
+                removeOptionPrices(targetAreas[i]);
+            }
+        } else {
+            removeOptionPrices(document.body);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', runEraser);
+    
+    var observer = new MutationObserver(function(mutations) {
+        var shouldUpdate = false;
+        for (var i = 0; i < mutations.length; i++) {
+            if (mutations[i].addedNodes.length > 0) {
+                shouldUpdate = true;
+                break;
+            }
+        }
+        if (shouldUpdate) {
+            runEraser();
+        }
+    });
+    
+    if (document.body) {
+        observer.observe(document.body, { childList: true, subtree: true });
+    } else {
+        document.addEventListener('DOMContentLoaded', function() {
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
+    }
+})();
+

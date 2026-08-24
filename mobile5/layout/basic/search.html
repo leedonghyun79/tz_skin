@@ -3,13 +3,25 @@
     <!--
         $category_page=/product/list.html
     -->
-    <fieldset>
-        <legend>검색</legend>
-        <div class="searchForm">
-            {$form.keyword}
-            <button type="button" class="btnDelete">삭제</button>
-        </div>
-    </fieldset>
+    <div class="search-header-custom">
+        <button type="button" class="btnClose" id="{$search_cancel_id}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        
+        <fieldset class="search-fieldset-custom">
+            <legend>검색</legend>
+            <div class="searchForm">
+                {$form.keyword}
+                <button type="button" class="btnDelete" style="display:none;">삭제</button>
+            </div>
+        </fieldset>
+        
+        <button type="button" class="btnSearchSubmit" onclick="var el = document.getElementById('keyword'); if(el && el.form) el.form.submit();">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+    </div>
+
+    <!-- [TVZone] 모바일 환경에서 검색어 기록/인기 검색어 탭 숨김 처리
     <div class="ec-base-tab">
         <ul class="searchTab {$hot_use_display|display}">
             <li class="selected"><a href="#none">인기 검색어</a></li>
@@ -38,5 +50,5 @@
             <button type="button" class="btnDeleteAll" onclick="{$recent_keyword_remove_all}">검색기록 전체삭제</button>
         </div>
     </div>
-    <button type="button" class="btnClose" id="{$search_cancel_id}">닫기</button>
+    -->
 </div>
