@@ -730,18 +730,21 @@ main#contents {
     border-radius: 16px;
     overflow: hidden;
     margin: 0 auto 20px;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
     background: #F6F6F6;
     position: relative;
+    z-index: 2;
     width: 350px;
     height: 350px;
     opacity: 1;
+    filter: grayscale(0.8);
 }
 
 .categorySlide .swiper-slide-active .img-box,
 .categorySlide .swiper-slide-duplicate-active .img-box {
     opacity: 1;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+    filter: grayscale(0);
 }
 
 .categorySlide .img-box:hover {
@@ -874,9 +877,11 @@ main#contents {
 /* --- Category text visibility & center-slide animation --- */
 /* Hide text for non-active slides and animate it up when slide becomes active (centered) */
 .categorySlide .cat-text-wrap {
+    position: relative;
+    z-index: 1;
     opacity: 0;
-    /* start above the image so it will drop down */
-    transform: translateY(-44px);
+    /* start behind the image so it will slide down from underneath */
+    transform: translateY(-60px);
     /* slower, smoother easing */
     transition: opacity 0.72s cubic-bezier(.16, .84, .24, 1), transform 0.72s cubic-bezier(.16, .84, .24, 1);
     pointer-events: none;
@@ -897,7 +902,7 @@ main#contents {
 .categorySlide .swiper-slide-duplicate-next .cat-text-wrap {
     /* Keep neighbor slides' text hidden (image visible) */
     opacity: 0;
-    transform: translateY(-44px);
+    transform: translateY(-60px);
     pointer-events: none;
 }
 
