@@ -1,119 +1,182 @@
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-body, div, p, a, span, li, button, input, td, th {
-    font-family: 'Pretendard', sans-serif;
-}
-h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
-    font-family: 'Poppins', 'Pretendard', sans-serif;
-}
-/* Ensure navigation menu uses the correct font */
-.header-nav-scroll a {
-    font-family: 'Poppins', 'Pretendard', sans-serif;
-}
-/* Utility (Login area) uses Pretendard */
-.btnBasket {
-    font-family: 'Pretendard', sans-serif !important;
-}
-/* Aggressively clear any black background in header */
-#header, .header, #topArea, .header-nav-wrap, .header-nav-scroll, .header-nav-wrap *, div[module="Layout_category"] {
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-}
+    body,
+    div,
+    p,
+    a,
+    span,
+    li,
+    button,
+    input,
+    td,
+    th {
+        font-family: 'Pretendard', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .mainTitle,
+    .title,
+    .main_title {
+        font-family: 'Poppins', 'Pretendard', sans-serif;
+    }
+
+    /* Ensure navigation menu uses the correct font */
+    .header-nav-scroll a {
+        font-family: 'Poppins', 'Pretendard', sans-serif;
+    }
+
+    /* Utility (Login area) uses Pretendard */
+    .btnBasket {
+        font-family: 'Pretendard', sans-serif !important;
+    }
+
+    /* Aggressively clear any black background in header */
+    #header,
+    .header,
+    #topArea,
+    .header-nav-wrap,
+    .header-nav-scroll,
+    .header-nav-wrap *,
+    div[module="Layout_category"] {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+    }
 </style>
-<header id="header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: #ffffff !important; border-bottom: 1px solid #eee;">
+<header id="header"
+    style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: #ffffff !important; border-bottom: 1px solid #eee;">
     <div class="header">
         <!-- Top Area -->
-        <section id="topArea" style="position:relative; display:flex; justify-content:space-between; align-items:center; padding:12px 10px; border-bottom:1px solid #f9f9f9; background-color: #ffffff !important; box-sizing:border-box; width:100%;">
+        <section id="topArea"
+            style="position:relative; display:flex; justify-content:space-between; align-items:center; padding:12px 10px; border-bottom:1px solid #f9f9f9; background-color: #ffffff !important; box-sizing:border-box; width:100%;">
             <div class="header-left" style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-                <a href="#none" class="fold" style="display:block; width:28px; height:28px; background:url('data:image/svg+xml;utf8,<svg viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M3 12H21M3 6H21M3 18H21\' stroke=\'black\' stroke-width=\'2.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>') no-repeat center; background-size:contain; text-indent:-9999px; flex-shrink:0;">메뉴</a>
+                <a href="#none" class="fold"
+                    style="display:block; width:28px; height:28px; background:url('data:image/svg+xml;utf8,<svg viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M3 12H21M3 6H21M3 18H21\' stroke=\'black\' stroke-width=\'2.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>') no-repeat center; background-size:contain; text-indent:-9999px; flex-shrink:0;">메뉴</a>
                 <a href="/myshop/index.html" style="display:flex; align-items:center; justify-content:center;">
-                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </a>
             </div>
-            
-            <div class="header-center" style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); display:flex; align-items:center; justify-content:center;">
-                <h1 module="Layout_LogoTop" style="margin:0; padding:0; display:flex; align-items:center; flex-shrink:0;">
-                    <a href="/index.html" style="display:block; flex-shrink:0;"><img src="//ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/category/logo/v2_e67ead919d7bb3da8e8c7d94ccc06be4_QBVL4HaAn9_top.jpg" alt="TVZONE" style="height:45px; width:auto; max-width:200px; object-fit:contain; vertical-align:middle; display:block;" /></a>
+
+            <div class="header-center"
+                style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); display:flex; align-items:center; justify-content:center;">
+                <h1 module="Layout_LogoTop"
+                    style="margin:0; padding:0; display:flex; align-items:center; flex-shrink:0;">
+                    <a href="/index.html" style="display:block; flex-shrink:0;"><img
+                            src="//ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/category/logo/v2_e67ead919d7bb3da8e8c7d94ccc06be4_QBVL4HaAn9_top.jpg"
+                            alt="TVZONE"
+                            style="height:45px; width:auto; max-width:200px; object-fit:contain; vertical-align:middle; display:block;" /></a>
                 </h1>
             </div>
-            
+
             <div class="header-right" style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
-                <button type="button" class="btnSearch" style="width:26px; height:26px; border:none; background:none; padding:0; cursor:pointer; display:inline-flex; align-items:center; justify-content:center;">
+                <button type="button" class="btnSearch"
+                    style="width:26px; height:26px; border:none; background:none; padding:0; cursor:pointer; display:inline-flex; align-items:center; justify-content:center;">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path
+                            d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                            stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
-                <div module="Layout_orderBasketcount" style="margin:0 !important; padding:0 !important; display:flex !important; align-items:center !important; position:static !important; width:auto !important; height:auto !important; right:auto !important; top:auto !important;">
+                <div module="Layout_orderBasketcount"
+                    style="margin:0 !important; padding:0 !important; display:flex !important; align-items:center !important; position:static !important; width:auto !important; height:auto !important; right:auto !important; top:auto !important;">
                     <a href="/order/basket.html" style="display:inline-flex; position:relative; text-decoration:none;">
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 11V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11M5 9H19L20 21H4L5 9Z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 11V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11M5 9H19L20 21H4L5 9Z"
+                                stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span class="count {$basket_count_display|display} {$basket_count_display_class}" style="position:absolute; top:-4px; right:-6px; background:#e53935; color:#fff; border-radius:10px; padding:2px 4px; min-width:14px; text-align:center; display:inline-block; font-size:10px; font-weight:bold; line-height:1; box-sizing:border-box;"><span class="{$basket_count_class}">{$basket_count}</span></span>
+                        <span class="count {$basket_count_display|display} {$basket_count_display_class}"
+                            style="position:absolute; top:-4px; right:-6px; background:#e53935; color:#fff; border-radius:10px; padding:2px 4px; min-width:14px; text-align:center; display:inline-block; font-size:10px; font-weight:bold; line-height:1; box-sizing:border-box;"><span
+                                class="{$basket_count_class}">{$basket_count}</span></span>
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- Bottom Navigation Area -->
-        <div class="header-nav-wrap" style="position:relative; display:block; padding:0 44px 0 20px; background-color: #ffffff !important; box-sizing:border-box; width:100%;">
+        <div class="header-nav-wrap"
+            style="position:relative; display:block; padding:0 44px 0 20px; background-color: #ffffff !important; box-sizing:border-box; width:100%;">
             <div module="Layout_category" style="width:100%; overflow:hidden;">
-                <ul class="header-nav-scroll" style="display:flex; overflow-x:auto; gap:18px; padding:12px 0; margin:0; list-style:none; white-space:nowrap; -webkit-overflow-scrolling:touch; scrollbar-width:none; background-color: #ffffff !important; transition: all 0.3s ease;">
-                    <li><a href="/product/list.html{$param}" style="color:#000; font-weight:bold; font-size:13px; text-decoration:none; display:block; letter-spacing:-0.5px;">{$name_or_img_tag}</a></li>
-                    <li><a href="/product/list.html{$param}" style="color:#000; font-weight:bold; font-size:13px; text-decoration:none; display:block; letter-spacing:-0.5px;">{$name_or_img_tag}</a></li>
-                    <li><a href="/shopinfo/nara.html" style="color:#000; font-weight:bold; font-size:13px; text-decoration:none; display:block; letter-spacing:-0.5px;">나라장터쇼핑몰</a></li>
+                <ul class="header-nav-scroll"
+                    style="display:flex; overflow-x:auto; gap:18px; padding:12px 0; margin:0; list-style:none; white-space:nowrap; -webkit-overflow-scrolling:touch; scrollbar-width:none; background-color: #ffffff !important; transition: all 0.3s ease;">
+                    <li><a href="/product/list.html{$param}"
+                            style="color:#000; font-weight:bold; font-size:13px; text-decoration:none; display:block; letter-spacing:-0.5px;">{$name_or_img_tag}</a>
+                    </li>
+                    <li><a href="/product/list.html{$param}"
+                            style="color:#000; font-weight:bold; font-size:13px; text-decoration:none; display:block; letter-spacing:-0.5px;">{$name_or_img_tag}</a>
+                    </li>
+                    <li><a href="/shopinfo/nara.html"
+                            style="color:#000; font-weight:bold; font-size:13px; text-decoration:none; display:block; letter-spacing:-0.5px;">나라장터쇼핑몰</a>
+                    </li>
                 </ul>
             </div>
-            
-            <button type="button" id="navExpandBtn" style="position:absolute; right:0; top:0; height:100%; width:44px; display:flex; align-items:center; justify-content:center; background:#fff; border:none; border-left:1px solid #eee; cursor:pointer; z-index:10;">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+            <button type="button" id="navExpandBtn"
+                style="position:absolute; right:0; top:0; height:100%; width:44px; display:flex; align-items:center; justify-content:center; background:#fff; border:none; border-left:1px solid #eee; cursor:pointer; z-index:10;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
             </button>
             <style>
-                .header-nav-scroll::-webkit-scrollbar { 
-                    height: 2px; 
+                .header-nav-scroll::-webkit-scrollbar {
+                    height: 2px;
                 }
-                .header-nav-scroll::-webkit-scrollbar-track { 
-                    background: transparent; 
+
+                .header-nav-scroll::-webkit-scrollbar-track {
+                    background: transparent;
                 }
-                .header-nav-scroll::-webkit-scrollbar-thumb { 
-                    background: #ddd; 
+
+                .header-nav-scroll::-webkit-scrollbar-thumb {
+                    background: #ddd;
                     border-radius: 2px;
                 }
-                .header-nav-wrap.expanded { padding-right: 20px !important; }
-                .header-nav-wrap.expanded .header-nav-scroll { 
+
+                .header-nav-wrap.expanded {
+                    padding-right: 20px !important;
+                }
+
+                .header-nav-wrap.expanded .header-nav-scroll {
                     display: grid !important;
                     grid-template-columns: repeat(3, 1fr);
-                    gap: 16px 8px;
+                    gap: 5px !important;
                     padding-bottom: 20px !important;
                     white-space: normal !important;
                 }
+
                 .header-nav-wrap.expanded .header-nav-scroll li {
                     display: flex;
                     align-items: center;
                     justify-content: flex-start;
                 }
+
                 .header-nav-wrap.expanded .header-nav-scroll a {
                     font-size: 14px !important;
                     line-height: 1.2;
                     word-break: keep-all;
                 }
+
                 .header-nav-wrap.expanded #navExpandBtn svg {
                     transform: rotate(45deg);
                     transition: transform 0.3s ease;
                 }
+
                 #navExpandBtn svg {
                     transition: transform 0.3s ease;
                 }
             </style>
             <script>
-                document.getElementById('navExpandBtn').addEventListener('click', function() {
+                document.getElementById('navExpandBtn').addEventListener('click', function () {
                     document.querySelector('.header-nav-wrap').classList.toggle('expanded');
                 });
             </script>
@@ -123,7 +186,7 @@ h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
 </header>
 <div id="header-spacer"></div>
 <script>
-    (function() {
+    (function () {
         // 헤더 스페이서 높이 업데이트
         function updateSpacer() {
             var header = document.getElementById('header');
@@ -137,18 +200,18 @@ h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
         updateSpacer();
 
         // 검색창 토글 스크립트
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var searchBtn = document.querySelector('.btnSearch');
             var searchBox = document.querySelector('.searchBox, .xans-layout-searchheader');
-            
+
             if (searchBtn && searchBox) {
-                searchBtn.addEventListener('click', function(e) {
+                searchBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     if (searchBox.style.display === 'block') {
                         searchBox.style.display = 'none';
                     } else {
                         searchBox.style.display = 'block';
-                        setTimeout(function() {
+                        setTimeout(function () {
                             var keywordInput = document.getElementById('keyword');
                             if (keywordInput) {
                                 keywordInput.focus();
@@ -161,7 +224,7 @@ h1, h2, h3, h4, h5, h6, .mainTitle, .title, .main_title {
             // 검색창 내부 닫기 버튼 이벤트
             var closeBtn = document.querySelector('.searchBox .btnClose, .xans-layout-searchheader .btnClose');
             if (closeBtn && searchBox) {
-                closeBtn.addEventListener('click', function(e) {
+                closeBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     searchBox.style.display = 'none';
                 });

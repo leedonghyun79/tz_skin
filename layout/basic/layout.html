@@ -213,7 +213,52 @@
         </script>
         -->
 
-
+        <!-- [TVZone] 옵션 마이너스 가격 제거 스크립트 -->
+        <script>
+        (function(){
+            function removeOptionPrices(node) {
+                if (node.nodeType === 3) { 
+                    var val = node.nodeValue;
+                    if (val && val.indexOf('(') !== -1 && (val.indexOf('+') !== -1 || val.indexOf('-') !== -1)) {
+                        // 정규식: 괄호 안의 + 또는 - 와 숫자, 콤마, '원' 포함 문자열을 모두 제거
+                        node.nodeValue = val.replace(/\s*\(\s*[\+\-]\s*[0-9,]+\s*[원]?\s*\)/g, '');
+                    }
+                } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                    for (var i = 0; i < node.childNodes.length; i++) {
+                        removeOptionPrices(node.childNodes[i]);
+                    }
+                }
+            }
+            function runEraser() {
+                var targetAreas = document.querySelectorAll('.xans-order, #mCafe24Order, .ec-base-prdInfo, .prdInfo, .option, .prdName, .description');
+                if (targetAreas.length > 0) {
+                    targetAreas.forEach(function(area) {
+                        removeOptionPrices(area);
+                    });
+                } else {
+                    removeOptionPrices(document.body);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', runEraser);
+            var observer = new MutationObserver(function(mutations) {
+                var shouldUpdate = false;
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length > 0) { shouldUpdate = true; }
+                });
+                if (shouldUpdate) { runEraser(); }
+            });
+            if (document.body) {
+                observer.observe(document.body, { childList: true, subtree: true });
+            } else {
+                document.addEventListener('DOMContentLoaded', function() {
+                    observer.observe(document.body, { childList: true, subtree: true });
+                });
+            }
+            // 즉시 1회 실행
+            setTimeout(runEraser, 500);
+            setTimeout(runEraser, 1500);
+        })();
+        </script>
     </body>
 
 </html>

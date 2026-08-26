@@ -961,6 +961,12 @@
                         }
                     }
 
+                    // PC 버전: 개별 상품 가격 영역 숨김 (하단 총상품금액과 중복 방지)
+                    var priceEls = tr.querySelectorAll('.ec-front-product-item-price, td.right span.price, td:nth-child(3) span');
+                    priceEls.forEach(function(el) {
+                        el.style.setProperty('display', 'none', 'important');
+                    });
+
                     tr.dataset.formatted = "true";
                 });
             }
@@ -1113,6 +1119,8 @@
                     btn.style.setProperty('display', 'none', 'important');
                 });
 
+
+
                 optionSelects.forEach(function (select) {
                     // Find the parent table and add our bulletproof class
                     var table = select.closest('table');
@@ -1187,8 +1195,7 @@
                             
                             var allSelected = true;
                             optionSelects.forEach(function(s) {
-                                // Ignore default unselected states. Be careful not to block valid options like "선택안함"
-                                if (s.value === '*' || s.value === '' || s.value === '옵션 선택' || s.value.indexOf('[필수] 옵션 선택') > -1 || s.value.indexOf('[선택] 옵션 선택') > -1) {
+                                if (s.value === '*' || s.value === '' || s.value.indexOf('선택') > -1) {
                                     allSelected = false;
                                 }
                             });
@@ -1206,6 +1213,91 @@
                     }
                 }
             });
+
+            // PC버전 커스텀 경고창 로직
+            var alertShown = false;
+            function validateOptionsAndReturn() {
+                var selectedProducts = document.querySelectorAll('tbody.option_products tr, #totalProducts tbody tr, div[id^="totalProducts"] tbody tr');
+                var hasSelectedProduct = false;
+                selectedProducts.forEach(function (tr) {
+                    if (!tr.classList.contains('custom-option-heading') && tr.style.display !== 'none' && !tr.classList.contains('base-product-hidden')) {
+                        if (tr.querySelector('input[type="text"], input[type="number"], .quantity_opt, .ec-base-qty, .delete, [src*="delete"], [src*="close"], .option_box_del')) {
+                            hasSelectedProduct = true;
+                        }
+                    }
+                });
+
+                if (hasSelectedProduct) {
+                    return true;
+                }
+
+                var selects = document.querySelectorAll('.infoArea select, .ec-base-product select, .productSet select, table[module="product_option"] select');
+                var missingRequired = false;
+                var missingOptional = false;
+                var hasAnyOptions = false;
+
+                selects.forEach(function(s) {
+                    if (s.id.includes('option_id') || s.name.includes('option') || s.id.includes('product_addoption')) {
+                        if (s.style.display !== 'none' && s.offsetParent !== null && !s.disabled) {
+                            hasAnyOptions = true;
+                            var optText = s.options[s.selectedIndex] ? s.options[s.selectedIndex].text : '';
+                            if (s.value === '*' || s.value === '' || optText.includes('옵션 선택') || optText.includes('선택해주세요')) {
+                                if (optText.includes('필수')) {
+                                    missingRequired = true;
+                                } else {
+                                    missingOptional = true;
+                                }
+                            }
+                        }
+                    }
+                });
+
+                if (hasAnyOptions && (missingRequired || missingOptional)) {
+                    if (!alertShown) {
+                        alertShown = true;
+                        setTimeout(function() { alertShown = false; }, 1000);
+                        
+                        if (missingRequired) {
+                            alert('필수 옵션을 확인해주세요.');
+                        } else {
+                            alert('모든 선택옵션을 확인해주세요.');
+                        }
+                    }
+                    return false;
+                }
+                return true;
+            }
+
+            function blockEvent(e) {
+                var target = e.target;
+                if (target && target.nodeType === 3) {
+                    target = target.parentNode;
+                }
+                if (!target || !target.closest) return;
+
+                var btn = target.closest('[module="product_action"] a, [module="product_action"] button, #actionCart, #actionCartClone, .btnStrong, .btnNormal');
+                
+                if (btn && (btn.textContent.includes('구매') || btn.textContent.includes('장바구니') || btn.id.includes('Cart') || btn.id.includes('Buy') || btn.getAttribute('onclick'))) {
+                    if (!validateOptionsAndReturn()) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+                        return false;
+                    }
+                }
+            }
+
+            window.addEventListener('click', blockEvent, true);
+            
+            // 최후의 수단: 카페24 기본 submit 함수 래핑
+            if (window.product_submit && !window.product_submit.intercepted) {
+                var orig_product_submit = window.product_submit;
+                window.product_submit = function() {
+                    if (!validateOptionsAndReturn()) return false;
+                    return orig_product_submit.apply(this, arguments);
+                };
+                window.product_submit.intercepted = true;
+            }
 
             var observer = new MutationObserver(function (mutations) {
                 observer.disconnect();

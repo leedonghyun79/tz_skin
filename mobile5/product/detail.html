@@ -1433,6 +1433,12 @@
                         wrapper.appendChild(upEl);
                     }
                 }
+                
+                // 개별 상품 가격 열 숨김 (총상품금액과 중복)
+                var priceTd = tr.querySelector('td:nth-child(2), td.price');
+                if (priceTd) {
+                    priceTd.style.setProperty('display', 'none', 'important');
+                }
 
                 tr.dataset.formatted = "true";
             });
@@ -1574,18 +1580,10 @@
                 return s.id.includes('option_id') || s.name.includes('option') || s.id.includes('product_addoption');
             });
 
-            var selectBtns = document.querySelectorAll('.infoArea .selectButton, .ec-base-product .selectButton, .selectButton');
-            if (optionSelects.length === 0) {
-                selectBtns.forEach(function (btn) {
-                    btn.style.setProperty('display', 'none', 'important');
-                });
-            } else {
-                selectBtns.forEach(function (btn) {
-                    if (btn.style.getPropertyValue('display') === 'none') {
-                        btn.style.removeProperty('display');
-                    }
-                });
-            }
+            var selectBtns = document.querySelectorAll('.infoArea .selectButton, .ec-base-product .selectButton, .selectButton, [id*="option_push_button"]');
+            selectBtns.forEach(function (btn) {
+                btn.style.setProperty('display', 'none', 'important');
+            });
 
             optionSelects.forEach(function (select) {
                 // Find the parent table and add our bulletproof class
@@ -1651,6 +1649,132 @@
         });
 
         observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+
+        // Auto-click option button when options are selected
+        document.body.addEventListener('change', function(e) {
+            if (e.target.tagName && e.target.tagName.toLowerCase() === 'select') {
+                if (e.target.id.includes('option_id') || e.target.name.includes('option') || e.target.id.includes('product_addoption')) {
+                    var container = e.target.closest('table, .productSet, .infoArea');
+                    var addBtns = container ? container.querySelectorAll('.selectButton a, a[onclick*="action_push_button"], a[onclick*="add_action_push_button"], .selectButton button, button[onclick*="action_push_button"], button[onclick*="add_action_push_button"]') : [];
+                    
+                    if (addBtns.length > 0) {
+                        var allSelects = container.querySelectorAll('select');
+                        var optionSelects = Array.from(allSelects).filter(function (s) {
+                            return (s.id.includes('option_id') || s.name.includes('option') || s.id.includes('product_addoption')) && 
+                                   s.style.display !== 'none' && 
+                                   s.offsetParent !== null && 
+                                   !s.disabled;
+                        });
+                        
+                        var allSelected = true;
+                        optionSelects.forEach(function(s) {
+                            var optText = s.options[s.selectedIndex] ? s.options[s.selectedIndex].text : '';
+                            if (s.value === '*' || s.value === '' || optText.includes('옵션 선택') || optText.includes('선택해주세요')) {
+                                allSelected = false;
+                            }
+                        });
+                        
+                        if (allSelected) {
+                            setTimeout(function() {
+                                addBtns.forEach(function(btn) {
+                                    if (btn.style.display !== 'none' || btn.closest('.selectButton')) {
+                                        btn.click();
+                                    }
+                                });
+                            }, 150);
+                        }
+                    }
+                }
+            }
+        });
+
+        var alertShown = false;
+        function validateOptionsAndReturn() {
+            var selectedProducts = document.querySelectorAll('tbody.option_products tr, #totalProducts tbody tr, div[id^="totalProducts"] tbody tr');
+            var hasSelectedProduct = false;
+            selectedProducts.forEach(function (tr) {
+                if (!tr.classList.contains('custom-option-heading') && tr.style.display !== 'none' && !tr.classList.contains('base-product-hidden')) {
+                    if (tr.querySelector('input[type="text"], input[type="number"], .quantity_opt, .ec-base-qty, .delete, [src*="delete"], [src*="close"], .option_box_del')) {
+                        hasSelectedProduct = true;
+                    }
+                }
+            });
+
+            // 옵션이 다 선택되어 하단 리스트에 추가된 경우 통과
+            if (hasSelectedProduct) {
+                return true;
+            }
+
+            var selects = document.querySelectorAll('.prdDesc select, .infoArea select, .ec-base-product select, .productSet select, table[module="product_option"] select');
+            var missingRequired = false;
+            var missingOptional = false;
+            var hasAnyOptions = false;
+
+            selects.forEach(function(s) {
+                if (s.id.includes('option_id') || s.name.includes('option') || s.id.includes('product_addoption')) {
+                    if (s.style.display !== 'none' && s.offsetParent !== null && !s.disabled) {
+                        hasAnyOptions = true;
+                        var optText = s.options[s.selectedIndex] ? s.options[s.selectedIndex].text : '';
+                        if (s.value === '*' || s.value === '' || optText.includes('옵션 선택') || optText.includes('선택해주세요')) {
+                            if (optText.includes('필수')) {
+                                missingRequired = true;
+                            } else {
+                                missingOptional = true;
+                            }
+                        }
+                    }
+                }
+            });
+
+            if (hasAnyOptions && (missingRequired || missingOptional)) {
+                if (!alertShown) {
+                    alertShown = true;
+                    setTimeout(function() { alertShown = false; }, 1000);
+                    
+                    if (missingRequired) {
+                        alert('필수 옵션을 확인해주세요.');
+                    } else {
+                        alert('모든 선택옵션을 확인해주세요.');
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
+
+        function blockEvent(e) {
+            var target = e.target;
+            if (target && target.nodeType === 3) {
+                target = target.parentNode;
+            }
+            if (!target || !target.closest) return;
+
+            var btn = target.closest('[module="product_action"] a, [module="product_action"] button, #orderFixArea a, #orderFixArea button, #actionCart, #actionCartClone, .btnStrong, .btnNormal');
+            
+            if (btn && (btn.textContent.includes('구매') || btn.textContent.includes('장바구니') || btn.id.includes('Cart') || btn.id.includes('Buy') || btn.getAttribute('onclick'))) {
+                if (!validateOptionsAndReturn()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    return false;
+                }
+            }
+        }
+
+        window.addEventListener('click', blockEvent, true);
+        window.addEventListener('touchstart', blockEvent, {passive: false, capture: true});
+        window.addEventListener('touchend', blockEvent, {passive: false, capture: true});
+        window.addEventListener('pointerdown', blockEvent, {passive: false, capture: true});
+        
+        // 최후의 수단: 카페24 기본 submit 함수 래핑
+        if (window.product_submit && !window.product_submit.intercepted) {
+            var orig_product_submit = window.product_submit;
+            window.product_submit = function() {
+                if (!validateOptionsAndReturn()) return false;
+                return orig_product_submit.apply(this, arguments);
+            };
+            window.product_submit.intercepted = true;
+        }
     });
 </script>
 
