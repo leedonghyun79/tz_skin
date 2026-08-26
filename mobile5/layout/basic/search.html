@@ -12,6 +12,11 @@
             <legend>검색</legend>
             <div class="searchForm">
                 {$form.keyword}
+                <script>
+                    if(document.getElementById('keyword')) {
+                        document.getElementById('keyword').placeholder = '찾으실 상품을 입력해주세요';
+                    }
+                </script>
                 <button type="button" class="btnDelete" style="display:none;">삭제</button>
             </div>
         </fieldset>

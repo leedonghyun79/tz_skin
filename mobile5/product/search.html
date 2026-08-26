@@ -9,6 +9,11 @@
 
     <div class="searchbox">
         {$form.keyword}
+        <script>
+            if(document.getElementById('keyword')) {
+                document.getElementById('keyword').placeholder = '찾으실 상품을 입력해주세요';
+            }
+        </script>
         <p class="button"><button type="submit" class="btnStrong">검색</button></p>
         <button type="button" class="btnDelete">삭제</button>
     </div>

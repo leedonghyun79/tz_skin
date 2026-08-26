@@ -668,7 +668,7 @@ main#contents {
 
 /* categorySlide */
 .categorySlide {
-    margin: 150px auto;
+    margin: 100px auto;
     max-width: 1300px;
     width: 100%;
     position: relative;
@@ -1294,7 +1294,7 @@ main#contents {
     .xans-product-listmain-2,
     .xans-product-listmain-3 {
         max-width: 1300px;
-        margin: 150px auto 0;
+        margin: 100px auto 0;
     }
 
     .productSlide {
@@ -1414,7 +1414,7 @@ main#contents {
     /* videoBanner - PC */
     .videoBanner {
         max-width: 1300px;
-        margin: 150px auto;
+        margin: 100px auto;
     }
 
     .videoBanner__inner {

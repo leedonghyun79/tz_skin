@@ -3,13 +3,15 @@
     <!--@css(/css/module/product/menuPackage.css)-->
     <div id="titleArea" module="product_headcategory">
         <h2>{$title_text_or_image}</h2>
-        <span module="Layout_MobileAction">
+        <!-- <span module="Layout_MobileAction">
             <a href="#none" onclick="{$go_back}"><img src="//img.echosting.cafe24.com/skin/mobile_ko_KR/layout/btn_back.gif" width="33" alt="뒤로가기"></a>
-        </span>
+        </span> -->
         <div class="funcArea">
             <span class="likeButton {$disp_likecate_class}"><button type="button">{$disp_likecate_icon}<strong>{$disp_likecate_count}</strong></button></span>
         </div>
     </div>
+
+
 
     <ul class="menuCategory">
 
@@ -46,8 +48,118 @@
         </li>
     </ul>
 
-    <p class="banner" module="product_headcategory">{$top_image1_tag_mobile}{$top_image2_tag_mobile}{$top_image3_tag_mobile}</p>
+    <!-- <p class="banner" module="product_headcategory">{$top_image1_tag_mobile}{$top_image2_tag_mobile}{$top_image3_tag_mobile}</p> -->
 </div>
+
+    <div class="xans-element- xans-product xans-product-menupackage">
+        <script>
+            (function() {
+                var currentCateNo = null;
+                var m = window.location.href.match(/[?&]cate_no=(\d+)/);
+                if (m) currentCateNo = m[1];
+                else {
+                    var m2 = window.location.pathname.match(/\/(\d+)\/(?:display\/\d+\/?)?$/);
+                    if (m2) currentCateNo = m2[1];
+                    else {
+                        var m3 = window.location.pathname.match(/\/(\d+)\/?$/);
+                        if (m3) currentCateNo = m3[1];
+                    }
+                }
+                
+                if (!currentCateNo && typeof window.iCategoryNo !== 'undefined') {
+                    currentCateNo = window.iCategoryNo;
+                }
+                
+                document.write('<style>');
+                document.write('#titleArea { border-bottom: 0 !important; margin-top: 15px !important; }');
+                document.write('.custom-hardcoded-menu { display: none !important; border-bottom: 0 !important; margin: 0 auto 50px !important; padding: 20px 0px 10px !important; width: 92% !important; white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }');
+                document.write('.custom-hardcoded-menu::-webkit-scrollbar { height: 4px; }');
+                document.write('.custom-hardcoded-menu::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }');
+                document.write('.custom-hardcoded-menu::-webkit-scrollbar-track { background: transparent; }');
+                document.write('.custom-hardcoded-menu > li { display: inline-block !important; border: 1px solid #ddd !important; border-radius: 4px !important; padding: 6px 12px !important; margin: 0 6px 0 0 !important; background: #fff !important; }');
+                document.write('.custom-hardcoded-menu > li.selected { border: 1px solid #000 !important; }');
+                document.write('.custom-hardcoded-menu > li > a { margin: 0 !important; }');
+                
+                if (currentCateNo) {
+                    var c = currentCateNo.toString();
+                    var map = {
+                        '65': '65', '68': '65', '69': '65', '70': '65', '71': '65', '72': '65', '73': '65', '74': '65',
+                        '24': 'led', '29': 'led', '30': 'led', '31': 'led', '43': 'led', '75': 'led', '76': 'led', '77': 'led', '78': 'led', '79': 'led', '80': 'led',
+                        '25': 'digital', '33': 'digital', '44': 'digital', '32': 'digital',
+                        '26': 'kiosk', '46': 'kiosk', '47': 'kiosk', '48': 'kiosk', '64': 'kiosk', '45': 'kiosk',
+                        '27': 'mounts', '49': 'mounts', '59': 'mounts', '61': 'mounts', '60': 'mounts'
+                    };
+                    
+                    if (map[c]) {
+                        document.write('#hardcoded-tabs-' + map[c] + ' { display: block !important; }');
+                        document.write('.menuCategory:not(.custom-hardcoded-menu) { display: none !important; }');
+                    }
+                }
+                document.write('</style>');
+            })();
+        </script>
+
+        <!-- 3차 메뉴 (안드로이드 사이니지 하위) -->
+        <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-65">
+            <li data-cate="65"><a href="/product/list_gallery.html?cate_no=65">전체</a></li>
+            <li data-cate="68"><a href="/product/list_gallery.html?cate_no=68">실내용</a></li>
+            <li data-cate="69"><a href="/product/list_gallery.html?cate_no=69">반옥외용</a></li>
+            <li data-cate="70"><a href="/product/list_gallery.html?cate_no=70">옥외용</a></li>
+            <li data-cate="72"><a href="/product/list_gallery.html?cate_no=72">특수용도</a></li>
+            <li data-cate="73"><a href="/product/list_gallery.html?cate_no=73">키오스크/함체</a></li>
+            <li data-cate="74"><a href="/product/list_gallery.html?cate_no=74">DID솔루션</a></li>
+            <li data-cate="71"><a href="/product/list_gallery.html?cate_no=71">PC모니터 / TV / 전자칠판</a></li>
+        </ul>
+
+        <!-- 2차 메뉴: LED Signage -->
+        <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-led">
+            <li data-cate="24"><a href="/product/list_gallery.html?cate_no=24">전체</a></li>
+            <li data-cate="29"><a href="/product/list_gallery.html?cate_no=29">실내용</a></li>
+            <li data-cate="30"><a href="/product/list_gallery.html?cate_no=30">실외용</a></li>
+            <li data-cate="31"><a href="/product/list_gallery.html?cate_no=31">배너형 포스터</a></li>
+            <li data-cate="43"><a href="/product/list_gallery.html?cate_no=43">특수형(비정형)</a></li>
+        </ul>
+
+        <!-- 2차 메뉴: Digital Signage -->
+        <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-digital">
+            <li data-cate="25"><a href="/product/list_gallery.html?cate_no=25">전체</a></li>
+            <li data-cate="33"><a href="/product/list_gallery.html?cate_no=33">삼성 사이니지</a></li>
+            <li data-cate="44"><a href="/product/list_gallery.html?cate_no=44">엘지 사이니지</a></li>
+            <li data-cate="65"><a href="/product/list_gallery.html?cate_no=65">안드로이드 사이니지</a></li>
+            <li data-cate="32"><a href="/product/list_gallery.html?cate_no=32">멀티비전</a></li>
+        </ul>
+
+        <!-- 2차 메뉴: Kiosk & DID -->
+        <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-kiosk">
+            <li data-cate="26"><a href="/product/list_gallery.html?cate_no=26">전체</a></li>
+            <li data-cate="46"><a href="/product/list_gallery.html?cate_no=46">삼성 스탠드</a></li>
+            <li data-cate="47"><a href="/product/list_gallery.html?cate_no=47">엘지 스탠드</a></li>
+            <li data-cate="48"><a href="/product/list_gallery.html?cate_no=48">티비존 스탠드</a></li>
+            <li data-cate="64"><a href="/product/list_gallery.html?cate_no=64">옥외형</a></li>
+            <li data-cate="45"><a href="/product/list_gallery.html?cate_no=45">전자액자</a></li>
+        </ul>
+        
+        <!-- 2차 메뉴: Mounts -->
+        <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-mounts">
+            <li data-cate="27"><a href="/product/list_gallery.html?cate_no=27">전체</a></li>
+            <li data-cate="49"><a href="/product/list_gallery.html?cate_no=49">이동형 거치대</a></li>
+            <li data-cate="59"><a href="/product/list_gallery.html?cate_no=59">멀티비전/메뉴보드용 거치대</a></li>
+            <li data-cate="61"><a href="/product/list_gallery.html?cate_no=61">전동형 거치대</a></li>
+            <li data-cate="60"><a href="/product/list_gallery.html?cate_no=60">천정형 거치대</a></li>
+        </ul>
+        
+        <script>
+            // add active class safely after DOM loads
+            $(document).ready(function() {
+                var m = window.location.href.match(/[?&]cate_no=(\d+)/);
+                if (m) {
+                    $('.custom-hardcoded-menu li').removeClass('selected');
+                    $('.custom-hardcoded-menu li[data-cate="'+m[1]+'"]').addClass('selected');
+                }
+            });
+        </script>
+    </div>
+
 
 
 <div module="product_listrecommend" class="ec-base-product">
@@ -111,7 +223,7 @@
             <option value="{$param}">{$sort_name}</option>
         </select>
     </div>
-    <ul class="viewType">
+    <ul class="viewType" style="display: none !important;">
         <li class="list"><a href="/product/list.html{$params}">목록형으로 보기</a></li>
         <li class="thumb"><a href="/product/list_thumb.html{$params}">이미지형으로 보기</a></li>
         <li class="gallery selected"><a href="/product/list_gallery.html{$params}">갤러리형으로 보기</a></li>
@@ -120,7 +232,7 @@
 </div>
 
 
-<div class="ec-base-product typeGallery" module="product_listnormal">
+<div class="ec-base-product typeThumb" module="product_listnormal">
     <!--@js(/js/module/product/list_gallery.js)-->
     <!--
         $count = 10

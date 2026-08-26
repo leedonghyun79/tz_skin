@@ -1,4 +1,4 @@
-﻿<!--@layout(/layout/basic/layout.html)-->
+<!--@layout(/layout/basic/layout.html)-->
 <div class="path">
     <span>현재 위치</span>
     <ol>
@@ -12,6 +12,14 @@
 </div>
 
 <!--@import(/product/shoppQ/searchForm_typeTop.html)-->
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        var keywordInput = document.getElementById('keyword');
+        if(keywordInput) {
+            keywordInput.placeholder = '찾으실 상품을 입력해주세요';
+        }
+    });
+</script>
 <div class="gInnerMargin">
     <div module="Search_Result" class="ec-base-product">
         <!--
