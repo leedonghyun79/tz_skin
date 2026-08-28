@@ -86,7 +86,7 @@ $(document).ready(function(){
             { link: '/product/list.html?cate_no=45', img: 'https://cdn.imweb.me/thumbnail/20260414/0da2809719be5.png', title: 'TZ-PW 시리즈', desc: '밝기: 350nit<br>해상도: 3,840x2,160(4K UHD)' }
         ],
         'Solutions|T-CMS 원격제어 프로그램': [
-            { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/product/big/20260713/3655c890d9c24477557f63e1a1a8fef1.jpg', title: 'T-CMS MULTIPLEX 솔루션 프로그램', desc: '올인원 광고용 디스플레이 컨트롤보드 옥타코어 안드로이드 셋탑박스' }
+            { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/product/medium/20260828/eef80cf8d645f61f5afde99cbd65d44c.jpg', title: '스마트 디스플레이 원격제어 플랫폼<br>T-CMS 안드로이드 셋탑 솔루션', desc: 'T-CMS MULTIPLEX 솔루션 원격제어 프로그램 패키지 - 안드로이드 셋탑 + T-CMS 솔루션' }
         ],
         'Solutions|T-50 USB 솔루션 프로그램': [
             { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/product/big/20260707/e4fe414b193e973b3f13fc90ef0b19de.jpg', title: '[T50-USB] 미디어보드 T50 + 솔루션 프로그램 패키지', desc: '광고용 최적화 솔루션 패키지' }
@@ -407,26 +407,99 @@ $(document).ready(function(){
 
             $('.simple-submenu').remove();
 
-            // 1. 왼쪽 카테고리 목록 업데이트
+            // 1. 왼쪽 카테고리 목록 업데이트 (3차 메뉴 동적 포함)
             var leftHtml = '<ul>';
             $(subItems).each(function() {
-                leftHtml += '<li data-subname="' + this.name + '"><a href="' + this.link + '">' + this.name + '</a></li>';
+                leftHtml += '<li data-subname="' + this.name + '" style="margin-bottom: 12px; position: relative;">';
+                
+                // 텍스트와 버튼을 나란히 배치하기 위해 래퍼 추가
+                leftHtml += '<div style="display: flex; align-items: center;">';
+                leftHtml += '<a href="' + this.link + '" style="display: inline-block;">' + this.name + '</a>';
+                
+                // 동적으로 3차 메뉴(하위 카테고리) 가져오기
+                var match = this.link.match(/cate_no=(\d+)/);
+                var hasSub = false;
+                var subTier3Html = '';
+                
+                // 삼성 스탠드/엘지 스탠드/티비존 스탠드 하위의 (세로형/회전형 등) 3차 메뉴는 숨김 처리
+                var hiddenTier3Parents = ['삼성 스탠드', '엘지 스탠드', '티비존 스탠드'];
+
+                if (match && $.inArray(this.name, hiddenTier3Parents) === -1) {
+                    var tier2CateNo = match[1];
+                    var subTier3 = methods.aSubCategory[tier2CateNo];
+
+                    if (subTier3 && subTier3.length > 0) {
+                        hasSub = true;
+                        var parentName = this.name;
+                        // 항상 펼쳐진 상태(display: block)로 설정
+                        subTier3Html += '<ul class="mega-tier3" style="margin-top: 8px; padding-left: 0; display: block;">';
+                        $(subTier3).each(function() {
+                            subTier3Html += '<li data-subname="' + parentName + '" style="margin-top: 10px; margin-bottom: 0; padding-left: 5px;"><a href="/product/list.html' + (this.param || '?cate_no=' + this.cate_no) + '">' + this.name + '</a></li>';
+                        });
+                        subTier3Html += '</ul>';
+                        
+                        // 화살표 버튼 삭제됨
+                    }
+                }
+                leftHtml += '</div>'; // flex 래퍼 종료
+                
+                if (hasSub) {
+                    leftHtml += subTier3Html;
+                }
+                
+                leftHtml += '</li>';
             });
             leftHtml += '</ul>';
             $('#submenu-left-content').html(leftHtml);
 
+            // 서브메뉴 접기/펴기 이벤트 삭제됨 (항상 펼침)
             // 좌측 서브메뉴 항목에 마우스를 올렸을 때 슬라이더 변경
-            $('#submenu-left-content li').on('mouseenter', function() {
+            $('#submenu-left-content li').on('mouseenter', function(e) {
+                e.stopPropagation(); // 하위 메뉴 호버 시 부모 이벤트 버블링 방지
                 var subName = $(this).data('subname');
+                
                 $('#submenu-left-content li').removeClass('active');
                 $(this).addClass('active');
+                
+                // 3차 메뉴 호버 시, 부모인 2차 메뉴도 활성화 상태(active) 유지
+                if ($(this).closest('.mega-tier3').length > 0) {
+                    $(this).closest('.mega-tier3').closest('li').addClass('active');
+                }
+                
                 renderSubmenuSlider(subName);
             });
 
-            // 2. 처음 열렸을 때 첫 번째 항목의 슬라이더 자동 표시
-            if (subItems.length > 0) {
+            // 2. 처음 열렸을 때 현재 페이지 메뉴 활성화 (없으면 첫 번째 항목)
+            var currentUrl = window.location.href;
+            var matchCate = currentUrl.match(/cate_no=(\d+)/);
+            var activeCateNo = matchCate ? matchCate[1] : null;
+            var $activeLink = null;
+            
+            if (activeCateNo) {
+                $activeLink = $('#submenu-left-content a[href*="cate_no=' + activeCateNo + '"]').first();
+            }
+
+            if ($activeLink && $activeLink.length > 0) {
+                var $activeLi = $activeLink.closest('li');
+                $activeLi.addClass('active');
+                
+                var subName = $activeLi.data('subname');
+                
+                // 3차 메뉴 항목인 경우 부모 2차 메뉴도 활성화하고 아코디언 펼치기
+                if ($activeLi.closest('.mega-tier3').length > 0) {
+                    var $parentLi = $activeLi.closest('.mega-tier3').closest('li');
+                    $parentLi.addClass('active');
+                    $activeLi.closest('.mega-tier3').show(); // 접혀있던 메뉴 펴기
+                    $parentLi.find('.mega-toggle-btn').css('transform', 'rotate(0deg)'); // 화살표 위로
+                    
+                    if (!subName) subName = $parentLi.data('subname'); // 안전장치
+                }
+                
+                renderSubmenuSlider(subName);
+            } else if (subItems.length > 0) {
                 var firstSubName = subItems[0].name;
-                $('#submenu-left-content li').first().addClass('active');
+                // 가장 첫 번째 2차 메뉴 활성화
+                $('#submenu-left-content > ul > li').first().addClass('active');
                 renderSubmenuSlider(firstSubName);
             } else {
                 $('#submenu-module .submenu-banner').empty();

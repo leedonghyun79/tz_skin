@@ -79,6 +79,7 @@
 
 /* 1. 왼쪽: 서브 메뉴 영역 */
 .submenu-left {
+  padding-top: 15px;
   flex: 0 0 330px;
   border-right: 1px solid #eee;
   padding-right: 30px;
@@ -86,7 +87,7 @@
 
 .submenu-left ul {
   margin: 0;
-  padding: 30px;
+  padding: 0;
   list-style: none;
 }
 
@@ -110,11 +111,25 @@
   white-space: nowrap;
 }
 
-.submenu-left>ul>li a:hover,
-.submenu-left>ul>li.active a {
+.submenu-left>ul>li>div>a:hover,
+.submenu-left>ul>li.active>div>a {
   color: #000;
   font-weight: 700;
   background: transparent;
+}
+
+/* 3차 메뉴 (mega-tier3) 링크 스타일 */
+.submenu-left .mega-tier3 li a {
+  font-size: 15px;
+  color: #888;
+  font-weight: 400;
+}
+
+/* 3차 메뉴 개별 호버 및 활성화 상태 */
+.submenu-left .mega-tier3 li a:hover,
+.submenu-left .mega-tier3 li.active>a {
+  color: #000;
+  font-weight: 700;
 }
 
 /* 2. 오른쪽: 상품 배너 영역 */

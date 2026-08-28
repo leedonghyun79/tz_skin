@@ -87,7 +87,7 @@
                         '24': 'led', '29': 'led', '30': 'led', '31': 'led', '43': 'led', '75': 'led', '76': 'led', '77': 'led', '78': 'led', '79': 'led', '80': 'led',
                         '25': 'digital', '33': 'digital', '44': 'digital', '32': 'digital',
                         '26': 'kiosk', '46': 'kiosk', '47': 'kiosk', '48': 'kiosk', '64': 'kiosk', '45': 'kiosk',
-                        '27': 'mounts', '49': 'mounts', '59': 'mounts', '61': 'mounts', '60': 'mounts'
+                        '42': 'mounts', '49': 'mounts', '59': 'mounts', '61': 'mounts', '60': 'mounts'
                     };
                     
                     if (map[c]) {
@@ -141,7 +141,7 @@
         
         <!-- 2차 메뉴: Mounts -->
         <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-mounts">
-            <li data-cate="27"><a href="/product/list_gallery.html?cate_no=27">전체</a></li>
+            <li data-cate="42"><a href="/product/list_gallery.html?cate_no=42">전체</a></li>
             <li data-cate="49"><a href="/product/list_gallery.html?cate_no=49">이동형 거치대</a></li>
             <li data-cate="59"><a href="/product/list_gallery.html?cate_no=59">멀티비전/메뉴보드용 거치대</a></li>
             <li data-cate="61"><a href="/product/list_gallery.html?cate_no=61">전동형 거치대</a></li>
@@ -149,14 +149,41 @@
         </ul>
         
         <script>
-            // add active class safely after DOM loads
-            $(document).ready(function() {
-                var m = window.location.href.match(/[?&]cate_no=(\d+)/);
-                if (m) {
-                    $('.custom-hardcoded-menu li').removeClass('selected');
-                    $('.custom-hardcoded-menu li[data-cate="'+m[1]+'"]').addClass('selected');
+            (function() {
+                function setActive() {
+                    var currentCateNo = null;
+                    var m = window.location.href.match(/[?&]cate_no=(\d+)/);
+                    if (m) currentCateNo = m[1];
+                    else {
+                        var m2 = window.location.pathname.match(/\/(\d+)\/(?:display\/\d+\/?)?$/);
+                        if (m2) currentCateNo = m2[1];
+                        else {
+                            var m3 = window.location.pathname.match(/\/(\d+)\/?$/);
+                            if (m3) currentCateNo = m3[1];
+                        }
+                    }
+                    if (!currentCateNo && typeof window.iCategoryNo !== 'undefined') {
+                        currentCateNo = window.iCategoryNo;
+                    }
+                    
+                    if (currentCateNo) {
+                        var menus = document.querySelectorAll('.custom-hardcoded-menu li');
+                        for(var i=0; i<menus.length; i++) {
+                            menus[i].classList.remove('selected');
+                            if(menus[i].getAttribute('data-cate') == currentCateNo) {
+                                menus[i].classList.add('selected');
+                            }
+                        }
+                    }
                 }
-            });
+                
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', setActive);
+                } else {
+                    setActive();
+                }
+                window.addEventListener('load', setActive);
+            })();
         </script>
     </div>
 

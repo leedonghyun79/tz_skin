@@ -4,7 +4,8 @@
 @import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
 
 /* Hide Cafe24 marketing banner */
-.campaign-container, #campaign-container {
+.campaign-container,
+#campaign-container {
     display: none !important;
 }
 
@@ -404,120 +405,122 @@ code {
 
 /* Float Banner */
 .qm-wrap {
-  position: fixed !important;
-  right: 12px !important;
-  bottom: 80px !important;
-  width: 90px !important;
-  z-index: 400 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  background: #fff !important;
-  border: 1.5px solid #ddd !important;
-  border-radius: 14px !important;
-  overflow: hidden !important;
+    position: fixed !important;
+    right: 12px !important;
+    bottom: 80px !important;
+    width: 90px !important;
+    z-index: 400 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    background: #fff !important;
+    border: 1.5px solid #ddd !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
 }
 
 html.expand .qm-wrap {
-  pointer-events: none !important;
-  border-color: #4d4d4d !important;
-  background-clip: padding-box !important;
+    pointer-events: none !important;
+    border-color: #4d4d4d !important;
+    background-clip: padding-box !important;
 }
+
 html.expand .qm-wrap::after {
-  content: "" !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background: rgba(0, 0, 0, 0.7) !important;
-  z-index: 10 !important;
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    z-index: 10 !important;
 }
 
 .qm-top-btn {
-  width: 100% !important;
-  padding: 10px 0 !important;
-  background: none !important;
-  border: none !important;
-  border-bottom: 1.5px solid #ddd !important;
-  border-radius: 0 !important;
-  cursor: pointer !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 3px !important;
-  text-decoration: none !important;
+    width: 100% !important;
+    padding: 10px 0 !important;
+    background: none !important;
+    border: none !important;
+    border-bottom: 1.5px solid #ddd !important;
+    border-radius: 0 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3px !important;
+    text-decoration: none !important;
 }
 
 .qm-top-arrow {
-  width: 0 !important;
-  height: 0 !important;
-  border-left: 5px solid transparent !important;
-  border-right: 5px solid transparent !important;
-  border-bottom: 7px solid #333 !important;
+    width: 0 !important;
+    height: 0 !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-bottom: 7px solid #333 !important;
 }
 
 .qm-top-txt {
-  font-size: 10px !important;
-  font-weight: 700 !important;
-  color: #333 !important;
-  letter-spacing: 0.05em !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    color: #333 !important;
+    letter-spacing: 0.05em !important;
 }
 
 .qm-item {
-  width: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-bottom: 1.5px solid #ddd !important;
-  text-decoration: none !important;
-  cursor: pointer !important;
+    padding-left: px;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-bottom: 1.5px solid #ddd !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
 }
 
 .qm-top-btn:hover {
-  background: #f5f5f5 !important;
+    background: #f5f5f5 !important;
 }
 
 .qm-top-btn:hover .qm-top-arrow {
-  border-bottom-color: #000 !important;
+    border-bottom-color: #000 !important;
 }
 
 .qm-top-btn:hover .qm-top-txt {
-  color: #000 !important;
+    color: #000 !important;
 }
 
 .qm-item:hover {
-  background: #f5f5f5 !important;
+    background: #f5f5f5 !important;
 }
 
 .qm-item:last-child {
-  border-bottom: none !important;
+    border-bottom: none !important;
 }
 
 .qm-item img {
-  width: 105% !important;
-  height: 85px !important;
-  object-fit: contain !important;
-  display: block !important;
+    width: 100% !important;
+    height: 85px !important;
+    object-fit: contain !important;
+    display: block !important;
 }
 
 @media (max-width: 540px) {
-  .qm-wrap {
-    position: fixed !important;
-    right: 5px !important;
-    bottom: 70px !important;
-    width: 65px !important;
-    border: 1px solid #ddd !important;
-  }
+    .qm-wrap {
+        position: fixed !important;
+        right: 5px !important;
+        bottom: 70px !important;
+        width: 65px !important;
+        border: 1px solid #ddd !important;
+    }
 
-  .qm-item img {
-    width: 100% !important;
-    height: 60px !important;
-  }
+    .qm-item img {
+        width: 100% !important;
+        height: 60px !important;
+    }
 
-  .qm-top-btn {
-    border-radius: 0 !important;
-    border-bottom: 1px solid #ddd !important;
-    padding: 7px 0 !important;
-  }
+    .qm-top-btn {
+        border-radius: 0 !important;
+        border-bottom: 1px solid #ddd !important;
+        padding: 7px 0 !important;
+    }
 }

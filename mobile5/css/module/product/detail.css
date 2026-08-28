@@ -1656,6 +1656,7 @@ body select[id^="product_option_id"] {
 /* --- Related Products margin --- */
 .relation-section-wrapper {
   margin-top: 80px !important;
+  padding: 0 15px !important;
 }
 
 /* --- Mobile Option Area Margin --- */
@@ -1678,7 +1679,7 @@ body select[id^="product_option_id"] {
 
 /* --- Avoid overlap with orderFixArea on mobile --- */
 body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .custom-ch-btn {
-  bottom: 100px !important;
+  bottom: 123px !important;
 }
 
 /* --- Product Detail Image Area Padding --- */
@@ -1695,7 +1696,8 @@ body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .custom-ch-btn {
   padding-left: 23px !important;
 }
 
-#totalProducts, div[id^="totalProducts"] {
+#totalProducts,
+div[id^="totalProducts"] {
   margin: 0 16px !important;
 }
 
@@ -1714,18 +1716,20 @@ body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .custom-ch-btn {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  width: 90px !important; /* Total width: 28+34+28 */
+  width: 90px !important;
+  /* Total width: 28+34+28 */
   height: 28px !important;
   border: 1px solid #ddd !important;
   border-radius: 2px !important;
   overflow: hidden !important;
   background: #fff !important;
   padding: 0 !important;
-  margin: 0 0 0 auto !important; /* Push to the right */
+  margin: 0 0 0 auto !important;
+  /* Push to the right */
 }
 
-.xans-product-detail .ec-base-qty > *,
-.custom-mobile-qty > * {
+.xans-product-detail .ec-base-qty>*,
+.custom-mobile-qty>* {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
@@ -1818,18 +1822,18 @@ body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .custom-ch-btn {
 }
 
 /* In case Cafe24 renders direct <img> tags instead of <a> tags on Mobile */
-.xans-product-detail .ec-base-qty > img[src*="down"],
-.xans-product-detail .ec-base-qty > img[class*="down"],
-.custom-mobile-qty > img[src*="down"] {
+.xans-product-detail .ec-base-qty>img[src*="down"],
+.xans-product-detail .ec-base-qty>img[class*="down"],
+.custom-mobile-qty>img[src*="down"] {
   order: 1 !important;
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='20' fill='%23111'>-</text></svg>") !important;
   object-fit: contain !important;
   cursor: pointer !important;
 }
 
-.xans-product-detail .ec-base-qty > img[src*="up"],
-.xans-product-detail .ec-base-qty > img[class*="up"],
-.custom-mobile-qty > img[src*="up"] {
+.xans-product-detail .ec-base-qty>img[src*="up"],
+.xans-product-detail .ec-base-qty>img[class*="up"],
+.custom-mobile-qty>img[src*="up"] {
   order: 3 !important;
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='20' fill='%23111'>+</text></svg>") !important;
   object-fit: contain !important;
@@ -1838,9 +1842,11 @@ body:has(#orderFixArea:not([style*="none"]):not(.displaynone)) .custom-ch-btn {
 
 /* Fix specific mobile layout overrides that might disrupt flex order */
 @media all and (max-width: 480px) {
+
   #totalProducts tbody tr td .ec-base-qty,
   .custom-mobile-qty {
     margin-right: 0 !important;
-    margin-left: auto !important; /* Force to right edge */
+    margin-left: auto !important;
+    /* Force to right edge */
   }
 }

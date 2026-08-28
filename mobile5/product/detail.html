@@ -7,10 +7,10 @@
     -->
     <div id="titleArea">
         <h2>상품상세 정보</h2>
-        <span module="Layout_MobileAction">
+        <!-- <span module="Layout_MobileAction">
             <a href="#none" onclick="{$go_back}"><img
                     src="//img.echosting.cafe24.com/skin/mobile_ko_KR/layout/btn_back.gif" width="33" alt="뒤로가기"></a>
-        </span>
+        </span> -->
     </div>
 
     <div class="overview" module="product_image">
@@ -1689,6 +1689,93 @@
         });
 
         var alertShown = false;
+
+        // alert() 대신 화면 정중앙에 뜨는 커스텀 모달 (취소/확인 버튼, 닫기버튼, 바깥 클릭으로 닫힘)
+        function showCenterAlert(title, description) {
+            if (description === undefined) {
+                description = title;
+                title = '알림';
+            }
+
+            var overlay = document.getElementById('custom-center-alert-overlay');
+            if (!overlay) {
+                var style = document.createElement('style');
+                style.textContent =
+                    '#custom-center-alert-overlay {' +
+                    '  position: fixed; top: 0; left: 0; width: 100%; height: 100%;' +
+                    '  background: rgba(20, 20, 20, 0.5); backdrop-filter: blur(2px);' +
+                    '  z-index: 99999; display: none; align-items: center; justify-content: center;' +
+                    '  animation: cca-fade-in 0.18s ease-out;' +
+                    '}' +
+                    '#custom-center-alert-box {' +
+                    '  background: #fff; width: 320px; max-width: 84%;' +
+                    '  padding: 26px 24px 22px; border-radius: 20px;' +
+                    '  box-shadow: 0 20px 50px rgba(0,0,0,0.25);' +
+                    '  text-align: left; position: relative;' +
+                    '  font-family: inherit; animation: cca-pop-in 0.2s cubic-bezier(.34,1.56,.64,1);' +
+                    '}' +
+                    '#custom-center-alert-box .cca-title {' +
+                    '  font-size: 17.5px; font-weight: 800; color: #17171a;' +
+                    '  margin: 0 24px 10px 0; word-break: keep-all;' +
+                    '}' +
+                    '#custom-center-alert-box .cca-msg {' +
+                    '  margin-bottom: 22px; word-break: keep-all; font-size: 14px;' +
+                    '  color: #6b6f76; line-height: 1.55; font-weight: 500;' +
+                    '}' +
+                    '#custom-center-alert-box .cca-btns { display: flex; gap: 10px; }' +
+                    '#custom-center-alert-box .cca-btn {' +
+                    '  flex: 1; padding: 12px 0; border-radius: 12px; font-size: 14px;' +
+                    '  font-weight: 700; cursor: pointer; border: none; transition: filter 0.15s;' +
+                    '}' +
+                    '#custom-center-alert-box .cca-btn:hover { filter: brightness(0.96); }' +
+                    '#custom-center-alert-box .cca-btn-cancel { background: #ECEDF0; color: #26282c; }' +
+                    '#custom-center-alert-box .cca-btn-confirm { background: #2563EB; color: #fff; }' +
+                    '#custom-center-alert-box .cca-close {' +
+                    '  position: absolute; top: 14px; right: 14px; width: 28px; height: 28px;' +
+                    '  border-radius: 50%; background: none; border: none; cursor: pointer;' +
+                    '  color: #b4b6bb; font-size: 20px; line-height: 1; display: flex;' +
+                    '  align-items: center; justify-content: center; transition: background 0.15s, color 0.15s;' +
+                    '}' +
+                    '#custom-center-alert-box .cca-close:hover { background: #f2f2f2; color: #666; }' +
+                    '@keyframes cca-fade-in { from { opacity: 0; } to { opacity: 1; } }' +
+                    '@keyframes cca-pop-in { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }';
+                document.head.appendChild(style);
+
+                overlay = document.createElement('div');
+                overlay.id = 'custom-center-alert-overlay';
+                overlay.innerHTML =
+                    '<div id="custom-center-alert-box">' +
+                    '  <button type="button" class="cca-close" aria-label="닫기">&times;</button>' +
+                    '  <div class="cca-title" id="custom-center-alert-title"></div>' +
+                    '  <div class="cca-msg" id="custom-center-alert-msg"></div>' +
+                    '  <div class="cca-btns">' +
+                    '    <button type="button" class="cca-btn cca-btn-cancel">취소</button>' +
+                    '    <button type="button" class="cca-btn cca-btn-confirm">확인</button>' +
+                    '  </div>' +
+                    '</div>';
+                document.body.appendChild(overlay);
+
+                var closeOverlay = function () {
+                    overlay.style.display = 'none';
+                };
+
+                overlay.querySelector('.cca-close').addEventListener('click', closeOverlay);
+                overlay.querySelector('.cca-btn-cancel').addEventListener('click', closeOverlay);
+                overlay.querySelector('.cca-btn-confirm').addEventListener('click', closeOverlay);
+
+                // 모달 바깥(오버레이) 클릭 시 닫힘
+                overlay.addEventListener('click', function (e) {
+                    if (e.target === overlay) {
+                        closeOverlay();
+                    }
+                });
+            }
+
+            document.getElementById('custom-center-alert-title').textContent = title;
+            document.getElementById('custom-center-alert-msg').textContent = description;
+            overlay.style.display = 'flex';
+        }
+
         function validateOptionsAndReturn() {
             var selectedProducts = document.querySelectorAll('tbody.option_products tr, #totalProducts tbody tr, div[id^="totalProducts"] tbody tr');
             var hasSelectedProduct = false;
@@ -1732,9 +1819,9 @@
                     setTimeout(function() { alertShown = false; }, 1000);
                     
                     if (missingRequired) {
-                        alert('필수 옵션을 확인해주세요.');
+                        showCenterAlert('필수 옵션을 확인해주세요.');
                     } else {
-                        alert('모든 선택옵션을 확인해주세요.');
+                        showCenterAlert('모든 선택옵션을 확인해주세요.');
                     }
                 }
                 return false;

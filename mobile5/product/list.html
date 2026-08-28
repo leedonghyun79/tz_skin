@@ -1,6 +1,13 @@
 <!--@layout(/layout/basic/layout.html)-->
 <div module="Product_menupackage">
     <!--@css(/css/module/product/menuPackage.css)-->
+    <div class="tz-mobile-path" module="product_headcategory" style="display:flex; align-items:center; flex-wrap:wrap; gap:4px; padding:10px 14px; font-size:12px; color:#999;">
+        <a href="/" style="color:#999; text-decoration:none;">홈</a>
+        <span class="{$disp_cate_1|display}" style="display:flex; align-items:center; gap:4px;"><span>/</span><a href="{$link_product_list_1}" style="color:#999; text-decoration:none;">{$name_1}</a></span>
+        <span class="{$disp_cate_2|display}" style="display:flex; align-items:center; gap:4px;"><span>/</span><a href="{$link_product_list_2}" style="color:#999; text-decoration:none;">{$name_2}</a></span>
+        <span class="{$disp_cate_3|display}" style="display:flex; align-items:center; gap:4px;"><span>/</span><a href="{$link_product_list_3}" style="color:#666; text-decoration:none;">{$name_3}</a></span>
+        <span class="{$disp_cate_4|display}" style="display:flex; align-items:center; gap:4px;"><span>/</span><a href="{$link_product_list_4}" style="color:#666; text-decoration:none;">{$name_4}</a></span>
+    </div>
     <div id="titleArea" module="product_headcategory">
         <h2>{$title_text_or_image}</h2>
         <!-- <span module="Layout_MobileAction">
@@ -66,110 +73,255 @@
 </div>
 
 <div class="xans-element- xans-product xans-product-menupackage">
-    <script>
-        (function () {
-            var currentCateNo = null;
-            var m = window.location.href.match(/[?&]cate_no=(\d+)/);
-            if (m) currentCateNo = m[1];
-            else {
-                var m2 = window.location.pathname.match(/\/(\d+)\/(?:display\/\d+\/?)?$/);
-                if (m2) currentCateNo = m2[1];
-                else {
-                    var m3 = window.location.pathname.match(/\/(\d+)\/?$/);
-                    if (m3) currentCateNo = m3[1];
-                }
-            }
+    <!-- 기본 카테고리 메뉴 및 타이틀 하단선 제거 -->
+    <style>
+        .menuCategory { display: none !important; }
+        #titleArea { border-bottom: 0 !important; margin-top: 15px !important; margin-bottom: 15px !important; }
 
+        .my-custom-tabs-container {
+            width: 92% !important;
+            margin: 0 auto 50px !important;
+            padding: 20px 0px 10px !important;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .my-custom-tabs-container::-webkit-scrollbar { height: 4px; }
+        .my-custom-tabs-container::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+        .my-custom-tabs-container::-webkit-scrollbar-track { background: transparent; }
+        .custom-category-box {
+            display: flex;
+            flex-direction: row; /* 원래대로 가로 나열 */
+            flex-wrap: nowrap;
+            gap: 6px;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 0;
+            list-style: none;
+            width: max-content;
+        }
+        .custom-category-box>li {
+            display: block;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        .custom-category-box>li>a,
+        .custom-category-box>li>div>a {
+            display: inline-block; /* 내용물 크기만큼 */
+            padding: 8px 12px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            background: #fff;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .custom-category-box>li.selected>a,
+        .custom-category-box>li.selected>div>a,
+        .custom-category-box>li.is-open>a,
+        .custom-category-box>li.is-open>div>a {
+            border-color: #222;
+            color: #222;
+            font-weight: 600;
+        }
+
+        /* 3차 메뉴 (박스 스타일, 세로 정렬) */
+        .custom-tier2-box {
+            display: flex !important; /* 항상 노출 */
+            position: static !important;
+            flex-direction: column; /* 세로로 나열 */
+            justify-content: flex-start;
+            align-items: stretch; /* 가로 꽉 차게 */
+            padding: 5px 0; 
+            margin-top: 5px; 
+            list-style: none;
+            z-index: 100;
+            min-width: 100%;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .custom-tier2-box>li {
+            display: block;
+            width: 100%;
+        }
+
+        .custom-tier2-box>li>a {
+            display: block;
+            padding: 7px 10px 7px 15px; /* 안쪽 여백 조정 */
+            border: none; 
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            background: transparent; 
+            text-align: left; /* 왼쪽 정렬 */
+            box-sizing: border-box;
+        }
+
+        .custom-tier2-box>li.selected>a {
+            color: #222;
+            font-weight: 600;
+        }
+
+        body.cate-66 .icon__box {
+            display: none !important;
+        }
+    </style>
+
+    <div class="my-custom-tabs-container">
+        <ul class="custom-category-box" id="dynamic-subcategory-box">
+            <!-- JS로 서브카테고리 박스 동적 렌더링 -->
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var currentCateNo = urlParams.get('cate_no');
+
+            if (!currentCateNo) {
+                var matches = window.location.pathname.match(/\/(\d+)\/?$/);
+                if (matches) currentCateNo = matches[1];
+            }
             if (!currentCateNo && typeof window.iCategoryNo !== 'undefined') {
                 currentCateNo = window.iCategoryNo;
             }
+            if (!currentCateNo) return;
 
-            document.write('<style>');
-            document.write('#titleArea { border-bottom: 0 !important; margin-top: 15px !important; }');
-            document.write('.custom-hardcoded-menu { display: none !important; border-bottom: 0 !important; margin: 0 auto 50px !important; padding: 20px 0px 10px !important; width: 92% !important; white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }');
-            document.write('.custom-hardcoded-menu::-webkit-scrollbar { height: 4px; }');
-            document.write('.custom-hardcoded-menu::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }');
-            document.write('.custom-hardcoded-menu::-webkit-scrollbar-track { background: transparent; }');
-            document.write('.custom-hardcoded-menu > li { display: inline-block !important; border: 1px solid #ddd !important; border-radius: 4px !important; padding: 6px 12px !important; margin: 0 6px 0 0 !important; background: #fff !important; }');
-            document.write('.custom-hardcoded-menu > li.selected { border: 1px solid #000 !important; }');
-            document.write('.custom-hardcoded-menu > li > a { margin: 0 !important; }');
-
-            if (currentCateNo) {
-                var c = currentCateNo.toString();
-                var map = {
-                    '65': '65', '68': '65', '69': '65', '70': '65', '71': '65', '72': '65', '73': '65', '74': '65',
-                    '24': 'led', '29': 'led', '30': 'led', '31': 'led', '43': 'led', '75': 'led', '76': 'led', '77': 'led', '78': 'led', '79': 'led', '80': 'led',
-                    '25': 'digital', '33': 'digital', '44': 'digital', '32': 'digital',
-                    '26': 'kiosk', '46': 'kiosk', '47': 'kiosk', '48': 'kiosk', '64': 'kiosk', '45': 'kiosk',
-                    '27': 'mounts', '49': 'mounts', '59': 'mounts', '61': 'mounts', '60': 'mounts'
-                };
-
-                if (map[c]) {
-                    document.write('#hardcoded-tabs-' + map[c] + ' { display: block !important; }');
-                    document.write('.menuCategory:not(.custom-hardcoded-menu) { display: none !important; }');
-                }
+            if (currentCateNo == '66') {
+                document.body.classList.add('cate-66');
             }
-            document.write('</style>');
-        })();
-    </script>
 
-    <!-- 3차 메뉴 (안드로이드 사이니지 하위) -->
-    <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-65">
-        <li data-cate="65"><a href="/product/list.html?cate_no=65">전체</a></li>
-        <li data-cate="68"><a href="/product/list.html?cate_no=68">실내용</a></li>
-        <li data-cate="69"><a href="/product/list.html?cate_no=69">반옥외용</a></li>
-        <li data-cate="70"><a href="/product/list.html?cate_no=70">옥외용</a></li>
-        <li data-cate="72"><a href="/product/list.html?cate_no=72">특수용도</a></li>
-        <li data-cate="73"><a href="/product/list.html?cate_no=73">키오스크/함체</a></li>
-        <li data-cate="74"><a href="/product/list.html?cate_no=74">DID솔루션</a></li>
-        <li data-cate="71"><a href="/product/list.html?cate_no=71">PC모니터 / TV / 전자칠판</a></li>
-    </ul>
+            // 모바일은 빵판(breadcrumbs)이 없으므로 전체 트리를 가져와서 조상 노드를 역추적함
+            fetch('/exec/front/Product/SubCategory')
+                .then(function (res) { return res.json(); })
+                .then(function (aData) {
+                    if (!aData || aData.length === 0) return;
 
-    <!-- 2차 메뉴: LED Signage -->
-    <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-led">
-        <li data-cate="24"><a href="/product/list.html?cate_no=24">전체</a></li>
-        <li data-cate="29"><a href="/product/list.html?cate_no=29">실내용</a></li>
-        <li data-cate="30"><a href="/product/list.html?cate_no=30">실외용</a></li>
-        <li data-cate="31"><a href="/product/list.html?cate_no=31">배너형 포스터</a></li>
-        <li data-cate="43"><a href="/product/list.html?cate_no=43">특수형(비정형)</a></li>
-    </ul>
+                    var depth1No = currentCateNo;
+                    var depth2No = null;
 
-    <!-- 2차 메뉴: Digital Signage -->
-    <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-digital">
-        <li data-cate="25"><a href="/product/list.html?cate_no=25">전체</a></li>
-        <li data-cate="33"><a href="/product/list.html?cate_no=33">삼성 사이니지</a></li>
-        <li data-cate="44"><a href="/product/list.html?cate_no=44">엘지 사이니지</a></li>
-        <li data-cate="65"><a href="/product/list.html?cate_no=65">안드로이드 사이니지</a></li>
-        <li data-cate="32"><a href="/product/list.html?cate_no=32">멀티비전</a></li>
-    </ul>
+                    var currentItem = aData.find(function(item) { return item.cate_no == currentCateNo; });
+                    
+                    if (currentItem && currentItem.parent_cate_no && currentItem.parent_cate_no != 1) { 
+                        var parentItem = aData.find(function(item) { return item.cate_no == currentItem.parent_cate_no; });
+                        if (parentItem) {
+                            if (parentItem.parent_cate_no && parentItem.parent_cate_no != 1) { 
+                                // 현재가 3차인 경우
+                                depth2No = parentItem.cate_no;
+                                depth1No = parentItem.parent_cate_no;
+                            } else { 
+                                // 현재가 2차인 경우
+                                depth1No = parentItem.cate_no;
+                                depth2No = currentItem.cate_no;
+                            }
+                        }
+                    }
 
-    <!-- 2차 메뉴: Kiosk & DID -->
-    <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-kiosk">
-        <li data-cate="26"><a href="/product/list.html?cate_no=26">전체</a></li>
-        <li data-cate="46"><a href="/product/list.html?cate_no=46">삼성 스탠드</a></li>
-        <li data-cate="47"><a href="/product/list.html?cate_no=47">엘지 스탠드</a></li>
-        <li data-cate="48"><a href="/product/list.html?cate_no=48">티비존 스탠드</a></li>
-        <li data-cate="64"><a href="/product/list.html?cate_no=64">옥외형</a></li>
-        <li data-cate="45"><a href="/product/list.html?cate_no=45">전자액자</a></li>
-    </ul>
+                    // tier1List: 메인카테고리(depth1No)를 부모로 가지는 2차 카테고리들
+                    var tier1List = aData.filter(function (item) {
+                        return item.parent_cate_no == depth1No;
+                    });
+                    
+                    if (tier1List.length === 0) {
+                        tier1List = aData.filter(function(item) {
+                            return item.parent_cate_no == currentCateNo;
+                        });
+                        depth1No = currentCateNo;
+                        depth2No = null;
+                    }
 
-    <!-- 2차 메뉴: Mounts -->
-    <ul class="menuCategory custom-hardcoded-menu" id="hardcoded-tabs-mounts">
-        <li data-cate="27"><a href="/product/list.html?cate_no=27">전체</a></li>
-        <li data-cate="49"><a href="/product/list.html?cate_no=49">이동형 거치대</a></li>
-        <li data-cate="59"><a href="/product/list.html?cate_no=59">멀티비전/메뉴보드용 거치대</a></li>
-        <li data-cate="61"><a href="/product/list.html?cate_no=61">전동형 거치대</a></li>
-        <li data-cate="60"><a href="/product/list.html?cate_no=60">천정형 거치대</a></li>
-    </ul>
+                    var html = '';
+                    
+                    // 특정 2차 카테고리 (삼성: 46, 엘지: 47, 티비존: 48) 일 때는 형제 메뉴를 숨기고 하위(3차) 메뉴만 가로 탭으로 노출
+                    var targetParents = ['46', '47', '48', '59'];
+                    var activeTargetNo = targetParents.includes(currentCateNo) ? currentCateNo : (targetParents.includes(depth2No) ? depth2No : null);
 
-    <script>
-        // add active class safely after DOM loads
-        $(document).ready(function () {
-            var m = window.location.href.match(/[?&]cate_no=(\d+)/);
-            if (m) {
-                $('.custom-hardcoded-menu li').removeClass('selected');
-                $('.custom-hardcoded-menu li[data-cate="' + m[1] + '"]').addClass('selected');
-            }
+                    // 카페24에 실제 하위 카테고리가 없는 경우를 위한 수동 지정 탭 (멀티비전/메뉴보드용 거치대)
+                    var manualSubTabs = {
+                        '59': [
+                            { name: '멀티비전 거치대(매립형)', cate_no: '59', param: '?cate_no=59' },
+                            { name: '메뉴보드용 거치대(천정형)', cate_no: '59', param: '?cate_no=59' }
+                        ]
+                    };
+
+                    if (activeTargetNo) {
+                        // 선택된 2차 카테고리의 3차 하위 메뉴만 탭으로 생성
+                        var mySubItems = aData.filter(function (sub) {
+                            return sub.parent_cate_no == activeTargetNo;
+                        });
+
+                        if (mySubItems.length === 0 && manualSubTabs[activeTargetNo]) {
+                            mySubItems = manualSubTabs[activeTargetNo];
+                        }
+
+                        if (mySubItems.length > 0) {
+                            // 탭 형태로 가로 나열
+                            html += '<li ' + (currentCateNo == activeTargetNo ? 'class="selected"' : '') + '><a href="/product/list.html?cate_no=' + activeTargetNo + '">전체</a></li>';
+                            mySubItems.forEach(function (subItem) {
+                                var isSubSelected = (currentCateNo == subItem.cate_no) ? 'class="selected"' : '';
+                                html += '<li ' + isSubSelected + '><a href="/product/list.html' + (subItem.param || '?cate_no=' + subItem.cate_no) + '">' + subItem.name + '</a></li>';
+                            });
+                        } else {
+                            // 실제 하위 카테고리가 없으면(API 미반환) 탭이 텅 비지 않도록 형제 목록 방식으로 폴백
+                            activeTargetNo = null;
+                        }
+                    }
+
+                    if (!activeTargetNo) {
+                        // 기존 로직: 전체 2차 메뉴 노출 + 하위 메뉴 수직 배열
+                        if (tier1List.length > 0) {
+                            var isAllSelected = (currentCateNo == depth1No || (!depth2No && currentCateNo != depth1No)) ? 'class="selected"' : '';
+                            html += '<li ' + isAllSelected + '><a href="/product/list.html?cate_no=' + depth1No + '">전체</a></li>';
+
+                            tier1List.forEach(function (item) {
+                                var isSelected = (depth2No == item.cate_no || currentCateNo == item.cate_no);
+
+                                // 삼성/엘지/티비존 스탠드, 멀티비전/메뉴보드용 거치대는 '전체' 탭에서 하위 메뉴 노출 안 함
+                                var mySubItems = targetParents.includes(String(item.cate_no)) ? [] : aData.filter(function (sub) {
+                                    return sub.parent_cate_no == item.cate_no;
+                                });
+                                
+                                var isSubMenuActive = mySubItems.some(function(subItem) {
+                                    return currentCateNo == subItem.cate_no;
+                                });
+                                
+                                var openClass = isSubMenuActive ? ' is-open' : '';
+                                html += '<li class="' + (isSelected ? 'selected' : '') + openClass + '" style="position: relative;">';
+                                
+                                if (mySubItems.length > 0) {
+                                    html += '<div class="parent-menu-wrapper" style="position: relative; width: 100%;">';
+                                    html += '<a href="/product/list.html' + (item.param || '?cate_no=' + item.cate_no) + '">' + item.name + '</a>';
+                                    html += '</div>';
+                                    
+                                    html += '<ul class="custom-tier2-box">';
+                                    mySubItems.forEach(function (subItem) {
+                                        var isSubSelected = (currentCateNo == subItem.cate_no) ? 'class="selected"' : '';
+                                        html += '<li ' + isSubSelected + '><a href="/product/list.html' + (subItem.param || '?cate_no=' + subItem.cate_no) + '">' + subItem.name + '</a></li>';
+                                    });
+                                    html += '</ul>';
+                                } else {
+                                    html += '<a href="/product/list.html' + (item.param || '?cate_no=' + item.cate_no) + '">' + item.name + '</a>';
+                                }
+                                
+                                html += '</li>';
+                            });
+                        }
+                    }
+                    var box = document.getElementById('dynamic-subcategory-box');
+                    if (box) {
+                        box.innerHTML = html;
+                        
+                        // 토글 기능이 제거되어 서브메뉴가 항상 노출됩니다.
+                    }
+                })
+                .catch(function (err) {
+                    console.error('SubCategory Fetch Error:', err);
+                });
         });
     </script>
 </div>
@@ -375,6 +527,26 @@
         </li>
     </ul>
 </div>
+
+<div module="product_empty" class="tz-empty-msg" id="tzEmptyMsg" style="display:none; text-align:center; padding:80px 0; color:#888; font-size:14px; border-top:1px solid #eee;">
+    <p>상품 준비중입니다.</p>
+</div>
+<script>
+(function () {
+    function toggleTzEmptyMsg() {
+        var msg = document.getElementById('tzEmptyMsg');
+        if (!msg) return;
+        var list = document.querySelector('.ec-base-product.typeThumb ul.prdList');
+        var hasProduct = !!(list && list.querySelector('li'));
+        msg.style.setProperty('display', hasProduct ? 'none' : 'block', 'important');
+    }
+    document.addEventListener('DOMContentLoaded', toggleTzEmptyMsg);
+    window.addEventListener('load', toggleTzEmptyMsg);
+    setTimeout(toggleTzEmptyMsg, 300);
+    setTimeout(toggleTzEmptyMsg, 1000);
+    setTimeout(toggleTzEmptyMsg, 2000);
+})();
+</script>
 
 <div module="product_listmore" class="ec-base-paginate typeMoreview">
     <a href="#none" onclick="{$more_action}" class="btnMore">
