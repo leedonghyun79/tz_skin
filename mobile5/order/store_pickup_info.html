@@ -1,22 +1,31 @@
-<!--@layout(/layout/basic/popup.html)-->
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+    <title>수령지 안내</title>
+    <!--@css(/css/module/order/ec_orderform/form_onetouch_popup.css)-->
+    <!--@js(/js/popup_scroll.js)-->
+    <!--@js(/js/common.js)-->
+</head>
+<body id="popup" class="v2">
 <div module="Order_StorePickupInfo" class="ec-base-layer">
-    <!--@css(/css/module/order/storePickupInfo.css)-->
-    <h1>수령지 안내</h1>
+
+    <div class="header">
+        <h1>수령지 안내</h1>
+    </div>
     <div class="wrap">
-        <dl class="ec-base-fold theme4 eToggle">
-            <dt><strong>{$sc_name}</strong><br />{$receive_addr}</dt>
-            <dd>
+
+        <dl class="ec-base-card pickupLocation">
+            <dt class="card-head"><strong class="name">{$sc_name}</strong><span class="desc">{$receive_addr}</span></dt>
+            <dd class="card-content">
                 <div class="ec-base-table">
-                    <table border="1">
+                    <table>
                         <caption>수령지 안내</caption>
-                        <colgroup>
-                            <col style="width:100px;">
-                            <col style="width:auto;">
-                        </colgroup>
                         <tbody>
                             <tr>
                                 <th scope="row">전화번호</th>
-                                <td>{$main_phone} <a href="tel:{$main_phone}" class="btnTel">전화걸기</a></td>
+                                <td><div class="gridSet gMiddle gap8">{$main_phone} <a href="tel:{$main_phone}" class="btnBasic">전화걸기</a></div></td>
                             </tr>
                             <tr>
                                 <th scope="row">영업시간</th>
@@ -27,30 +36,25 @@
                                 <td>{$receive_info}</td>
                             </tr>
                             <tr>
-                                <td colspan="2">약도</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="map">{$receive_map}</td>
+                                <th scope="row" class="top">약도</th>
+                                <td>{$receive_map}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </dd>
         </dl>
-        <dl class="ec-base-fold theme4 eToggle">
-        	<dt><strong>{$sc_name}</strong><br />{$receive_addr}</dt>
-            <dd>
+
+        <dl class="ec-base-card pickupLocation">
+            <dt class="card-head"><strong class="name">{$sc_name}</strong><span class="desc">{$receive_addr}</span></dt>
+            <dd class="card-content">
                 <div class="ec-base-table">
-                    <table border="1">
+                    <table>
                         <caption>수령지 안내</caption>
-                        <colgroup>
-                            <col style="width:100px;">
-                            <col style="width:auto;">
-                        </colgroup>
                         <tbody>
                             <tr>
                                 <th scope="row">전화번호</th>
-                                <td>{$main_phone} <a href="tel:{$main_phone}" class="btnTel">전화걸기</a></td>
+                                <td><div class="gridSet gMiddle gap8">{$main_phone} <a href="tel:{$main_phone}" class="btnBasic">전화걸기</a></div></td>
                             </tr>
                             <tr>
                                 <th scope="row">영업시간</th>
@@ -61,10 +65,8 @@
                                 <td>{$receive_info}</td>
                             </tr>
                             <tr>
-                                <th scope="row" colspan="2">약도</th>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="map">{$receive_map}</td>
+                                <th scope="row" class="top">약도</th>
+                                <td>{$receive_map}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -72,5 +74,10 @@
             </dd>
         </dl>
     </div>
-    <button type="button" class="btnClose" onclick="window.close()">닫기</button>
+    <div class="footer ec-base-button">
+        <a href="#none" onclick="window.close()" class="btnSubmit">확인</a>
+    </div>
+    <button type="button" class="btnClose" onclick="javascript:self.close();">닫기</button>
 </div>
+</body>
+</html>

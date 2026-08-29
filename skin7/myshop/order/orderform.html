@@ -1,11 +1,9 @@
 <!doctype html>
 <html lang="ko">
-
 <head>
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
     <title>주문서 작성</title>
 
     <!--@css(/css/module/order/ec_orderform/form_onetouch.css)-->
@@ -15,13 +13,6 @@
     <!--@js(/layout/basic/js/common.js)-->
     <!--@js(/js/module/order/ec_orderform/orders.js)-->
     <!--@js(/js/module/order/ec_orderform/orders_v2.js)-->
-    <style>
-        .v2 #mCafe24Order .optionWrap .optionItem:first-of-type,
-        .v2 #mCafe24Order .optionWrap .optionItem:has(> .displaynone)+.optionItem {
-            width: 230px;
-            padding-left: 0;
-        }
-    </style>
 </head>
 
 <body id="userStyle" class="v2">
@@ -75,16 +66,11 @@
             <!-- [약관동의] -->
             <!--@import(/order/ec_orderform/agreement_v2.html)-->
 
-            <div class="agree-msg" id="agreeMsg">
-                <p>주문 내용을 확인하였으며 약관에 동의합니다.</p>
-            </div>
+            <div class="agree-msg" id="agreeMsg"><p>주문 내용을 확인하였으며 약관에 동의합니다.</p></div>
 
             <div class="ec-base-button gFull" id="orderFixItem">
                 <button type="button" class="btnSubmit" id="{$btn_payment_id}">
-                    {$total_order_price_front_head}<span
-                        id="{$total_order_price_front_id}">{$total_order_price_front}</span>{$total_order_price_front_tail}
-                    <span class="{$subscription_hide_display|display}">결제하기</span><span
-                        class="{$subscription_show_display|display}">정기배송 신청하기</span>
+                    {$total_order_price_front_head}<span id="{$total_order_price_front_id}">{$total_order_price_front}</span>{$total_order_price_front_tail} <span class="{$subscription_hide_display|display}">결제하기</span><span class="{$subscription_show_display|display}">정기배송 신청하기</span>
                 </button>
             </div>
         </div>
@@ -109,5 +95,4 @@
         </div>
     </div>
 </body>
-
 </html>

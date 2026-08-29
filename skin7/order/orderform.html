@@ -15,13 +15,6 @@
     <!--@js(/layout/basic/js/common.js)-->
     <!--@js(/js/module/order/ec_orderform/orders.js)-->
     <!--@js(/js/module/order/ec_orderform/orders_v2.js)-->
-    <style>
-        .v2 #mCafe24Order .optionWrap .optionItem:first-of-type,
-        .v2 #mCafe24Order .optionWrap .optionItem:has(> .displaynone)+.optionItem {
-            width: 230px;
-            padding-left: 0;
-        }
-    </style>
 </head>
 
 <body id="userStyle" class="v2">
@@ -70,23 +63,23 @@
 
                 <!-- [적립 혜택] -->
                 <!--@import(/order/ec_orderform/benefit.html)-->
-            </div>
 
-            <!-- [약관동의] -->
-            <!--@import(/order/ec_orderform/agreement_v2.html)-->
+                <!-- [약관동의] -->
+                <!--@import(/order/ec_orderform/agreement_v2.html)-->
 
-            <div class="agree-msg" id="agreeMsg">
-                <p>주문 내용을 확인하였으며 약관에 동의합니다.</p>
-            </div>
+                <div class="agree-msg" id="agreeMsg">
+                    <p>주문 내용을 확인하였으며 약관에 동의합니다.</p>
+                </div>
 
-            <div class="ec-base-button gFull" id="orderFixItem">
-                <button type="button" class="btnSubmit" id="{$btn_payment_id}">
-                    {$total_order_price_front_head}<span
-                        id="{$total_order_price_front_id}">{$total_order_price_front}</span>{$total_order_price_front_tail}
-                    <span class="{$subscription_hide_display|display}">결제하기</span><span
-                        class="{$subscription_show_display|display}">정기배송 신청하기</span>
-                </button>
-            </div>
+                <div class="ec-base-button gFull" id="orderFixItem">
+                    <button type="button" class="btnSubmit" id="{$btn_payment_id}">
+                        {$total_order_price_front_head}<span
+                            id="{$total_order_price_front_id}">{$total_order_price_front}</span>{$total_order_price_front_tail}
+                        <span class="{$subscription_hide_display|display}">결제하기</span><span
+                            class="{$subscription_show_display|display}">정기배송 신청하기</span>
+                    </button>
+                </div>
+            </div> <!-- // stickyTop -->
         </div>
 
         <!-- [주문 정보 확인 레이어팝업] -->
@@ -108,6 +101,37 @@
             </p>
         </div>
     </div>
+
+    <style>
+        /* 오른쪽 영역 스크롤 따라다니기 (Sticky) */
+        @media (min-width: 1024px) {
+            .v2 #mCafe24Order .rightGroup .stickyTop {
+                position: -webkit-sticky !important;
+                position: sticky !important;
+                top: 20px !important;
+                /* 스크롤 시 상단에서 떨어질 간격 설정 */
+                z-index: 10;
+            }
+        }
+
+        /* 구매상품 옵션 폰트 크기 축소 */
+        @media (min-width: 1024px) {
+            .v2 #mCafe24Order .ec-base-prdInfo .description .info li {
+                font-size: 13px !important;
+            }
+
+            .v2 #mCafe24Order .optionWrap .optionItem:first-of-type {
+                width: 450px;
+                padding-left: 0;
+            }
+        }
+
+
+        /* 상품 개별 합계금액 숨김 처리 */
+        #mCafe24Order .orderArea .totalPrice {
+            display: none !important;
+        }
+    </style>
 </body>
 
 </html>

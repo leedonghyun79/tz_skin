@@ -1,18 +1,17 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>사은품 선택</title>
     <!--@js(/js/common.js)-->
     <!--@js(/layout/basic/js/popup.js)-->
-    <!--@css(/css/module/order/ec_orderform/form_onetouch_layer.css)-->
 </head>
 
 <body id="layer" class="v2">
 <div class="dimmed"></div>
 <div module="gift_select" class="ec-base-layer">
+    <!--@css(/css/module/order/ec_orderform/form_onetouch_layer.css)-->
     <div class="header">
         <h1>사은품 선택</h1>
     </div>
@@ -32,6 +31,18 @@
                 <dd>{$able_point} 점</dd>
             </dl>
         </div>
+
+        <!-- 이지스킨 -->
+        <!--<div module="gift_point" class="ec-base-box gBlank5">
+            <dl class="ec-base-desc typeDot gSmall">
+                <dt>총 합계 사은품 포인트</dt>
+                <dd>: <strong class="txtEm">{$total_point} 점</strong></dd>
+                <dt>사용 포인트</dt>
+                <dd> : <strong>{$use_point} 점</strong> <span class="txt11 {$display_selected_count|display}">(선택된 사은품 : <span id="{$selected_count_id}">0</span>개)</span></dd>
+                <dt>남은 포인트</dt>
+                <dd>: <strong>{$able_point} 점</strong></dd>
+            </dl>
+        </div>-->
 
         <div class="giftList">
             <div class="ec-base-prdInfo">

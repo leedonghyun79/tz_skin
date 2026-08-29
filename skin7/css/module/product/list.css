@@ -1,0 +1,106 @@
+    .ec-base-product .spec {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .custom-category-box {
+        display: flex;
+        flex-direction: row; /* 원래대로 가로 나열 */
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0;
+        list-style: none;
+    }
+
+    .custom-category-box>li {
+        display: block;
+        position: relative; /* 호버 드롭다운 기준점 */
+    }
+
+    .custom-category-box>li>a,
+    .custom-category-box>li>div>a {
+        display: inline-block; /* 내용물 크기만큼 */
+        padding: 10px 20px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        font-size: 15px;
+        color: #666;
+        text-decoration: none;
+        background: #fff;
+        transition: all 0.2s;
+        min-width: 120px;
+        text-align: left;
+    }
+
+    .custom-category-box>li>a:hover,
+    .custom-category-box>li>div>a:hover,
+    .custom-category-box>li.selected>a,
+    .custom-category-box>li.selected>div>a,
+    .custom-category-box>li.is-open>a,
+    .custom-category-box>li.is-open>div>a {
+        border-color: #222;
+        color: #222;
+        font-weight: 600;
+    }
+
+    /* 3차 메뉴 (박스 스타일, 세로 정렬) */
+    .custom-tier2-box {
+        display: flex !important; /* 항상 노출 */
+        position: static !important; /* 항상 공간 차지 */
+        flex-direction: column; /* 세로로 나열 */
+        justify-content: flex-start;
+        align-items: stretch; /* 가로 꽉 채우기 */
+        padding: 5px 0; 
+        margin-top: 5px; 
+        list-style: none;
+        z-index: 100;
+        min-width: 100%;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .custom-tier2-box>li {
+        display: block;
+        width: 100%;
+    }
+
+    .custom-tier2-box>li>a {
+        display: block; 
+        padding: 7px 10px 7px 25px; /* 안쪽 여백 조정 (들여쓰기 효과) */
+        border: none; 
+        font-size: 15px;
+        color: #666;
+        text-decoration: none;
+        background: transparent; 
+        transition: all 0.2s;
+        text-align: left; /* 왼쪽 정렬 */
+        box-sizing: border-box;
+    }
+
+    .custom-tier2-box>li.selected>a,
+    .custom-tier2-box>li>a:hover {
+        color: #222;
+        font-weight: 600;
+    }
+
+    /* 개인결제창(cate_no=66) 상품 리스트 아이콘 숨김 */
+    body.cate-66 .icon__box {
+        display: none !important;
+    }
+
+    /* 좌측 사이드바 카테고리 메뉴 전체 펼침 및 화살표 제거 */
+    .ec-base-tab.typeMenu .menuCategory .iconWrap {
+        display: none !important;
+    }
+    .ec-base-tab.typeMenu .menuCategory ul {
+        display: block !important;
+    }
+
+    .product_area .ec-base-product:has(li) ~ .tz-empty-msg { display: none !important; }
