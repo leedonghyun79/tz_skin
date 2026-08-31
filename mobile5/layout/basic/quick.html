@@ -11,10 +11,10 @@
             alt="공식사이트 바로가기" />
     </a>
 </div>
-<a class="custom-ch-btn" href="javascript:void(0)" onclick="if(window.ChannelIO){ChannelIO('showMessenger');}">
+<button type="button" class="custom-ch-btn" onclick="if(window.ChannelIO){ChannelIO('showMessenger');}">
     <img src="https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/qm/channel_logo.png"
         alt="상담하기" />
-</a>
+</button>
 
 <style>
     /* --- Custom Channel Talk Button --- */
@@ -31,6 +31,10 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         overflow: hidden;
         background: #fff;
+        border: none;
+        padding: 0;
+        outline: none;
+        cursor: pointer;
     }
 
     .custom-ch-btn img {

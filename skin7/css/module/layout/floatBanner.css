@@ -161,6 +161,9 @@
   background: transparent;
   justify-content: center;
   align-items: center;
+  border: none;
+  padding: 0;
+  outline: none;
 }
 
 .custom-ch-btn img {

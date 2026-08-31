@@ -88,8 +88,8 @@ $(document).ready(function(){
         'Solutions|T-CMS 원격제어 프로그램': [
             { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/product/medium/20260828/eef80cf8d645f61f5afde99cbd65d44c.jpg', title: '스마트 디스플레이 원격제어 플랫폼<br>T-CMS 안드로이드 셋탑 솔루션', desc: 'T-CMS MULTIPLEX 솔루션 원격제어 프로그램 패키지 - 안드로이드 셋탑 + T-CMS 솔루션' }
         ],
-        'Solutions|T-50 USB 솔루션 프로그램': [
-            { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/product/big/20260707/e4fe414b193e973b3f13fc90ef0b19de.jpg', title: '[T50-USB] 미디어보드 T50 + 솔루션 프로그램 패키지', desc: '광고용 최적화 솔루션 패키지' }
+        'Solutions|T-10 USB 솔루션 프로그램': [
+            { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/upload/img/category/T10.jpg', title: '[T10-USB] 미디어보드 T10 + 솔루션 프로그램 패키지', desc: '광고용 최적화 솔루션 패키지' }
         ],
         'Solutions|T-서베이 만족도조사 키오스크': [
             { link: '/product/list.html?cate_no=52', img: 'https://ecimg.cafe24img.com/pg3042b49219970023/tvzone0479/web/product/big/20260709/a9ab91ba8024fdcb83399387a57f31b4.png', title: 'T-서베이 소비자만족도 키오스크', desc: '32인치 식당 및 급식소용 소비자 만족도 조사 터치형 키오스크' }
@@ -355,7 +355,7 @@ $(document).ready(function(){
                 ],
                 'Solutions': [
                     { name: 'T-CMS 원격제어 프로그램', link: '/product/list.html?cate_no=52' },
-                    { name: 'T-50 USB 솔루션 프로그램', link: '/product/list.html?cate_no=52' },
+                    { name: 'T-10 USB 솔루션 프로그램', link: '/product/list.html?cate_no=52' },
                     { name: 'T-서베이 만족도조사 키오스크', link: '/product/list.html?cate_no=52' }
                 ]
             };

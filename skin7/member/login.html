@@ -37,18 +37,18 @@
                 <a href="#none" class="btnSubmit gFull sizeL" onclick="{$action_func_login}">로그인</a>
                 <a href="{$returnUrl}" onclick="{$action_nomember_order}" class="btnNormal gFull sizeL {$display_nomember|display}">비회원 구매</a>
             </div>    
-            <ul class="login__util">
-                <li><a href="/member/id/find_id.html">아이디찾기</a></li>
-                <li><a href="/member/passwd/find_passwd_info.html">비밀번호찾기</a></li>
-                <li><a href="/member/agreement.html">회원가입</a></li>
-            </ul>
+            <div class="login__util">
+                <div class="util-left">
+                    <a href="/member/id/find_id.html">아이디찾기</a> <span class="bar">|</span> <a href="/member/passwd/find_passwd_info.html">비밀번호찾기</a>
+                </div>
+                <div class="util-right">
+                    <a href="/member/join.html">회원가입</a>
+                </div>
+            </div>
             <div class="login__sns">
-                <a href="#none" class="btnKakao {$display_kakao|display}" onclick="{$kakao_func_login}">카카오 로그인</a>
             	<a href="#none" class="btnNaver {$display_naver|display}" onclick="{$naver_func_login}">네이버 로그인</a>
-                <a href="#none" class="btnFacebook {$display_facebook|display}" onclick="{$facebook_func_login}">Facebook으로 로그인</a>
-                <a href="#none" class="btnLine {$display_line|display}" onclick="{$line_func_login}">LINE으로 로그인</a>
-                <a href="#none" class="btnGoogle {$display_google|display}" onclick="{$google_func_login}">Google로 로그인</a>
-                <a href="#none" class="btnApple {$display_apple|display}" onclick="{$apple_func_login}">Apple로 로그인</a>
+                <a href="#none" class="btnKakao {$display_kakao|display}" onclick="{$kakao_func_login}">카카오 로그인</a>
+                <a href="#none" class="btnGoogle {$display_google|display}" onclick="{$google_func_login}">Google 로그인</a>
             </div>
         </fieldset>
     </div>
@@ -72,7 +72,7 @@
             {$form.order_password}
             <div class="login__button">
             	<button type="submit" class="btnSubmit gFull sizeL">조회</button>
-        		<a href="/member/agreement.html" class="btnNormal gFull sizeL">회원가입</a>
+        		<a href="/member/join.html" class="btnNormal gFull sizeL">회원가입</a>
             </div>
             <p class="txtInfo typeDot">비회원의 경우, 주문시의 주문번호로 주문조회가 가능합니다.</p>
         </div>

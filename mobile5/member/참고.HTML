@@ -1,377 +1,5 @@
-<!--@layout(/layout/basic/layout.html)-->
-<div id="titleArea">
-    <h2>회원가입</h2>
-    <span module="Layout_MobileAction">
-        <a href="#none" onclick="{$go_back}"><img src="//img.echosting.cafe24.com/skin/mobile_ko_KR/layout/btn_back.gif" width="33" alt="뒤로가기"></a>
-    </span>
-</div>
-
-<div module="member_join" class="clearfix form_area_inner">
+<div class="xans-element- xans-member xans-member-join clearfix form_area_inner">
   <div class="">
-<style>
-/* Reset & Basic Setup */
-body {
-    background-color: #f7f6f2 !important;
-}
-.form_area_inner {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
-    color: #333;
-    background-color: #f7f6f2;
-}
-
-/* Hide Table Borders & Reset */
-.ec-base-table table {
-    border: none !important;
-    width: 100%;
-}
-.ec-base-table th, .ec-base-table td {
-    border: none !important;
-    padding: 8px 0;
-}
-.ec-base-table caption { display: none; }
-
-/* Radio Buttons Styling */
-.form_type {
-    padding-bottom: 10px;
-}
-.form_type label {
-    margin-right: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    vertical-align: middle;
-    color: #333;
-}
-.form_type input[type="radio"],
-input[type="radio"][name="is_solar_calendar"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: none;
-    background-color: #dcd9d2;
-    vertical-align: middle;
-    margin-right: 8px;
-    cursor: pointer;
-    outline: none;
-}
-.form_type input[type="radio"]:checked,
-input[type="radio"][name="is_solar_calendar"]:checked {
-    background-color: #112a20;
-}
-
-/* Input Fields (aromatica_inputfield) */
-.aromatica_inputfield {
-    position: relative;
-    margin-bottom: 25px;
-    text-align: right;
-    font-size: 11px;
-    color: #666;
-}
-.aromatica_inputfield input[type="text"],
-.aromatica_inputfield input[type="password"],
-.aromatica_inputfield input[type="tel"],
-.aromatica_inputfield input[type="number"],
-.aromatica_inputfield input[type="email"],
-.aromatica_inputfield select {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 14px;
-    border: none;
-    border-bottom: 1px solid #e0e0e0;
-    border-radius: 0;
-    box-sizing: border-box;
-    background-color: transparent;
-    margin-bottom: 5px;
-    color: #333;
-    text-align: left;
-}
-.aromatica_inputfield input::placeholder {
-    color: #999;
-}
-.aromatica_inputfield input:focus,
-.aromatica_inputfield select:focus {
-    outline: none;
-    border-bottom: 1px solid #112a20;
-}
-
-/* Error States */
-.aromatica_inputfield span.error, 
-.aromatica_inputfield p.error {
-    color: #ff3b30 !important;
-}
-.aromatica_inputfield span.info, 
-.aromatica_inputfield p.info {
-    color: #333 !important;
-}
-
-/* Message positioning */
-.aromatica_inputfield::after {
-    content: '';
-    display: table;
-    clear: both;
-}
-.aromatica_inputfield span[id$="Msg"] {
-    display: inline-block;
-    float: left;
-    margin-top: 8px;
-    font-size: 13px;
-    clear: left;
-}
-.aromatica_inputfield small {
-    display: inline-block;
-    float: right;
-    margin-top: 8px;
-    font-size: 12px;
-    color: #999;
-}
-
-/* Flex layout for multiple inputs (Phone, Birthdate) */
-.flex_row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-}
-.flex_row input,
-.flex_row select {
-    flex: 1;
-    min-width: 0;
-}
-
-/* Phone number form specific flex */
-.phone_number_form.aromatica_inputfield {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-.phone_number_form.aromatica_inputfield .per_100 {
-    width: 100%;
-    flex-basis: 100%;
-}
-.phone_number_form.aromatica_inputfield > select,
-.phone_number_form.aromatica_inputfield > input {
-    flex: 1;
-}
-
-/* Buttons */
-.btnBasic {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 16px;
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 0;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    box-sizing: border-box;
-    white-space: nowrap;
-    background: #112a20;
-    color: #fff;
-    border: none;
-}
-.btnBasic:hover {
-    background: #0b1c15;
-}
-
-/* Positioning buttons inside input fields */
-.aromatica_inputfield .btnBasic {
-    position: absolute;
-    right: 0;
-    bottom: 25px; /* Above the help text */
-}
-
-/* Exception for mobile wrap to fit the button */
-#mobileWrap .aromatica_inputfield {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-#mobileWrap .aromatica_inputfield select,
-#mobileWrap .aromatica_inputfield input {
-    flex: 1;
-    margin-bottom: 0;
-}
-#mobileWrap .aromatica_inputfield span {
-    color: #666;
-}
-#mobileWrap .aromatica_inputfield .btnBasic {
-    position: relative;
-    bottom: 0;
-    height: 40px;
-}
-
-/* Special case for companyWrap button */
-#companyNoRow .aromatica_inputfield .btnBasic {
-    bottom: 10px; /* No help text below this one */
-}
-
-.joinsubmitbtn {
-    width: 100%;
-    background: #ebe8e1;
-    color: #a0a0a0;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 16px;
-    margin-top: 30px;
-    border: 1px solid #dcd9d2;
-    border-radius: 0;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.joinsubmitbtn:hover {
-    background: #e2ded5;
-    color: #666;
-}
-
-/* Accordion Terms */
-.agree_wrap {
-    margin-top: 30px;
-}
-.agree_wrap .accordion_tit {
-    font-size: 14px;
-    font-weight: 600;
-    padding: 16px 0 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #333;
-}
-.agree_wrap .accordion_tit::after {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'%3E%3C/polyline%3E%3C/svg%3E");
-    background-size: contain;
-    background-position: center;
-    transition: transform 0.2s;
-    background-repeat: no-repeat;
-}
-.agree_wrap .accordion_tit.on::after {
-    transform: rotate(180deg);
-}
-.agree_wrap .accordion_contents {
-    padding: 10px 0;
-    background: transparent;
-    font-size: 13px;
-    color: #666;
-    border: none;
-}
-.agreeArea .clearfix {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-}
-.agreeArea .check {
-    margin: 0;
-}
-.agree_wrap input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
-    margin-right: 12px;
-    vertical-align: middle;
-    background-color: #e5e4de;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-}
-.agree_wrap input[type="checkbox"]:checked {
-    background-color: #112a20;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-    background-size: 10px;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.agree_wrap label {
-    vertical-align: middle;
-    font-size: 13px;
-    color: #666;
-    cursor: pointer;
-}
-.agree_wrap .accordion_tit label {
-    color: #333 !important;
-}
-.agreeArea ul.check {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-.agreeArea ul.check li {
-    display: flex;
-    align-items: center;
-    padding: 8px 0;
-}
-
-/* Plus button icon */
-.agreeToggleBtn {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-color: #112a20;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-}
-.agreeToggleBtn::before,
-.agreeToggleBtn::after {
-    content: '';
-    position: absolute;
-    background-color: #fff;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.agreeToggleBtn::before {
-    width: 8px;
-    height: 1.5px;
-}
-.agreeToggleBtn::after {
-    width: 1.5px;
-    height: 8px;
-}
-.ec-base-box.typeThinBg {
-    background-color: transparent !important;
-    border: none !important;
-}
-.btn_accordion_icon {
-    display: none !important;
-}
-
-/* Hide structural blocks */
-.displaynone {
-    display: none !important;
-}
-
-/* Birthdate styling */
-.birth_wrap {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.birth_wrap select,
-.birth_wrap input {
-    flex: 1;
-    padding: 10px 0;
-    border: none;
-    border-bottom: 1px solid #e0e0e0;
-    background: transparent;
-    font-size: 14px;
-}
-</style>
     <h2 class="displaynone">일반 회원가입</h2>
 
     <!--
@@ -887,9 +515,9 @@ input[type="radio"][name="is_solar_calendar"]:checked {
             <option value="017">017</option>
             <option value="018">018</option>
             <option value="019">019</option>
-          </select><input id="phone2" name="phone[]" maxlength="4" fw-filter="isNumber&amp;isNumber" fw-label="일반전화"
-            fw-alone="N" fw-msg="" placeholder="0000" value="" type="text"><input id="phone3" name="phone[]" maxlength="4"
-            fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="" placeholder="0000" value="" type="text">
+          </select>-<input id="phone2" name="phone[]" maxlength="4" fw-filter="isNumber&amp;isNumber" fw-label="일반전화"
+            fw-alone="N" fw-msg="" value="" type="text">-<input id="phone3" name="phone[]" maxlength="4"
+            fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="" value="" type="text">
         </div>
       </div>
       <div class="clearfix ">
@@ -904,9 +532,9 @@ input[type="radio"][name="is_solar_calendar"]:checked {
             <option value="017">017</option>
             <option value="018">018</option>
             <option value="019">019</option>
-          </select><input id="mobile2" name="mobile[]" maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화"
-            fw-alone="N" fw-msg="" placeholder="0000" value="" type="text"><input id="mobile3" name="mobile[]"
-            maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="0000" value=""
+          </select>-<input id="mobile2" name="mobile[]" maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화"
+            fw-alone="N" fw-msg="" placeholder="" value="" type="text">-<input id="mobile3" name="mobile[]"
+            maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value=""
             type="text"><button type="button" id="btn_action_verify_mobile" class="btnNormal "
             onclick="memberVerifyMobile.joinSendVerificationNumber(); return false;">인증번호 받기</button>
           <div class="per_100 mobile_confirm_txt">
@@ -988,23 +616,23 @@ input[type="radio"][name="is_solar_calendar"]:checked {
             autocomplete="off"><label for="is_sex1">여자</label>
         </div>
       </div>
-      <div class="clearfix displaynone">
+      <div class="clearfix ">
         <br>
         <div class="formLeft displaynone displaynone">
           생년월일 <font class="">*</font>
         </div>
         <div class="formRight aromatica_inputfield">
-          <input id="birth_year" name="birth_year" fw-filter="" fw-label="생년월일" fw-msg="" class="inputTypeText"
+          <input id="birth_year" name="birth_year" fw-filter="isFill" fw-label="생년월일" fw-msg="" class="inputTypeText"
             placeholder="년" maxlength="4" value="" type="text"> <input id="birth_month" name="birth_month"
-            fw-filter="" fw-label="생년월일" fw-msg="" class="inputTypeText" placeholder="월" maxlength="2" value=""
-            type="text"> <input id="birth_day" name="birth_day" fw-filter="" fw-label="생년월일" fw-msg=""
+            fw-filter="isFill" fw-label="생년월일" fw-msg="" class="inputTypeText" placeholder="월" maxlength="2" value=""
+            type="text"> <input id="birth_day" name="birth_day" fw-filter="isFill" fw-label="생년월일" fw-msg=""
             class="inputTypeText" placeholder="일" maxlength="2" value="" type="text">
           <div class="clear"></div>
           <br>
-          <span class="form_type "><input id="is_solar_calendar0" name="is_solar_calendar" fw-filter=""
+          <span class="form_type "><input id="is_solar_calendar0" name="is_solar_calendar" fw-filter="isFill"
               fw-label="생년월일" fw-msg="" value="T" type="radio" checked="checked" autocomplete="off"><label
               for="is_solar_calendar0">양력</label>
-            <input id="is_solar_calendar1" name="is_solar_calendar" fw-filter="" fw-label="생년월일" fw-msg=""
+            <input id="is_solar_calendar1" name="is_solar_calendar" fw-filter="isFill" fw-label="생년월일" fw-msg=""
               value="F" type="radio" autocomplete="off"><label for="is_solar_calendar1">음력</label></span>
         </div>
       </div>
@@ -1953,7 +1581,7 @@ input[type="radio"][name="is_solar_calendar"]:checked {
 
     <a href="#none" class="per_100 btn_large btn_fill btn_disabled displayblock joinsubmitbtn"
       onclick="memberJoinAction()">회원가입하기</a>
-    <div id="ec_shop_member_confirm-infolayer" class="joinConfirm ec-base-layer displaynone">
+    <div id="ec_shop_member_confirm-infolayer" class="joinConfirm ec-base-layer ">
 
 
 
@@ -2205,74 +1833,3 @@ input[type="radio"][name="is_solar_calendar"]:checked {
     </div>
   </div>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Elements
-    var memberTypeRadios = document.querySelectorAll('input[name="member_type"]');
-    var companyTypeRadios = document.querySelectorAll('input[name="company_type"]');
-    var companyWrap = document.getElementById('companyWrap');
-    var companyRow = document.getElementById('companyRow');
-    var companyNoRow = document.getElementById('companyNoRow');
-    var businessAuth = document.getElementById('businessAuth');
-    var authMember = document.getElementById('authMember');
-
-    function updateMemberForm() {
-        var isBusiness = document.getElementById('member_type1').checked;
-        var isCorporate = document.getElementById('company_type1') && document.getElementById('company_type1').checked;
-        
-        if (isBusiness) {
-            if(companyWrap) companyWrap.style.display = '';
-            if(companyRow) companyRow.style.display = '';
-            if(companyNoRow) companyNoRow.style.display = '';
-            if(authMember) authMember.style.display = isCorporate ? '' : 'none'; // Only show authMember if corporate needs it or adjust as necessary
-            if(businessAuth) businessAuth.style.display = isCorporate ? '' : 'none';
-        } else {
-            if(companyWrap) companyWrap.style.display = 'none';
-            if(companyRow) companyRow.style.display = 'none';
-            if(companyNoRow) companyNoRow.style.display = 'none';
-            if(authMember) authMember.style.display = 'none';
-            if(businessAuth) businessAuth.style.display = 'none';
-        }
-    }
-
-    memberTypeRadios.forEach(function(radio) {
-        radio.addEventListener('change', updateMemberForm);
-    });
-    
-    companyTypeRadios.forEach(function(radio) {
-        radio.addEventListener('change', updateMemberForm);
-    });
-
-
-
-    // Auto-check all terms
-    var agreeAll = document.getElementById('sAgreeAllChecked');
-    var allTermCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sAgreeAllChecked)');
-
-    if (agreeAll) {
-        agreeAll.addEventListener('change', function() {
-            var isChecked = this.checked;
-            allTermCheckboxes.forEach(function(cb) {
-                if (!cb.disabled) {
-                    cb.checked = isChecked;
-                }
-            });
-        });
-
-        allTermCheckboxes.forEach(function(cb) {
-            cb.addEventListener('change', function() {
-                var allChecked = true;
-                allTermCheckboxes.forEach(function(innerCb) {
-                    if (!innerCb.checked) {
-                        allChecked = false;
-                    }
-                });
-                agreeAll.checked = allChecked;
-            });
-        });
-    }
-
-    // Initialize on load
-    updateMemberForm();
-});
-</script>
