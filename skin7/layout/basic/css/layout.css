@@ -746,12 +746,12 @@ html {
 
 .swiper-control {
     position: absolute;
-    bottom: 70px;
+    bottom: 66px; /* slightly adjusted */
     z-index: 100;
     width: 100%;
-    height: 10px;
+    height: 20px; /* increased to fit larger icons */
     text-align: center;
-    overflow: hidden;
+    overflow: visible; /* changed from hidden to prevent clipping */
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -809,8 +809,8 @@ html {
 .swiper-pagination {
     position: relative;
     display: inline-block;
-    height: 10px;
-    margin: 0 10px;
+    height: 14px;
+    margin: 0 14px;
     text-align: center;
     -webkit-transition: .3s opacity;
     -o-transition: .3s opacity;
@@ -825,8 +825,8 @@ html {
     position: relative;
     z-index: 10;
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
     text-indent: -150%;
     white-space: nowrap;
     font-size: 1px;
@@ -842,26 +842,26 @@ html {
     position: absolute;
     top: 0;
     display: inline-block;
-    width: 2px;
-    height: 10px;
+    width: 3px;
+    height: 14px;
     background: #fff;
 }
 
 .swiper-button-pause:before {
-    left: 1px;
+    left: 2px;
 }
 
 .swiper-button-pause:after {
-    right: 1px;
+    right: 2px;
 }
 
 .swiper-button-play {
     display: none;
     width: 0;
     height: 0;
-    border-top: 5px solid transparent;
-    border-left: 8px solid #fff;
-    border-bottom: 5px solid transparent;
+    border-top: 7px solid transparent;
+    border-left: 11px solid #fff;
+    border-bottom: 7px solid transparent;
 }
 
 .swiper-control.on .swiper-button-play {
@@ -873,8 +873,8 @@ html {
 }
 
 .swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
+    width: 14px;
+    height: 14px;
     display: inline-block;
     border-radius: 100%;
     background: #000;
@@ -888,7 +888,7 @@ html {
 }
 
 .swiper-container-horizontal .swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 7px;
+    margin: 0 9px;
     background: #fff;
 }
 
@@ -931,4 +931,25 @@ html {
     height: 100%;
     background: rgba(0, 0, 0, .5);
     border-radius: 10px;
+}
+
+/* 취소선(할인 전 가격) 텍스트 명도 대비 접근성 개선 */
+span[style*="line-through"],
+strike,
+span[style*="color:#aaaaaa"],
+span[style*="color: #aaaaaa"] {
+    color: #666666 !important;
+}
+
+/* 추가 접근성 개선: 하단 푸터 및 배너 텍스트 명도 대비 부족 해결 */
+.serviceBanner__item .text p,
+.xans-layout-footer .info__address,
+.xans-layout-footer .info__address span,
+.xans-layout-footer .info__address span a,
+.xans-layout-footer .copyright,
+.xans-layout-footer .info__community a,
+.xans-layout-footer .info__customer .runtime,
+#footer,
+.xans-layout-footerpackage .copyright {
+    color: #666666 !important;
 }

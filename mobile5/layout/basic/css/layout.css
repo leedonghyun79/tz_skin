@@ -524,3 +524,24 @@ html.expand .qm-wrap::after {
         padding: 7px 0 !important;
     }
 }
+
+/* 취소선(할인 전 가격) 텍스트 명도 대비 접근성 개선 */
+span[style*="line-through"],
+strike,
+span[style*="color:#aaaaaa"],
+span[style*="color: #aaaaaa"] {
+    color: #666666 !important;
+}
+
+/* 추가 접근성 개선: 하단 푸터 및 배너 텍스트 명도 대비 부족 해결 */
+.serviceBanner__item .text p,
+.xans-layout-footer .info__address,
+.xans-layout-footer .info__address span,
+.xans-layout-footer .info__address span a,
+.xans-layout-footer .copyright,
+.xans-layout-footer .info__community a,
+.xans-layout-footer .info__customer .runtime,
+#footer,
+.xans-layout-footerpackage .copyright {
+    color: #666666 !important;
+}

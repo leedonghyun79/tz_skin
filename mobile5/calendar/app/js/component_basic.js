@@ -23,7 +23,7 @@ class Cafe24AppCalendar extends HTMLElement {
     }
     async render() {
         const [fontsStyle, resetStyle, calendarStyle, froalaStyle] = await Promise.all([
-            CAC_UTIL.loadCSS('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap'),
+            CAC_UTIL.loadCSS('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'),
             CAC_UTIL.loadCSS('/calendar/app/css/reset.css'),
             CAC_UTIL.loadCSS('/calendar/app/css/calendar.css'),
             CAC_UTIL.loadCSS('/calendar/app/css/froala_style.min.css'),

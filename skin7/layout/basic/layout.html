@@ -190,25 +190,29 @@
         <!-- HappyTalk SDK -->
         <script>
             var ht = null;
-            (function(id, scriptSrc, callback) {
-                var d = document,
-                    tagName = 'script',
-                    $script = d.createElement(tagName),
-                    $element = d.getElementsByTagName(tagName)[0];
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    (function(id, scriptSrc, callback) {
+                        var d = document,
+                            tagName = 'script',
+                            $script = d.createElement(tagName),
+                            $element = d.getElementsByTagName(tagName)[0];
 
-                $script.id = id;
-                $script.async = true;
-                $script.src = scriptSrc;
+                        $script.id = id;
+                        $script.async = true;
+                        $script.src = scriptSrc;
 
-                if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
-                $element.parentNode.insertBefore($script, $element);
-            })('happytalkSDK', 'https://chat-static.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
-                ht = new Happytalk({
-                  siteId: '1000426178',
-                  siteName: '(주)티비존',
-                  categoryId: '187988',
-                  divisionId: '187989'
-              });
+                        if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
+                        $element.parentNode.insertBefore($script, $element);
+                    })('happytalkSDK', 'https://chat-static.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
+                        ht = new Happytalk({
+                          siteId: '1000426178',
+                          siteName: '(주)티비존',
+                          categoryId: '187988',
+                          divisionId: '187989'
+                      });
+                    });
+                }, 3000);
             });
         </script>
         <!-- /HappyTalk SDK -->
