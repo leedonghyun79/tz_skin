@@ -4,10 +4,11 @@
 .login .password span { height:32px; line-height:32px; padding:0 0 0 10px; }
 .login input[type=text],
 .login input[type=password] { width:100%; height:50px; line-height:48px; padding:0 10px; margin:0 0 10px; border:none; border-bottom:1px solid #e5e5e5; }
-.ec-base-tab.typeNav .menu { display:flex; background:#f5f5f5; border-radius:30px; margin-bottom:30px; border:none; }
-.ec-base-tab.typeNav .menu li { flex:1; border:none; }
-.ec-base-tab.typeNav .menu li a { display:block; padding:15px 0; color:#999; text-align:center; border:none !important; background:transparent; font-weight:bold; }
-.ec-base-tab.typeNav .menu li.selected a { background:#222; color:#fff; border-radius:30px; }
+.xans-member-login .ec-base-tab.typeNav .menu { display:flex !important; width:100%; box-sizing:border-box; background:none !important; border:none !important; padding:0; gap:0; margin-bottom:24px; }
+.xans-member-login .ec-base-tab.typeNav .menu li { flex:1; border:none !important; position:relative; }
+.xans-member-login .ec-base-tab.typeNav .menu li + li::before { content:"|"; position:absolute; left:0; top:50%; transform:translateY(-50%); color:#ddd; font-weight:normal; pointer-events:none; }
+.xans-member-login .ec-base-tab.typeNav .menu li a { display:block; padding:20px 0; color:#bbb !important; text-align:center; background:none !important; font-weight:bold; font-size:14px; border:none !important; white-space:nowrap; text-decoration:none; transition:color .2s; }
+.xans-member-login .ec-base-tab.typeNav .menu li.selected a { color:#111 !important; background:none !important; border:none !important; }
 .login__security { margin:10px 0 30px; font-size:13px; }
 .login__security .secret { position:relative; display:inline-block; height:17px; line-height:17px; padding:0 0 0 27px; background:url("//img.echosting.cafe24.com/skin/skin/member/ico_access.svg") no-repeat 0 0; }
 .login__security .secret img { position:absolute; top:0; left:0; opacity:.00001; width:100%; height:100%; z-index:10; }
@@ -31,3 +32,8 @@
 @media all and (min-width:1025px) {
     .login { width:421px; margin:0 auto; }
 }
+
+/* 기존회원 / 비회원 주문조회 탭 항상 표시 */
+.xans-member-login .ec-base-tab.typeNav {
+    display: flex !important;
+}

@@ -229,6 +229,23 @@
         </script>
         -->
 
+        <!-- [TVZone] 로그인 링크 returnUrl 동적 추가 -->
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentPath = window.location.pathname + window.location.search + window.location.hash;
+            document.querySelectorAll("#header .xans-layout-statelogoff a").forEach(function (loginLink) {
+                try {
+                    var url = new URL(loginLink.href, window.location.origin);
+                    if (url.searchParams.has("noMemberOrder") && !url.searchParams.has("returnUrl")) {
+                        url.searchParams.set("returnUrl", currentPath);
+                        loginLink.href = url.pathname + url.search;
+                    }
+                } catch(e) {}
+            });
+        });
+        </script>
+        <!-- /[TVZone] 로그인 링크 returnUrl 동적 추가 -->
+
         <!-- [TVZone] 옵션 마이너스 가격 제거 스크립트 -->
         <script>
         (function(){

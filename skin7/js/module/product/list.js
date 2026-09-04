@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (mySubItems.length > 0) {
                     // 탭 형태로 가로 나열
-                    html += '<li ' + (currentCateNo == activeTargetNo ? 'class="selected"' : '') + '><a href="/product/list.html?cate_no=' + activeTargetNo + '">전체</a></li>';
+                    html += '<li><a href="/product/list.html?cate_no=' + depth1No + '">전체</a></li>';
                     mySubItems.forEach(function (subItem) {
                         var isSubSelected = (currentCateNo == subItem.cate_no) ? 'class="selected"' : '';
                         html += '<li ' + isSubSelected + '><a href="/product/list.html' + (subItem.param || '?cate_no=' + subItem.cate_no) + '">' + subItem.name + '</a></li>';

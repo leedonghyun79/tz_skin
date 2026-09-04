@@ -35,30 +35,96 @@
 .xans-member-login .loginUtil .btnLogin:before { display:block; content:""; position:absolute; top:6px; left:0; width:1px; height:13px; background:#848484; }
 .xans-member-login .loginUtil .btnLogin:first-child:before { display:none; }
 .xans-member-login .loginUtil .btnLogin .icon { display:inline-block; width:5px; padding:0 7px 0 6px; }
-.xans-member-login .snsLogin .btnNaver {
-    display:block; margin:10px 0 0; border:0; border-radius:2px; font-size:13px; color:#fff; text-align:center; height:34px; line-height:33px; padding:0 0 0 45px;
-    background:#26c826 url("//img.echosting.cafe24.com/skin/mobile/member/ico_btn_naver.png") no-repeat 13px 0; background-size:33px 33px;
-    -moz-box-sizing:border-box; box-sizing:border-box;
+.xans-member-login .snsLogin [class*="btn"] { 
+    display:block; margin:10px 0 0; border:0; border-radius:4px; font-size:14px; text-align:center; height:40px; line-height:40px; font-weight:bold; box-sizing:border-box; background-size:20px auto; 
 }
-.xans-member-login .snsLogin .btnFacebook {
-    display:block; margin:10px 0 0; border:0; border-radius:2px; font-size:13px; color:#fff; text-align:center; height:33px; line-height:33px; padding:0 0 0 45px;
-    background:#4267b2 url("//img.echosting.cafe24.com/skin/mobile/member/ico_btn_facebook.png") no-repeat 13px 0; background-size:33px 33px;
-    -moz-box-sizing:border-box; box-sizing:border-box;
+.xans-member-login .snsLogin .btnKakao { 
+    color:#391b1b; background:#fee500 url("//img.echosting.cafe24.com/skin/skin/member/ico_kakao.svg") no-repeat 15px 50%; 
 }
-.xans-member-login .snsLogin .btnGoogle {
-    display:block; margin:10px 0 0; border:0; border-radius:2px; font-size:13px; color:#fff; text-align:center; height:33px; line-height:33px; padding:0 0 0 45px;
-    background:#517ff3 url("//img.echosting.cafe24.com/skin/mobile/member/ico_google.png") no-repeat 0 0; background-size:auto 31px; border:1px solid #517ff3;
-    -moz-box-sizing:border-box; box-sizing:border-box;
+.xans-member-login .snsLogin .btnNaver { 
+    color:#fff; background:#03c75a url("//img.echosting.cafe24.com/skin/skin/member/ico_naver.svg") no-repeat 15px 50%; 
 }
-.xans-member-login .snsLogin .btnKakao {
-    display:block; margin:10px 0 0; border:0; border-radius:2px; font-size:13px; color:#3c1e1e; text-align:center; height:34px; line-height:33px; padding:0 0 0 45px;
-    background:#ffeb00 url("//img.echosting.cafe24.com/skin/mobile/member/ico_btn_kakao.png") no-repeat 11px 1px; background-size:auto 33px;
-    -moz-box-sizing:border-box; box-sizing:border-box;
+.xans-member-login .snsLogin .btnGoogle { 
+    color:#000; border:1px solid #e5e5e5; background:#fff url("//img.echosting.cafe24.com/skin/skin/member/ico_google.svg") no-repeat 15px 50%; 
 }
-.xans-member-login .snsLogin .btnLine {
-    display:block; margin:10px 0 0; border:0; border-radius:2px; font-size:13px; color:#fff; text-align:center; height:34px; line-height:33px; padding:0 0 0 45px;
-    background:#26c826 url("//img.echosting.cafe24.com/skin/mobile/member/ico_btn_line.png") no-repeat 10px 0; background-size:35px 33px;
-    -moz-box-sizing:border-box; box-sizing:border-box;
+.xans-member-login .snsLogin .btnFacebook { 
+    color:#fff; background:#4267b2 url("//img.echosting.cafe24.com/skin/mobile/member/ico_btn_facebook.png") no-repeat 15px 50%; background-size:20px auto;
+}
+.xans-member-login .snsLogin .btnLine { 
+    color:#fff; background:#00c300 url("//img.echosting.cafe24.com/skin/mobile/member/ico_btn_line.png") no-repeat 15px 50%; background-size:20px auto;
 }
 .xans-member-login #member_id,
 .xans-member-login #member_passwd { font-size:15px; }
+
+/* 기존회원/비회원 주문조회 탭 디자인 (PC와 동일) */
+.xans-member-login .ec-base-tab.gMerge { display: flex !important; width:100%; box-sizing:border-box; background:none !important; border:none !important; padding:0; margin:0 0 24px; border-top:0 !important; }
+.xans-member-login .ec-base-tab.gMerge ul { display:flex; width:100%; border:none !important; background:none !important; }
+.xans-member-login .ec-base-tab.gMerge li { flex:1; border:none !important; position:relative; background:none !important; }
+.xans-member-login .ec-base-tab.gMerge li + li::before { content:"|"; position:absolute; left:0; top:50%; transform:translateY(-50%); color:#ddd; font-weight:normal; pointer-events:none; }
+.xans-member-login .ec-base-tab.gMerge li a { display:block; padding:20px 0; color:#bbb !important; text-align:center; background:none !important; font-weight:bold; font-size:14px; border:none !important; white-space:nowrap; text-decoration:none; transition:color .2s; }
+.xans-member-login .ec-base-tab.gMerge li.selected a { color:#111 !important; background:none !important; border:none !important; }
+.xans-member-login .ec-base-tab.gMerge li.selected { border:none !important; }
+
+/* ---------------------------------------------------------
+   커스텀 로그인 탭 스왑 및 UI 스타일링 
+--------------------------------------------------------- */
+/* 로그인 폼 전체 버튼 높이 40px 통일 */
+.tz-member-outer .ec-base-button.gFull>button,
+.tz-member-outer .ec-base-button.gFull>a,
+.tz-nomember-outer .ec-base-button.gFull>button,
+.tz-nomember-outer .ec-base-button.gFull>a {
+    height: 40px !important;
+    line-height: 40px !important;
+    box-sizing: border-box !important;
+}
+
+/* 완벽한 CSS 기반 폼 스왑 (JS 캐싱/오류 원천 방지) */
+body.tz-show-nomember #tz-member-wrapper fieldset {
+    display: none !important;
+}
+
+body.tz-show-nomember #tz-member-wrapper .loginHeader {
+    display: none !important;
+}
+
+body.tz-show-nomember #tz-nomember-wrapper {
+    display: block !important;
+}
+
+body.tz-show-nomember #tz-nomember-wrapper .tz-nomember-outer {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+/* 탭 스타일링 - Cafe24 기본 selected 클래스 활용 */
+.ec-base-tab ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+}
+.ec-base-tab li {
+    flex: 1;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+}
+.ec-base-tab li a {
+    display: block;
+    padding: 12px 0;
+    color: #757575;
+    font-size: 14px;
+    font-weight: 400;
+}
+.ec-base-tab li.selected {
+    border-bottom: 2px solid #111;
+}
+.ec-base-tab li.selected a {
+    color: #111;
+    font-weight: 700;
+}
+
+

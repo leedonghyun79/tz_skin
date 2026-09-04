@@ -874,7 +874,7 @@ span.noBorder input {
 /********************* PC *********************/
 @media all and (min-width:1025px) {
     .titleArea {
-        margin: 45px 0 80px;
+        margin: 45px 0;
         text-align: center;
     }
 

@@ -1,4 +1,5 @@
 <!--@layout(/layout/basic/layout.html)-->
+
 <div class="path">
     <span>현재 위치</span>
     <ol>
@@ -21,8 +22,8 @@
     <div class="login">
         <div class="ec-base-tab typeNav gFlex {$member_login_tab_display|display}">
             <ul class="menu">
-                <li class="selected"><a href="#member">회원</a></li>
-                <li><a href="#noMember">비회원</a></li>
+                <li class="selected"><a href="#member">기존회원</a></li>
+                <li><a href="#noMember">비회원 주문조회</a></li>
             </ul>
         </div>
         <fieldset class="form">
@@ -46,15 +47,15 @@
                 </div>
             </div>
             <div class="login__sns">
-            	<a href="#none" class="btnNaver {$display_naver|display}" onclick="{$naver_func_login}">네이버 로그인</a>
-                <a href="#none" class="btnKakao {$display_kakao|display}" onclick="{$kakao_func_login}">카카오 로그인</a>
-                <a href="#none" class="btnGoogle {$display_google|display}" onclick="{$google_func_login}">Google 로그인</a>
+            	<a href="#none" class="btnNaver {$display_naver|display}" onclick="{$naver_func_login}">네이버 간편 로그인 / 회원가입</a>
+                <a href="#none" class="btnKakao {$display_kakao|display}" onclick="{$kakao_func_login}">카카오 간편 로그인 / 회원가입</a>
+                <a href="#none" class="btnGoogle {$display_google|display}" onclick="{$google_func_login}">구글 간편 로그인 / 회원가입</a>
             </div>
         </fieldset>
     </div>
 </div>
 
-<div module="MyShop_OrderHistoryNologin" id="order_history_nologin_id" class="gInnerMargin">
+<div module="MyShop_OrderHistoryNologin" id="order_history_nologin_id" class="gInnerMargin" style="display:none">
     <!--@css(/css/module/myshop/orderHistoryNologin.css)-->
     <!--
         $orderDetailUrl = /myshop/order/list.html
@@ -62,8 +63,8 @@
     <div class="login">
         <div class="ec-base-tab typeNav gFlex">
             <ul class="menu">
-                <li><a href="#member">회원</a></li>
-                <li class="selected"><a href="#noMember">비회원</a></li>
+                <li><a href="#member">기존회원</a></li>
+                <li class="selected"><a href="#noMember">비회원 주문조회</a></li>
             </ul>
         </div>
         <div class="form">
@@ -71,8 +72,8 @@
             {$form.order_id}
             {$form.order_password}
             <div class="login__button">
-            	<button type="submit" class="btnSubmit gFull sizeL">조회</button>
-        		<a href="/member/join.html" class="btnNormal gFull sizeL">회원가입</a>
+            	<button type="submit" class="btnSubmit gFull sizeL">비회원 주문조회</button>
+        		<a href="/member/join.html" class="btnNormal gFull sizeL" style="background:#fff; color:#222; border:1px solid #ddd;">회원가입</a>
             </div>
             <p class="txtInfo typeDot">비회원의 경우, 주문시의 주문번호로 주문조회가 가능합니다.</p>
         </div>
