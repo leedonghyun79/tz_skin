@@ -21,9 +21,14 @@
 .login__button { margin:20px 0 0; }
 .login__button [class^="btn"] { background:#222; color:#fff; border:none; font-weight:bold; border-radius:4px; }
 .login__button [class^="btn"] + [class^="btn"] { margin:10px 0 0; }
-.login__sns { margin:40px 0 0; }
+.login__sns { margin:0 0 30px; }
+.login__sns .sns-intro { font-size:14px; color:#555; line-height:1.4; margin-bottom:15px; text-align:center; }
 .login__sns [class*="btn"] { display:block; border-radius:4px; font-size:15px; text-align:center; height:50px; line-height:50px; font-weight:bold; text-decoration:none; box-sizing:border-box; background-size:20px 0; }
 .login__sns [class*="btn"] + [class*="btn"] { margin:10px 0 0; }
+
+.login__or { position:relative; text-align:center; margin:30px 0; }
+.login__or::before { content:""; position:absolute; left:0; top:50%; width:100%; height:1px; background:#e5e5e5; z-index:1; }
+.login__or span { display:inline-block; position:relative; z-index:2; padding:0 15px; background:#fff; font-size:13px; color:#999; }
 .login__sns .btnKakao { color:#391b1b; background:#fee500 url("//img.echosting.cafe24.com/skin/skin/member/ico_kakao.svg") no-repeat 20px 15px; }
 .login__sns .btnNaver { color:#fff; background:#03c75a url("//img.echosting.cafe24.com/skin/skin/member/ico_naver.svg") no-repeat 20px 15px; }
 .login__sns .btnGoogle { color:#000; border:1px solid #e5e5e5; background:#fff url("//img.echosting.cafe24.com/skin/skin/member/ico_google.svg") no-repeat 20px 15px; }

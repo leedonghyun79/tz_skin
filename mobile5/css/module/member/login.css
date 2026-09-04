@@ -35,9 +35,15 @@
 .xans-member-login .loginUtil .btnLogin:before { display:block; content:""; position:absolute; top:6px; left:0; width:1px; height:13px; background:#848484; }
 .xans-member-login .loginUtil .btnLogin:first-child:before { display:none; }
 .xans-member-login .loginUtil .btnLogin .icon { display:inline-block; width:5px; padding:0 7px 0 6px; }
+.xans-member-login .snsLogin { margin:0 0 30px; }
+.xans-member-login .snsLogin .sns-intro { font-size:13px; color:#555; line-height:1.4; margin-bottom:15px; text-align:center; }
 .xans-member-login .snsLogin [class*="btn"] { 
     display:block; margin:10px 0 0; border:0; border-radius:4px; font-size:14px; text-align:center; height:40px; line-height:40px; font-weight:bold; box-sizing:border-box; background-size:20px auto; 
 }
+
+.xans-member-login .login__or { position:relative; text-align:center; margin:30px 0; }
+.xans-member-login .login__or::before { content:""; position:absolute; left:0; top:50%; width:100%; height:1px; background:#e5e5e5; z-index:1; }
+.xans-member-login .login__or span { display:inline-block; position:relative; z-index:2; padding:0 15px; background:#fff; font-size:13px; color:#999; }
 .xans-member-login .snsLogin .btnKakao { 
     color:#391b1b; background:#fee500 url("//img.echosting.cafe24.com/skin/skin/member/ico_kakao.svg") no-repeat 15px 50%; 
 }
