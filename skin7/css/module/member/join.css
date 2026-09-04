@@ -1,57 +1,532 @@
-.xans-member-join .required { display:block; margin: -13px 0 0; line-height:1; text-align:right; color:var(--font-color-base); }
-.xans-member-join .icoRequired { vertical-align:middle; margin-top:-3.5px; }
+/* ========================================
+   PC Join - Modern Redesign (skin7)
+   ======================================== */
 
-.xans-member-join .ec-base-table .error { color:var(--font-color-warn); }
-
-.xans-member-join .verify { position:relative; display:inline-block; vertical-align:top; }
-.xans-member-join .verify .time { position:absolute; top:10px; right:15px; color:var(--font-color-warn); }
-.xans-member-join .verify #verify_sms_number { padding:2px 50px 2px 4px; box-sizing:border-box; }
-.xans-member-join .verify #verify_sms_number:disabled { padding-right:4px; }
-
-.xans-member-join .ec-base-table.typeWrite table .interest { margin-top:10px; }
-.xans-member-join .ec-base-table.typeWrite table .interest label { line-height:26px; }
-
-.xans-member-join .eTooltip { position:relative; display:inline-block; }
-.xans-member-join .ec-base-tooltip.typeUpper { left:20px !important; bottom:28px !important; width:260px; }
-.xans-member-join .ec-base-tooltip.typeUpper .edge { left:20%; }
-.xans-member-join .ec-base-tooltip.typeUpper:before,
-.xans-member-join .ec-base-tooltip.typeUpper:after { left:55px; }
-
-#realNameAuth p span { display:inline-block; width:80px; }
-
-.xans-member-join #btn_verify_mobile_confirm { margin-left:15px; }
-
-/********************* Mobile / Tablet *********************/
-@media all and (max-width:1024px) {
-    .xans-member-join input,
-    .xans-member-join select,
-    .xans-member-join .eTooltip,
-    .xans-member-join #nameContents,
-    .xans-member-join #authWrap { width:100%; }
+.xans-member-join {
+    font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    color: #222;
 }
 
-/********************* PC *********************/
-@media all and (min-width:1025px) {
-    .xans-member-join select,
-    .xans-member-join input[type="text"],
-    .xans-member-join input[type="password"] { width:290px; }
-    
-    .xans-member-join #hint,
-    .xans-member-join #hint_answer { width:450px; }
-    
-    .xans-member-join #mobile1,
-    .xans-member-join #mobile2,
-    .xans-member-join #mobile3,
-    .xans-member-join #phone1,
-    .xans-member-join #phone2, 
-    .xans-member-join #phone3,
-    .xans-member-join #birth_year,
-    .xans-member-join #marry_year,
-    .xans-member-join #partner_year,
-    .xans-member-join #birth_month,
-    .xans-member-join #marry_month,
-    .xans-member-join #partner_month,
-    .xans-member-join #birth_day,
-    .xans-member-join #marry_day,
-    .xans-member-join #partner_day { width:86px; }
+/* 회원인증, 타이틀 영역 숨김 */
+.xans-member-join .titleArea {
+    display: none !important;
+}
+
+.xans-member-join .titleArea--middle {
+    display: none !important;
+}
+
+/* ── 테이블 → 세로 폼 변환 ── */
+.xans-member-join .ec-base-table.typeWrite {
+    margin: 0;
+}
+
+.xans-member-join .ec-base-table.typeWrite table,
+.xans-member-join .ec-base-table.typeWrite colgroup,
+.xans-member-join .ec-base-table.typeWrite tbody {
+    display: block;
+    width: 100%;
+}
+
+.xans-member-join .ec-base-table.typeWrite tr {
+    display: block;
+    margin-bottom: 22px;
+    border: none !important;
+    background: none !important;
+}
+
+/* th → label */
+.xans-member-join .ec-base-table.typeWrite th {
+    display: block;
+    width: 100%;
+    padding: 0 0 7px 0;
+    border: none !important;
+    background: none !important;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.4;
+}
+
+.xans-member-join .ec-base-table.typeWrite th .icoRequired {
+    display: none;
+}
+
+.xans-member-join .ec-base-table.typeWrite th .icon {
+    display: none;
+}
+
+/* 필수 표시 */
+.xans-member-join .ec-base-table.typeWrite th::after {
+    content: ' *';
+    color: #3a6cf4;
+    font-size: 13px;
+}
+
+.xans-member-join .ec-base-table.typeWrite tr[class*="display"] th::after {
+    content: '';
+}
+
+/* td */
+.xans-member-join .ec-base-table.typeWrite td {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none !important;
+    background: none !important;
+}
+
+/* caption 숨김 */
+.xans-member-join .ec-base-table.typeWrite caption {
+    display: none;
+}
+
+/* ── 인풋 공통 ── */
+.xans-member-join input[type="text"],
+.xans-member-join input[type="password"],
+.xans-member-join input[type="number"],
+.xans-member-join input[type="tel"],
+.xans-member-join input[type="email"] {
+    width: 100% !important;
+    height: 48px !important;
+    padding: 0 14px !important;
+    border: 1px solid #d5d5d5 !important;
+    border-radius: 6px !important;
+    font-size: 15px !important;
+    color: #222 !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    transition: border-color 0.2s !important;
+    -webkit-appearance: none !important;
+}
+
+.xans-member-join input[type="text"]:focus,
+.xans-member-join input[type="password"]:focus,
+.xans-member-join input[type="number"]:focus,
+.xans-member-join input[type="tel"]:focus,
+.xans-member-join input[type="email"]:focus {
+    border-color: #222 !important;
+}
+
+.xans-member-join select {
+    height: 48px !important;
+    padding: 0 14px !important;
+    border: 1px solid #d5d5d5 !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    color: #222 !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+}
+
+/* ── 힌트 / 안내 텍스트 ── */
+.xans-member-join .txtInfo {
+    font-size: 12px;
+    color: #3a6cf4;
+    margin-top: 6px;
+    line-height: 1.5;
+}
+
+.xans-member-join ul.txtInfo {
+    padding: 0;
+    margin-top: 6px;
+}
+
+.xans-member-join ul.txtInfo li {
+    font-size: 12px;
+    color: #3a6cf4;
+    list-style: none;
+}
+
+.xans-member-join p.txtInfo {
+    font-size: 12px;
+    color: #3a6cf4;
+    margin-top: 6px;
+}
+
+/* 에러 */
+.xans-member-join .error {
+    color: #e53e3e !important;
+    font-size: 12px;
+}
+
+.xans-member-join .ec-base-table .error {
+    color: #e53e3e;
+}
+
+/* ── 버튼 (중복확인 등) ── */
+.xans-member-join .btnNormal {
+    height: 48px !important;
+    padding: 0 16px !important;
+    border: 1px solid #222 !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #222 !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+    vertical-align: top !important;
+}
+
+/* 아이디 / 이메일 행 */
+.xans-member-join .ec-base-table.typeWrite .idCheck td {
+    display: flex !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+.xans-member-join .ec-base-table.typeWrite .idCheck td input {
+    flex: 1;
+    min-width: 0;
+}
+
+.xans-member-join #member_id {
+    width: 100% !important;
+}
+
+.xans-member-join #idMsg,
+.xans-member-join #emailMsg {
+    width: 100% !important;
+    font-size: 12px !important;
+    margin-top: 4px !important;
+}
+
+/* 이메일 폼 */
+.xans-member-join #email1 {
+    margin-bottom: 0 !important;
+}
+
+.xans-member-join #email1,
+.xans-member-join #email2,
+.xans-member-join #email3 {
+    flex: 1 !important;
+    width: 0 !important;
+    margin: 0 !important;
+}
+
+.xans-member-join tr:has(#email1) td {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+}
+
+.xans-member-join .verify {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.xans-member-join .verify .time {
+    position: absolute;
+    top: 14px;
+    right: 15px;
+    color: #e53e3e;
+    font-size: 13px;
+}
+
+.xans-member-join #verify_sms_number {
+    padding-right: 60px !important;
+}
+
+.xans-member-join #btn_verify_mobile_confirm {
+    margin-left: 8px;
+}
+
+/* 컨테이너 */
+.xans-member-join .formGroup.code {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 4px;
+    /* 필드/하이픈 간격 */
+    width: 100%;
+}
+
+/* select + input 두 개: 한 줄에 나눠 갖기 */
+.xans-member-join .formGroup.code>#mobile1,
+.xans-member-join .formGroup.code>#mobile2,
+.xans-member-join .formGroup.code>#mobile3 {
+    flex: 1 1 0 !important;
+    /* 남은 폭을 3등분 */
+    min-width: 0 !important;
+    /* 넘침 방지 */
+    width: auto !important;
+}
+
+/* 에러/성공 문구만 아래 줄로 */
+.xans-member-join .formGroup.code>.txtInfo {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-top: 8px !important;
+    text-align: left;
+}
+
+.xans-member-join #mobile1,
+.xans-member-join #mobile2,
+.xans-member-join #mobile3,
+.xans-member-join #phone1,
+.xans-member-join #phone2,
+.xans-member-join #phone3 {
+    width: calc(33.33334% - 4px);
+    ;
+}
+
+
+.xans-member-join #mobile1,
+.xans-member-join #mobile3 {
+    margin: 0;
+}
+
+.xans-member-join .formGroup.code button {
+    margin-left: 8px !important;
+    flex-shrink: 0 !important;
+}
+
+/* 주소 */
+.xans-member-join #postcode1 {
+    width: 100px !important;
+    margin-bottom: 8px;
+}
+
+/* tooltip 숨김 */
+.xans-member-join .ec-base-tooltip {
+    display: none !important;
+}
+
+/* ── 추가정보 제목 영역 ── */
+.xans-member-join .titleArea--middle.ec-base-section {
+    display: block !important;
+    margin: 32px 0 0;
+}
+
+/* ── 약관 동의 영역 ── */
+.custom-agree-wrap {
+    margin: 32px 0 24px;
+    padding: 24px 0 0;
+    font-size: 14px;
+    color: #333;
+    max-width: 620px;
+    border-top: none !important;
+}
+
+.custom-agree-wrap .agree-all {
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.custom-agree-wrap .agree-all label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #111;
+}
+
+.custom-agree-wrap .agree-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.custom-agree-wrap .agree-item .btn-view {
+    font-size: 13px;
+    color: #3a6cf4;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.custom-agree-wrap .marketing-options {
+    padding-left: 31px;
+    margin: -6px 0 14px;
+    display: flex;
+    gap: 20px;
+}
+
+/* 커스텀 체크박스 (원형) */
+.custom-agree-wrap input[type="checkbox"] {
+    display: none;
+}
+
+.custom-agree-wrap label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.custom-agree-wrap label .chk-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin-right: 9px;
+    border: 1.5px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+    background: #fff;
+    flex-shrink: 0;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.custom-agree-wrap input[type="checkbox"]:checked+.chk-icon {
+    border-color: #3a6cf4;
+    background: #3a6cf4;
+}
+
+.custom-agree-wrap input[type="checkbox"]:checked+.chk-icon::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 4px;
+    width: 5px;
+    height: 9px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* 마케팅 옵션 (사각형 체크) */
+.custom-agree-wrap .marketing-options label .chk-icon {
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+}
+
+.custom-agree-wrap .marketing-options input[type="checkbox"]:checked+.chk-icon::after {
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 9px;
+}
+
+/* ── 가입하기 버튼 ── */
+.xans-member-join .ec-base-button.gBottom {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.xans-member-join .ec-base-button.gBottom .btnSubmitFix {
+    display: inline-block;
+    min-width: 200px;
+    height: 54px;
+    padding: 0 40px;
+    border: none !important;
+    border-radius: 6px !important;
+    background: #111 !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    text-decoration: none !important;
+    line-height: 54px !important;
+}
+
+.xans-member-join .ec-base-button.gBottom .btnSubmitFix:hover {
+    background: #333 !important;
+}
+
+.xans-member-join .ec-base-button.gBottom .btnNormalFix {
+    display: inline-block;
+    min-width: 120px;
+    height: 54px;
+    padding: 0 30px;
+    border: 1px solid #ccc !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    color: #555 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    line-height: 54px !important;
+    margin-right: 8px;
+}
+
+/* ── 약관 모달 (PC) ── */
+.agree-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.agree-modal-overlay.is-open {
+    display: flex;
+}
+
+.agree-modal {
+    width: 600px;
+    max-width: 90vw;
+    max-height: 80vh;
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.agree-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.agree-modal__title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #111;
+}
+
+.agree-modal__close {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #555;
+    line-height: 1;
+}
+
+.agree-modal__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.agree-modal__body iframe {
+    width: 100%;
+    height: 60vh;
+    border: none;
+    display: block;
 }

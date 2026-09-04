@@ -1,2278 +1,544 @@
 <!--@layout(/layout/basic/layout.html)-->
-<div id="titleArea">
-    <h2>회원가입</h2>
-    <span module="Layout_MobileAction">
-        <a href="#none" onclick="{$go_back}"><img src="//img.echosting.cafe24.com/skin/mobile_ko_KR/layout/btn_back.gif" width="33" alt="뒤로가기"></a>
-    </span>
+<div class="section path">
+    <span>현재 위치</span>
+    <ol>
+        <li><a href="/">홈</a></li>
+        <li title="현재 위치"><strong>회원 가입</strong></li>
+    </ol>
+</div>
+<div class="section titleArea">
+    <h2>회원 가입</h2>
 </div>
 
-<div module="member_join" class="clearfix form_area_inner">
-  <div class="">
-<style>
-/* Reset & Basic Setup */
-body {
-    background-color: #f7f6f2 !important;
-}
-.form_area_inner {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
-    color: #333;
-    background-color: #f7f6f2;
-}
-
-/* Hide Table Borders & Reset */
-.ec-base-table table {
-    border: none !important;
-    width: 100%;
-}
-.ec-base-table th, .ec-base-table td {
-    border: none !important;
-    padding: 8px 0;
-}
-.ec-base-table caption { display: none; }
-
-/* Radio Buttons Styling */
-.form_type {
-    padding-bottom: 10px;
-}
-.form_type label {
-    margin-right: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    vertical-align: middle;
-    color: #333;
-}
-.form_type input[type="radio"],
-input[type="radio"][name="is_solar_calendar"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: none;
-    background-color: #dcd9d2;
-    vertical-align: middle;
-    margin-right: 8px;
-    cursor: pointer;
-    outline: none;
-}
-.form_type input[type="radio"]:checked,
-input[type="radio"][name="is_solar_calendar"]:checked {
-    background-color: #112a20;
-}
-
-/* Input Fields (aromatica_inputfield) */
-.aromatica_inputfield {
-    position: relative;
-    margin-bottom: 25px;
-    text-align: right;
-    font-size: 11px;
-    color: #666;
-}
-.aromatica_inputfield input[type="text"],
-.aromatica_inputfield input[type="password"],
-.aromatica_inputfield input[type="tel"],
-.aromatica_inputfield input[type="number"],
-.aromatica_inputfield input[type="email"],
-.aromatica_inputfield select {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 14px;
-    border: none;
-    border-bottom: 1px solid #e0e0e0;
-    border-radius: 0;
-    box-sizing: border-box;
-    background-color: transparent;
-    margin-bottom: 5px;
-    color: #333;
-    text-align: left;
-}
-.aromatica_inputfield input::placeholder {
-    color: #999;
-}
-.aromatica_inputfield input:focus,
-.aromatica_inputfield select:focus {
-    outline: none;
-    border-bottom: 1px solid #112a20;
-}
-
-/* Error States */
-.aromatica_inputfield span.error, 
-.aromatica_inputfield p.error {
-    color: #ff3b30 !important;
-}
-.aromatica_inputfield span.info, 
-.aromatica_inputfield p.info {
-    color: #333 !important;
-}
-
-/* Message positioning */
-.aromatica_inputfield::after {
-    content: '';
-    display: table;
-    clear: both;
-}
-.aromatica_inputfield span[id$="Msg"] {
-    display: inline-block;
-    float: left;
-    margin-top: 8px;
-    font-size: 13px;
-    clear: left;
-}
-.aromatica_inputfield small {
-    display: inline-block;
-    float: right;
-    margin-top: 8px;
-    font-size: 12px;
-    color: #999;
-}
-
-/* Flex layout for multiple inputs (Phone, Birthdate) */
-.flex_row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-}
-.flex_row input,
-.flex_row select {
-    flex: 1;
-    min-width: 0;
-}
-
-/* Phone number form specific flex */
-.phone_number_form.aromatica_inputfield {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-.phone_number_form.aromatica_inputfield .per_100 {
-    width: 100%;
-    flex-basis: 100%;
-}
-.phone_number_form.aromatica_inputfield > select,
-.phone_number_form.aromatica_inputfield > input {
-    flex: 1;
-}
-
-/* Buttons */
-.btnBasic {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 16px;
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 0;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    box-sizing: border-box;
-    white-space: nowrap;
-    background: #112a20;
-    color: #fff;
-    border: none;
-}
-.btnBasic:hover {
-    background: #0b1c15;
-}
-
-/* Positioning buttons inside input fields */
-.aromatica_inputfield .btnBasic {
-    position: absolute;
-    right: 0;
-    bottom: 25px; /* Above the help text */
-}
-
-/* Exception for mobile wrap to fit the button */
-#mobileWrap .aromatica_inputfield {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-#mobileWrap .aromatica_inputfield select,
-#mobileWrap .aromatica_inputfield input {
-    flex: 1;
-    margin-bottom: 0;
-}
-#mobileWrap .aromatica_inputfield span {
-    color: #666;
-}
-#mobileWrap .aromatica_inputfield .btnBasic {
-    position: relative;
-    bottom: 0;
-    height: 40px;
-}
-
-/* Special case for companyWrap button */
-#companyNoRow .aromatica_inputfield .btnBasic {
-    bottom: 10px; /* No help text below this one */
-}
-
-.joinsubmitbtn {
-    width: 100%;
-    background: #ebe8e1;
-    color: #a0a0a0;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 16px;
-    margin-top: 30px;
-    border: 1px solid #dcd9d2;
-    border-radius: 0;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.joinsubmitbtn:hover {
-    background: #e2ded5;
-    color: #666;
-}
-
-/* Accordion Terms */
-.agree_wrap {
-    margin-top: 30px;
-}
-.agree_wrap .accordion_tit {
-    font-size: 14px;
-    font-weight: 600;
-    padding: 16px 0 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #333;
-}
-.agree_wrap .accordion_tit::after {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'%3E%3C/polyline%3E%3C/svg%3E");
-    background-size: contain;
-    background-position: center;
-    transition: transform 0.2s;
-    background-repeat: no-repeat;
-}
-.agree_wrap .accordion_tit.on::after {
-    transform: rotate(180deg);
-}
-.agree_wrap .accordion_contents {
-    padding: 10px 0;
-    background: transparent;
-    font-size: 13px;
-    color: #666;
-    border: none;
-}
-.agreeArea .clearfix {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-}
-.agreeArea .check {
-    margin: 0;
-}
-.agree_wrap input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
-    margin-right: 12px;
-    vertical-align: middle;
-    background-color: #e5e4de;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-}
-.agree_wrap input[type="checkbox"]:checked {
-    background-color: #112a20;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-    background-size: 10px;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.agree_wrap label {
-    vertical-align: middle;
-    font-size: 13px;
-    color: #666;
-    cursor: pointer;
-}
-.agree_wrap .accordion_tit label {
-    color: #333 !important;
-}
-.agreeArea ul.check {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-.agreeArea ul.check li {
-    display: flex;
-    align-items: center;
-    padding: 8px 0;
-}
-
-/* Plus button icon */
-.agreeToggleBtn {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-color: #112a20;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-}
-.agreeToggleBtn::before,
-.agreeToggleBtn::after {
-    content: '';
-    position: absolute;
-    background-color: #fff;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.agreeToggleBtn::before {
-    width: 8px;
-    height: 1.5px;
-}
-.agreeToggleBtn::after {
-    width: 1.5px;
-    height: 8px;
-}
-.ec-base-box.typeThinBg {
-    background-color: transparent !important;
-    border: none !important;
-}
-.btn_accordion_icon {
-    display: none !important;
-}
-
-/* Hide structural blocks */
-.displaynone {
-    display: none !important;
-}
-
-/* Birthdate styling */
-.birth_wrap {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.birth_wrap select,
-.birth_wrap input {
-    flex: 1;
-    padding: 10px 0;
-    border: none;
-    border-bottom: 1px solid #e0e0e0;
-    background: transparent;
-    font-size: 14px;
-}
-</style>
-    <h2 class="displaynone">일반 회원가입</h2>
-
+<div module="member_join" class="memberArea">
+    <!--@css(/css/module/member/join.css)-->
     <!--
-                    $returnUrl = /member/join_result.html
-                    $checkIdUrl = /member/check_id.html
-                    $personalName = 이름
-                    $companyName = 법인명
-                    $companySsn = 법인번호
-                    $foreignerSsn1 = 외국인 등록번호
-                    $foreignerSsn2 = 여권번호
-                    $foreignerSsn3 = 국제운전면허증번호
-                 -->
-    <div class="ec-base-table typeWrite form_type_wrap">
-      <table border="1" summary="">
-        <caption>회원가입</caption>
-        <colgroup>
-          <col style="width:100px;">
-          <col style="width:auto;">
-        </colgroup>
-        <tbody>
-          <tr class="">
-            <th scope="row" class="displaynone">회원구분 *</th>
-            <td class="form_type"><input id="member_type0" name="member_type" fw-filter="isFill" fw-label="회원구분"
-                fw-msg="" value="p" type="radio" checked="checked" autocomplete="off"
-                data-gtm-form-interact-field-id="2"><label for="member_type0">개인회원</label>
-              <input id="member_type1" name="member_type" fw-filter="isFill" fw-label="회원구분" fw-msg="" value="c"
-                type="radio" autocomplete="off" data-gtm-form-interact-field-id="1"><label
-                for="member_type1">사업자회원</label>
-            </td>
-          </tr>
-          <tr id="companyWrap" style="">
-            <th scope="row" class="displaynone">사업자구분 *</th>
-            <td class="form_type"><input id="company_type0" name="company_type" fw-filter="" fw-label="사업자구분" fw-msg=""
-                value="p" type="radio" checked="checked" autocomplete="off" data-gtm-form-interact-field-id="4"><label
-                for="company_type0">개인사업자</label>
-              <input id="company_type1" name="company_type" fw-filter="" fw-label="사업자구분" fw-msg="" value="c"
-                type="radio" autocomplete="off" data-gtm-form-interact-field-id="3"><label
-                for="company_type1">법인사업자</label>
-            </td>
-          </tr>
-          <tr id="authMember" style="display: none;">
-            <th scope="row" class="displaynone">회원인증 *</th>
-            <td>
-              <div id="authWrap" style="">
-                <!-- 개인 회원 인증 -->
-                <div id="personAuth" style="">
-                  <div id="personalTypeWrap" style=""></div>
-                  <div id="ipinWrap" style="display: none;"></div>
-                  <div id="mobileWrap" style="display: none;"></div>
-                  <div id="emailWrap" style="display: none;"></div>
-                </div>
-
-                <!-- 법인 사업자 인증 -->
-                <div id="businessAuth" style="display: none;">
-                  <ul class="grid">
-                    <li class="aromatica_inputfield"><input id="bname" name="bname" fw-filter="isMax[20]" fw-label="법인명"
-                        fw-msg="" class="inputTypeText" placeholder="" maxlength="20" value="" type="text"></li>
-                    <li class="aromatica_inputfield"><input id="bssn1" name="bssn1" fw-filter="isMax[6]"
-                        fw-label="bssn1" fw-msg="" class="inputTypeText" placeholder="법인번호" maxlength="6" value=""
-                        type="text"> - <input id="bssn2" name="bssn2" fw-filter="isMax[7]" fw-label="bssn2" fw-msg=""
-                        maxlength="7" autocomplete="off" value="" type="password"> <a href="#none"
-                        class="btn_medium btn_fill inlineblock"
-                        onclick="CompanyCheck.checkDupl(); return false;">중복확인</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <!-- 외국인 회원 인증 -->
-                <div id="foreignerAuth" style="display: none;">
-                  <ul class="grid">
-                    <li>이름(Name) <input id="foreigner_name" name="foreigner_name" fw-filter="" fw-label="foreigner_name"
-                        fw-msg="" class="inputTypeText" placeholder="" maxlength="20" value="" type="text"></li>
-                    <li><input id="foreigner_type0" name="foreigner_type" fw-filter="" fw-label="foreigner_type"
-                        fw-msg="" value="d" type="radio" checked="checked" autocomplete="off"><label
-                        for="foreigner_type0">국제운전면허증번호</label> <input id="foreigner_ssn" name="foreigner_ssn"
-                        fw-filter="" fw-label="foreigner_ssn" fw-msg="" class="inputTypeText" placeholder="" value=""
-                        type="text"> <a href="#none" class="btnNormal" onclick="checkForeignerNumber();">중복확인</a>
-                    </li>
-                  </ul>
-                  <div id="foreignerPersonWrap" style="display: none;">
-                    <p class="gBlank5">회사는 회원의 본인확인 및 서비스제공을 위하여 고유식별정보를 수집하여 보관하며
-                      개인정보처리방침에 따라 <br>보유 및 이용합니다. 고유식별정보 제공을 거부하는 경우 서비스 이용이 제한됩니다.
-                    </p>
-                    <p><input id="f_identification_check0" name="f_identification_check[]" fw-filter=""
-                        fw-label="고유식별정보 처리" fw-msg="고유식별정보 처리 방침에 동의해 주세요." value="1" type="checkbox"><label
-                        for="f_identification_check0">고유식별정보 처리에 동의 합니다.</label></p>
-                  </div>
-                  <div id="foreignerEmailWrap" style="display: none;">
-                    <ul>
-                      <li>기본정보 &gt; 이메일 항목에 입력하신 정보로 본인인증을 진행합니다.</li>
-                      <li>회원가입 후에 입력하신 이메일 주소로 인증 메일이 발송되오니, 확인해 주시기 바랍니다.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="displaynone ">
-      <h3 class="">기본정보</h3>
-      <p class="required ">* 필수입력사항</p>
-    </div>
-
-    <div class="ec-base-table typeWrite ">
-      <div class="clearfix">
-        <div class="formLeft displaynone">
-          아이디 *
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="member_id" name="member_id" fw-filter="isFill&amp;isFill&amp;isMin[4]&amp;isMax[16]&amp;isIdentity"
-            fw-label="아이디" fw-msg="" class="inputTypeText" placeholder="아이디" value="" type="text"> <span id="idMsg"
-            class="xsmall_txt error">아이디를 입력해 주세요.</span><small class="xsmall_txt">(영문소문자/숫자, 4~16자)</small>
-        </div>
-      </div>
-
-      <div class="clearfix">
-        <div class="formLeft displaynone">
-          비밀번호 *
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <div class="eTooltip">
-            <input id="passwd" name="passwd" fw-filter="isFill&amp;isMin[4]&amp;isMax[16]" fw-label="비밀번호" fw-msg=""
-              autocomplete="off" maxlength="16" 0="disabled" value="" type="password" placeholder="비밀번호">
-            <div class="ec-base-tooltip typeUpper" style="display: none;">
-              <div class="content">
-                <strong class="txtWarn">※ 비밀번호 입력 조건</strong>
-                <ul class="ec-base-help typeDash gBlank10 txtWarn">
-                  - 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자<br>- 입력 가능 특수문자 <br>&nbsp;&nbsp;&nbsp; ~ ` ! @ # $ % ^ ( ) * _ - =
-                  { } [ ] | ; : &lt; &gt; , . ? /<br>- 공백 입력 불가능<br>- 연속된 문자, 숫자 사용 불가능<br>- 동일한 문자, 숫자를 반복해서 사용
-                  불가능<br>- 아이디 포함 불가능 </ul>
-              </div>
-              <a href="#none" class="btnClose" tabindex="-1"><img
-                  src="//img.echosting.cafe24.com/skin/base/common/btn_close_tip.gif" alt="닫기"></a>
-              <span class="edge"></span>
-            </div>
-          </div>
-          <small class="xsmall_txt">(영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)</small>
-        </div>
-      </div>
-
-      <div class="clearfix">
-        <div class="formLeft displaynone">
-          비밀번호 확인 *
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="user_passwd_confirm" name="user_passwd_confirm" fw-filter="isFill&amp;isMatch[passwd]"
-            fw-label="비밀번호 확인" fw-msg="비밀번호가 일치하지 않습니다." autocomplete="off" maxlength="16" 0="disabled" value=""
-            type="password" placeholder="비밀번호 확인"> <span id="pwConfirmMsg"></span>
-        </div>
-      </div>
-
-      <div class="clearfix">
-        <div class="formLeft displaynone displaynone">
-          비밀번호 확인 질문 *
-        </div>
-        <div class="formRight aromatica_inputfield displaynone">
-          <select id="hint" name="hint" fw-filter="" fw-label="hint" fw-msg="">
-            <option value="hint_01">기억에 남는 추억의 장소는?</option>
-            <option value="hint_02">자신의 인생 좌우명은?</option>
-            <option value="hint_03">자신의 보물 제1호는?</option>
-            <option value="hint_04">가장 기억에 남는 선생님 성함은?</option>
-            <option value="hint_05">타인이 모르는 자신만의 신체비밀이 있다면?</option>
-            <option value="hint_06">추억하고 싶은 날짜가 있다면?</option>
-            <option value="hint_07">받았던 선물 중 기억에 남는 독특한 선물은?</option>
-            <option value="hint_08">유년시절 가장 생각나는 친구 이름은?</option>
-            <option value="hint_09">인상 깊게 읽은 책 이름은?</option>
-            <option value="hint_10">읽은 책 중에서 좋아하는 구절이 있다면?</option>
-            <option value="hint_11">자신이 두번째로 존경하는 인물은?</option>
-            <option value="hint_12">친구들에게 공개하지 않은 어릴 적 별명이 있다면?</option>
-            <option value="hint_13">초등학교 때 기억에 남는 짝꿍 이름은?</option>
-            <option value="hint_14">다시 태어나면 되고 싶은 것은?</option>
-            <option value="hint_15">내가 좋아하는 캐릭터는?</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="clearfix">
-        <div class="formLeft displaynone displaynone">
-          비밀번호 확인 답변 *
-        </div>
-        <div class="formRight aromatica_inputfield displaynone">
-          <input id="hint_answer" name="hint_answer" fw-filter="" fw-label="비밀번호 확인시 답변" fw-msg="" class="inputTypeText"
-            placeholder="" value="" type="text">
-        </div>
-      </div>
-
-      <div class="clearfix 1">
-        <div class="formLeft displaynone" id="nameTitle">
-          이름 *
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <span id="nameContents"><input type="text" name="name" id="name" maxlength="20" placeholder="이름"></span>
-          <!-- <br class="mobileonly"/> -->
-          <span id="under14Msg" class="displaynone small">14세 미만 사용자는 법정대리인 동의가 필요합니다.</span>
-        </div>
-      </div>
-
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          이름(영문) <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="name_en" name="name_en" fw-filter="isMax[30]&amp;isAlphaSpace" fw-label="이름(영문)" fw-msg=""
-            class="ec-member-name" placeholder="" maxlength="30" value="" type="text"> (이름 - 성 형식으로 입력해 주세요.)
-        </div>
-      </div>
-
-      <!-- 외국인 회원 정보 -->
-      <div class="clearfix" style="display: none;">
-        <div class="formLeft displaynone" id="ssnTitle"></div>
-        <div class="formRight aromatica_inputfield" id="ssnContents"></div>
-      </div>
-      <!-- // 외국인 회원 정보 -->
-
-      <div class="clearfix" id="companyRow" style="">
-        <div class="formLeft displaynone">
-          상호명 *
-        </div>
-        <div class="formRight aromatica_inputfield" id="companyName"><input name="cname" class="inputTypeText"
-            id="cname" type="text" maxlength="20" fw-msg="" fw-label="상호명" fw-filter="isMax[20]" value=""
-            placeholder="상호명"></div>
-      </div>
-
-      <div class="clearfix" id="companyNoRow" style="">
-        <div class="formLeft displaynone">
-          사업자번호 *
-        </div>
-        <div class="formRight aromatica_inputfield" id="companySsn">
-          <input id="cssn" name="cssn" fw-filter="isMax[20]" fw-label="사업자 번호" fw-msg="" class="inputTypeText"
-            placeholder="사업자 번호" maxlength="20" value="" type="text"> <a href="#none"
-            class="btn_medium btn_fill inlineblock " onclick="checkCssnDupl(); return false;">중복확인</a>
-          <span id="cssnMsg" class="xsmall_txt"></span>
-        </div>
-      </div>
-
-      <div class="clearfix" id="nation" style="display: none;">
-        <div class="formLeft displaynone">
-          국적 *
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <select id="citizenship" name="citizenship" fw-filter="" fw-label="국적" fw-msg="">
-            <option value="" selected="selected">국가/지역</option>
-            <option value="GH">가나(GHANA)</option>
-            <option value="GA">가봉(GABON)</option>
-            <option value="GY">가이아나(GUYANA)</option>
-            <option value="GM">감비아(GAMBIA)</option>
-            <option value="GT">과테말라(GUATEMALA)</option>
-            <option value="GD">그레나다(GRENADA)</option>
-            <option value="GE">그루지야(GEORGIA)</option>
-            <option value="GR">그리스(GREECE)</option>
-            <option value="GN">기니(GUINEA)</option>
-            <option value="GW">기니비소(GUINEA-BISSAU)</option>
-            <option value="NA">나미비아(NAMIBIA)</option>
-            <option value="NG">나이지리아(NIGERIA)</option>
-            <option value="ZA">남아프리카공화국(SOUTH AFRICA)</option>
-            <option value="AN">네덜란드(네덜란드령앤틸리스)(NETHERLANDS(ANTILLES))</option>
-            <option value="NL">네덜란드(네델란드)(NETHERLANDS)</option>
-            <option value="AW">네덜란드(아루바섬)(ARUBA)</option>
-            <option value="NP">네팔(NEPAL)</option>
-            <option value="NO">노르웨이(NORWAY)</option>
-            <option value="NZ">뉴질란드(NEW ZEALAND)</option>
-            <option value="NE">니제르(NIGER)</option>
-            <option value="NI">니카라과(NICARAGUA)</option>
-            <option value="KR">대한민국(KOREA (REP OF,))</option>
-            <option value="DK">덴마크(DENMARK)</option>
-            <option value="GL">덴마크(그린란드)(GREENLAND)</option>
-            <option value="FO">덴마크(페로즈제도)(FAROE ISLANDS)</option>
-            <option value="DO">도미니카공화국(DOMINICAN REPUBLIC)</option>
-            <option value="DM">도미니카연방(DOMINICA)</option>
-            <option value="DE">독일(GERMANY)</option>
-            <option value="TL">동티모르(TIMOR-LESTE)</option>
-            <option value="LA">라오스(LAO PEOPLE'S DEM REP)</option>
-            <option value="LR">라이베리아(LIBERIA)</option>
-            <option value="LV">라트비아(LATVIA)</option>
-            <option value="RU">러시아(RUSSIAN FEDERATION)</option>
-            <option value="LB">레바논(LEBANON)</option>
-            <option value="LS">레소토(LESOTHO)</option>
-            <option value="RO">루마니아(ROMANIA)</option>
-            <option value="LU">룩셈부르크(LUXEMBOURG)</option>
-            <option value="RW">르완다(RWANDA)</option>
-            <option value="LY">리비아(LIBYAN ARAB JAMAHIRIYA)</option>
-            <option value="LI">리첸쉬테인(LIECHTENSTEIN)</option>
-            <option value="LT">리투아니아(LITHUANIA)</option>
-            <option value="MG">마다가스카르(MADAGASCAR)</option>
-            <option value="MK">마케도니아(MACEDONIA)</option>
-            <option value="MW">말라위(MALAWI)</option>
-            <option value="MY">말레이지아(MALAYSIA)</option>
-            <option value="ML">말리(MALI)</option>
-            <option value="MX">멕시코(MEXICO)</option>
-            <option value="MC">모나코(MONACO)</option>
-            <option value="MA">모로코(MOROCCO)</option>
-            <option value="MU">모리셔스(MAURITIUS)</option>
-            <option value="MR">모리타니(MAURITANIA)</option>
-            <option value="MZ">모잠비크(MOZAMBIQUE)</option>
-            <option value="ME">몬테네그로(MONTENEGRO)</option>
-            <option value="MD">몰도바(MOLDOVA, REPUBLIC OF)</option>
-            <option value="MV">몰디브(MALDIVES)</option>
-            <option value="MT">몰타(MALTA)</option>
-            <option value="MN">몽골(MONGOLIA)</option>
-            <option value="US">미국(U.S.A)</option>
-            <option value="GU">미국(괌)(GUAM)</option>
-            <option value="MH">미국(마아샬제도)(MARSHALL ISLANDS)</option>
-            <option value="VI">미국(버진제도)(VIRGIN ISLANDS U.S.)</option>
-            <option value="WS">미국(사모아, 구 서사모아)(SAMOA)</option>
-            <option value="AS">미국(사모아제도)(AMERICAN SAMOA)</option>
-            <option value="MP">미국(사이판)(NORTHERN MARIANA ISLANDS)</option>
-            <option value="PW">미국(팔라우섬)(PALAU)</option>
-            <option value="PR">미국(푸에르토리코섬)(PUERTO RICO)</option>
-            <option value="MM">미얀마(MYANMAR)</option>
-            <option value="FM">미크로네시아(마이크로네시아)(MICRONESIA)</option>
-            <option value="VU">바누아투(VANUATU)</option>
-            <option value="BH">바레인(BAHRAIN)</option>
-            <option value="BB">바베이도스(BARBADOS)</option>
-            <option value="BS">바하마(BAHAMAS)</option>
-            <option value="BD">방글라데시(BANGLADESH)</option>
-            <option value="VE">베네수엘라(VENEZUELA)</option>
-            <option value="BJ">베넹(BENIN)</option>
-            <option value="VN">베트남(VIET NAM)</option>
-            <option value="BE">벨기에(BELGIUM)</option>
-            <option value="BY">벨라루스(BELARUS)</option>
-            <option value="BZ">벨리세(BELIZE)</option>
-            <option value="BA">보스니아헤르체코비나(Bosnia and Herzegovina)</option>
-            <option value="BW">보츠와나(BOTSWANA)</option>
-            <option value="BO">볼리비아(BOLIVIA)</option>
-            <option value="BF">부르키나파소(BURKINA FASO)</option>
-            <option value="BT">부탄(BHUTAN)</option>
-            <option value="BG">불가리아(BULGARIA(REP))</option>
-            <option value="BR">브라질(BRAZIL)</option>
-            <option value="BN">브루네이(나이)(BRUNEI DARUSSALAM)</option>
-            <option value="BI">브룬디(BURUNDI)</option>
-            <option value="SA">사우디아라비아(SAUDI ARABIA)</option>
-            <option value="CY">사이프러스(CYPRUS)</option>
-            <option value="SM">산마리노(SAN MARINO)</option>
-            <option value="SN">세네갈(SENEGAL)</option>
-            <option value="RS">세르비아/코소보(SERBIA/KOSOVO)</option>
-            <option value="SC">세이셸(SEYCHELLES)</option>
-            <option value="LC">세인트 루시아(SAINT LUCIA)</option>
-            <option value="VC">세인트빈센트그레나딘(SAINT VINCENT AND THE GRENADINES)</option>
-            <option value="KN">세인트키츠네비스(SAINT KITTS AND NEVIS)</option>
-            <option value="SB">솔로몬아일란드(SOLOMON ISLANDS)</option>
-            <option value="SR">수리남(SURINAME)</option>
-            <option value="LK">스리랑카(SRI LANKA)</option>
-            <option value="SZ">스와질랜드(SWAZILAND)</option>
-            <option value="SE">스웨덴(SWEDEN)</option>
-            <option value="CH">스위스(SWITZERLAND)</option>
-            <option value="ES">스페인(에스파니아)(SPAIN)</option>
-            <option value="SK">슬로바키아(SLOVAKIA)</option>
-            <option value="SI">슬로베니아(SLOVENIA)</option>
-            <option value="SL">시에라리온(SIERRA LEONE)</option>
-            <option value="SG">싱가포르(SINGAPORE)</option>
-            <option value="AE">아랍에미레이트연합국(UNITED ARAB EMIRATES)</option>
-            <option value="AM">아르메니아(ARMENIA)</option>
-            <option value="AR">아르헨티나(ARGENTINA)</option>
-            <option value="IS">아이슬란드(ICELAND)</option>
-            <option value="HT">아이티(HAITI)</option>
-            <option value="IE">아일란드(에이레)(IRELAND)</option>
-            <option value="AZ">아제르바이잔(AZERBAIJAN)</option>
-            <option value="AF">아프가니스탄(AFGHANISTAN)</option>
-            <option value="AD">안도라(ANDORRA)</option>
-            <option value="AL">알바니아(ALBANIA)</option>
-            <option value="DZ">알제리(ALGERIA)</option>
-            <option value="AO">앙골라(ANGOLA)</option>
-            <option value="AG">앤티과바부다(ANTIGUA AND BARBUDA)</option>
-            <option value="ER">에리트리아(ERITREA)</option>
-            <option value="EE">에스토니아(ESTONIA)</option>
-            <option value="EC">에콰도르(ECUADOR)</option>
-            <option value="SV">엘살바도르(EL SALVADOR)</option>
-            <option value="GB">영국(UNITED KINGDOM)</option>
-            <option value="MS">영국(몽세라)(MONTSERRAT)</option>
-            <option value="BM">영국(버뮤다섬)(BERMUDA)</option>
-            <option value="VG">영국(버진제도)(VIRGIN ISLANDS BRITISH)</option>
-            <option value="AI">영국(안귈라섬)(ANGUILLA)</option>
-            <option value="GI">영국(지브롤터)(GIBRALTAR)</option>
-            <option value="KY">영국(케이만제도)(CAYMAN ISLANDS)</option>
-            <option value="TC">영국(터크스케이코스제도)(TURKS AND CAICOS ISLANDS)</option>
-            <option value="YE">예멘(YEMEN)</option>
-            <option value="OM">오만(OMAN)</option>
-            <option value="NF">오스트레일리아(노퍽섬)(NORFOLK ISLAND)</option>
-            <option value="AU">오스트레일리아(호주)(AUSTRALIA)</option>
-            <option value="AT">오스트리아(AUSTRIA)</option>
-            <option value="HN">온두라스(HONDURAS)</option>
-            <option value="JO">요르단(JORDAN)</option>
-            <option value="UG">우간다(UGANDA)</option>
-            <option value="UY">우루과이(URUGUAY)</option>
-            <option value="UZ">우즈베크(UZBEKISTAN)</option>
-            <option value="UA">우크라이나(UKRAINE)</option>
-            <option value="ET">이디오피아(ETHIOPIA)</option>
-            <option value="IQ">이라크(IRAQ)</option>
-            <option value="IR">이란(IRAN(ISLAMIC REP))</option>
-            <option value="IL">이스라엘(ISRAEL)</option>
-            <option value="EG">이집트(EGYPT)</option>
-            <option value="IT">이탈리아(이태리)(ITALY)</option>
-            <option value="IN">인도(INDIA)</option>
-            <option value="ID">인도네시아(INDONESIA)</option>
-            <option value="JP">일본(JAPAN)</option>
-            <option value="JM">자메이카(JAMAICA)</option>
-            <option value="ZM">잠비아(ZAMBIA)</option>
-            <option value="CN">중국(CHINA(PEOPLE'S REP))</option>
-            <option value="MO">중국(마카오)(MACAU)</option>
-            <option value="HK">중국(홍콩)(HONG KONG)</option>
-            <option value="CF">중앙 아프리카(CENTRAL AFRICAN REPUBLIC)</option>
-            <option value="DJ">지부티(DJIBOUTI)</option>
-            <option value="ZW">짐바브웨(ZIMBABWE)</option>
-            <option value="TD">차드(CHAD)</option>
-            <option value="CZ">체코(CZECH REP)</option>
-            <option value="CL">칠레(CHILE)</option>
-            <option value="CM">카메룬(CAMEROON)</option>
-            <option value="CV">카보베르데(CAPE VERDE)</option>
-            <option value="KZ">카자흐(KAZAKHSTAN)</option>
-            <option value="QA">카타르(QATAR)</option>
-            <option value="KH">캄보디아(CAMBODIA)</option>
-            <option value="CA">캐나다(CANADA)</option>
-            <option value="KE">케냐(KENYA)</option>
-            <option value="CR">코스타리카(COSTA RICA)</option>
-            <option value="CI">코트디봐르(COTE D IVOIRE)</option>
-            <option value="CO">콜롬비아(COLOMBIA)</option>
-            <option value="CG">콩고(CONGO)</option>
-            <option value="CU">쿠바(CUBA)</option>
-            <option value="KW">쿠웨이트(KUWAIT)</option>
-            <option value="HR">크로아티아(CROATIA)</option>
-            <option value="KG">키르키즈스탄(KYRGYZSTAN)</option>
-            <option value="KI">키리바티(KIRIBATI)</option>
-            <option value="TH">타이(태국)(THAILAND)</option>
-            <option value="TW">타이완(대만)(TAIWAN)</option>
-            <option value="TJ">타지키스탄(TAJIKISTAN)</option>
-            <option value="TZ">탄자니아(TANZANIA(UNITED REP))</option>
-            <option value="TR">터키(TURKEY)</option>
-            <option value="TG">토고(TOGO)</option>
-            <option value="TO">통가(TONGA)</option>
-            <option value="TM">투르크메니스탄(TURKMENISTAN)</option>
-            <option value="TV">투발루(TUVALU)</option>
-            <option value="TN">튀니지(TUNISIA)</option>
-            <option value="TT">트리니다드토바고(TRINIDAD AND TOBAGO)</option>
-            <option value="PA">파나마(PANAMA(REP))</option>
-            <option value="PY">파라과이(PARAGUAY)</option>
-            <option value="PK">파키스탄(PAKISTAN)</option>
-            <option value="PG">파푸아뉴기니(PAPUA NEW GUINEA)</option>
-            <option value="PE">페루(PERU)</option>
-            <option value="PT">포르투갈(PORTUGAL)</option>
-            <option value="PL">폴란드(POLAND(REP))</option>
-            <option value="FR">프랑스(FRANCE)</option>
-            <option value="GP">프랑스(과데루프섬)(GUADELOUPE)</option>
-            <option value="GF">프랑스(기아나)(FRENCH GUIANA)</option>
-            <option value="NC">프랑스(뉴칼레도니아섬)(NEW CALEDONIA)</option>
-            <option value="RE">프랑스(레위니옹섬)(REUNION)</option>
-            <option value="MQ">프랑스(마르티니크섬)(MARTINIQUE)</option>
-            <option value="PF">프랑스(폴리네시아)(FRENCH POLYNESIA)</option>
-            <option value="FJ">피지(FIJI)</option>
-            <option value="FI">필란드(FINLAND)</option>
-            <option value="PH">필리핀(PHILIPPINES)</option>
-            <option value="HU">헝가리(HUNGARY(REP))</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="clearfix  displaynone">
-        <div class="formLeft displaynone">
-          주소 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="postcode1" name="postcode1" fw-filter="isLengthRange[1][14]" fw-label="우편번호1" fw-msg=""
-            class="inputTypeText" placeholder="우편번호" readonly="readonly" maxlength="14" value="" type="text"> <a
-            href="#none" class="btnNormal" onclick="" id="postBtn">우편번호</a><br>
-          <input id="addr1" name="addr1" fw-filter="" fw-label="주소" fw-msg="" class="inputTypeText" placeholder="기본주소"
-            readonly="readonly" value="" type="text">
-          <div class="clear mobileonly"></div>
-          <small>기본주소</small><br>
-          <input id="addr2" name="addr2" fw-filter="" fw-label="주소" fw-msg="" class="inputTypeText" placeholder="나머지주소"
-            value="" type="text">
-          <div class="clear mobileonly"></div>
-          <small>나머지주소 (선택입력가능)</small>
-        </div>
-      </div>
-
-      <div class="clearfix  displaynone">
-        <div class="formLeft displaynone">
-          일반전화 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <select id="phone1" name="phone[]" fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="">
-            <option value="02">02</option>
-            <option value="031">031</option>
-            <option value="032">032</option>
-            <option value="033">033</option>
-            <option value="041">041</option>
-            <option value="042">042</option>
-            <option value="043">043</option>
-            <option value="044">044</option>
-            <option value="051">051</option>
-            <option value="052">052</option>
-            <option value="053">053</option>
-            <option value="054">054</option>
-            <option value="055">055</option>
-            <option value="061">061</option>
-            <option value="062">062</option>
-            <option value="063">063</option>
-            <option value="064">064</option>
-            <option value="050">050</option>
-            <option value="0502">0502</option>
-            <option value="0503">0503</option>
-            <option value="0504">0504</option>
-            <option value="0505">0505</option>
-            <option value="0506">0506</option>
-            <option value="0507">0507</option>
-            <option value="0508">0508</option>
-            <option value="070">070</option>
-            <option value="010">010</option>
-            <option value="011">011</option>
-            <option value="016">016</option>
-            <option value="017">017</option>
-            <option value="018">018</option>
-            <option value="019">019</option>
-          </select><input id="phone2" name="phone[]" maxlength="4" fw-filter="isNumber&amp;isNumber" fw-label="일반전화"
-            fw-alone="N" fw-msg="" placeholder="0000" value="" type="text"><input id="phone3" name="phone[]" maxlength="4"
-            fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="" placeholder="0000" value="" type="text">
-        </div>
-      </div>
-      <div class="clearfix ">
-        <div class="formLeft displaynone">
-          휴대전화 <font class="">*</font>
-        </div>
-        <div class="formRight displayflex aromatica_inputfield phone_number_form">
-          <select id="mobile1" name="mobile[]" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="">
-            <option value="010">010</option>
-            <option value="011">011</option>
-            <option value="016">016</option>
-            <option value="017">017</option>
-            <option value="018">018</option>
-            <option value="019">019</option>
-          </select><input id="mobile2" name="mobile[]" maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화"
-            fw-alone="N" fw-msg="" placeholder="0000" value="" type="text"><input id="mobile3" name="mobile[]"
-            maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="0000" value=""
-            type="text"><button type="button" id="btn_action_verify_mobile" class="btnNormal "
-            onclick="memberVerifyMobile.joinSendVerificationNumber(); return false;">인증번호 받기</button>
-          <div class="per_100 mobile_confirm_txt">
-            <p class="txtWarn displaynone" id="result_send_verify_mobile_fail"></p>
-            <ul class="txtInfo displaynone" id="result_send_verify_mobile_success">
-              <li>인증번호가 발송되었습니다.</li>
-              <li>인증번호를 받지 못하셨다면 휴대폰 번호를 확인해 주세요.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="clearfix displaynone aromatica_mobile_confirm" id="confirm_verify_mobile">
-        <div class="formLeft displaynone">
-          인증번호 *
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <div class="verify">
-            <input id="verify_sms_number" name="verify_sms_number" fw-filter="isMax[15]" fw-label="verify_sms_number"
-              fw-msg="" class="inputTypeText" placeholder="" maxlength="15" value="" type="text"> <span class="time"
-              id="expiryTime"></span>
-          </div>
-          <button type="button" class="btnNormal" id="btn_verify_mobile_confirm"
-            onclick="memberVerifyMobile.joinVerifySmsNumberConfirm(); return false;">확인</button>
-        </div>
-      </div>
-      <div class="clearfix">
-        <div class="formLeft displaynone">
-          이메일 *
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="email1" name="email1" fw-filter="isFill&amp;isEmail" fw-label="이메일" fw-alone="N" fw-msg=""
-            placeholder="이메일" value="" type="text"> <span id="emailMsg"></span>
-        </div>
-      </div>
-      <!-- <div class="clearfix displaynone">
-                            <div class="formLeft displaynone">
-                                평생회원
-                            </div>
-                            <div class="formRight lifetime_member accordion_contents_wrap">
-                                <div class="agree_member_check_wrap accordion_tit">
-                                    <input type="checkbox" id="agree_member_check"/><label for="agree_member_check"
-                                        class="small_txt">평생회원으로 가입합니다.</label>
-                                    <a href="javascript:void(0)" class="btn_accordion_icon"></a>
-                                </div>
-                                <div class="accordion_contents">
-                                    <ul class="txtDesc xsmall_txt">
-                                        <li>평생 회원으로 가입시 평생회원 감사쿠폰 (10% 적립 쿠폰/쿠폰혜택을 받으신 경우, 3개월간 평생회원을 유지하셔야 합니다.)이 발행됩니다<br/>
-                                            평생 회원으로 가입 시 고객님의 개인 정보는 회원 탈퇴 시 까지 안전하게 보관됩니다.</li>
-                                        <li class="displaynone displaynone">지금 평생회원으로 가입하시면 쿠폰혜택을
-                                            드립니다. (쿠폰혜택을 받으신 경우, 3개월간 평생회원을 유지하셔야 합니다.)</li>
-                                    </ul>
-                                    <span class="lifetime_radio input_radio_wrap"><input id="is_lifetime0" name="is_lifetime" fw-filter="" fw-label="is_lifetime" fw-msg="" value="T" type="radio"  /><label for="is_lifetime0" >동의함</label>
-<input id="is_lifetime1" name="is_lifetime" fw-filter="" fw-label="is_lifetime" fw-msg="" value="F" type="radio" checked="checked"  /><label for="is_lifetime1" >동의안함</label></span>
-                                </div>
-                            </div>
-                        </div> -->
-    </div>
-
-    <h3 class=" displaynone">추가정보</h3>
-    <div class="ec-base-table typeWrite  ">
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          별명 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="nick_name" name="nick_name" fw-filter="" fw-label="별명" fw-msg="" class="inputTypeText"
-            placeholder="" maxlength="20" value="" type="text">
-          <p id="nickMsg"></p>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          성별 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="is_sex0" name="is_sex" fw-filter="" fw-label="성별" fw-msg="" value="M" type="radio"
-            autocomplete="off"><label for="is_sex0">남자</label>
-          <input id="is_sex1" name="is_sex" fw-filter="" fw-label="성별" fw-msg="" value="F" type="radio"
-            autocomplete="off"><label for="is_sex1">여자</label>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <br>
-        <div class="formLeft displaynone displaynone">
-          생년월일 <font class="">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="birth_year" name="birth_year" fw-filter="" fw-label="생년월일" fw-msg="" class="inputTypeText"
-            placeholder="년" maxlength="4" value="" type="text"> <input id="birth_month" name="birth_month"
-            fw-filter="" fw-label="생년월일" fw-msg="" class="inputTypeText" placeholder="월" maxlength="2" value=""
-            type="text"> <input id="birth_day" name="birth_day" fw-filter="" fw-label="생년월일" fw-msg=""
-            class="inputTypeText" placeholder="일" maxlength="2" value="" type="text">
-          <div class="clear"></div>
-          <br>
-          <span class="form_type "><input id="is_solar_calendar0" name="is_solar_calendar" fw-filter=""
-              fw-label="생년월일" fw-msg="" value="T" type="radio" checked="checked" autocomplete="off"><label
-              for="is_solar_calendar0">양력</label>
-            <input id="is_solar_calendar1" name="is_solar_calendar" fw-filter="" fw-label="생년월일" fw-msg=""
-              value="F" type="radio" autocomplete="off"><label for="is_solar_calendar1">음력</label></span>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          별명 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="nick_name" name="nick_name" fw-filter="" fw-label="별명" fw-msg="" class="inputTypeText"
-            placeholder="" maxlength="20" value="" type="text">
-          <p id="nickMsg"></p>
-        </div>
-      </div>
-
-
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          결혼기념일 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="marry_year" name="marry_year" fw-filter="" fw-label="결혼 기념일" fw-msg="" class="inputTypeText"
-            placeholder="" maxlength="4" value="" type="text"> 년 <input id="marry_month" name="marry_month" fw-filter=""
-            fw-label="결혼 기념일" fw-msg="" class="inputTypeText" placeholder="" maxlength="2" value="" type="text"> 월
-          <input id="marry_day" name="marry_day" fw-filter="" fw-label="결혼 기념일" fw-msg="" class="inputTypeText"
-            placeholder="" maxlength="2" value="" type="text"> 일
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          배우자생일 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="partner_year" name="partner_year" fw-filter="" fw-label="배우자 생일" fw-msg="" class="inputTypeText"
-            placeholder="" maxlength="4" value="" type="text"> 년 <input id="partner_month" name="partner_month"
-            fw-filter="" fw-label="배우자 생일" fw-msg="" class="inputTypeText" placeholder="" maxlength="2" value=""
-            type="text"> 월 <input id="partner_day" name="partner_day" fw-filter="" fw-label="배우자 생일" fw-msg=""
-            class="inputTypeText" placeholder="" maxlength="2" value="" type="text"> 일
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          자녀 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <select id="child" name="child" fw-filter="" fw-label="자녀" fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="child_01">없음</option>
-            <option value="child_02">1</option>
-            <option value="child_03">2</option>
-            <option value="child_04">3</option>
-            <option value="child_05">4</option>
-            <option value="child_06">5</option>
-            <option value="child_07">6</option>
-            <option value="child_08">7</option>
-            <option value="child_09">8</option>
-            <option value="child_10">9</option>
-            <option value="child_11">10 이상</option>
-          </select>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          최종학력 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <select id="school" name="school" fw-filter="" fw-label="최종학력" fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="school_01">초등학교재학</option>
-            <option value="school_02">초등학교졸업</option>
-            <option value="school_03">중학교재학</option>
-            <option value="school_04">중학교졸업</option>
-            <option value="school_05">고등학교재학</option>
-            <option value="school_06">고등학교졸업</option>
-            <option value="school_07">대학교재학</option>
-            <option value="school_08">대학교졸업</option>
-            <option value="school_09">대학원재학</option>
-            <option value="school_10">대학원졸업이상</option>
-          </select>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          별명 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <input id="nick_name" name="nick_name" fw-filter="" fw-label="별명" fw-msg="" class="inputTypeText"
-            placeholder="" maxlength="20" value="" type="text">
-          <p id="nickMsg"></p>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          최종학력 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <select id="school" name="school" fw-filter="" fw-label="최종학력" fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="school_01">초등학교재학</option>
-            <option value="school_02">초등학교졸업</option>
-            <option value="school_03">중학교재학</option>
-            <option value="school_04">중학교졸업</option>
-            <option value="school_05">고등학교재학</option>
-            <option value="school_06">고등학교졸업</option>
-            <option value="school_07">대학교재학</option>
-            <option value="school_08">대학교졸업</option>
-            <option value="school_09">대학원재학</option>
-            <option value="school_10">대학원졸업이상</option>
-          </select>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          직종 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <select id="job_class" name="job_class" fw-filter="" fw-label="직종" fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="job_class_05">서비스</option>
-            <option value="job_class_06">교육</option>
-            <option value="job_class_07">부동산/운송</option>
-            <option value="job_class_08">농/임/수/광업</option>
-            <option value="job_class_09">금융</option>
-            <option value="job_class_10">유통</option>
-            <option value="job_class_11">예술</option>
-            <option value="job_class_12">의료</option>
-            <option value="job_class_13">법률</option>
-            <option value="job_class_14">제조/무역</option>
-            <option value="job_class_15">건설업</option>
-          </select>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">직업 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><select id="job" name="job" fw-filter="" fw-label="직업" fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="job_01">학생</option>
-            <option value="job_02">회사원</option>
-            <option value="job_03">자영업</option>
-            <option value="job_04">무직</option>
-            <option value="job_05">기타</option>
-          </select></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">연소득 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><select id="earning" name="earning" fw-filter="" fw-label="연소득"
-            fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="earning_01">없음</option>
-            <option value="earning_02">1000만원 이하</option>
-            <option value="earning_03">1200만원 이하</option>
-            <option value="earning_04">1500만원 이하</option>
-            <option value="earning_05">1800만원 이하</option>
-            <option value="earning_06">2000만원 이하</option>
-            <option value="earning_07">2500만원 이하</option>
-            <option value="earning_08">3000만원 이하</option>
-            <option value="earning_09">4000만원 이하</option>
-            <option value="earning_10">5000만원 이하</option>
-            <option value="earning_11">5000만원 이상</option>
-            <option value="earning_12">기타</option>
-          </select></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">자동차 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><select id="car" name="car" fw-filter="" fw-label="자동차" fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="car_01">없음</option>
-            <option value="car_02">1000cc 이하</option>
-            <option value="car_03">1000cc ~ 1500cc</option>
-            <option value="car_04">1500cc ~ 2000cc</option>
-            <option value="car_05">2000cc ~ 3000cc</option>
-            <option value="car_06">3000cc ~ 4000cc</option>
-            <option value="car_07">4000cc 이상</option>
-          </select></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">지역 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><select id="region" name="region" fw-filter="" fw-label="지역"
-            fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="region_01">경기</option>
-            <option value="region_02">서울</option>
-            <option value="region_03">인천</option>
-            <option value="region_04">강원</option>
-            <option value="region_05">충남</option>
-            <option value="region_06">충북</option>
-            <option value="region_07">대전</option>
-            <option value="region_08">경북</option>
-            <option value="region_09">경남</option>
-            <option value="region_10">대구</option>
-            <option value="region_11">부산</option>
-            <option value="region_12">울산</option>
-            <option value="region_13">전북</option>
-            <option value="region_14">전남</option>
-            <option value="region_15">광주</option>
-            <option value="region_15_01">세종</option>
-            <option value="region_16">제주</option>
-            <option value="region_17">해외</option>
-          </select></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">인터넷 이용장소 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><select id="internet" name="internet" fw-filter="" fw-label="인터넷"
-            fw-msg="">
-            <option value="" selected="selected">선택</option>
-            <option value="internet_01">집</option>
-            <option value="internet_02">회사</option>
-            <option value="internet_03">PC방</option>
-            <option value="internet_04">기타</option>
-          </select></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">관심분야 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <div class="interest"><input id="inter_check0" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg=""
-              value="0" type="checkbox"><label for="inter_check0">애니메이션</label>
-            <input id="inter_check1" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="1"
-              type="checkbox"><label for="inter_check1">영화/연극</label>
-            <input id="inter_check2" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="2"
-              type="checkbox"><label for="inter_check2">놀이공원</label>
-            <input id="inter_check3" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="3"
-              type="checkbox"><label for="inter_check3">경품정보</label>
-            <input id="inter_check4" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="4"
-              type="checkbox"><label for="inter_check4">미술전시회</label>
-            <input id="inter_check5" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="5"
-              type="checkbox"><label for="inter_check5">클래식 콘서트</label>
-            <input id="inter_check6" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="6"
-              type="checkbox"><label for="inter_check6">패션/미용</label>
-            <input id="inter_check7" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="7"
-              type="checkbox"><label for="inter_check7">정치</label>
-            <input id="inter_check8" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="8"
-              type="checkbox"><label for="inter_check8">IT/정보통신</label>
-            <input id="inter_check9" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="9"
-              type="checkbox"><label for="inter_check9">스포츠</label>
-            <input id="inter_check10" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="10"
-              type="checkbox"><label for="inter_check10">요리/음식</label>
-            <input id="inter_check11" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="11"
-              type="checkbox"><label for="inter_check11">연예인</label>
-            <input id="inter_check12" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="12"
-              type="checkbox"><label for="inter_check12">여성/주부</label>
-            <input id="inter_check13" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="13"
-              type="checkbox"><label for="inter_check13">육아</label>
-            <input id="inter_check14" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="14"
-              type="checkbox"><label for="inter_check14">비즈니스/금융/부동산</label>
-            <input id="inter_check15" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="15"
-              type="checkbox"><label for="inter_check15">주식/증권</label>
-            <input id="inter_check16" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="16"
-              type="checkbox"><label for="inter_check16">스포츠/레져/취미</label>
-            <input id="inter_check17" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="17"
-              type="checkbox"><label for="inter_check17">경매/공동구매</label>
-            <input id="inter_check18" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="18"
-              type="checkbox"><label for="inter_check18">뉴스/정보</label>
-            <input id="inter_check19" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="19"
-              type="checkbox"><label for="inter_check19">컴퓨터/게임</label>
-            <input id="inter_check20" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="20"
-              type="checkbox"><label for="inter_check20">대학교/대학원정보</label>
-            <input id="inter_check21" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="21"
-              type="checkbox"><label for="inter_check21">건강/의료</label>
-            <input id="inter_check22" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="22"
-              type="checkbox"><label for="inter_check22">자동차/여행</label>
-            <input id="inter_check23" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="23"
-              type="checkbox"><label for="inter_check23">쇼핑/전자상거래</label>
-            <input id="inter_check24" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="24"
-              type="checkbox"><label for="inter_check24">구인/구직</label>
-            <input id="inter_check25" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="25"
-              type="checkbox"><label for="inter_check25">어학강좌</label>
-            <input id="inter_check26" name="inter_check[]" fw-filter="" fw-label="관심분야" fw-msg="" value="26"
-              type="checkbox"><label for="inter_check26">기타등등</label>
-          </div>
-        </div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><input id="add1" name="add1" fw-filter="" fw-label="추가항목1" fw-msg=""
-            class="inputTypeText" placeholder="" maxlength="200" value="" type="text"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><input id="add2" name="add2" fw-filter="" fw-label="추가항목2" fw-msg=""
-            class="inputTypeText" placeholder="" maxlength="200" value="" type="text"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><input id="add3" name="add3" fw-filter="" fw-label="추가항목3" fw-msg=""
-            class="inputTypeText" placeholder="" maxlength="200" value="" type="text"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><input id="add4" name="add4" fw-filter="" fw-label="추가항목4" fw-msg=""
-            class="inputTypeText" placeholder="" maxlength="200" value="" type="text"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font lass="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*
-          </font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*
-          </font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*
-          </font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*
-          </font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*
-          </font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">
-          <font class="displaynone">*
-          </font>
-        </div>
-        <div class="formRight aromatica_inputfield"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">추천인 아이디 <font class="displaynone">*</font>
-        </div>
-        <div class="formRight aromatica_inputfield"><input id="reco_id" name="reco_id" fw-filter="" fw-label="추천인 ID"
-            fw-msg="" class="inputTypeText" placeholder="" value="" type="text"></div>
-      </div>
-      <div class="clearfix displaynone">
-        <div class="formLeft displaynone">환불계좌 정보 <font class="displaynone">*
-          </font>
-        </div>
-        <div class="formRight aromatica_inputfield">
-          <dl class="ec-base-desc typeDot">
-            <dt>예금주</dt>
-            <dd><input id="bank_account_owner" name="bank_account_owner" fw-filter="" fw-label="예금주" fw-msg=""
-                class="inputTypeText" placeholder="" autocomplete="off" value="" type="text"></dd>
-            <dt>은행명</dt>
-            <dd><select id="refund_bank_code" name="refund_bank_code" fw-filter="" fw-label="은행명" fw-msg="">
-                <option value="" selected="selected">- 은행선택 -</option>
-                <option value="bank_02">산업은행</option>
-                <option value="bank_03">기업은행</option>
-                <option value="bank_04">국민은행</option>
-                <option value="bank_05">하나(외환)은행</option>
-                <option value="bank_07">수협중앙회</option>
-                <option value="bank_11">농협중앙회</option>
-                <option value="bank_12">농협개인</option>
-                <option value="bank_13">농협</option>
-                <option value="bank_20">우리은행</option>
-                <option value="bank_209">유안타증권</option>
-                <option value="bank_218">KB증권</option>
-                <option value="bank_23">SC제일은행</option>
-                <option value="bank_230">미래에셋증권</option>
-                <option value="bank_238">대우증권</option>
-                <option value="bank_240">삼성증권</option>
-                <option value="bank_243">한국투자증권</option>
-                <option value="bank_26">신한은행</option>
-                <option value="bank_261">교보증권</option>
-                <option value="bank_262">하이투자증권</option>
-                <option value="bank_263">현대차증권</option>
-                <option value="bank_266">SK증권</option>
-                <option value="bank_267">대신증권</option>
-                <option value="bank_269">한화증권</option>
-                <option value="bank_270">하나대투증권</option>
-                <option value="bank_278">신한금융투자</option>
-                <option value="bank_279">동부증권</option>
-                <option value="bank_280">유진투자증권</option>
-                <option value="bank_287">메리츠증권</option>
-                <option value="bank_288">카카오페이증권</option>
-                <option value="bank_289">NH투자증권</option>
-                <option value="bank_291">신영증권</option>
-                <option value="bank_292">케이뱅크</option>
-                <option value="bank_293">카카오뱅크</option>
-                <option value="bank_294">LIG증권</option>
-                <option value="bank_295">OK저축은행</option>
-                <option value="bank_296">토스뱅크</option>
-                <option value="bank_297">토스증권</option>
-                <option value="bank_31">iM뱅크</option>
-                <option value="bank_32">부산은행</option>
-                <option value="bank_34">광주은행</option>
-                <option value="bank_35">제주은행</option>
-                <option value="bank_37">전북은행</option>
-                <option value="bank_39">경남은행</option>
-                <option value="bank_447">체이스 뱅크</option>
-                <option value="bank_52">모건스탠리은행</option>
-                <option value="bank_53">씨티은행</option>
-                <option value="bank_57">유에프제이은행</option>
-                <option value="bank_58">미즈호코퍼레이트은행</option>
-                <option value="bank_59">미쓰비시도쿄은행</option>
-                <option value="bank_60">뱅크오브아메리카</option>
-                <option value="bank_71">우체국</option>
-                <option value="bank_76">신용보증기금</option>
-                <option value="bank_77">기술신용보증기금</option>
-                <option value="bank_81">하나은행</option>
-                <option value="bank_82">농협회원조합</option>
-                <option value="bank_83">도이치은행</option>
-                <option value="bank_84">상호저축은행</option>
-                <option value="bank_85">새마을금고</option>
-                <option value="bank_86">수출입은행</option>
-                <option value="bank_87">신용협동조합</option>
-                <option value="bank_89">홍콩상하이은행(HSBC)</option>
-                <option value="bank_90">에이비엔암로은행</option>
-                <option value="bank_91">산림조합</option>
-                <option value="bank_93">한국주택금융공사</option>
-                <option value="bank_94">서울보증보험</option>
-                <option value="bank_95">경찰청</option>
-                <option value="bank_99">금융결제원</option>
-                <option value="bank_999">기타</option>
-              </select></dd>
-            <dt>계좌번호</dt>
-            <dd><input id="bank_account_no" name="bank_account_no" fw-filter="" fw-label="계좌번호" fw-msg=""
-                class="inputTypeText" placeholder="" autocomplete="off" value="" type="text"> ('-'와 숫자만 입력해주세요.)</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <div class="clearfix displaynone ">
-      <div class="formLeft displaynone">
-        평생회원
-      </div>
-      <div class="formRight lifetime_member accordion_contents_wrap">
-        <div class="agree_member_check_wrap accordion_tit">
-          <input type="checkbox" id="agree_member_check"><label for="agree_member_check" class="small_txt">평생회원으로
-            가입합니다.</label>
-          <a href="javascript:void(0)" class="btn_accordion_icon"></a>
-        </div>
-        <div class="accordion_contents">
-          <ul class="txtDesc xsmall_txt">
-            <li>평생 회원으로 가입시 평생회원 감사쿠폰 (10% 적립 쿠폰/쿠폰혜택을 받으신 경우, 3개월간 평생회원을 유지하셔야 합니다.)이 발행됩니다.<br>
-              평생 회원으로 가입 시 고객님의 개인 정보는 회원 탈퇴 시 까지 안전하게 보관됩니다.</li>
-            <li class="displaynone displaynone">지금 평생회원으로 가입하시면 쿠폰혜택을
-              드립니다. (쿠폰혜택을 받으신 경우, 3개월간 평생회원을 유지하셔야 합니다.)</li>
-          </ul>
-          <span class="lifetime_radio input_radio_wrap"><input id="is_lifetime0" name="is_lifetime" fw-filter=""
-              fw-label="is_lifetime" fw-msg="" value="T" type="radio" autocomplete="off"><label
-              for="is_lifetime0">동의함</label>
-            <input id="is_lifetime1" name="is_lifetime" fw-filter="" fw-label="is_lifetime" fw-msg="" value="F"
-              type="radio" checked="checked" autocomplete="off"><label for="is_lifetime1">동의안함</label></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="clear"></div>
-    <div class="agree_wrap accordion_contents_wrap ">
-      <div class="ec-base-box typeThinBg gStrong accordion_tit on">
-        <label for="sAgreeAllChecked"><span class="ec-base-chk"><input type="checkbox" id="sAgreeAllChecked"><em
-              class="checkbox"></em></span><strong class="btnLine small_txt bold">전체약관 항목에 동의합니다.</strong></label>
-        <a href="javascript:void(0)" class="btn_accordion_icon"></a>
-      </div>
-      <div class="accordion_contents" style="display: block;">
-        <div class="ec-base-box typeThinBg agreeArea">
-          <!-- <h3>이용약관 동의 [필수]<font class="agreeToggleBtn btnLine"></font></h3> -->
-          <div class="content agreeContent" style="display: none;">
-            <div class="agreeContent_title">
-              <span class="normal_txt">이용약관</span><a href="javascript:void(0)" class="btn_layer_close"></a>
-            </div>
-            <div class="agreeContent_txt">
-              <div class="fr-view fr-view-mall-agreement">
-                <dl id="join_rull" style="margin: 0px auto;">
-                  <dt style="margin: 0px; padding: 0px;">
-
-                    <p align="left" class="MsoNormal"><strong>제&nbsp;1&nbsp;장&nbsp;:&nbsp;아로마티카 웹사이트
-                        서비스</strong><br>&nbsp;<br><strong>제&nbsp;1&nbsp;조&nbsp;(목적)</strong><br>&nbsp;<br>이 약관은
-                      ㈜아로마티카(전자상거래 사업자,&nbsp;이하&nbsp;"회사")가 운영하는 아로마티카 쇼핑몰(이하&nbsp;"몰")에서 제공하는 관련 서비스(이하&nbsp;"서비스")를
-                      이용함에 있어 고객의 권리,&nbsp;의무 및 책임사항을 규정함을 목적으로
-                      합니다.<br>&nbsp;<br><strong>제&nbsp;2&nbsp;조&nbsp;(정의)</strong><br>&nbsp;<br>① "몰"이란 회사가 재화 또는
-                      용역(이하&nbsp;"재화 등")의 판매등 고객에 대한 서비스를 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한 가상의 영업장을
-                      말합니다.<br>② "고객"이란 몰에 접속하여 이 약관에 따라 회사가 제공하는 서비스를 받는 회원을 말합니다.<br>③ "서비스"란 회사가 인터넷 웹사이트 또는 모바일 앱
-                      내에서 제4조에서 정한 내용의 업무를 통하여 이용자에게 제공하는 인터넷관련 유•무형의 행위 등을 말합니다.<br>④ "회원"이라 함은 몰에 개인정보를 제공하여 회원등록을 한
-                      자로서,&nbsp;회사및 몰의 정보를 지속적으로 제공받으며,&nbsp;몰이 제공하는 서비스를 계속적으로 이용할 수 있는 자를
-                      말합니다.<br>&nbsp;<br><strong>제&nbsp;3&nbsp;조&nbsp;(약관의 등의 명시와 설명 및
-                        개정)</strong><br>&nbsp;<br>①&nbsp;회사는 이 약관의 내용과 상호 및 대표자 성명,&nbsp;영업소 소재지 주소(고객의 불만을 처리할 수 있는 곳의
-                      주소를 포함),&nbsp;전화번호,&nbsp;팩스전송번호,&nbsp;전자우편주소,&nbsp;사업 자등록번호,&nbsp;통신판매업신고번호,&nbsp;개인정보 보호 책임자 등을
-                      고객이 쉽게 알 수 있도록 몰의 초기화면에 게시합니다.&nbsp;다만,&nbsp;약관의 내용은 고객이 연결화면을 통하여 볼 수 있도록 할 수 있습니다.<br>②&nbsp;회사는
-                      고객이 약관에 동의하기에 앞서 약관에 정하여져 있는 내용 중 청약철회,&nbsp;배송책임,&nbsp;환불조건 등과 같은 중요한 내용을 고객이 이해할 수 있도록 별도의 연결 화면
-                      또는 팝업화면 등을 몰에 제공하여 고객의 확인을 구하여야 합니다.<br>③&nbsp;회사는 전자상거래 등에서의 소비자보호에 관한 법률,&nbsp;약관의 규제에 관한
-                      법률,&nbsp;전자거래기본법,&nbsp;전자서명법,&nbsp;정보통신망 이용촉진 등에 관한 법률,&nbsp;방문 판매 등에 관한 법률,&nbsp;소비자보호법 등 관련법을
-                      위배하지 않는 범위에서 이 약관을 개정할 수 있습니다.<br>④&nbsp;회사가 약관을 개정할 경우에는 변경된 약관을 적용하고자 하는 날(이하&nbsp;"효력
-                      발생일")로부터&nbsp;7일(회원에게 불리한 변경의 경우&nbsp;30일)&nbsp;이전에 이 약관이 변경된다는 사실과 변경된 내용 등을 공지합니다.&nbsp;이 경우 개정
-                      전 내용과 개정 후 내용을 명확하게 비교하여 고객에게 알기 쉽도록 표시합니다.<br>⑤&nbsp;회사는 전항에 따라 개정약관을 공지하면서 회원에게&nbsp;30일 기간 내에
-                      의사표시를 하지 않으면 개정에 동의하는 의사표시가 있는 것으로 본다는 뜻을 명확하게 공지 하였음에도 회원이 몰에 대하여 명시적으로 거부의 의사표시를 하지 아니한 경우 회원이
-                      개정 약관에 동의한 것으로 봅니다.<br>⑥&nbsp;회원이 몰의 개정된 약관에 동의하지 않는 경우에는 회사는 개정 약관내용을 당해 회원에게 적용할 수 없으며,&nbsp;이
-                      경우 회원은 이용계약을 해지할 수 있습니다.&nbsp;변경된 약관의 효력 발생일 이후에도 서비스를 이용하는 경우 약관의 변경 사항에 동의한 것으로
-                      간주됩니다.<br>⑦&nbsp;이 약관에서 정하지 아니한 사항과 이 약관의 해석에 관하여는 전자상거래 등에서의 소비자 보호에 관한 법률,&nbsp;약관의 규제 등에 관한
-                      법률,&nbsp;공정거래위원회가 정하는 전자상거래 등에서의 소비자보호지침 및 관계법령 또는 상관례에
-                      따릅니다.<br>&nbsp;<br><strong>제&nbsp;4&nbsp;조&nbsp;(서비스의 제공 및 변경)</strong><br>&nbsp;<br>①&nbsp;회사는 몰을
-                      통하여 다음과 같은 서비스를 제공합니다.<br>1.&nbsp;재화 또는 용역에 대한 정보 제공 및 구매계약의 체결<br>2.&nbsp;구매계약이 체결된 재화의
-                      배송<br>3.&nbsp;구매계약 및 배송에 관련된 용역 제공<br>4.&nbsp;해당 용역에 대한 고객 응대 및 처리<br>5.&nbsp;기타 회사가 정하는
-                      업무<br>②&nbsp;회사는 재화 등의 품절 또는 기술적 사양의 변경 등의 경우 장차 체결되는 계약에 의해 제공할 재화 등의 내용을 변경할 수 있습니다.&nbsp;이 경우에는
-                      변경된 재화 등의 내용 및 제공일자를 명시하여 현재의 재화 등의 내용을 게시한 곳에 즉시 공지합니다.<br>③&nbsp;회사가 제공하기로 고객과 계약을 체결한 서비스의 내용을
-                      재화 등의 품절 또는 기술적 사양의 변경 등의 사유로 변경할 경우에는 그 사유를 고객에게 통지 가능한 방법으로 즉시 통지합니다.<br>④&nbsp;회사는 제3항에 따른 사유로
-                      인하여 고객이 입은 손해를 배상합니다.&nbsp;다만,&nbsp;회사가 고의 또는 과실이 없음을 입증하는 경우에는 그러하지
-                      아니합니다.<br>&nbsp;<br><strong>제&nbsp;5&nbsp;조&nbsp;(서비스의 중단)</strong><br>&nbsp;<br>①&nbsp;회사는 몰에 컴퓨터
-                      등 전기통신설비의 보수점검•교체 및 고장,&nbsp;통신의 장애 등의 사유가 발생한 경우에는 서비스의 제공의 일시중단 사실을 통지하고 서비스를 일시적으로 중단할 수
-                      있습니다.<br>②&nbsp;회사는 제1항의 사유로 서비스의 제공이 일시적으로 중단됨으로 인하여 이용자가 입은 손해에 대하여 배상합니다.&nbsp;다만,&nbsp;회사에게 고의
-                      또는 과실이 없는 경우에는 책임을 부담하지 않습니다.<br>③&nbsp;회사는 사업종목의 전환,&nbsp;사업의 포기,&nbsp;업체간의 통합 등의 이유로 몰을 통해 서비스를
-                      제공할 수 없게 되는 경우,&nbsp;이를 사전에 이용자에게
-                      통지합니다.<br>&nbsp;<br><strong>제&nbsp;6&nbsp;조&nbsp;(회원가입)</strong><br>&nbsp;<br>①&nbsp;고객은 약관 내용에 대해
-                      확인하고,&nbsp;회사가 정한 가입 양식에 따라 회원정보를 기입한 후 약관내용에 대하여 동의여부를 체크하는 방법으로 동의할 수 있습니다.&nbsp;고객이 동의 부분에 체크하면
-                      이 약관에 대해 동의한 것으로 봅니다.<br>②&nbsp;회사는 제1항에 따라 회원으로 가입할 것을 신청한 고객 중 다음 각호에 해당하지 않는 한 회원으로
-                      등록합니다.<br>1.&nbsp;등록 내용에 허위,&nbsp;기재누락,&nbsp;오기가 있는 경우<br>2.&nbsp;만&nbsp;14세 미만의
-                      아동.&nbsp;다만,&nbsp;아동의 개인정보보호를 특별히 보호하기 위하여 만&nbsp;14세 미만의 아동에 대한 개인정보를 수집할 필요가 있는 때에는 관련 법에 따라
-                      법정대리인(부모)의 동의를 득한 경우에 한하여 수집합니다.<br>3.&nbsp;다른 사람의 명의를 사용하여 신청한 경우<br>4.&nbsp;사회의 안녕질서 또는 미풍양속을
-                      저해할 목적으로 신청한 경우<br>5.&nbsp;기타 회사 소정의 이용신청요건을 충족하지 못하는 경우<br>③&nbsp;회사는 다음에 해당하는 경우에 그 신청에 대한 승낙
-                      제한사유가 해소될 때까지 승낙을 유보할 수 있습니다.<br>1.&nbsp;서비스 관련 설비에 여유가 없는 경우<br>2.&nbsp;기술상 지장이 있는
-                      경우<br>3.&nbsp;기타 회사가 필요하다고 인정되는 경우<br>④&nbsp;회원가입계약의 성립시기는 회사의 승낙이 회원에게 도달한 시점으로
-                      합니다.<br>⑤&nbsp;가입신청 양식에 기재하는 모든 고객정보는 진실한 데이터인 것으로 간주됩니다.&nbsp;실명이나 실제 정보를 입력하지 않은 고객은 법적인 보호를 받을
-                      수 없으며 서비스의 제한을 받을 수 있습니다.<br>⑥&nbsp;회원은 회원가입 시 등록사항에 변동이 있는 경우,&nbsp;즉시 전자우편 기타 방법으로 회사에 대하여 그
-                      변경사항을 알려야 합니다.&nbsp;이를 회사에 알리지 않음으로 인하여 발생하는 일체의 불이익에 대하여 몰은 책임지지 않습니다.<br>⑦&nbsp;당사는 법정 대리인의 동의가
-                      필요한 만&nbsp;14세 미만 아동의 회원 가입을 받고 있지 않습니다.<br>&nbsp;<br><strong>제&nbsp;7&nbsp;조&nbsp;(회원 탈퇴 및 자격 상실
-                        등)</strong><br>&nbsp;<br>①&nbsp;회원은 회사에 대하여 언제든지 몰에서의 탈퇴를 요청할 수 있으며,&nbsp;게시물의 삭제를 비롯한 필요한 조치를 할
-                      수 있습니다.<br>②&nbsp;회원 또는 고객이 다음 각호의 사유에 해당하는 경우,&nbsp;회사는 회원자격을 제한 및 정지,&nbsp;상실시킬 수
-                      있습니다.<br>1.&nbsp;가입 신청 또는 정보 변경시에 허위 내용을 등록한 때<br>2.&nbsp;몰을 이용하여 구입한 재화 등의 대금,&nbsp;기타 몰 이용에 관련하여
-                      회원이 부담하는 채무를 기일에 이행하지 않는 때<br>3.&nbsp;다른 사람의 몰 이용을 방해하거나 그 정보를 도용하는 등 전자상거래 질서를 위협하는
-                      때<br>4.&nbsp;서비스 운영을 고의로 방해한 경우<br>5.&nbsp;정보통신설비의 오작동이나 정보 등의 파괴를 유발시키는 컴퓨터 바이러스프로그램 등을 유포하는
-                      경우<br>6.&nbsp;정보통신설비의 오작동,&nbsp;오류 현상 등을 이용하여 비정상적인 방법으로 몰을 이용하는 경우<br>7.&nbsp;타인의 개인정보,&nbsp;이용자
-                      아이디(ID)&nbsp;및 비밀번호를 부정하게 사용하는 경우<br>8.&nbsp;회사의 서비스 정보를 이용하여 얻은 정보를 회사의 사전 승낙 없이 복제 또는 유통시키거나
-                      상업적으로 이용하는 경우<br>9.&nbsp;기타 몰을 이용하여 법령 또는 이 약관이 금지하거나 공서양속에 반하는 행위를 하는 때<br>③&nbsp;회사가 회원자격을 상실시키는
-                      경우에는 회원등록을 말소합니다.&nbsp;이 경우 회원에게 이를 통지하고,&nbsp;회원등록 말소 전에 최소한&nbsp;30일 이상의 기간을 정하여 소명할 기회를
-                      부여합니다.<br>&nbsp;<br><strong>제&nbsp;8&nbsp;조&nbsp;(회원에 대한 통지)</strong><br>&nbsp;<br>①&nbsp;회사가 회원에
-                      대한 개별 통지를 하는 경우,&nbsp;회원이 미리 지정한 전자우편 주소 및 가입시 등록한 정보에 기명된 수단으로 할 수 있습니다.<br>②&nbsp;회사는 다수 회원에 대한
-                      통지의 경우&nbsp;1&nbsp;주일 이상 온라인 서비스 게시판에 게시함으로써 개별 통지에 갈음할 수 있습니다.&nbsp;다만,&nbsp;회원 본인의 거래와 관련하여 중대한
-                      영향을 미치는 사항에 대하여는 개별
-                      통지합니다.<br>&nbsp;<br><strong>제&nbsp;9&nbsp;조&nbsp;(구매신청)</strong><br>&nbsp;<br>고객은 몰에서 다음 또는 이와 유사한
-                      방법에 의하여 구매를 신청하며,&nbsp;회사는 고객이 구매 신청을 함에 있어서 다음 각 내용을 몰을 통하여 알기 쉽게 제공하여야 합니다.1.&nbsp;재화 등의 검색 및
-                      선택<br>2.&nbsp;주소 등 주문 및 배송에 필요한 정보의 입력<br>3.&nbsp;약관내용,&nbsp;청약 철회권이 제한되는 서비스,&nbsp;배송료,&nbsp;설치비
-                      등의 비용부담과 관련한 내용에 대한 확인<br>4.&nbsp;이 약관에 동의하고 제3호의 사항을 확인하거나 거부하는 표시<br>5.&nbsp;재화 등의 구매신청 및 이에 관한
-                      확인 또는 회사의 확인에 대한 동의<br>6.&nbsp;결제 방법의 선택<br>&nbsp;<br><strong>제&nbsp;10&nbsp;조&nbsp;(구매계약의
-                        성립)</strong><br>&nbsp;<br>①&nbsp;회사는 고객의 구매신청에 대하여 다음 각호에 해당하면 고객의 청약에 대하여 승낙하지 않을 수
-                      있습니다.&nbsp;다만,&nbsp;미성년자가 체결한 계약의 경우에는 법정대리인의 동의를 얻지 못하면 미성년자 본인 또는 그 법정대리인은 해당 계약을 취소할 수
-                      있습니다.<br>1.&nbsp;신청 내용에 허위,&nbsp;기재누락,&nbsp;오기가 있는 경우<br>2.&nbsp;미성년자가 보호자의 승낙 없이 구매하는
-                      경우<br>3.&nbsp;기타 구매신청에 승낙하는 것이 기술상 현저히 지장이 있다고 판단하는 경우<br>②&nbsp;구매신청에 대한 회사의 승낙은 주문 완료 후 메일의 형태로
-                      고객에게 전달되며,&nbsp;이 메일이 고객에게 도달한 시점에 계약이 성립된 것으로 간주합니다.<br>③&nbsp;제2항에 따른 승낙의 의사표시에는 고객의 구매 신청에 대한
-                      확인 및 판매가능 여부,&nbsp;구매신청의 정정 취소 등에 관한 정보 등을
-                      포함합니다.<br>&nbsp;<br><strong>제&nbsp;11&nbsp;조&nbsp;(지급방법)</strong><br>&nbsp;<br>몰에서 구매한 재화 등에 대한
-                      대금지급방법은 다음 각호의 하나로 할 수 있으며,&nbsp;회사는 이용자의 지급방법 선택과 관련하여 재화 등의 대금에 어떠한 명목의 수수료도 추가하여 징수하지
-                      않습니다.<br>1.&nbsp;인터넷 뱅킹,&nbsp;폰 뱅킹 등 각종 계좌 이체<br>2.&nbsp;직불카드,&nbsp;선불카드,&nbsp;신용카드
-                      결제<br>3.&nbsp;온라인 무통장입금<br>4.&nbsp;휴대폰 결제<br>5.&nbsp;기타 관계 법령 또는 몰의 정책에 따라 허용되어 사전 공지한 지급
-                      방법<br>&nbsp;<br><strong>제&nbsp;12&nbsp;조&nbsp;(수신확인통지,&nbsp;구매신청 변경 및
-                        취소)</strong><br>&nbsp;<br>①&nbsp;회사는 고객의 구매신청이 있는 경우 고객에게 수신확인통지를 합니다.<br>②&nbsp;수신확인통지를 받은 고객은
-                      의사표시의 불일치 등이 있는 경우에는 수신확인통지를 받은 후 즉시 몰의 웹페이지 혹은 전화를 통해 구매신청 변경 및 취소를 요청할 수 있고 몰은 고객의 요청이 있는 경우에는
-                      지체 없이 그 요청에 따라 처리하여야 합니다.&nbsp;다만,&nbsp;이미 대금을 지불한 경우에는 청약철회 규정에 따릅니다.<br>③&nbsp;고객이 변경 및 취소를
-                      요구하였을 때 회사가 그 진행을 통제할 수 없는 경우 반품으로 처리되어야 하며 청약 철회의 과정을
-                      따릅니다.<br>&nbsp;<br><strong>제&nbsp;13&nbsp;조&nbsp;(배송)</strong><br>&nbsp;<br>①&nbsp;회사는 고객과 재화 등의
-                      공급시기에 관하여 별도의 약정이 없는 이상,&nbsp;고객이 청약을 한 날부터&nbsp;7일 이내에 재화 등을 배송할 수 있도록 주문제작,&nbsp;포장 등 기타의 필요한
-                      조치를 취합니다.&nbsp;다만,&nbsp;회사가 이미 재화 등에 대한 대금의 전부 또는 일부를 받은 경우에는 대금의 전부 또는 일부를 받은 날부터&nbsp;2영업일 이내에
-                      재화 등의 공급을 위하여 필요한 조치를 취합니다.&nbsp;이 때 회사는 고객이 재화 등의 공급 절차 및 진행 사항을 확인할 수 있도록 적절한 조치를
-                      합니다.<br>②&nbsp;회사는 고객이 구매한 재화에 대해 배송수단,&nbsp;수단별 배송비용 부담자,&nbsp;수단별 배송기간 등을 몰에 명시합니다.&nbsp;만약 회사의
-                      고의,&nbsp;과실로 약정 배송기간을 초과한 경우에는 그로 인한 고객의 손해를 배상하여야 합니다.&nbsp;다만 회사가 고의과실이 없음을 입증한 경우에는 그러하지
-                      아니합니다.<br>③&nbsp;회사는 배송과정에서 상품이 파손되지 않도록 적절한 포장을 하여야 하며&nbsp;'전자상거래 등에서의 소비자 보호에 관한 법률'&nbsp;규정에
-                      따라 소비자의 청약에 따라 재화등을 공급하는 경우 그 내용을 기재한 서면(이하&nbsp;"공급서"라 한다)을 재화 등에 첨부하여 소비자에게
-                      송부합니다.<br>&nbsp;<br><strong>제&nbsp;14&nbsp;조&nbsp;(환급)</strong><br>&nbsp;<br>회사는 고객이 구매 신청한 재화 등이
-                      품절 등의 사유로 인도 또는 제공을 할 수 없을 때에는 지체 없이 그 사유를 고객에게 통지하고 사전에 재화 등의 대금을 받은 경우에는 대금을 받은 날부터&nbsp;3영업일
-                      이내에 환급하거나 환급에 필요한 조치를 취합니다.<br>&nbsp;<br><strong>제&nbsp;15&nbsp;조&nbsp;(청약철회
-                        등)</strong><br>&nbsp;<br>①&nbsp;회사는 회사의 부주의로 교환,&nbsp;반품의 사례가 발생하였을
-                      경우&nbsp;(오배송,&nbsp;미배송,&nbsp;파손,&nbsp;불량 등)&nbsp;반품수령완료 및 고객문의&nbsp;10일 이내에 환급 및 환급에 필요한 조치를
-                      취합니다.<br>②&nbsp;고객은 재화 등을 배송 받은 경우 다음 각호에 해당하는 경우에는 반품 및 교환을 할 수 없습니다.<br>1.&nbsp;고객에게 책임 있는 사유로
-                      재화 등이 멸실 또는 훼손된 경우<br>(다만,&nbsp;재화 등의 내용을 확인하기 위하여 포장 등을 훼손한 경우에는 청약철회를 할 수 있습니다)<br>2.&nbsp;고객의
-                      사용 또는 일부 소비에 의하여 재화 등의 가치가 현저히 감소한 경우<br>3.&nbsp;시간의 경과에 의하여 재판매가 곤란할 정도로 재화 등의 가치가 현저히 감소한
-                      경우<br>4.&nbsp;같은 성능을 지닌 재화 등으로 복제가 가능한 경우 그 원본인 재화 등의 포장을 훼손한 경우<br>③&nbsp;제2항 제2호 내지 제4호의 경우에 회사가
-                      사전에 청약철회 등이 제한되는 사실을 소비자가 쉽게 알 수 있는 곳에 명기하지 않았다면 고객의 청약철회 등이 제한되지 않습니다.<br>④&nbsp;고객은 제1항 및 제2항의
-                      규정에도 불구하고 재화 등의 내용이 표시,&nbsp;광고 내용과 다르거나 계약 내용과 다르게 이행된 때에는 당해 재화 등을 공급받은 날부터&nbsp;3월 이내,&nbsp;그
-                      사실을 안 날 또는 알 수 있었던 날부터&nbsp;30일 이내에 청약철회 등을 할 수
-                      있습니다.<br>&nbsp;<br><strong>제&nbsp;16&nbsp;조&nbsp;(청약철회 등의 효과)</strong><br>&nbsp;<br>①&nbsp;회사는
-                      고객으로부터 재화 등을 반환 받은 경우&nbsp;3영업일(매주 화,&nbsp;금요일 일괄 환급)&nbsp;이내에 이미 지급받은 재화 등의 대금을 환급합니다.&nbsp;이 경우
-                      회사가 고객에게 재화 등의 환급을 지연한 때에는 그 지연기간에 대하여 공정거래위원회가 정하여 고시하는 지연이자율을 곱하여 산정한 지연이자를 지급합니다.<br>②&nbsp;회사는
-                      대금을 환급함에 있어서 고객이 신용카드 또는 전자화폐 등의 결제수단으로 재화 등의 대금을 지급한 때에는 지체 없이 당해 결제수단을 제공한 사업자로 하여금 재화 등의 대금의
-                      청구를 정지 또는 취소하도록 요청합니다.<br>③&nbsp;청약 철회 등의 경우 공급받은 재화 등의 반환에 필요한 비용은 기본적으로 고객이 부담합니다.&nbsp;회사는 고객에게
-                      청약 철회 등을 이유로 위약금 또는 손해배상을 청구하지 않습니다.&nbsp;다만,&nbsp;재화 등의 내용이 표시광고 내용과 다르거나 계약내용과 다르게 이행되어 청약철회 등을
-                      하는 경우 재화 등의 반환에 필요한 비용은 회사가 부담합니다.<br>④&nbsp;고객이 수취거부나 환불을 원하는 경우 배송비(처음 구매 건이 무료배송이면 왕복
-                      배송비,&nbsp;고객 선불이면 편도 배송비)와 은행 송금 수수료를 부담해야 하며,&nbsp;실제 회사의 환불은 상품 반송이 확인 된 후 환불됩니다.<br>⑤&nbsp;단순
-                      고객변심으로 인한 교환/반품의 경우 왕복 배송비는 고객이 부담해야 합니다.<br>⑥&nbsp;피부 트러블로 인한 반품의 경우 배송비는 고객부담이며 상품 수령 후&nbsp;30일
-                      이내에 반품을 접수시켜 주어야 합니다.&nbsp;단,&nbsp;피부과 진단서가 첨부된 경우 제반 비용은 고객이 부담하며 배송비는 회사가 부담합니다만,&nbsp;단 화장품과
-                      피부트러블과의 상당한 인과관계가 인정되는 경우,&nbsp;또는 질환치료의 목적의 경우에는 진단서 발급비용을 회사가 부담합니다.<br>⑦&nbsp;고객의 부재중이거나 수취인 주소
-                      불명으로 인해 반송되어 다시 배송되는 경우 해당 배송비는 고객이 부담합니다.<br>⑧&nbsp;모든 반품 시,&nbsp;고객은 판촉행위로 인한 경품 및 사은품을 반납하여야
-                      하며,&nbsp;고객이 사은품을 사용하였을 경우 회사는 해당 금액만큼 차감하여 지급할 수 있습니다.&nbsp;다만,&nbsp;회사의 책임이 있는 사유로 인한 반품의 경우에는
-                      그렇지 않습니다.<br>&nbsp;<br><strong>제&nbsp;17&nbsp;조&nbsp;(개인정보보호)</strong><br>&nbsp;<br>①&nbsp;회사는
-                      고객에게 서비스 제공을 위하여 필요 최소한의 개인정보를 수집하며&nbsp;회원 가입 및 결제 단계에서 명확히 고지합니다<br>②&nbsp;회사가 제1항에 따라 고객의 개인정보를
-                      수집하는 때에는 관련 법에 따라 반드시 당해 고객의 동의를 받습니다.<br>③&nbsp;수집된 개인정보는 당해 고객의 동의 없이 목적 외로 이용하거나 제3자에게 제공할 수
-                      없으며,&nbsp;이에 대한 모든 책임은 회사가 부담합니다.&nbsp;다만,&nbsp;다음의 경우에는 예외로 합니다.<br>1.&nbsp;배송업무상 배송업체에게 배송에 필요한
-                      최소한의 고객의 정보(성명,&nbsp;주소,&nbsp;전화번호)를 알려주는 경우<br>2.&nbsp;통계작성,&nbsp;학술연구 또는 시장조사를 위하여 필요한 경우로서 특정
-                      개인을 식별할 수 없는 형태로 제공하는 경우<br>3.&nbsp;재화 등의 거래에 따른 대금정산을 위하여 필요한 경우<br>4.&nbsp;법률의 규정 또는 법률에 의하여 필요한
-                      불가피한 사유가 있는 경우<br>④&nbsp;회사가 제2항과 제3항에 의해 고객의 동의를 받아야 하는 경우에는 개인정보보호 책임자의 신원(소속,&nbsp;성명 및
-                      전화번호,&nbsp;기타 연락처),&nbsp;정보의 수집목적 및 이용목적,&nbsp;제3자에 대한 정보제공 관련사항(제공 받은 자,&nbsp;제공목적 및 제공할 정보의
-                      내용)&nbsp;등 개인정보보호법 및 정보통신망 이용촉진 등에 관한 법률이 규정한 사항을 미리 명시하거나 고지해야 하며 고객은 언제든지 이 동의를 철회할 수
-                      있습니다.<br>⑤&nbsp;고객은 언제든지 회사가 가지고 있는 자신의 개인정보에 대해 열람 및 오류정정을 요구할 수 있으며 회사는 이에 대해 지체 없이 필요한 조치를 취할
-                      의무를 집니다.&nbsp;고객이 오류의 정정을 요구한 경우에는 회사는 그 오류를 정정할 때까지 당해 개인정보를 이용하지 않습니다.<br>⑥&nbsp;회사는 개인정보 보호를
-                      위하여 개인정보 취급자를 한정하여 그 수를 최소화하며,&nbsp;회사의 책임이 있는 사유로 고객의 개인정보에 대한 분실,&nbsp;도난,&nbsp;유출,&nbsp;변조 등이
-                      발생하여 고객에게 손해가 발생할 경우 그 손해를 배상할 의무를 부담합니다.<br>⑦&nbsp;회사 또는 그로부터 개인정보를 제공받은 제3자는 개인정보의 수집목적 또는 제공받은
-                      목적을 달성한 때에는 당해 개인정보를 지체 없이 파기합니다.&nbsp;다만,&nbsp;관련 법령에 따라 보관의무가 발생하는 경우는 예외로 합니다.<br>⑧&nbsp;회사는
-                      위치정보를 수집하는 경우 위치정보의 보호 및 이용 등에 관한 법률을 준수합니다.<br>&nbsp;<br><strong>제&nbsp;18&nbsp;조&nbsp;(회사의
-                        의무)</strong><br>&nbsp;<br>①&nbsp;회사는 법령과 이 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며 이 약관이 정하는 바에 따라
-                      지속적이고,&nbsp;안정적으로 재화용역을 제공하는데 최선을 다합니다.<br>②&nbsp;회사는 고객이 안전하게 인터넷 서비스를 이용할 수 있도록 고객의 개인정보(신용정보
-                      포함)보호를 위한 보안 시스템을 갖추도록 합니다.<br>③&nbsp;회사는 상품이나 용역에 대하여 「표시•광고의 공정화에 관한 법률」 에 따른 부당한 표시광고행위를 함으로써
-                      고객이 손해를 입은 때에는 이를 배상할 책임을 부담합니다.<br>④&nbsp;회사는 이용자의 명시적인 의사에 반하여 영리목적의 광고성 전자우편을 발송하지
-                      않습니다.<br>&nbsp;<br><strong>제&nbsp;19&nbsp;조&nbsp;(회원의&nbsp;ID&nbsp;및 비밀번호에 대한
-                        의무)</strong><br>&nbsp;<br>① ID와 비밀번호에 관한 관리책임은 회원에게 있습니다.<br>②&nbsp;회원은 자신의&nbsp;ID&nbsp;및 비밀번호를
-                      제3자에게 이용하게 해서는 안됩니다.<br>④&nbsp;회원이 자신의&nbsp;ID&nbsp;및 비밀번호를 도난 당하거나 제3자가 사용하고 있음을 인지한 경우에는 즉시 회사에
-                      통보하고 회사의 안내가 있는 경우에는 그에 따라야 합니다.<br>⑤&nbsp;회사는 회원이 제2항,&nbsp;제3항을 위반하여 회원에게 발생한 손해에 대하여는 책임을 지지
-                      않습니다.<br>&nbsp;<br><strong>제&nbsp;20&nbsp;조&nbsp;(회원의 의무)</strong><br>&nbsp;<br>①&nbsp;고객은 다음 각호의
-                      행위를 하여서는 안 되며,&nbsp;고객이 다음 각호의 행위를 하는 경우 회사는 법령,&nbsp;이 약관 및 회사의 정책 등에 따라 적절한 조치를 취할 수
-                      있습니다.<br>1.&nbsp;신청 또는 변경 시 허위 내용의 등록<br>2.&nbsp;타인의 정보 도용<br>3.&nbsp;몰에 게시된 정보의 임의적
-                      변경<br>4.&nbsp;회사가 정한 정보 이외의 정보(컴퓨터 프로그램 등)&nbsp;등의 송신 또는 게시<br>5.&nbsp;회사 기타 제3자의 저작권 등 지적재산권에 대한
-                      침해<br>6.&nbsp;회사 기타 제3자의 명예를 손상시키거나 업무를 방해하는 행위<br>7.&nbsp;몰의 운영진 또는 회사의 직원 기타 관계자를 사칭하는
-                      행위<br>8.&nbsp;외설 또는 폭력적인 메시지,&nbsp;화상,&nbsp;음성,&nbsp;기타 공서양속에 반하는 정보를 몰에 공개 또는 게시하는
-                      행위<br>③&nbsp;고객은 회원가입 신청 또는 회원정보 변경 시 실명으로 모든 사항을 사실에 근거하여 작성하여야 하며,&nbsp;허위 또는 타인의 정보를 등록할 경우 일체의
-                      권리를 주 장할 수 없습니다.<br>④&nbsp;고객은 이 약관에서 규정하는 사항과 기타 회사가 정한 제반 규정,&nbsp;공지사항 등 회사가 공지하는 사항 및 관계법령을
-                      준수하여야 하며,&nbsp;기타 회사의 업무 및 몰 운영에 방해가 되는 행위,&nbsp;회사의 명예를 손상시키는 행위를 해서는 안됩니다.<br>⑤&nbsp;고객은
-                      주소,&nbsp;연락처,&nbsp;전자우편 주소 등 정보가 변경된 경우 이를 지체 없이 회사에 알려야 하며,&nbsp;알리지 않음으로 인하여 발생하는 일체의 불이익에 대하여
-                      회사는 책임지지 않습니다.<br>⑥&nbsp;고객은 회사의 사전 승낙 없이 서비스를 이용하여 영업활동을 할 수 없으며,&nbsp;그 영업활동의 결과에 대해 회사는 책임 지지
-                      않습니다.&nbsp;또한 고객은 이와 같은 영업활동으로 인해 회사가 손해를 입은 경우 회사에 대해 손해배상의무를 지며,&nbsp;회사는 해당 고객에 대해 서비스 이용제한 및
-                      적법한 절차를 거쳐 손해배상 등을 청구할 수 있습니다.<br>&nbsp;<br><strong>제&nbsp;21&nbsp;조&nbsp;(포인트의 적립 및
-                        사용)</strong><br>&nbsp;<br>①&nbsp;회사는 몰에서 고객이 적립 및 사용할 수 있는 전용 포인트,&nbsp;제3자와의 포인트 제도제휴
-                      등(이하&nbsp;"포인트")&nbsp;회사의 정책에 따라 포인트 제도를 운영할 수 있습니다.<br>②&nbsp;회사가 포인트제도를 운영할 경우,&nbsp;포인트의
-                      적립,&nbsp;사용,&nbsp;소멸,&nbsp;삭감 등 포인트제도 운영에 필요한 사항을 몰을 통하여 사전에 공지하며,&nbsp;그에 따라 포인트제도를
-                      운영합니다.<br>③&nbsp;회사는 경영환경의 변화,&nbsp;영업정책의 변경 등 필요성이 있다고 판단되는 경우 포인트 제도를 관한 사항을 변경할 수 있습니다.&nbsp;다만
-                      이 경우 제3조에 따른 약관변경에 준하여 변경합니다.<br>&nbsp;<br><strong>제&nbsp;22&nbsp;조&nbsp;(웹사이트 연결등에 관한
-                        책임)</strong><br>&nbsp;<br>①&nbsp;회사는 몰에 다른 사이트를 하이퍼 링크(하이퍼 링크의 대상에는 문자,&nbsp;그림 및 동영상 등이 포함)방식
-                      등에 의해 연결시킬 수 있습니다.<br>②&nbsp;회사는 몰에 연결된 다른 사이트가 독자적으로 제공하는 재화등에 의하여 고객과 행하는 거래에 대해서 보증책임을 지지 않는다는
-                      뜻을 몰의 초기화면 또는 연결되는 시점의 팝업화면으로 명시한 경우에는 그 거래에 대한 보증 책임을 지지
-                      않습니다.<br>&nbsp;<br><strong>제&nbsp;23&nbsp;조&nbsp;(지적재산권의 귀속 및
-                        이용제한)</strong><br>&nbsp;<br>①&nbsp;회사가 작성한 저작물에 대한 일체의 소유권,&nbsp;저작권 기타 지적재산권은 회사에
-                      귀속합니다.<br>②&nbsp;고객은 몰을 이용함으로써 얻은 정보 중 회사에게 지적재산권이 귀속된 정보를 회사의 사전 승낙 없이
-                      복제,&nbsp;송신,&nbsp;출판,&nbsp;배포,&nbsp;방송 기타 방법에 의하여 영리목적으로 이용하거나 제3자에게 이용하게 하여서는 안됩니다.<br>③&nbsp;고객이
-                      서비스 화면 내에 게시한 게시물의 저작권은 게시한 해당 고객에게 유보되나,&nbsp;회사는 고객의 몰 내 게시물에 대하여 서비스의
-                      운영,&nbsp;전시,&nbsp;전송,&nbsp;배포,&nbsp;홍보의 목적으로 회원의 별도의 허락없이 무상으로 몰의 운영 범위 내에서 이용할 수
-                      있습니다<br>④&nbsp;회사는 고객의 게시물이 법령에 위반되거나,&nbsp;공서양속 또는 몰의 운영방침에 반하거나 제3자의 권리를 침해하는 때에는 해당 게시물을 몰에서
-                      삭제하는 등의 필요한 조치를 할 수 있습니다.<br>&nbsp;<br><strong>제&nbsp;24&nbsp;조&nbsp;(정보의
-                        제공)</strong><br>&nbsp;<br>①&nbsp;회사는 고객에게 서비스 이용에 필요가 있다고 인정되는 각종 정보에 대해서 전자우편이나 서신우편 등의 방법으로
-                      회원의 동의를 얻어 회원에게 제공할 수 있습니다.<br>②&nbsp;회사는 서비스 개선 및 고객 대상의 서비스 소개 등의 목적으로 고객의 동의 하에 추가적인 개인 정보를 요구할
-                      수 있습니다.<br>&nbsp;<br><strong>제&nbsp;25&nbsp;조&nbsp;(분쟁해결)</strong><br>&nbsp;<br>①&nbsp;회사는 고객이
-                      제기하는 정당한 의견이나 불만을 반영하고 그 피해를 보상처리하기 위하여 피해 보상 처리 기구인 쇼핑몰고객상담센터를 설치,&nbsp;운영합니다.<br>②&nbsp;회사는
-                      고객으로부터 제출되는 불만사항 및 의견은 우선적으로 그 사항을 처리합니다.&nbsp;다만,&nbsp;신속한 처리가 곤란한 경우에는 고객에게 그 사유와 처리일정을 즉시 통보해야
-                      합니다.<br>③&nbsp;회사와 고객 간에 발생한 전자상거래 분쟁과 관련하여 고객의 피해구제신청이 있는 경우에 전자거래기본법 및 동법 시행령에 의하여 설치된
-                      전자거래분쟁조정위원회의 조정에 따를 수 있습니다.<br>&nbsp;<br><strong>제&nbsp;26&nbsp;조&nbsp;(관할 및
-                        준거법)</strong><br>&nbsp;<br>①&nbsp;회사와 고객간에 발생한 전자상거래 분쟁에 관한 소송은 제소 당시의 고객의 주소에 의하고,&nbsp;주소가 없는
-                      경우에는 거소를 관할하는 지방법원을 관할법원으로 합니다.&nbsp;다만,&nbsp;제소 당시 고객의 주소 또는 거소가 분명하지 않거나 외국 거주자의 경우에는민사소송법상의
-                      관할법원에 제기합니다.<br>②&nbsp;회사와 고객간에 제기된 법적 분쟁에는 대한민국법률을
-                      적용합니다.<br>&nbsp;<br><strong>제&nbsp;2&nbsp;장&nbsp;:&nbsp;아로마티카 멤버십 포인트 회원
-                        서비스</strong><br>&nbsp;<br><strong>제&nbsp;1&nbsp;조&nbsp;(목적)</strong><br>&nbsp;<br>이 약관의 목적은 회사가
-                      운용하는&nbsp;“포인트”&nbsp;멤버십 회원제도에 따라 회사에 발생하는 일체의 권리,&nbsp;의무 등을 명확히 함에
-                      있습니다.<br>&nbsp;<br><strong>제&nbsp;2&nbsp;조&nbsp;(용어의 정의)</strong><br>&nbsp;<br>이 약관에서 사용하는 용어의 정의는
-                      다음과 같습니다.<br>&nbsp;<br>①&nbsp;포인트<br>회사가 운영하는 포인트 서비스에 관한 제도에 따라 회사가 그 구매고객 중 멤버십 회원으로 가입한 고객에게 상품
-                      또는 용역의 구매시 적립 또는 사용할 수 있도록 하는 등 다양한 혜택을 제공하기 위하여 부여하는 포인트입니다.<br>&nbsp;<br>②&nbsp;멤버십
-                      회원(이하&nbsp;“회원”)<br>이 약관 및 개인정보와 관련한 내용에 동의하고 회사가 제공한 본인확인 방법을 거친 후 회원 가입을 승낙 받아,&nbsp;포인트 서비스를 받을
-                      수 있는 권리를 갖는 고객을 말합니다.<br>&nbsp;<br><strong>제&nbsp;3&nbsp;조&nbsp;(회원
-                        가입)</strong><br>&nbsp;<br>①&nbsp;회원으로 가입하고자 하는 고객은 회사가 정한 회원가입신청서에 정해진 사항을 기입한 후 이 약관과 개인정보 수집 및
-                      이용 동의에 동의함으로써 회원가입을 신청합니다.<br>②&nbsp;회원은 이 약관에서 특별히 정한 경우를 제외하고,&nbsp;회원자격 및 그로부터 발생한 권리를 타인에게
-                      양도하거나 대여 또는 담보의 목적으로 이용할 수 없습니다.<br>&nbsp;<br><strong>제&nbsp;4&nbsp;조&nbsp;(회원자격 상실 및
-                        탈퇴)</strong><br>&nbsp;<br>①&nbsp;회원은 언제든지 서면(전자서면 포함),&nbsp;구두 기타 회사가 정하는 방법으로 회원 탈퇴를 요청할 수
-                      있습니다.<br>②&nbsp;회원이 다음 각호의&nbsp;1에 해당하는 경우,&nbsp;회사는 회원에 대한 통보로써 회원자격을 제한 또는 상실시킬 수
-                      있습니다.&nbsp;다만,&nbsp;회원이 사망한 때에는 회사 및 제휴사의 사전 통보 없이 사망 즉시 회원자격이 상실됩니다.<br>&nbsp;<br>-&nbsp;회원 가입 신청
-                      시 허위내용을 등록,&nbsp;기재 또는 고지한 경우<br>-&nbsp;포인트를 부정하게 적립 또는 사용한 경우<br>-&nbsp;기타 이 약관상 회원의 의무를 위반하여 거래상
-                      신의를 상실한 경우나 관련 법령을 위반하는 경우<br>&nbsp;<br>③&nbsp;본 조 제1항에 의한 회원 탈퇴 또는 제2항에 의한 회원 자격상실이 확정되는 시점은 아래와
-                      같습니다.<br>&nbsp;<br>회원탈퇴 또는 자격상실은 회원 탈퇴 요청일 또는 자격상실 통보일로부터 누적포인트의 존재 유무와 상관없이 즉시
-                      확정됩니다.&nbsp;다만,&nbsp;탈퇴를 요청한 회원 또는 자격을 상실한 회원이 포인트에 대한 소유권을 포기한다는 의사표시를 한 경우에는 회원 탈퇴 요청일 또는 자격 상실
-                      통보 일에 회원탈퇴 또는 자격상실이 확정됩니다.<br>사망으로 인한 회원 자격상실의 경우에는 회원 사망일에 자격상실이
-                      확정됩니다.<br>&nbsp;<br>&nbsp;<br><strong>제&nbsp;5&nbsp;조&nbsp;(회원
-                        혜택)</strong><br>&nbsp;<br>①&nbsp;회원으로 신청하는 고객은 회사에 자신의 개인정보를 제공하는데 동의하며,&nbsp;회사는 이를 토대로 회원에게
-                      적절한 서비스를 제공합니다.<br>②&nbsp;회원은 회원자격으로 회사의 제품 구매 시 구매금액의 일정 부분을 포인트로 적립 받을 수 있습니다.<br>③&nbsp;회원에게는
-                      포인트 회원만이 참여할 수 있는 각종 이벤트에 참여할 자격이 주어집니다.<br>&nbsp;<br>&nbsp;<br><strong>제&nbsp;6&nbsp;조&nbsp;(포인트의
-                        적립)</strong><br>&nbsp;<br>①&nbsp;회원은 회사로부터의 상품 구매 또는 서비스 이용 금액에 비례하여 회사가 정하는 적립률에 따라 포인트를 적립 받을
-                      수 있습니다.&nbsp;다만,&nbsp;포인트의 적립과 관련하여 발생하는 제세공과금은 회원이 부담합니다.<br>②&nbsp;회원은 원칙적으로 구매결제금액(상품주문금액과 실제
-                      결제 금액이 상이할 경우,&nbsp;실제 결제 금액 기준)의 일정비율에 해당하는 포인트를 적립 받을 수 있습니다.&nbsp;다만,&nbsp;회사의 정책에 따라 일부
-                      품목,&nbsp;할인특매,&nbsp;염가판매 상품 등은 적립대상에서 제외되거나 적립률이 다를 수 있습니다.<br>③&nbsp;회원은 회사의 이벤트에 참여하여 지급 받은 포인트를
-                      회사의 상품 구매 또는 서비스 이용에 따라 적립된 포인트와 합산하여 사용 가능합니다.<br>④&nbsp;포인트의 적립률,&nbsp;적립장소 등을 포함한 적립기준은 회사의
-                      영업환경 변화 등에 따라 회원에게 사전 공지 후 변경될 수 있으며,&nbsp;자세한 내용은 제1장 제3조에 따라
-                      공지합니다.<br>&nbsp;<br><strong>제&nbsp;7&nbsp;조&nbsp;(적립 포인트 사용)</strong><br>&nbsp;<br>①&nbsp;회원은 이
-                      약관에 따라 회원가입을 완료한 후 즉시 포인트의 적립 및 사용이 가능합니다.&nbsp;다만,&nbsp;회사의 정책에 따라 일부품목,&nbsp;할인특매,&nbsp;염가판매 상품
-                      등은 사용대상에서 제외될 수 있습니다.<br>②&nbsp;회원은 적립한 포인트를&nbsp;1포인트당&nbsp;1원으로 환산하여 사용할 수 있습니다.&nbsp;포인트는
-                      최소사용포인트는&nbsp;1,000포인트입니다.<br>③&nbsp;포인트의 사용은 적립된 한도 내에서 해당 포인트를 차감하여 제품 결제 대금에서 현금 또는 신용카드와 합산하여
-                      결제 대금의 최대&nbsp;50%까지 사용할 수 있습니다.<br>④&nbsp;회원은 적립된 포인트를 친족을 포함한 제3자에게 양도하거나 대여 또는 담보의 목적으로 이용할 수
-                      없습니다.<br>&nbsp;<br><strong>제&nbsp;8&nbsp;조&nbsp;(포인트 누락 시 항변)</strong><br>&nbsp;<br>①&nbsp;포인트 적립이
-                      누락된 경우,&nbsp;회원은 구매일로부터&nbsp;60일 이내에 구매 증빙 자료를 제시하여 포인트를 적립 받을 수 있습니다.<br>②&nbsp;누락 포인트 적립 시 해당
-                      구매처로부터 받은 구매영수증,&nbsp;현금영수증,&nbsp;카드영수증에 한하여 구매증빙자료로서의 효력이
-                      인정됩니다.<br>&nbsp;<br><strong>제&nbsp;9&nbsp;조&nbsp;(포인트의 삭감 및 소멸)</strong><br>①&nbsp;회원에게 적립된 포인트가
-                      부정한 방법 또는 개인정보 도용으로 인해 적립된 사실이 인정되는 때에는 회사는 해당 포인트를 삭감할 수 있습니다.<br>②&nbsp;회원이 탈퇴하거나 회사에 의하여 자격을
-                      상실한 경우,&nbsp;포인트는 자동 소멸됩니다.<br>③&nbsp;적립된 포인트의 소멸시효는 적립일로부터&nbsp;12개월을 원칙으로 하되,&nbsp;회사가 회원에게 사전
-                      공지 후 변경될 수 있으며,&nbsp;사전고지 시에는 해당 기간을 소멸시효로 봅니다.<br>④&nbsp;회사는 포인트의 소멸예정일이 도래하여 포인트를 소멸시키는 경우 소멸예정
-                      포인트,&nbsp;소멸 시기 등 포인트 소멸과 관련된 내용을 최소&nbsp;15일 전에 회원에게 개별 고지합니다.<br>⑤&nbsp;회원이
-                      탈퇴∙자격상실∙휴면계정∙무거래(1년)&nbsp;등을 원인으로 포인트가 소멸되는 경우 포인트는 현금으로 반환되지 않고 소멸되며,&nbsp;소멸된 포인트는 복구가
-                      불가능합니다.<br>&nbsp;<br><strong>제10조&nbsp;(쿠폰)</strong><br>&nbsp;<br>&nbsp;①쿠폰은&nbsp;"몰"에서 유상 또는 무상으로
-                      발행하는 쿠폰으로 발행대상,&nbsp;발행경로,&nbsp;사용대상 등에 따라 구분될 수 있으며,&nbsp;쿠폰의
-                      세부구분,&nbsp;할인금액(할인율),&nbsp;사용방법,&nbsp;사용기한 및 제한에 대한 사항은 쿠폰 또는 서비스 화면에 표시됩니다.&nbsp;쿠폰의 종류 및 내용은 회사의
-                      서비스 정책에 따라 변경될 수 있습니다.&nbsp;쿠폰은 회원의 구매횟수,&nbsp;구매금액,&nbsp;최근 구매일,&nbsp;최근 접속일,&nbsp;회원등급
-                      혜택,&nbsp;회원등급 변경 등에 따라서 발급될 수 있습니다.<br>②&nbsp;쿠폰은 현금으로 출금될 수 없으며,&nbsp;쿠폰에 표시된 유효기간이 만료되거나 회원자격이
-                      상실되면 소멸합니다.<br>③&nbsp;쿠폰은&nbsp;"몰"에서 별도로 명시한 경우를 제외하고는 타인에게 양도할 수 없으며,&nbsp;부정한 목적이나 용도로 사용할 수
-                      없습니다.&nbsp;이를 위반한 경우&nbsp;"몰"은 쿠폰을 소멸시키거나 회원자격을 제한 또는 상실시킬 수 있습니다.<br>④&nbsp;이용자가 부정한 방법으로 적립금 또는
-                      쿠폰을 획득한 사실이 확인될 경우, "몰"은 이용자의 적립금 또는 쿠폰을 회수하고,&nbsp;회원자격 상실(아이디 삭제)&nbsp;및 민 형사 상의 법적 조치 등을 취할 수
-                      있습니다.<br>⑤&nbsp;회원 탈퇴 시&nbsp;"몰"로부터 발급받은&nbsp;"쿠폰"&nbsp;중 미사용한&nbsp;"쿠폰"은 즉시 소멸되며,&nbsp;탈퇴 후
-                      재가입하더라도 소멸된&nbsp;"쿠폰"은 복구되지 아니합니다.<br>⑥&nbsp;쿠폰의 부여 및 사용 소멸에 관한 상세한 사항은&nbsp;"몰"이 정한 정책에 따르며,
-                      "몰"은&nbsp;sms,&nbsp;알림톡,&nbsp;이메일 등으로 사용/소멸 내용을 이용회원에게
-                      안내합니다.<br>&nbsp;<br>&nbsp;<br><br>&nbsp;<strong>부칙</strong><br>&nbsp;제&nbsp;1&nbsp;조&nbsp;(약관의
-                      효력)<br>&nbsp;1.&nbsp;본 약관은&nbsp;2025년10월15일부터 시행됩니다.<br>&nbsp;2.&nbsp;본 약관 시행 이전에 가입한 회원에게도 본 약관이
-                      동일하게 적용됩니다.&nbsp;다만,&nbsp;회사는 변경 내용과 시행일을 최소&nbsp;7일(회원에게 불리한 경우&nbsp;30일)&nbsp;전에 홈페이지 공지 및 이메일
-                      등으로 고지하며,&nbsp;회원이 시행일 이후 서비스 이용을 계속하는 경우 변경된 약관에 동의한 것으로 봅니다.<br>&nbsp;<br>이용약관 버전번호:
-                      v1.1<br>이용약관 시행일자: 2025.10.15<br>이용약관&nbsp;(V1.0) :&nbsp;<a
-                        href="https://www.aromatica.co.kr/termsofuse_v1" rel="noopener noreferrer" target="_blank">최초
-                        이용약관&nbsp;</a><br>
-                    </p>
-                  </dt>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div class="clearfix">
-            <p class="check floatleft"><input id="agree_service_check0" name="agree_service_check[]" fw-filter="/1/"
-                fw-label="이용약관 동의" fw-msg="이용약관에 동의 하세요" class="ec-base-chk" value="1" type="checkbox"><label
-                for="agree_service_check0">이용약관 동의 (필수)</label></p>
-            <font class="agreeToggleBtn btnLine floatright"></font>
-          </div>
-        </div>
-
-        <div class="ec-base-box typeThinBg agreeArea">
-          <!-- <h3>개인정보 수집 및 이용 동의 [필수]<font class="agreeToggleBtn btnLine"></font></h3> -->
-          <div class="content agreeContent" style="display: none;">
-            <div class="agreeContent_title">
-              <span class="normal_txt">개인정보 수집 및 이용</span><a href="javascript:void(0)" class="btn_layer_close"></a>
-            </div>
-            <div class="agreeContent_txt">
-              <div class="fr-view fr-view-privacy-required">
-                <div><b>개인정보 수집 이용 동의</b></div>
-                <div><br></div>
-                <div>회사가 회원가입 시 수집하는 개인정보 항목과 그 수집ㆍ이용의 주된 목적은 아래와 같습니다.</div>
-                <div><br></div>
-                <div><b>* 멤버십 온라인 서비스</b></div>
-                <table
-                  style="margin: 25px 0px 0px; padding: 0px; border-collapse: collapse; border-spacing: 0px; font-size: 12px; border-style: solid; border-color: rgb(212, 212, 215); border-image: initial; border-width: 2px 0px; font-family: &quot;맑은 고딕&quot;, 돋움, Dotum, sans-serif; letter-spacing: -1px; background-color: rgb(245, 246, 247);">
-                  <caption
-                    style="display: block; text-indent: -9999em; overflow: hidden; height: 0px; font-size: 0px; line-height: 0;">
-                  </caption>
-                  <colgroup>
-                    <col width="20%">
-                    <col width="*">
-                    <col width="20%">
-                  </colgroup>
-                  <thead>
-                    <tr style="margin: 0px; padding: 0px;">
-                      <th scope="col"
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; font-weight: normal; background: rgb(236, 236, 236);">
-                        수집항목</th>
-                      <th scope="col"
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; font-weight: normal; background: rgb(236, 236, 236); border-left: 1px solid rgb(212, 212, 215);">
-                        수집ㆍ이용 목적</th>
-                      <th scope="col"
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; font-weight: normal; background: rgb(236, 236, 236); border-left: 1px solid rgb(212, 212, 215);">
-                        이용ㆍ보유 기간</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style="margin: 0px; padding: 0px;">
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215);">
-                        성명, 본인확인 값(CI), 생년월일, 성별, 무선 전화 번호, 내/외국인 구별, 온라인 회원의 아이디(ID) 및 비밀번호, 주소</td>
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; border-top: 1px solid rgb(212, 212, 215); border-left: 1px solid rgb(212, 212, 215);">
-                        <font color="#666666">
-                          서비스 이용에 따른 본인 식별 / 가입연령확인 / 불량회원의 부정이용 방지</font>
-                      </td>
-                      <td rowspan="5"
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215); border-left: 1px solid rgb(212, 212, 215);">
-                        회원 탈퇴 시까지<br>(개인정보취급방침 제 5 조 참조)</td>
-                    </tr>
-                    <tr style="margin: 0px; padding: 0px;">
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215);">
-                        비밀번호 확인 질문/답변, 주소, 무선 전화번호, 이메일주소, SMS수신동의, 이메일 수신동의</td>
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215); border-left: 1px solid rgb(212, 212, 215);">
-                        비밀번호 분실시 초기화를 위한 본인인증정보, 회원가입을 통한 샘플 수령을 위한 수령지정보, 주문에 대한 상태 정보 전달 및 프로모션/이벤트 정보전달</td>
-                    </tr>
-                    <tr style="margin: 0px; padding: 0px;">
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215);">
-                        구매 거래내역, 포인트 내역</td>
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215); border-left: 1px solid rgb(212, 212, 215);">
-                        이용자의 서비스 이용 및 상품구매에 따른 멤버십 회원 관리 근거자료</td>
-                    </tr>
-                    <tr style="margin: 0px; padding: 0px;">
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215);">
-                        유선전화번호,관심 카테고리, 피부타입, 피부고민, 헤어고민(선택)</td>
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215); border-left: 1px solid rgb(212, 212, 215);">
-                        비상 상황시 연락처, 상품 추천</td>
-                    </tr>
-                    <tr style="margin: 0px; padding: 0px;">
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215);">
-                        추천인 아이디</td>
-                      <td
-                        style="margin: 0px; padding: 18px 10px; border-collapse: collapse; border-spacing: 0px; color: rgb(102, 102, 102); border-top: 1px solid rgb(212, 212, 215); border-left: 1px solid rgb(212, 212, 215);">
-                        회원 가입시 추천자에게 포인트 적립</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="clearfix">
-            <p class="check floatleft"><input id="agree_privacy_check0" name="agree_privacy_check[]" fw-filter="/1/"
-                fw-label="개인정보 수집 및 이용 방침" fw-msg="개인정보 수집 및 이용 방침에 동의하세요" class="ec-base-chk" value="1"
-                type="checkbox"><label for="agree_privacy_check0">개인정보 수집 및 이용 동의 (필수)</label></p>
-            <font class="agreeToggleBtn btnLine floatright"></font>
-          </div>
-        </div>
-
-        <div class="ec-base-box typeThinBg agreeArea">
-          <div class="content agreeContent" style="display: none;">
-            <div class="agreeContent_title">
-              <span class="normal_txt">14세 이상 동의</span><a href="javascript:void(0)" class="btn_layer_close"></a>
-            </div>
-            <div class="agreeContent_txt">
-              당사는 법정 대리인의 동의가 필요한 만 14세 미만 아동의 회원 가입을 받고 있지 않습니다.
-            </div>
-          </div>
-          <div class="clearfix">
-            <p class="check floatleft"><input id="adultCheck" class="ec-base-chk" type="checkbox"><label
-                for="adultCheck">본인은 만 14세 미만이 아닙니다. (필수)</label></p>
-            <font class="agreeToggleBtn btnLine floatright"></font>
-          </div>
-        </div>
-
-        <!--   <div class="ec-base-box typeThinBg agreeArea">
-                              <h3>개인정보 제3자 제공 동의 [선택]<font class="agreeToggleBtn btnLine"></font></h3> 
-                                <div class="content agreeContent">
-                                    <div class="agreeContent_title"><span class="normal_txt">개인정보 제3자 제공</span><a
-                                            href="javascript:void(0)" class="btn_layer_close"></a></div>
-                                    <div class="agreeContent_txt">
-                                        <div class="fr-view fr-view-privacy-optional"></div>                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <p class="check floatleft"><input id="agree_information_check0" name="agree_information_check[]" fw-filter="" fw-label="개인정보 제3자 제공 동의" fw-msg="" class="ec-base-chk" value="1" type="checkbox"  /><label for="agree_information_check0" ></label><label
-                                        for="agree_information_check0">개인정보 제3자 제공 동의 (선택)</label></p>
-                                    <font class="agreeToggleBtn btnLine floatright"></font>
-                                </div>
-                            </div>
-    
-                            <div class="ec-base-box typeThinBg agreeArea displaynone">
-                             <h3>개인정보 처리 위탁 동의 [선택]<font class="agreeToggleBtn btnLine"></font></h3>
-                                <div class="content agreeContent">
-                                    <div class="agreeContent_title"><span class="normal_txt">개인정보 처리 위탁</span><a
-                                            href="javascript:void(0)" class="btn_layer_close"></a></div>
-                                    <div class="agreeContent_txt">
-                                        <div class="fr-view fr-view-privacy-optional"></div>                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <p class="check floatleft"><input id="agree_consignment_check0" name="agree_consignment_check[]" fw-filter="" fw-label="개인정보 처리 위탁 동의" fw-msg="" class="ec-base-chk" value="1" type="checkbox"  /><label for="agree_consignment_check0" ></label><label for="">개인정보 처리 위탁 동의
-                                            (선택)</label></p>
-                                    <font class="agreeToggleBtn btnLine floatright"></font>
-                                </div>
-                            </div>
+        $returnUrl = /member/join_result.html
+        $checkIdUrl = /member/check_id.html
+        $personalName = 이름
+        $companyName = 법인명
+        $companySsn = 법인번호
+        $foreignerSsn1 = 외국인 등록번호
+        $foreignerSsn2 = 여권번호
+        $foreignerSsn3 = 국제운전면허증번호
+        $isRuleBasedAddrForm = T
      -->
-        <div class="ec-base-box typeThinBg agreeArea ">
-          <!-- <h3>쇼핑정보 수신 동의 [선택]<font class="agreeToggleBtn btnLine"></font></h3> -->
-          <div class="content agreeContent" style="display: none;">
-            <div class="agreeContent_title">
-              <span class="normal_txt">쇼핑정보</span><a href="javascript:void(0)" class="btn_layer_close"></a>
-            </div>
-            <div class="agreeContent_txt">
-              <p>할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 SMS나 이메일로 받아보실 수 있습니다.</p>
-              <p>단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.</p>
-              <p>선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.</p>
-            </div>
-          </div>
-          <div class="clearfix">
-            <p class="check floatleft"><input id="marketingAllCheck" class="ec-base-chk" type="checkbox"
-                data-gtm-form-interact-field-id="0"><label for="marketingAllCheck">쇼핑정보 전체동의(선택)</label></p>
-            <font class="agreeToggleBtn btnLine floatright"></font>
-          </div>
-          <ul class="check">
-            <!-- <li class="">
-                                        <input id="marketingAllCheck" class="ec-base-chk" type="checkbox"/><label for="marketingAllCheck">쇼핑정보 전체동의(선택)</label>
-                                    </li>-->
-            <li class=" marketingAllChild"><input id="is_sms0" name="is_sms" fw-label="is_sms" fw-msg=""
-                class="ec-base-chk" value="T" type="checkbox"><label for="is_sms0">SMS·카카오톡 수신</label>
-            </li>
-            <li class=" marketingAllChild"><input id="is_news_mail0" name="is_news_mail" fw-label="is_news_mail"
-                fw-msg="" class="ec-base-chk" value="T" type="checkbox"><label for="is_news_mail0">이메일 수신</label>
-            </li>
-          </ul>
-          <small class="xsmall_txt" data-text-color="var(--aromatica-color-primary)"
-            style="margin-top: 15px; display: block; color: var(--aromatica-color-primary);">※ SMS / 이메일 쇼핑정보 모두 수신 동의시
-            적립금 2,000원 지급</small>
-        </div>
-        <div class="bg_black" style="display: none;"></div>
-      </div>
+    <div class="titleArea titleArea--middle {$display_base_column_title|display}">
+        <h3>회원인증</h3>
     </div>
-
-    <a href="#none" class="per_100 btn_large btn_fill btn_disabled displayblock joinsubmitbtn"
-      onclick="memberJoinAction()">회원가입하기</a>
-    <div id="ec_shop_member_confirm-infolayer" class="joinConfirm ec-base-layer displaynone">
-
-
-
-      <div class="header">
-        <h3>가입 정보 확인</h3>
-      </div>
-      <div class="content">
-        <p>아직 회원가입이 완료되지 않았으니, 작성하신 내용을 확인하신 후에 가입을 완료해 주세요.</p>
-        <div class="ec-base-table">
-          <table border="1" summary="">
-            <caption>가입 정보 확인</caption>
+    <div class="ec-base-table typeWrite {$display_base_column_title|display}">
+        <table border="1">
+            <caption>회원가입</caption>
             <colgroup>
-              <col style="width:130px;">
-              <col style="width:auto;">
+                <col style="width:190px;">
+                <col style="width:auto;">
             </colgroup>
             <tbody>
-              <tr>
-                <th scope="row">아이디</th>
-                <td><span id="ec_shop_member_confirm_field-member_id"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">비밀번호 확인 질문</th>
-                <td><span id="ec_shop_member_confirm_field-hint"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">비밀번호 확인 답변</th>
-                <td><span id="ec_shop_member_confirm_field-hint_answer"></span></td>
-              </tr>
-              <tr>
-                <th scope="row" id="ec_shop_member_confirm-name_title">이름</th>
-                <td id="ec_shop_member_confirm-name_contents"></td>
-              </tr>
-              <!-- 외국인 회원 정보 -->
-              <tr>
-                <th scope="row" id="ec_shop_member_confirm-ssn_title"></th>
-                <td id="ec_shop_member_confirm-ssn_contents"></td>
-              </tr>
-              <!-- // 외국인 회원 정보 -->
-              <tr id="ec_shop_member_confirm-company_name">
-                <th scope="row">상호명</th>
-                <td></td>
-              </tr>
-              <tr id="ec_shop_member_confirm-company_ssn">
-                <th scope="row">사업자번호</th>
-                <td></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">이름(영문)</th>
-                <td><span id="ec_shop_member_confirm_field-name_en"></span></td>
-              </tr>
-              <tr id="ec_shop_member_confirm-nation">
-                <th>국적</th>
-                <td><span id="ec_shop_member_confirm_field-citizenship"></span></td>
-              </tr>
-              <tr class="">
-                <th scope="row">주소</th>
-                <td>
-                  <span id="ec_shop_member_confirm_field-postcode1"></span><br>
-                  <span id="ec_shop_member_confirm_field-addr1"></span>
-                  <span id="ec_shop_member_confirm_field-addr2"></span>
-                </td>
-              </tr>
-              <tr class="">
-                <th scope="row">일반전화</th>
-                <td><span id="ec_shop_member_confirm_field-phone"></span></td>
-              </tr>
-              <tr class="">
-                <th scope="row">휴대전화</th>
-                <td><span id="ec_shop_member_confirm_field-mobile"></span></td>
-              </tr>
-              <tr class="">
-                <th scope="row">SMS 수신여부</th>
-                <td><span id="ec_shop_member_confirm_field-is_sms"></span></td>
-              </tr>
-              <tr>
-                <th scope="row">이메일</th>
-                <td>
-                  <span id="ec_shop_member_confirm_field-email1"></span>@<span
-                    id="ec_shop_member_confirm_field-email2"></span>
-                </td>
-              </tr>
-              <tr class="">
-                <th scope="row">이메일 수신여부</th>
-                <td><span id="ec_shop_member_confirm_field-is_news_mail"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">평생회원</th>
-                <td><span id="ec_shop_member_confirm_field-is_lifetime"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">별명</th>
-                <td><span id="ec_shop_member_confirm_field-nick_name"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">성별</th>
-                <td><span id="ec_shop_member_confirm_field-is_sex"></span></td>
-              </tr>
-              <tr class="">
-                <th scope="row">생년월일</th>
-                <td>
-                  <span id="ec_shop_member_confirm_field-birth_year"></span><span>/</span><span
-                    id="ec_shop_member_confirm_field-birth_month"></span><span>/</span><span
-                    id="ec_shop_member_confirm_field-birth_day"></span> <span class="">(<span
-                      id="ec_shop_member_confirm_field-is_solar_calendar"></span>)</span>
-                </td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">결혼기념일</th>
-                <td>
-                  <span id="ec_shop_member_confirm_field-marry_year"></span><span>/</span><span
-                    id="ec_shop_member_confirm_field-marry_month"></span><span>/</span><span
-                    id="ec_shop_member_confirm_field-marry_day"></span>
-                </td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">배우자생일</th>
-                <td>
-                  <span id="ec_shop_member_confirm_field-partner_year"></span><span>/</span><span
-                    id="ec_shop_member_confirm_field-partner_month"></span><span>/</span><span
-                    id="ec_shop_member_confirm_field-partner_day"></span>
-                </td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">자녀</th>
-                <td><span id="ec_shop_member_confirm_field-child"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">최종학력</th>
-                <td><span id="ec_shop_member_confirm_field-school"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">직종</th>
-                <td><span id="ec_shop_member_confirm_field-job_class"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">직업</th>
-                <td><span id="ec_shop_member_confirm_field-job"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">연소득</th>
-                <td><span id="ec_shop_member_confirm_field-earning"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">자동차</th>
-                <td><span id="ec_shop_member_confirm_field-car"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">지역</th>
-                <td><span id="ec_shop_member_confirm_field-region"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">인터넷 이용장소</th>
-                <td><span id="ec_shop_member_confirm_field-internet"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">관심분야</th>
-                <td><span id="ec_shop_member_confirm_field-inter_check"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add1"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add2"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add3"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add4"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add5"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add6"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add7"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add8"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add9"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add10"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add11"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add12"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add13"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add14"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row"></th>
-                <td><span id="ec_shop_member_confirm_field-add15"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">추천인 아이디</th>
-                <td><span id="ec_shop_member_confirm_field-reco_id"></span></td>
-              </tr>
-              <tr class="displaynone">
-                <th scope="row">환불계좌 정보</th>
-                <td>
-                  <ul class="account">
-                    <li>
-                      예금주 : <span id="ec_shop_member_confirm_field-bank_account_owner"></span>
-                    </li>
-                    <li>
-                      은행명 : <span id="ec_shop_member_confirm_field-refund_bank_code"></span>
-                    </li>
-                    <li>
-                      계좌번호 : <span id="ec_shop_member_confirm_field-bank_account_no"></span>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
+                <tr class="{$display_member_type|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">회원구분</th>
+                    <td>{$form.member_type}</td>
+                </tr>
+                <tr id="companyWrap">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">사업자구분
+                    </th>
+                    <td>{$form.company_type}</td>
+                </tr>
+                <tr id="authMember">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">회원인증</th>
+                    <td class="formMultiple">
+                        <div id="authWrap" style="display:none;">
+
+                            <div id="personAuth">
+                                <div id="personalTypeWrap">{$form.personal_type}</div>
+                                <div id="ipinWrap">
+                                    <a href="#none" class="btnNormal sizeS" onclick="{$action_ipin_open}">아이핀인증</a>
+                                    <p class="gBlank5">아이핀이란, 회원님의 개인정보 보호를 위해 웹사이트에 주민등록번호를 제공하지 않고 본인임을 확인하는 인터넷상의
+                                        개인식별번호 서비스입니다. <br>아이핀을 통한 가입을 원하시면 아이핀 인증 버튼을 눌러 진행해 주십시오.</p>
+                                </div>
+                                <div id="mobileWrap">
+                                    <a href="#none" class="btnNormal sizeS" onclick="{$action_mobile_open}">휴대폰인증</a>
+                                    <p class="gBlank5">본인 명의의 휴대폰으로 본인인증을 진행합니다.</p>
+                                </div>
+                                <div id="emailWrap">
+                                    <ul class="txtInfo">
+                                        <li>기본정보 &gt; 이메일 항목에 입력하신 정보로 본인인증을 진행합니다.</li>
+                                        <li>회원가입 후에 입력하신 이메일 주소로 인증 메일이 발송되오니, 확인해 주시기 바랍니다.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="businessAuth">
+                                <dl>
+                                    <dt>법인명</dt>
+                                    <dd>{$form.bname}</dd>
+                                    <dt>법인번호</dt>
+                                    <dd class="formGroup code">{$form.bssn1} - {$form.bssn2} <a href="#none"
+                                            class="btnNormal" onclick="{$action_business_dupl}">중복확인</a></dd>
+                                </dl>
+                            </div>
+
+                            <div id="foreignerAuth">
+                                <dl>
+                                    <dt>이름(Name)</dt>
+                                    <dd>{$form.foreigner_name}</dd>
+                                    <dt>{$form.foreigner_type}</dt>
+                                    <dd class="formGroup">{$form.foreigner_ssn} <a href="#none" class="btnNormal"
+                                            onclick="{$action_foreigner_check}">중복확인</a></dd>
+                                    <div id="foreignerPersonWrap">
+                                        <p class="txtInfo"></p>
+                                        <div class="content">{$desc_id_info_consent}</div>
+                                        <p>{$form.f_identification_check}</p>
+                                    </div>
+                                    <div id="foreignerEmailWrap">
+                                        <ul class="txtInfo">
+                                            <li>기본정보 &gt; 이메일 항목에 입력하신 정보로 본인인증을 진행합니다.</li>
+                                            <li>회원가입 후에 입력하신 이메일 주소로 인증 메일이 발송되오니, 확인해 주시기 바랍니다.</li>
+                                        </ul>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="ec-base-button">
-        <a href="#none" class="btnSubmitFix sizeS" id="ec_shop_confirm-checkingjoininfo_action">회원가입</a>
-        <a href="#none" class="btnNormalFix sizeS" onclick="CheckingJoinInfoLayerClose()">닫기</a>
-      </div>
-      <a href="#none" class="close"><img src="//img.echosting.cafe24.com/skin/base/common/btn_close.gif" alt="닫기"
-          onclick="CheckingJoinInfoLayerClose()"></a>
+        </table>
     </div>
-  </div>
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Elements
-    var memberTypeRadios = document.querySelectorAll('input[name="member_type"]');
-    var companyTypeRadios = document.querySelectorAll('input[name="company_type"]');
-    var companyWrap = document.getElementById('companyWrap');
-    var companyRow = document.getElementById('companyRow');
-    var companyNoRow = document.getElementById('companyNoRow');
-    var businessAuth = document.getElementById('businessAuth');
-    var authMember = document.getElementById('authMember');
 
-    function updateMemberForm() {
-        var isBusiness = document.getElementById('member_type1').checked;
-        var isCorporate = document.getElementById('company_type1') && document.getElementById('company_type1').checked;
-        
-        if (isBusiness) {
-            if(companyWrap) companyWrap.style.display = '';
-            if(companyRow) companyRow.style.display = '';
-            if(companyNoRow) companyNoRow.style.display = '';
-            if(authMember) authMember.style.display = isCorporate ? '' : 'none'; // Only show authMember if corporate needs it or adjust as necessary
-            if(businessAuth) businessAuth.style.display = isCorporate ? '' : 'none';
-        } else {
-            if(companyWrap) companyWrap.style.display = 'none';
-            if(companyRow) companyRow.style.display = 'none';
-            if(companyNoRow) companyNoRow.style.display = 'none';
-            if(authMember) authMember.style.display = 'none';
-            if(businessAuth) businessAuth.style.display = 'none';
-        }
-    }
+    <div class="titleArea titleArea--middle {$display_base_column_title|display}">
+        <h3>기본정보</h3>
+        <p class="required {$display_base_column_title|display}"><img src="/SkinImg/img/ico_required.svg"
+                class="icon icoRequired" alt="필수">필수입력사항</p>
+    </div>
+    <div class="ec-base-table typeWrite" style="border: none;">
+        <table border="1">
+            <caption>회원 기본정보</caption>
+            <colgroup>
+                <col style="width:190px;">
+                <col style="width:auto;">
+            </colgroup>
+            <tbody>
+                <tr class="{$display_use_id|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">아이디</th>
+                    <td>{$form.member_id} <div class="txtInfo">(영문소문자/숫자, 4~16자)</div>
+                        <p id="{$idMsg_id}" class="txtInfo txtSuccess"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">비밀번호</th>
+                    <td>
+                        <div class="eTooltip">
+                            {$form.passwd}
+                            <div class="ec-base-tooltip typeUpper">
+                                <div class="content">
+                                    <strong>※ {$passwd_terms}</strong>
+                                    <ul class="typeDash txtInfo">
+                                        {$passwd_chk_info}
+                                    </ul>
+                                </div>
+                                <a href="#none" class="btnClose">닫기</a>
+                                <span class="edge"></span>
+                            </div>
+                        </div>
+                        <div class="txtInfo">{$passwd_type_desc}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">비밀번호 확인
+                    </th>
+                    <td>{$form.user_passwd_confirm} <p class="txtInfo" id="{$pwConfirmMsg_id}"></p>
+                    </td>
+                </tr>
+                <tr class="{$display_hint|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">비밀번호 확인
+                        질문</th>
+                    <td>{$form.hint}</td>
+                </tr>
+                <tr class="{$display_hint_answer|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">비밀번호 확인
+                        답변</th>
+                    <td>{$form.hint_answer}</td>
+                </tr>
+                <tr>
+                    <th scope="row" id="{$name_title}"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired"
+                            alt="필수">이름</th>
+                    <td>
+                        <span id="{$name_contents}">{$form.name}</span>
+                        <p id="under14Msg" class="txtInfo displaynone">14세 미만 사용자는 법정대리인 동의가 필요합니다.</p>
+                    </td>
+                </tr>
+                <tr class="{$display_eng_name|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_name_en|display}" alt="필수">이름(영문)</th>
+                    <td>{$form.name_en} <span class="txtInfo">(이름 - 성 형식으로 입력해 주세요.)</span></td>
+                </tr>
+                <tr>
+                    <th scope="row" id="ssnTitle"></th>
+                    <td id="ssnContents"></td>
+                </tr>
+                <tr id="{$companyRow}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">상호명</th>
+                    <td id="companyName">{$form.cname}</td>
+                </tr>
+                <tr id="{$companyNoRow}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">사업자번호
+                    </th>
+                    <td class="formGroup" id="companySsn">
+                        {$form.cssn}
+                        <a href="#none" class="btnNormal {$display_cssn_dupl|display}"
+                            onclick="{$action_cssn_dupl}">중복확인</a>
+                        <p id="{$cssnMsg_id}"></p>
+                    </td>
+                </tr>
+                <tr id="nation">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">국적</th>
+                    <td>{$form.citizenship}</td>
+                </tr>
+                <tr class="{$display_addr|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_address|display}" alt="필수">주소</th>
+                    <td class="formMultiple">{$form.address}</td>
+                </tr>
+                <tr class="{$display_phone|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_phone|display}" alt="필수">일반전화</th>
+                    <td class="formGroup code">{$form.phone}</td>
+                </tr>
+                <tr class="{$display_mobile|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_cell|display}" alt="필수">휴대전화</th>
+                    <td class="formGroup code">
+                        {$form.mobile}<button type="button" id="{$btn_action_verify_mobile}"
+                            class="btnNormal {$display_verify_mobile|display}"
+                            onclick="{$action_verify_mobile}">인증번호</button>
+                        <p class="txtInfo {$bDisplayMobileVerifyInfoDefault|display} error"
+                            id="{$result_send_verify_mobile_fail}"></p>
+                        <ul class="txtInfo {$bDisplayMobileVerifyInfoDefault|display}"
+                            id="{$result_send_verify_mobile_success}">
+                            <li>인증번호가 발송되었습니다.</li>
+                            <li>인증번호를 받지 못하셨다면 휴대폰 번호를 확인해 주세요.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="{$display_verify_mobile_confirm|display}" id="{$confirm_verify_mobile}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">인증번호</th>
+                    <td class="formGroup">
+                        <div class="verify">
+                            <div>{$form.verify_sms_number}</div>
+                            <span class="time" id="{$expiryTime}"></span>
+                        </div>
+                        <button type="button" class="btnNormal" id="{$btn_verify_mobile_confirm}"
+                            onclick="{$action_verify_mobile_confirm}">확인</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg" class="icon icoRequired" alt="필수">이메일</th>
+                    <td>{$form.email} <p class="txtInfo" id="{$emailMsg_id}"></p>
+                    </td>
+                </tr>
+                <tr class="{$display_is_lifetime|display}">
+                    <th scope="row">평생회원</th>
+                    <td>
+                        {$form.is_lifetime}
+                        <ul class="txtInfo">
+                            <li>평생회원으로 가입하시면 <strong>{$mall_name}</strong> 회원 탈퇴시까지는 휴면회원으로 전환되지 않으며, 고객님의 개인정보가 탈퇴시까지
+                                안전하게 보관됩니다.</li>
+                            <li class="{$display_is_lifetime_benefit|display}">지금 평생회원으로 가입하시면 쿠폰혜택을 드립니다. (쿠폰혜택을 받으신
+                                경우, 3개월간 평생회원을 유지하셔야 합니다.)</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    memberTypeRadios.forEach(function(radio) {
-        radio.addEventListener('change', updateMemberForm);
-    });
-    
-    companyTypeRadios.forEach(function(radio) {
-        radio.addEventListener('change', updateMemberForm);
-    });
+    <div class="titleArea titleArea--middle {$display_add_title|display}">
+        <h3>추가정보 <span class="desc">(선택)</span></h3>
+    </div>
+    <div class="ec-base-table typeWrite {$display_add_title|display}">
+        <table border="1">
+            <caption>회원 추가정보</caption>
+            <colgroup>
+                <col style="width:190px;">
+                <col style="width:auto;">
+            </colgroup>
+            <tbody>
+                <tr class="{$display_nick|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_nick_name_flag|display}" alt="필수"> 별명</th>
+                    <td>{$form.nick_name} <span class="txtInfo" id="{$nick_msg}"></span></td>
+                </tr>
+                <tr class="{$display_is_sex|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_sex|display}" alt="필수"> 성별</th>
+                    <td>{$form.is_sex}</td>
+                </tr>
+                <tr class="{$display_birthday|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_is_birthday|display}" alt="필수"> 생년월일</th>
+                    <td class="formGroup date">{$form.birth_year} 년 {$form.birth_month} 월 {$form.birth_day} 일<br><span
+                            class="gFlow {$display_calendar_type|display}">{$form.is_solar_calendar}</span></td>
+                </tr>
+                <tr class="{$display_marry|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_is_wedding_anniversary|display}" alt="필수"> 결혼기념일
+                    </th>
+                    <td class="formGroup date">{$form.marry_year} 년 {$form.marry_month} 월 {$form.marry_day} 일</td>
+                </tr>
+                <tr class="{$display_partner|display}">
+                    <th scope="row"><img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_is_life_partner|display}" alt="필수"> 배우자생일</th>
+                    <td class="formGroup date">{$form.partner_year} 년 {$form.partner_month} 월 {$form.partner_day} 일</td>
+                </tr>
+                <tr class="{$display_child|display}">
+                    <th scope="row">자녀 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_child|display}" alt="필수"></th>
+                    <td>{$form.child}</td>
+                </tr>
+                <tr class="{$display_school|display}">
+                    <th scope="row">최종학력 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_school|display}" alt="필수"></th>
+                    <td>{$form.school}</td>
+                </tr>
+                <tr class="{$display_job_class|display}">
+                    <th scope="row">직종 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_job_class|display}" alt="필수"></th>
+                    <td>{$form.job_class}</td>
+                </tr>
+                <tr class="{$display_job|display}">
+                    <th scope="row">직업 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_job|display}" alt="필수"></th>
+                    <td>{$form.job}</td>
+                </tr>
+                <tr class="{$display_earning|display}">
+                    <th scope="row">연소득 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_earning|display}" alt="필수"></th>
+                    <td>{$form.earning}</td>
+                </tr>
+                <tr class="{$display_car|display}">
+                    <th scope="row">자동차 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_car|display}" alt="필수"></th>
+                    <td>{$form.car}</td>
+                </tr>
+                <tr class="{$display_region|display}">
+                    <th scope="row">지역 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_region|display}" alt="필수"></th>
+                    <td>{$form.region}</td>
+                </tr>
+                <tr class="{$display_internet|display}">
+                    <th scope="row">인터넷 이용장소 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_internet|display}" alt="필수"></th>
+                    <td>{$form.internet}</td>
+                </tr>
+                <tr class="{$display_inter|display}">
+                    <th scope="row">관심분야 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_interest|display}" alt="필수"></th>
+                    <td>
+                        <div class="interest">{$form.inter_check}</div>
+                    </td>
+                </tr>
+                <tr class="{$display_add1|display}">
+                    <th scope="row">{$title_add1} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add1|display}" alt="필수"></th>
+                    <td>{$form.add1}</td>
+                </tr>
+                <tr class="{$display_add2|display}">
+                    <th scope="row">{$title_add2} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add2|display}" alt="필수"></th>
+                    <td>{$form.add2}</td>
+                </tr>
+                <tr class="{$display_add3|display}">
+                    <th scope="row">{$title_add3} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add3|display}" alt="필수"></th>
+                    <td>{$form.add3}</td>
+                </tr>
+                <tr class="{$display_add4|display}">
+                    <th scope="row">{$title_add4} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add4|display}" alt="필수"></th>
+                    <td>{$form.add4}</td>
+                </tr>
+                <tr class="{$display_add5|display}">
+                    <th scope="row">{$title_add5} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add5|display}" alt="필수"></th>
+                    <td>{$form.add5}</td>
+                </tr>
+                <tr class="{$display_add6|display}">
+                    <th scope="row">{$title_add6} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired $display_required_add6|display}" alt="필수"></th>
+                    <td>{$form.add6}</td>
+                </tr>
+                <tr class="{$display_add7|display}">
+                    <th scope="row">{$title_add7} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add7|display}" alt="필수"></th>
+                    <td>{$form.add7}</td>
+                </tr>
+                <tr class="{$display_add8|display}">
+                    <th scope="row">{$title_add8} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add8|display}" alt="필수"></th>
+                    <td>{$form.add8}</td>
+                </tr>
+                <tr class="{$display_add9|display}">
+                    <th scope="row">{$title_add9} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add9|display}" alt="필수"></th>
+                    <td>{$form.add9}</td>
+                </tr>
+                <tr class="{$display_add10|display}">
+                    <th scope="row">{$title_add10} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add10|display}" alt="필수"></th>
+                    <td>{$form.add10}</td>
+                </tr>
+                <tr class="{$display_add11|display}">
+                    <th scope="row">{$title_add11} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add11|display}" alt="필수"></th>
+                    <td>{$form.add11}</td>
+                </tr>
+                <tr class="{$display_add12|display}">
+                    <th scope="row">{$title_add12} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add12|display}" alt="필수"></th>
+                    <td>{$form.add12}</td>
+                </tr>
+                <tr class="{$display_add13|display}">
+                    <th scope="row">{$title_add13} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add13|display}" alt="필수"></th>
+                    <td>{$form.add13}</td>
+                </tr>
+                <tr class="{$display_add14|display}">
+                    <th scope="row">{$title_add14} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add14|display}" alt="필수"></th>
+                    <td>{$form.add14}</td>
+                </tr>
+                <tr class="{$display_add15|display}">
+                    <th scope="row">{$title_add15} <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_add15|display}" alt="필수"></th>
+                    <td>{$form.add15}</td>
+                </tr>
+                <tr class="{$display_reco_id|display}">
+                    <th scope="row">추천인 아이디 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_reco_id|display}" alt="필수"></th>
+                    <td>{$form.reco_id}</td>
+                </tr>
+                <tr class="{$display_bank|display}">
+                    <th scope="row">환불계좌 정보 <img src="/SkinImg/img/ico_required.svg"
+                            class="icon icoRequired {$display_required_bank_account_no|display}" alt="필수"></th>
+                    <td class="formMultiple">
+                        <dl>
+                            <dt>예금주</dt>
+                            <dd>{$form.bank_account_owner}</dd>
+                            <dt>은행명</dt>
+                            <dd>{$form.refund_bank_code}</dd>
+                            <dt>계좌번호</dt>
+                            <dd>{$form.bank_account_no} <span class="txtInfo">('-'와 숫자만 입력해주세요.)</span></dd>
+                        </dl>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
+    <!-- 약관 모달 -->
+    <div class="agree-modal-overlay" id="agreeModal">
+        <div class="agree-modal">
+            <div class="agree-modal__header">
+                <span class="agree-modal__title" id="agreeModalTitle"></span>
+                <button class="agree-modal__close" id="agreeModalClose">&times;</button>
+            </div>
+            <div class="agree-modal__body">
+                <iframe id="agreeModalFrame" src=""></iframe>
+            </div>
+        </div>
+    </div>
 
+    <div class="custom-agree-wrap">
+        <div class="agree-all">
+            <label><input type="checkbox" id="custom_agree_all"> <span class="chk-icon"></span> 모두 동의합니다</label>
+        </div>
+        <div class="agree-list">
+            <div class="agree-item">
+                <label><input type="checkbox" id="custom_agree_service" class="req-agree"> <span
+                        class="chk-icon"></span> (필수) 이용약관 동의</label>
+                <button type="button" class="btn-view" data-modal-url="/member/agreement/agree.html"
+                    data-modal-title="이용약관">내용보기</button>
+            </div>
+            <div class="agree-item">
+                <label><input type="checkbox" id="custom_agree_privacy" class="req-agree"> <span
+                        class="chk-icon"></span> (필수) 개인정보 수집 및 이용</label>
+                <button type="button" class="btn-view" data-modal-url="/member/agreement/privacy.html"
+                    data-modal-title="개인정보 수집 및 이용">내용보기</button>
+            </div>
+            <!-- <div class="marketing-options" style="margin-top: 10px;">
+                <span style="font-size: 13px; color: #555; margin-right: 15px;">(선택) 쇼핑정보 수신 동의</span>
+                <label><input type="checkbox" name="is_news_mail" value="T" id="custom_is_news_mail"> <span class="chk-icon"></span> 이메일</label>
+                <label><input type="checkbox" name="is_sms" value="T" id="custom_is_sms"> <span class="chk-icon"></span> 휴대폰</label>
+            </div> -->
+        </div>
+    </div>
 
-    // Auto-check all terms
-    var agreeAll = document.getElementById('sAgreeAllChecked');
-    var allTermCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sAgreeAllChecked)');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // ── 모달 ──
+            var overlay = document.getElementById('agreeModal');
+            var modalFrame = document.getElementById('agreeModalFrame');
+            var modalTitle = document.getElementById('agreeModalTitle');
+            document.getElementById('agreeModalClose').addEventListener('click', function () {
+                overlay.classList.remove('is-open');
+                modalFrame.src = '';
+            });
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) { overlay.classList.remove('is-open'); modalFrame.src = ''; }
+            });
+            document.querySelectorAll('.btn-view').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    modalTitle.textContent = btn.getAttribute('data-modal-title');
+                    modalFrame.src = btn.getAttribute('data-modal-url');
+                    overlay.classList.add('is-open');
+                });
+            });
 
-    if (agreeAll) {
-        agreeAll.addEventListener('change', function() {
-            var isChecked = this.checked;
-            allTermCheckboxes.forEach(function(cb) {
-                if (!cb.disabled) {
-                    cb.checked = isChecked;
+            // ── 체크박스 ──
+            var agreeAll = document.getElementById('custom_agree_all');
+            var reqAgrees = document.querySelectorAll('.req-agree');
+            var smsAgree = document.getElementById('custom_is_sms');
+            var emailAgree = document.getElementById('custom_is_news_mail');
+
+            function syncAll() {
+                var ok = true;
+                reqAgrees.forEach(function (r) { if (!r.checked) ok = false; });
+                if (!smsAgree.checked || !emailAgree.checked) ok = false;
+                agreeAll.checked = ok;
+            }
+            agreeAll.addEventListener('change', function () {
+                var v = this.checked;
+                reqAgrees.forEach(function (el) { el.checked = v; });
+                smsAgree.checked = emailAgree.checked = v;
+            });
+            reqAgrees.forEach(function (el) { el.addEventListener('change', syncAll); });
+
+            [smsAgree, emailAgree].forEach(function (el) {
+                if (el) {
+                    el.addEventListener('change', syncAll);
                 }
             });
-        });
 
-        allTermCheckboxes.forEach(function(cb) {
-            cb.addEventListener('change', function() {
-                var allChecked = true;
-                allTermCheckboxes.forEach(function(innerCb) {
-                    if (!innerCb.checked) {
-                        allChecked = false;
-                    }
-                });
-                agreeAll.checked = allChecked;
-            });
+            // ── 가입하기 검증 ──
+            var joinBtn = document.querySelector('.btnSubmitFix');
+            if (joinBtn) {
+                var orig = joinBtn.getAttribute('onclick');
+                if (orig) {
+                    joinBtn.removeAttribute('onclick');
+                    joinBtn.addEventListener('click', function (e) {
+                        var ok = true;
+                        reqAgrees.forEach(function (el) { if (!el.checked) ok = false; });
+                        if (!ok) { alert('필수 약관에 모두 동의해 주세요.'); return; }
+                        eval(orig);
+                    });
+                }
+            }
         });
-    }
+    </script>
 
-    // Initialize on load
-    updateMemberForm();
-});
-</script>
+    <div class="ec-base-button gBottom">
+        <a href="#none" class="btnNormalFix sizeM" onclick="history.go(-1); return false;">취소</a>
+        <a href="#none" class="btnSubmitFix sizeM" onclick="{$action_func_join}">가입하기</a>
+    </div>
+
+    <!--@import(/member/join_confirm.html)-->
+</div>

@@ -1,77 +1,324 @@
-/* 공통 */
-.progress { overflow:hidden; height:37px; border-bottom:1px solid #ccc; text-align:center; }
-.progress li { position:relative; float:left; padding:0 0 0 17px; width:35%; height:100%; line-height:37px; background-color:#ebebeb; box-sizing:border-box; list-style-type:none; }
-.progress li:first-child { padding:0; width:30%; }
-.progress li:first-child:before { display:none; }
-.progress li:before { position:absolute; top:0; left:0; display:inline-block; content:""; width:17px; height:37px; background:url("//img.echosting.cafe24.com/skin/mobile/common/bg_process.png") no-repeat 0 0; background-size:67px auto; }
-.progress li.done { background-color:#fafafa; }
-.progress li.done + li:before { background-position:-25px 0; }
-.progress li.done + li.done:before { background-position:-50px 0; }
+/* ========================================
+   Mobile Join - Modern Redesign
+   ======================================== */
 
-.xans-member-join { margin:14px 7px 0; padding:0 0 29px; color:#63666e; font-size: 11px; }
-.xans-member-join .titleArea { width:100%; margin:0; border:none; }
-.xans-member-join .titleArea.accountArea { margin:-8px 0 0; }
-.xans-member-join .titleArea h3 { height:30px; padding:13px 0 0 14px; border:1px solid #d5d5d5; font-size:13px; font-weight:bold; color:#4a5164; font-family:"맑은 고딕",Malgun Gothic,"돋움",Dotum; background:#f1f1f1; }
-.xans-member-join .titleArea h3 span { float:right; padding:0 14px 0 0; color:#1b1b1b; font:11px normal; }
-.xans-member-join .titleArea h3 span img { margin:0 3px 0 0; padding:4px 0 0; vertical-align:top; }
-.xans-member-join p.required { margin:-25px 0 6px; color:#6292db; font-size:11px; text-align:right; }
-.xans-member-join p.required img { vertical-align:middle; }
+/* 전체 래퍼 */
+.xans-member-join {
+    margin: 0;
+    padding: 0 16px 40px;
+    color: #333;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+}
 
-.xans-member-join ul.info li { margin:5px 0 0; }
-.xans-member-join ul.info .name { display:block; margin-bottom:5px; font-weight:normal; }
+/* 숨길 섹션 (회원인증 테이블 등) */
+.xans-member-join .titleArea { display: none; }
+.xans-member-join .titleArea.accountArea { display: none; }
 
+/* ── 테이블 → 세로 폼 변환 ── */
+.xans-member-join .ec-base-table.typeWrite { margin: 0; }
+.xans-member-join .ec-base-table.typeWrite table,
+.xans-member-join .ec-base-table.typeWrite colgroup,
+.xans-member-join .ec-base-table.typeWrite tbody { display: block; width: 100%; }
 
-/* 정보입력 */
-.xans-member-join .ec-base-table.typeWrite { margin:0 0 7px; }
-.xans-member-join .ec-base-table.typeWrite .emailCheck td,
-.xans-member-join .ec-base-table.typeWrite .idCheck td { font-size:11px; }
-.xans-member-join .ec-base-table.typeWrite .emailCheck .error,
-.xans-member-join .ec-base-table.typeWrite .idCheck .error { color:#f00; }
-.xans-member-join .ec-base-table.typeWrite td.thead .subject { display:block; padding:0 0 10px; font-weight:normal; color:#757575; }
-.xans-member-join .ec-base-table.typeWrite .interest label { min-width:90px; margin:0 7px 14px 0; }
-.xans-member-join .ec-base-table.typeWrite .interest { font-size:11px; line-height:1.2em; }
-.xans-member-join .ec-base-table.typeWrite .interest input { margin:0 3px 0 0; }
-.xans-member-join .ec-base-table.typeWrite .interest span { display:inline-block; }
-.xans-member-join .ec-base-table.typeWrite th > img { vertical-align:top; padding:4px 0 0; }
-.xans-member-join .ec-base-table.typeWrite select { margin-right:4px; }
-.xans-member-join .ec-base-table.typeWrite #authWrap #ipinWrap img,
-.xans-member-join .ec-base-table.typeWrite #authWrap #mobileWrap img,
-.xans-member-join .ec-base-table.typeWrite #authWrap img { width:106px !important; }
+.xans-member-join .ec-base-table.typeWrite tr {
+    display: block;
+    margin-bottom: 20px;
+    border: none !important;
+    background: none !important;
+}
+.xans-member-join .ec-base-table.typeWrite tr[style*="display:none"],
+.xans-member-join .ec-base-table.typeWrite tr.displaynone { display: none !important; }
 
-/* INPUT SIZE */
+/* th → label 스타일 */
+.xans-member-join .ec-base-table.typeWrite th {
+    display: block;
+    width: 100%;
+    padding: 0 0 6px 0;
+    border: none !important;
+    background: none !important;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.4;
+}
+.xans-member-join .ec-base-table.typeWrite th img { display: none; }
+
+/* 필수 표시 - th 텍스트 뒤 별표 */
+.xans-member-join .ec-base-table.typeWrite th::after {
+    content: ' *';
+    color: #3a6cf4;
+    font-size: 13px;
+}
+/* 선택 항목 th는 별표 없앰 (display class 있는 것들) */
+.xans-member-join .ec-base-table.typeWrite tr[class*="display"] th::after { content: ''; }
+
+/* td → input 영역 */
+.xans-member-join .ec-base-table.typeWrite td {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none !important;
+    background: none !important;
+}
+
+/* ── 인풋 공통 스타일 ── */
 .xans-member-join input[type=text],
 .xans-member-join input[type=password],
 .xans-member-join input[type=number],
 .xans-member-join input[type=tel],
-.xans-member-join select { width:100%; }
-.xans-member-join input[type=tel] { padding:10px 4px; }
-.xans-member-join select { padding:0 20px 0 4px; }
-.xans-member-join #foreigner_ssn { width:auto; }
-.xans-member-join #user_passwd_confirm,
-.xans-member-join #hint,
-.xans-member-join #hint_answer { margin-bottom:7px; }
-.xans-member-join #member_id { width:113px; }
-.xans-member-join #postcode1 { width:55px; text-align:center; }
-.xans-member-join #addr1 { margin:5px 0 0; }
-.xans-member-join #addr2 { margin:5px 0 7px; }
-.xans-member-join #phone1,
-.xans-member-join #mobile1 { width:33%; }
-.xans-member-join #phone2,
-.xans-member-join #phone3,
-.xans-member-join #mobile2,
-.xans-member-join #mobile3 { width:25%; margin:0 4px; }
-.xans-member-join #bssn1,
-.xans-member-join #bssn2 { width:70px; }
-.xans-member-join #email1 { max-width:40%; margin:0 4px 4px 0; }
-.xans-member-join #email2 { max-width:45%; margin:0 4px 4px 4px; }
-.xans-member-join #email3 { height:29px; margin:0 0 4px; }
+.xans-member-join input[type=email] {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #222;
+    background: #fff;
+    box-sizing: border-box;
+    outline: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s;
+}
+.xans-member-join input[type=text]:focus,
+.xans-member-join input[type=password]:focus,
+.xans-member-join input[type=number]:focus,
+.xans-member-join input[type=tel]:focus,
+.xans-member-join input[type=email]:focus { border-color: #222; }
 
-.xans-member-join #birth_year,
-.xans-member-join #marry_year,
-.xans-member-join #partner_year { width:54px; margin:0 4px 0 0; }
-.xans-member-join #birth_month,
-.xans-member-join #marry_month,
-.xans-member-join #partner_month { width:38px; margin:0 4px; }
-.xans-member-join #birth_day,
-.xans-member-join #marry_day,
-.xans-member-join #partner_day { width:38px; margin:0 4px; }
+.xans-member-join select {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #222;
+    background: #fff;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+/* ── 힌트 텍스트 ── */
+.xans-member-join .ec-base-tooltip-area { position: relative; }
+.xans-member-join .ec-base-tooltip { display: none !important; }
+.xans-member-join .eTip { display: block; }
+
+/* 비밀번호 힌트 */
+.xans-member-join .ec-base-table.typeWrite tr:nth-child(3) td::after {
+    content: '(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)';
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #3a6cf4;
+}
+
+/* 아이디 인풋 너비 - 중복확인 버튼과 나란히 */
+.xans-member-join .ec-base-table.typeWrite .idCheck td { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+.xans-member-join .ec-base-table.typeWrite .idCheck td input { flex: 1; min-width: 0; }
+.xans-member-join #member_id { width: auto !important; flex: 1; }
+.xans-member-join #idMsg { width: 100%; font-size: 12px; margin-top: 4px; }
+
+/* 이메일 체크 */
+.xans-member-join .ec-base-table.typeWrite .emailCheck td { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+.xans-member-join .ec-base-table.typeWrite .emailCheck td input { flex: 1; }
+.xans-member-join #emailMsg { width: 100%; font-size: 12px; margin-top: 4px; }
+
+/* 중복확인 / 기본 버튼 */
+.xans-member-join .btnBasic {
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #222;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    color: #222;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* 휴대전화 */
+.xans-member-join #mobile1 { width: 32% !important; margin-right: 4px; }
+.xans-member-join #mobile2,
+.xans-member-join #mobile3 { width: 25% !important; margin: 0 4px 0 0; }
+
+/* 일반전화 */
+.xans-member-join #phone1 { width: 32% !important; margin-right: 4px; }
+.xans-member-join #phone2,
+.xans-member-join #phone3 { width: 25% !important; margin: 0 4px 0 0; }
+
+/* 이메일 */
+.xans-member-join #email1 { max-width: none !important; margin: 0 0 8px 0 !important; }
+.xans-member-join #email2 { max-width: none !important; margin: 0 4px 0 4px !important; }
+.xans-member-join #email3 { height: 48px !important; margin: 0 !important; }
+
+/* 우편번호 */
+.xans-member-join #postcode1 { width: 90px !important; text-align: left; }
+
+/* 비밀번호 확인 메시지 */
+.xans-member-join #pwConfirmMsg { display: block; margin-top: 6px; font-size: 12px; }
+
+/* 오류 메시지 */
+.xans-member-join p[id], .xans-member-join span[id] { font-size: 12px; margin-top: 4px; color: #e53e3e; display: block; }
+
+/* 추가정보 tr 숨김 (기본) */
+.xans-member-join .ec-base-table.typeWrite tr[class=""] > th { /* 표시 */ }
+
+/* caption 숨김 */
+.xans-member-join .ec-base-table.typeWrite caption { display: none; }
+
+/* ── 가입하기 버튼 ── */
+.xans-member-join .ec-base-button.gFull { margin: 0 0 16px; padding: 0; }
+.xans-member-join .ec-base-button.gFull .btnSubmit {
+    display: block;
+    width: 100%;
+    height: 54px;
+    border: none;
+    border-radius: 4px;
+    background: #111;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.xans-member-join .ec-base-button.gFull .btnSubmit:active { background: #333; }
+
+/* ── 약관 동의 영역 (custom-agree-wrap) ── */
+.custom-agree-wrap {
+    margin: 8px 0 24px;
+    padding: 20px 0 0;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+    color: #333;
+}
+.custom-agree-wrap .agree-all {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+.custom-agree-wrap .agree-all label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #111;
+}
+.custom-agree-wrap .agree-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+.custom-agree-wrap .agree-item .btn-view {
+    font-size: 13px;
+    color: #3a6cf4;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+.custom-agree-wrap .marketing-options {
+    padding-left: 28px;
+    margin: -6px 0 14px;
+    display: flex;
+    gap: 20px;
+}
+
+/* 커스텀 체크박스 (원형) */
+.custom-agree-wrap input[type="checkbox"] { display: none; }
+.custom-agree-wrap label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    line-height: 1;
+}
+.custom-agree-wrap label .chk-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin-right: 9px;
+    border: 1.5px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+    background: #fff;
+    flex-shrink: 0;
+    transition: border-color 0.15s;
+}
+.custom-agree-wrap input[type="checkbox"]:checked + .chk-icon { border-color: #3a6cf4; background: #3a6cf4; }
+.custom-agree-wrap input[type="checkbox"]:checked + .chk-icon::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 4px;
+    width: 5px;
+    height: 9px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* 마케팅 옵션 (사각형 체크) */
+.custom-agree-wrap .marketing-options label .chk-icon {
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+}
+.custom-agree-wrap .marketing-options input[type="checkbox"]:checked + .chk-icon::after {
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 9px;
+}
+
+/* ── 약관 모달 ── */
+.agree-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.55);
+    z-index: 9999;
+    align-items: flex-end;
+}
+.agree-modal-overlay.is-open { display: flex; }
+.agree-modal {
+    width: 100%;
+    max-height: 75vh;
+    background: #fff;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.agree-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 16px 14px;
+    border-bottom: 1px solid #eee;
+}
+.agree-modal__title { font-size: 16px; font-weight: 600; color: #111; }
+.agree-modal__close {
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer;
+    font-size: 22px; color: #555; line-height: 1;
+}
+.agree-modal__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    -webkit-overflow-scrolling: touch;
+}

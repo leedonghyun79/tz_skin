@@ -70,3 +70,30 @@
         <a href="#none" class="btnEm" onclick="history.go(-1); return false;">취소</a>
     </div>
 </div>
+
+<!-- [TVZone] 약관동의 완벽 우회 스크립트 (실제 클릭 시뮬레이션) -->
+<script>
+window.addEventListener('load', function() {
+    document.body.style.opacity = '0';
+    // 필수 항목만 클릭 (선택 항목은 join.html에서 처리)
+    var idsToClick = [
+        'agree_service_check0',
+        'agree_privacy_check0',
+        'agree_information_check0',
+        'agree_consignment_check0'
+    ];
+    idsToClick.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && !el.checked) {
+            el.click();
+        }
+    });
+    setTimeout(function() {
+        if(typeof checkAgreement === 'function') {
+            checkAgreement('/member/join.html');
+        } else {
+            document.body.style.opacity = '1';
+        }
+    }, 200);
+});
+</script>
