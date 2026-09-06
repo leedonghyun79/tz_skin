@@ -477,17 +477,15 @@
             <div class="agree-item">
                 <label><input type="checkbox" id="custom_agree_service" class="req-agree"> <span
                         class="chk-icon"></span> (필수) 이용약관 동의</label>
-                <button type="button" class="btn-view" data-modal-url="/member/agreement/agreement1.html"
+                <button type="button" class="btn-view" data-modal-url="/member/agreement/agree.html"
                     data-modal-title="이용약관">내용보기</button>
             </div>
-            <!-- <div class="agree-item">
-                <label><input type="checkbox" id="custom_agree_marketing"> <span class="chk-icon"></span> (선택) 쇼핑정보 수신 동의</label>
-                <button type="button" class="btn-view" data-modal-url="/member/agreement/agreement3.html" data-modal-title="쇼핑정보 수신 동의">내용보기</button>
+            <div class="agree-item">
+                <label><input type="checkbox" id="custom_agree_privacy" class="req-agree"> <span
+                        class="chk-icon"></span> (필수) 개인정보 수집 및 이용</label>
+                <button type="button" class="btn-view" data-modal-url="/member/agreement/privacy.html"
+                    data-modal-title="개인정보 수집 및 이용">내용보기</button>
             </div>
-            <div class="marketing-options">
-                <label><input type="checkbox" name="is_news_mail" value="T" id="custom_is_news_mail"> <span class="chk-icon"></span> 이메일</label>
-                <label><input type="checkbox" name="is_sms" value="T" id="custom_is_sms"> <span class="chk-icon"></span> 휴대폰</label>
-            </div> -->
         </div>
     </div>
 
@@ -508,7 +506,9 @@
                 }
             });
             document.querySelectorAll('.btn-view').forEach(function (btn) {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     modalTitle.textContent = btn.getAttribute('data-modal-title');
                     modalFrame.src = btn.getAttribute('data-modal-url');
                     overlay.classList.add('is-open');
@@ -518,38 +518,28 @@
             // ── 체크박스 로직 ──
             var agreeAll = document.getElementById('custom_agree_all');
             var reqAgrees = document.querySelectorAll('.req-agree');
-            var marketingAgree = document.getElementById('custom_agree_marketing');
             var smsAgree = document.getElementById('custom_is_sms');
             var emailAgree = document.getElementById('custom_is_news_mail');
 
             function syncAllCheck() {
                 var allChecked = true;
                 reqAgrees.forEach(function (r) { if (!r.checked) allChecked = false; });
-                if (!marketingAgree.checked || !smsAgree.checked || !emailAgree.checked) allChecked = false;
+                if (smsAgree && !smsAgree.checked) allChecked = false;
+                if (emailAgree && !emailAgree.checked) allChecked = false;
                 agreeAll.checked = allChecked;
             }
 
             agreeAll.addEventListener('change', function () {
                 var v = this.checked;
                 reqAgrees.forEach(function (el) { el.checked = v; });
-                marketingAgree.checked = v;
-                smsAgree.checked = v;
-                emailAgree.checked = v;
+                if (smsAgree) smsAgree.checked = v;
+                if (emailAgree) emailAgree.checked = v;
             });
 
             reqAgrees.forEach(function (el) { el.addEventListener('change', syncAllCheck); });
 
-            marketingAgree.addEventListener('change', function () {
-                smsAgree.checked = this.checked;
-                emailAgree.checked = this.checked;
-                syncAllCheck();
-            });
-
             [smsAgree, emailAgree].forEach(function (el) {
-                el.addEventListener('change', function () {
-                    marketingAgree.checked = smsAgree.checked || emailAgree.checked;
-                    syncAllCheck();
-                });
+                if (el) el.addEventListener('change', syncAllCheck);
             });
 
             // ── 가입하기 버튼 검증 ──
@@ -562,7 +552,7 @@
                         var allReqChecked = true;
                         reqAgrees.forEach(function (el) { if (!el.checked) allReqChecked = false; });
                         if (!allReqChecked) {
-                            alert('이용약관에 동의해 주세요.');
+                            alert('필수 약관에 모두 동의해 주세요.');
                             return;
                         }
                         eval(originalOnClick);
