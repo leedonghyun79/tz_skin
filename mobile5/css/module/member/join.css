@@ -343,6 +343,7 @@
 }
 
 .custom-agree-wrap .agree-item .btn-view {
+    display: inline-block;
     font-size: 13px;
     color: #3a6cf4;
     text-decoration: none;
@@ -353,6 +354,7 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .custom-agree-wrap .marketing-options {
