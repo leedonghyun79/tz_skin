@@ -190,29 +190,25 @@
         <!-- HappyTalk SDK -->
         <script>
             var ht = null;
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    (function(id, scriptSrc, callback) {
-                        var d = document,
-                            tagName = 'script',
-                            $script = d.createElement(tagName),
-                            $element = d.getElementsByTagName(tagName)[0];
+            (function(id, scriptSrc, callback) {
+                var d = document,
+                    tagName = 'script',
+                    $script = d.createElement(tagName),
+                    $element = d.getElementsByTagName(tagName)[0];
 
-                        $script.id = id;
-                        $script.async = true;
-                        $script.src = scriptSrc;
+                $script.id = id;
+                $script.async = true;
+                $script.src = scriptSrc;
 
-                        if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
-                        $element.parentNode.insertBefore($script, $element);
-                    })('happytalkSDK', 'https://chat-static.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
-                        ht = new Happytalk({
-                          siteId: '1000426178',
-                          siteName: '(주)티비존',
-                          categoryId: '187988',
-                          divisionId: '187989'
-                      });
-                    });
-                }, 3000);
+                if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
+                $element.parentNode.insertBefore($script, $element);
+            })('happytalkSDK', 'https://chat-static.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
+                ht = new Happytalk({
+                  siteId: '1000426178',
+                  siteName: '(주)티비존',
+                  categoryId: '187988',
+                  divisionId: '187989'
+              });
             });
         </script>
         <!-- /HappyTalk SDK -->
@@ -228,23 +224,6 @@
         });
         </script>
         -->
-
-        <!-- [TVZone] 로그인 링크 returnUrl 동적 추가 -->
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var currentPath = window.location.pathname + window.location.search + window.location.hash;
-            document.querySelectorAll("#header .xans-layout-statelogoff a").forEach(function (loginLink) {
-                try {
-                    var url = new URL(loginLink.href, window.location.origin);
-                    if (url.searchParams.has("noMemberOrder") && !url.searchParams.has("returnUrl")) {
-                        url.searchParams.set("returnUrl", currentPath);
-                        loginLink.href = url.pathname + url.search;
-                    }
-                } catch(e) {}
-            });
-        });
-        </script>
-        <!-- /[TVZone] 로그인 링크 returnUrl 동적 추가 -->
 
         <!-- [TVZone] 옵션 마이너스 가격 제거 스크립트 -->
         <script>
