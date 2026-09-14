@@ -439,7 +439,7 @@
         <div class="agree-modal">
             <div class="agree-modal__header">
                 <span class="agree-modal__title" id="agreeModalTitle"></span>
-                <button class="agree-modal__close" id="agreeModalClose">&times;</button>
+                <button type="button" class="agree-modal__close" id="agreeModalClose">&times;</button>
             </div>
             <div class="agree-modal__body">
                 <iframe id="agreeModalFrame" src=""></iframe>
@@ -478,7 +478,8 @@
             var overlay = document.getElementById('agreeModal');
             var modalFrame = document.getElementById('agreeModalFrame');
             var modalTitle = document.getElementById('agreeModalTitle');
-            document.getElementById('agreeModalClose').addEventListener('click', function () {
+            document.getElementById('agreeModalClose').addEventListener('click', function (e) {
+                e.preventDefault();
                 overlay.classList.remove('is-open');
                 modalFrame.src = '';
             });

@@ -320,9 +320,13 @@ $(function() {
                         return;
                     }
                     if (data['@type'] === 'Product' && data.offers) {
-                        var priceVal = String(data.offers.price || '');
-                        var numeric = parseInt(priceVal.replace(/[^0-9]/g, ''));
-                        if (!numeric || numeric === 0 || priceVal.indexOf('전화문의') !== -1) {
+                        var offerList = Array.isArray(data.offers) ? data.offers : [data.offers];
+                        var isInvalid = offerList.some(function (offer) {
+                            var priceVal = String((offer && offer.price) || '');
+                            var numeric = parseInt(priceVal.replace(/[^0-9]/g, ''));
+                            return !numeric || numeric === 0 || priceVal.indexOf('전화문의') !== -1;
+                        });
+                        if (isInvalid) {
                             delete data.offers;
                             script.textContent = JSON.stringify(data);
                         }

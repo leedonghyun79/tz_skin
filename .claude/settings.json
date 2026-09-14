@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://tvzonemall.com/product/%EC%8B%A4%EB%82%B4%ED%98%95-smd-p186mm-5760mm%C3%973360mm-263%EC%9D%B8%EC%B9%98-%EB%8C%80%ED%98%95%EC%8A%A4%ED%81%AC%EB%A6%B0/147/\" -o /tmp/p147.html -w \"%{http_code}\\\\n\")",
+      "Bash(grep -o 'application/ld+json.\\\\{0,2000\\\\}' /tmp/p147.html)",
+      "Bash(grep -o '\"@type\":\"Product\".\\\\{0,100\\\\}' /tmp/p147.html)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(cygpath -w /tmp/p147.html)",
+      "Bash(awk 'BEGIN{RS=\"application/ld\\\\\\\\+json\"} {print \"===CHUNK===\"; print substr\\($0,1,600\\)}' /tmp/p147.html)",
+      "Bash(awk 'BEGIN{RS=\"application/ld\\\\\\\\+json\"} NR==3 {print substr\\($0,1,600\\)}' /tmp/p147.html)",
+      "Bash(awk 'BEGIN{RS=\"application/ld\\\\\\\\+json\"} {print NR\": \"length\\($0\\)}' /tmp/p147.html)"
+    ]
+  }
+}

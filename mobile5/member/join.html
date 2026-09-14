@@ -477,14 +477,14 @@
             <div class="agree-item">
                 <label><input type="checkbox" id="custom_agree_service" class="req-agree"> <span
                         class="chk-icon"></span> (필수) 이용약관 동의</label>
-                <span class="btn-view" role="button" tabindex="0" data-modal-url="/member/agreement/agree.html"
-                    data-modal-title="이용약관">내용보기</span>
+                <button type="button" class="btn-view" data-modal-url="/member/agreement/agree.html"
+                    data-modal-title="이용약관">내용보기</button>
             </div>
             <div class="agree-item">
                 <label><input type="checkbox" id="custom_agree_privacy" class="req-agree"> <span
                         class="chk-icon"></span> (필수) 개인정보 수집 및 이용</label>
-                <span class="btn-view" role="button" tabindex="0" data-modal-url="/member/agreement/privacy.html"
-                    data-modal-title="개인정보 수집 및 이용">내용보기</span>
+                <button type="button" class="btn-view" data-modal-url="/member/agreement/privacy.html"
+                    data-modal-title="개인정보 수집 및 이용">내용보기</button>
             </div>
         </div>
     </div>
@@ -506,28 +506,13 @@
                     modalFrame.src = '';
                 }
             });
-            function openAgreeModal(btn) {
-                modalTitle.textContent = btn.getAttribute('data-modal-title');
-                modalFrame.src = btn.getAttribute('data-modal-url');
-                overlay.classList.add('is-open');
-            }
-            // 카페24 모바일 member_join 모듈이 폼 안의 클릭을 검증 트리거로 가로챌 수 있어
-            // 캡처 단계에서 먼저 잡아 전파를 끊는다.
-            document.addEventListener('click', function (e) {
-                var btn = e.target.closest ? e.target.closest('.btn-view') : null;
-                if (!btn) return;
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                openAgreeModal(btn);
-            }, true);
-            document.addEventListener('keydown', function (e) {
-                if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
-                var btn = e.target.closest ? e.target.closest('.btn-view') : null;
-                if (!btn) return;
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                openAgreeModal(btn);
-            }, true);
+            document.querySelectorAll('.btn-view').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    modalTitle.textContent = btn.getAttribute('data-modal-title');
+                    modalFrame.src = btn.getAttribute('data-modal-url');
+                    overlay.classList.add('is-open');
+                });
+            });
 
             // ── 체크박스 로직 ──
             var agreeAll = document.getElementById('custom_agree_all');

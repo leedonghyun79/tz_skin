@@ -3,7 +3,7 @@
   position: relative;
 }
 
-.xans-product-detail .headingArea h1 {
+.xans-product-detail .headingArea h2 {
   display: inline;
   font-size: 20px;
   line-height: 30px;
@@ -1609,6 +1609,13 @@
     line-height: 0;
     justify-content: center;
     margin-bottom: 150px;
+  }
+
+  .xans-product-detail .detailArea h1 {
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #000;
   }
 
   .xans-product-detail .imgArea {

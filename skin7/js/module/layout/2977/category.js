@@ -53,9 +53,9 @@ $(document).ready(function(){
             { link: '/product/list.html?cate_no=33', img: 'https://cdn.imweb.me/thumbnail/20260413/c796f98fa516f.png', title: 'QM 시리즈', desc: '밝기: 500nit<br>해상도: 3,840X2,160(4K UHD)' }
         ],
         'DigitalSignage|엘지 사이니지': [ 
-            { link: '/product/list.html?cate_no=44', img: 'https://cdn.imweb.me/thumbnail/20260413/6a93b4bc3d118.png', title: 'UH7J 시리즈', desc: '밝기: 700nit<br>해상도: 3,840X2,160(4K UHD)' },
-            { link: '/product/list.html?cate_no=44', img: 'https://cdn.imweb.me/thumbnail/20260413/6a93b4bc3d118.png', title: 'UH5J 시리즈', desc: '밝기: 500nit<br>해상도: 3,840X2,160(4K UHD)' },
-            { link: '/product/list.html?cate_no=44', img: 'https://cdn.imweb.me/thumbnail/20260413/6a93b4bc3d118.png', title: 'UH5N 시리즈', desc: '밝기: 500nit<br>해상도: 3,840X2,160(4K UHD)' }
+            { link: '/product/list.html?cate_no=44', img: 'https://cdn.imweb.me/thumbnail/20260413/6a93b4bc3d118.png', title: 'UH7Q 시리즈', desc: '밝기: 700nit<br>해상도: 3,840X2,160(4K UHD)' },
+            { link: '/product/list.html?cate_no=44', img: 'https://cdn.imweb.me/thumbnail/20260413/6a93b4bc3d118.png', title: 'UH5Q 시리즈', desc: '밝기: 500nit<br>해상도: 3,840X2,160(4K UHD)' },
+            { link: '/product/list.html?cate_no=44', img: 'https://cdn.imweb.me/thumbnail/20260413/6a93b4bc3d118.png', title: 'UM5K 시리즈', desc: '밝기: 500nit<br>해상도: 3,840X2,160(4K UHD)' }
         ],
         'DigitalSignage|전자액자': [
             { link: '/product/list.html?cate_no=45', img: 'https://cdn.imweb.me/thumbnail/20260414/0da2809719be5.png', title: 'TZ-PW 시리즈', desc: '밝기: 350nit<br>해상도: 3,840x2,160(4K UHD)' }
