@@ -16,7 +16,24 @@
       "Bash(curl -s -A \"Mozilla/5.0\" \"https://tvzonemall.com/sitemap.xml\" -o /tmp/sitemap.xml)",
       "Bash(curl -s -o /tmp/sitemap_www.xml -w \"HTTP: %{http_code}\\\\nFinal URL: %{url_effective}\\\\n\" -A \"Mozilla/5.0\" \"https://www.tvzonemall.com/sitemap.xml\")",
       "Bash(curl -s -A \"Mozilla/5.0\" \"https://tvzonemall.com/robots.txt\")",
-      "Bash(curl -s -A \"Mozilla/5.0\" \"https://tvzonemall.com/product/%EC%8B%A4%EB%82%B4%ED%98%95-gob-p186mm-2560mm%C3%971440mm-116%EC%9D%B8%EC%B9%98-%EB%8C%80%ED%98%95%EC%8A%A4%ED%81%AC%EB%A6%B0/131/\" -o /tmp/p131.html)"
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://tvzonemall.com/product/%EC%8B%A4%EB%82%B4%ED%98%95-gob-p186mm-2560mm%C3%971440mm-116%EC%9D%B8%EC%B9%98-%EB%8C%80%ED%98%95%EC%8A%A4%ED%81%AC%EB%A6%B0/131/\" -o /tmp/p131.html)",
+      "Bash(curl -sL https://tvzonemall.com/robots.txt)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' https://tvzonemall.com/sitemap.xml)",
+      "Bash(curl -sIL \"https://tvzonemall.com/category/digital-signage/25/\")",
+      "Bash(curl -s -o /dev/null -w 'GET %{http_code} -> %{url_effective}\\\\n' -L \"https://tvzonemall.com/category/digital-signage/25/\")",
+      "Bash(curl -sL \"https://tvzonemall.com/category/digital-signage/25/\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code} %{url_effective}\\\\n' -L \"https://tvzonemall.com/\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code} %{url_effective}\\\\n' -L \"https://www.tvzonemall.com/\")",
+      "Bash(curl -sI \"https://tvzonemall.com/\")",
+      "Bash(curl -sI \"https://www.tvzonemall.com/\")",
+      "Bash(curl -s -D - -o /dev/null \"https://tvzonemall.com/\")",
+      "Bash(curl -s -D - -o /dev/null \"https://www.tvzonemall.com/\")",
+      "Bash(curl -sL \"https://tvzonemall.com/\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' https://tvzonemall.com/llms.txt)",
+      "Bash(curl -sL https://tvzonemall.com/sitemap.xml)",
+      "Bash(curl -sL https://tvzonemall.com/)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' https://tvzonemall.com/없는페이지-테스트999)",
+      "Bash(curl -sL https://tvzonemall.com/llms.txt)"
     ]
   }
 }

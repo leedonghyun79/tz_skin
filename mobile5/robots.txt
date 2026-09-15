@@ -26,4 +26,4 @@ User-agent: bingbot
 Crawl-delay: 5
  
  
-Sitemap: https://tvzone0479.cafe24.com/sitemap.xml
+Sitemap: https://tvzonemall.com/sitemap.xml
